@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
@@ -42,7 +41,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-function configure()
+function Configure()
   local capabilities = require('cmp_nvim_lsp').update_capabilities(
     vim.lsp.protocol.make_client_capabilities()
   )
@@ -119,5 +118,5 @@ function configure()
 end
 
 return {
-  configure = configure
+  configure = Configure
 }
