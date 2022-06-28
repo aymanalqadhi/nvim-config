@@ -51,5 +51,5 @@ vim.cmd [[
 --- per-filetype config
 -- *.lua
 vim.api.nvim_command [[
-  autocmd FileType lua setlocal shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType lua setlocal shiftwidth=4 softtabstop=4 expandtab
 ]]
