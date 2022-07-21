@@ -65,8 +65,11 @@ return require('packer').startup(function(use)
   use 'jose-elias-alvarez/typescript.nvim'
   use 'windwp/nvim-ts-autotag'
 
--- move
-use 'fedepujol/move.nvim'
+  -- move
+  use 'fedepujol/move.nvim'
+
+  -- hover
+  use 'lewis6991/hover.nvim'
 
   --- configure plugins ---
   require('pluginsconfig.indentblankline').configure()
