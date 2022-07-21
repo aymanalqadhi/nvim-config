@@ -7,6 +7,7 @@ local function configure()
         ".git",
         "build",
         "target",
+        "node_modules",
       },
     }
   }
