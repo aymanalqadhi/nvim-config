@@ -30,3 +30,7 @@ vim.api.nvim_set_keymap('n', '<A-l>', ":MoveHChar(1)<CR>", { noremap = true, sil
 vim.api.nvim_set_keymap('n', '<A-h>', ":MoveHChar(-1)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<A-l>', ":MoveHBlock(1)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<A-h>', ":MoveHBlock(-1)<CR>", { noremap = true, silent = true })
+
+-- hover.nvim
+vim.keymap.set('n',  'K', require('hover').hover       , { desc='hover.nvim'         })
+vim.keymap.set('n', 'gK', require('hover').hover_select, { desc='hover.nvim (select)' })
