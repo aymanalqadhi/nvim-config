@@ -61,6 +61,9 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- typescript
+  use 'jose-elias-alvarez/typescript.nvim'
+
 -- move
 use 'fedepujol/move.nvim'
 
@@ -71,6 +74,7 @@ use 'fedepujol/move.nvim'
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.telescope').configure()
+  require('pluginsconfig.typescript').configure()
   require('rust-tools').setup({})
 
 end)
