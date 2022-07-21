@@ -61,12 +61,16 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+-- move
+use 'fedepujol/move.nvim'
+
   --- configure plugins ---
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.lualine').configure()
   require('pluginsconfig.lspconfig').configure()
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.crates').configure()
+  require('pluginsconfig.telescope').configure()
   require('rust-tools').setup({})
 
 end)
