@@ -63,6 +63,7 @@ return require('packer').startup(function(use)
 
   -- typescript
   use 'jose-elias-alvarez/typescript.nvim'
+  use 'windwp/nvim-ts-autotag'
 
 -- move
 use 'fedepujol/move.nvim'
@@ -75,6 +76,7 @@ use 'fedepujol/move.nvim'
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.typescript').configure()
+  require('pluginsconfig.nvimtsautotag').configure()
   require('rust-tools').setup({})
 
 end)
