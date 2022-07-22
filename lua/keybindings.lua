@@ -1,7 +1,4 @@
-local opts = {
-    noremap = true,
-    silent = true,
-}
+local opts = { noremap = true, silent = true }
 
 -- disable arrows
 vim.api.nvim_set_keymap('n', '<Up>', '<Nop>', opts)
@@ -19,18 +16,37 @@ vim.api.nvim_set_keymap('n', ';b', [[
 ]], opts)
 vim.api.nvim_set_keymap('n', '\\\\', '<cmd>Telescope buffers<cr>', opts)
 vim.api.nvim_set_keymap('n', ';;', '<cmd>Telescope help_tags<cr>', opts)
-vim.api.nvim_set_keymap('n', ' .', '<cmd>Telescope lsp_code_actions<cr>', opts)
+--vim.api.nvim_set_keymap('n', ' .', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
 -- move.nvim
-vim.api.nvim_set_keymap('n', '<A-j>', ":MoveLine(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', ":MoveLine(-1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-j>', ":MoveBlock(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-k>', ":MoveBlock(-1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-l>', ":MoveHChar(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-h>', ":MoveHChar(-1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-l>', ":MoveHBlock(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-h>', ":MoveHBlock(-1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-j>', ":MoveLine(1)<CR>", opts)
+vim.api.nvim_set_keymap('n', '<A-k>', ":MoveLine(-1)<CR>", opts)
+vim.api.nvim_set_keymap('v', '<A-j>', ":MoveBlock(1)<CR>", opts)
+vim.api.nvim_set_keymap('v', '<A-k>', ":MoveBlock(-1)<CR>", opts)
+vim.api.nvim_set_keymap('n', '<A-l>', ":MoveHChar(1)<CR>", opts)
+vim.api.nvim_set_keymap('n', '<A-h>', ":MoveHChar(-1)<CR>", opts)
+vim.api.nvim_set_keymap('v', '<A-l>', ":MoveHBlock(1)<CR>", opts)
+vim.api.nvim_set_keymap('v', '<A-h>', ":MoveHBlock(-1)<CR>", opts)
 
 -- hover.nvim
 vim.keymap.set('n',  'K', require('hover').hover       , { desc='hover.nvim'         })
 vim.keymap.set('n', 'gK', require('hover').hover_select, { desc='hover.nvim (select)' })
+
+-- lspconfig
+vim.api.nvim_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+vim.api.nvim_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
