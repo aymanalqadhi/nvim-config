@@ -55,11 +55,14 @@ local function configure()
          n = { ["q"] = require("telescope.actions").close },
       },
     },
-   extensions_list = { "themes", "terms" },
+    extensions = {
+      ["ui-select"] = {
+        require"telescope.themes".get_dropdown { }
+      }
+    }
   }
 
-vim.g.theme_switcher_loaded = true
-require("base46").load_highlight "telescope"
+  require("telescope").load_extension("ui-select")
 end
 
 return {
