@@ -42,14 +42,17 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
 
-  -- line
+  -- indenation markers
   use 'lukas-reineke/indent-blankline.nvim'
 
-  -- indenation markers
+  -- line
   use 'nvim-lualine/lualine.nvim'
 
   -- startup page
-  use 'mhinz/vim-startify'
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+  }
 
   -- smoother scrolls
   use 'psliwka/vim-smoothie'
@@ -81,6 +84,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.typescript').configure()
   require('pluginsconfig.nvimtsautotag').configure()
+  require('pluginsconfig.alpha').configure()
   require('rust-tools').setup({})
 
 end)
