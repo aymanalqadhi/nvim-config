@@ -19,6 +19,11 @@ local function configure()
 
   local function footer()
   	local handle = io.popen("fortune")
+
+    if handle == nil then
+        return ''
+    end
+
   	local fortune = handle:read("*a")
   	handle:close()
   	return fortune
@@ -35,5 +40,5 @@ local function configure()
 end
 
 return {
-    configure = configure
+  configure = configure
 }
