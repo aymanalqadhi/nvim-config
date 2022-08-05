@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
   use 'cohama/lexima.vim'
+  use('jose-elias-alvarez/null-ls.nvim')
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
