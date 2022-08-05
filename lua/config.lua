@@ -16,9 +16,9 @@ vim.o.splitbelow = true
 
 -- tabs config
 vim.o.expandtab = true
-vim.o.tabstop= 4
-vim.o.shiftwidth= 4
-vim.o.softtabstop= 4
+vim.o.tabstop= 2
+vim.o.shiftwidth= 2
+vim.o.softtabstop= 2
 
 -- searching
 vim.o.incsearch = true
@@ -38,7 +38,7 @@ vim.o.lazyredraw = true
 -- colorscheme
 vim.g.oceanic_next_terminal_bold = 1
 vim.g.oceanic_next_terminal_italic = 1
-vim.cmd 'colorscheme oceanicnext'
+vim.cmd 'colorscheme onedarkpro'
 
 -- enable transparency
 vim.cmd [[
