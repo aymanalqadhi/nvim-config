@@ -12,6 +12,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+  use('jose-elias-alvarez/null-ls.nvim')
 
   -- snippets
   use 'hrsh7th/cmp-vsnip'
@@ -30,7 +31,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
   use 'cohama/lexima.vim'
-  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -77,7 +78,7 @@ return require('packer').startup(function(use)
   -- hover
   use 'lewis6991/hover.nvim'
 
-  --- configure plugins ---
+  --- configure plugins with configuration files ---
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.lualine').configure()
   require('pluginsconfig.lspconfig').configure()
@@ -88,6 +89,8 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.alpha').configure()
   require('pluginsconfig.onedarkpro').configure()
+
+  --  manually configure plugins --
   require('rust-tools').setup({})
 
 end)
