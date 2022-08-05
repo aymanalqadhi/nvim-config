@@ -89,6 +89,8 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.alpha').configure()
   require('pluginsconfig.onedarkpro').configure()
+  require('pluginsconfig.nullls').configure()
+  require('pluginsconfig.prettier').configure()
 
   --  manually configure plugins --
   require('rust-tools').setup({})
