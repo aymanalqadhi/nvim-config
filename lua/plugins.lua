@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
   -- colorschems
   use 'adrian5/oceanic-next-vim'
   use 'kyazdani42/blue-moon'
+  use 'olimorris/onedarkpro.nvim'
 
   -- icons
   use 'kyazdani42/nvim-web-devicons'
@@ -85,6 +86,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.typescript').configure()
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.alpha').configure()
+  require('pluginsconfig.onedarkpro').configure()
   require('rust-tools').setup({})
 
 end)
