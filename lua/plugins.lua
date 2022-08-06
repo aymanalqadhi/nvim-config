@@ -78,6 +78,12 @@ return require('packer').startup(function(use)
   -- hover
   use 'lewis6991/hover.nvim'
 
+  -- diagnostics list
+  use {
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons'
+  }
+
   --- configure plugins with configuration files ---
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.lualine').configure()
@@ -94,6 +100,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.prettier').configure()
 
   --  manually configure plugins --
-  require('rust-tools').setup({})
-
+  require('rust-tools').setup{}
+  require('trouble').setup{}
 end)
