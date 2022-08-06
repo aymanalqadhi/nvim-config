@@ -49,7 +49,10 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- line
-  use 'nvim-lualine/lualine.nvim'
+  use {
+    'romgrk/barbar.nvim',
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
 
   -- startup page
   use {
@@ -98,6 +101,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.prettier').configure()
+  require('pluginsconfig.barbar').configure()
 
   --  manually configure plugins --
   require('rust-tools').setup{}
