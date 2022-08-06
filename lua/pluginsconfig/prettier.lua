@@ -1,6 +1,6 @@
 local prettier = require("prettier")
 
-function configure()
+local function configure()
   prettier.setup({
     bin = 'prettier', -- or `prettierd`
     filetypes = {
