@@ -23,15 +23,15 @@ return require('packer').startup(function(use)
   use 'saecki/crates.nvim'
 
   -- version control
-  use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
+  use 'lewis6991/gitsigns.nvim'
 
   -- productivity
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
   use 'cohama/lexima.vim'
-  use('MunifTanjim/prettier.nvim')
+  use 'MunifTanjim/prettier.nvim'
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -86,6 +86,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.typescript').configure()
+  require('pluginsconfig.gitsigns').configure()
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.alpha').configure()
   require('pluginsconfig.onedarkpro').configure()
