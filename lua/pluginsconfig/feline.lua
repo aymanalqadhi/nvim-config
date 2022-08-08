@@ -276,17 +276,17 @@ local function configure()
   components.active[3][3] = {
     provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
     hl = {
-      fg = 'white',
+      fg = 'green',
       bg = 'bg',
       style = 'bold'
     },
-    right_sep = ' '
+    right_sep = ':'
   }
   -- fileEncode
   components.active[3][4] = {
     provider = 'file_encoding',
     hl = {
-      fg = 'white',
+      fg = 'green',
       bg = 'bg',
       style = 'bold'
     },
@@ -295,7 +295,7 @@ local function configure()
   components.active[3][5] = {
     provider = 'position',
     hl = {
-      fg = 'white',
+      fg = 'cyan',
       bg = 'bg',
       style = 'bold'
     },
