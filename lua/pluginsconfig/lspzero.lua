@@ -34,6 +34,11 @@ local function configure()
   vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
   lsp.preset('lsp-compe')
+  
+  lsp.on_attach(function(client, bufnr)
+    require 'illuminate'.on_attach(client)
+  end)
+
   lsp.setup()
 end
 
