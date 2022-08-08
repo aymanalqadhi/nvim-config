@@ -6,15 +6,29 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
 
   -- lsp
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
+      {'jose-elias-alvarez/null-ls.nvim'},
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-cmdline'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
+
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
+    }
+  }
 
   -- snippets
   use 'hrsh7th/cmp-vsnip'
@@ -64,9 +78,6 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
   }
 
-  -- smoother scrolls
-  use 'psliwka/vim-smoothie'
-
   -- telescope
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
@@ -93,7 +104,7 @@ return require('packer').startup(function(use)
 
   --- configure plugins with configuration files ---
   require('pluginsconfig.indentblankline').configure()
-  require('pluginsconfig.lspconfig').configure()
+  --require('pluginsconfig.lspconfig').configure()
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.telescope').configure()
@@ -106,10 +117,9 @@ return require('packer').startup(function(use)
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
   require('pluginsconfig.feline').configure()
+  require('pluginsconfig.lspzero').configure()
 
   --  manually configure plugins --
-  require('mason').setup{}
-  require('mason-lspconfig').setup{}
   require('rust-tools').setup{}
   require('trouble').setup{}
 end)
