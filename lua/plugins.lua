@@ -7,12 +7,14 @@ return require('packer').startup(function(use)
 
   -- lsp
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/cmp-nvim-lsp'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use('jose-elias-alvarez/null-ls.nvim')
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- snippets
   use 'hrsh7th/cmp-vsnip'
@@ -53,6 +55,8 @@ return require('packer').startup(function(use)
     'romgrk/barbar.nvim',
     requires = {'kyazdani42/nvim-web-devicons'}
   }
+  use 'feline-nvim/feline.nvim'
+  use 'SmiteshP/nvim-gps'
 
   -- startup page
   use {
@@ -101,8 +105,11 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
+  require('pluginsconfig.feline').configure()
 
   --  manually configure plugins --
+  require('mason').setup{}
+  require('mason-lspconfig').setup{}
   require('rust-tools').setup{}
   require('trouble').setup{}
 end)
