@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
   -- language-specific lsp addons
   use 'simrat39/rust-tools.nvim'
   use 'saecki/crates.nvim'
+  use 'simrat39/symbols-outline.nvim'
 
   -- version control
   use 'tpope/vim-fugitive'
