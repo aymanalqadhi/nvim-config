@@ -89,7 +89,6 @@ return require('packer').startup(function(use)
 
   --- configure plugins with configuration files ---
   require('pluginsconfig.indentblankline').configure()
-  require('pluginsconfig.lualine').configure()
   require('pluginsconfig.lspconfig').configure()
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.crates').configure()
