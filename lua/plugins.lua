@@ -103,9 +103,9 @@ return require('packer').startup(function(use)
   }
 
   --- configure plugins with configuration files ---
-  require('pluginsconfig.indentblankline').configure()
-  --require('pluginsconfig.lspconfig').configure()
+  require('pluginsconfig.lspzero').configure()
   require('pluginsconfig.cmp').configure()
+  require('pluginsconfig.nullls').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.typescript').configure()
@@ -113,11 +113,10 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.alpha').configure()
   require('pluginsconfig.onedarkpro').configure()
-  require('pluginsconfig.nullls').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
   require('pluginsconfig.feline').configure()
-  require('pluginsconfig.lspzero').configure()
+  require('pluginsconfig.indentblankline').configure()
 
   --  manually configure plugins --
   require('rust-tools').setup{}
