@@ -38,6 +38,7 @@ return require('packer').startup(function(use)
   use 'simrat39/rust-tools.nvim'
   use 'saecki/crates.nvim'
   use 'simrat39/symbols-outline.nvim'
+  use 'RRethy/vim-illuminate'
 
   -- version control
   use 'tpope/vim-fugitive'
