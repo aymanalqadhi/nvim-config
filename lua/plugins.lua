@@ -50,6 +50,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
+  use 'kyazdani42/nvim-tree.lua'
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -123,4 +124,5 @@ return require('packer').startup(function(use)
   --  manually configure plugins --
   require('rust-tools').setup{}
   require('trouble').setup{}
+  require("nvim-tree").setup()
 end)
