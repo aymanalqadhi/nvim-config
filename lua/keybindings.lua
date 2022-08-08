@@ -93,3 +93,7 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 -- symbols-outline
 map('n', '<A-s>', '<cmd>SymbolsOutline<CR>', opts)
+
+-- illumniate
+map('n', '<a-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+map('n', '<a-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
