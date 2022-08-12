@@ -43,17 +43,11 @@ vim.o.lazyredraw = true
 vim.o.signcolumn = 'yes'
 
 -- colorscheme
--- vim.g.oceanic_next_terminal_bold = 1
--- vim.g.oceanic_next_terminal_italic = 1
-vim.cmd 'colorscheme onedarkpro'
-
--- enable transparency
---vim.cmd [[
---  hi Normal guibg=NONE ctermbg=NONE
---  hi LineNr guibg=NONE ctermbg=NONE
---  hi SignColumn guibg=NONE ctermbg=NONE
---  hi EndOfBuffer guibg=NONE ctermbg=NONE
---]]
+vim.g.tokyodark_transparent_background = false
+vim.g.tokyodark_enable_italic_comment = true
+vim.g.tokyodark_enable_italic = true
+vim.g.tokyodark_color_gamma = "1.0"
+vim.cmd("colorscheme tokyodark")
 
 --- per-filetype config
 -- *.lua
