@@ -9,33 +9,29 @@ return require('packer').startup(function(use)
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
-      -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
-      {'jose-elias-alvarez/null-ls.nvim'},
+      -- lsp support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'jose-elias-alvarez/null-ls.nvim' },
 
-      -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'hrsh7th/cmp-cmdline'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'},
+      -- autocompletion
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
 
-      -- Snippets
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
+      -- snippets
+      { 'L3MON4D3/LuaSnip' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'rafamadriz/friendly-snippets' },
 
       -- status
-      {'j-hui/fidget.nvim'},
+      { 'j-hui/fidget.nvim' },
     }
   }
-
-  -- snippets
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
 
   -- language-specific lsp addons
   use 'simrat39/rust-tools.nvim'
@@ -53,8 +49,18 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
-  use 'kyazdani42/nvim-tree.lua'
   use 'rmagatti/goto-preview'
+
+  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -75,7 +81,7 @@ return require('packer').startup(function(use)
   -- line
   use {
     'romgrk/barbar.nvim',
-    requires = {'kyazdani42/nvim-web-devicons'}
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
   use 'feline-nvim/feline.nvim'
   use 'SmiteshP/nvim-gps'
@@ -91,7 +97,7 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-ui-select.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   -- typescript
@@ -127,11 +133,12 @@ return require('packer').startup(function(use)
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
+  require('pluginsconfig.neotree').configure()
 
-  --  manually configure plugins --
-  require('rust-tools').setup{}
-  require('trouble').setup{}
-  require('nvim-tree').setup()
-  require('fidget').setup{}
+  -- manually configure plugins --
+  require('rust-tools').setup {}
+  require('trouble').setup {}
+  require('fidget').setup {}
+  require('luasnip.loaders.from_vscode').lazy_load()
 
 end)
