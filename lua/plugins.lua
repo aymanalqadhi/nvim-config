@@ -27,6 +27,9 @@ return require('packer').startup(function(use)
       -- Snippets
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
+
+      -- status
+      {'j-hui/fidget.nvim'},
     }
   }
 
@@ -126,5 +129,7 @@ return require('packer').startup(function(use)
   --  manually configure plugins --
   require('rust-tools').setup{}
   require('trouble').setup{}
-  require("nvim-tree").setup()
+  require('nvim-tree').setup()
+  require('fidget').setup{}
+
 end)
