@@ -3,6 +3,39 @@ local types = require("cmp.types")
 local str = require("cmp.utils.str")
 local lspkind = require("lspkind")
 
+local function t(v)
+    return vim.api.nvim_replace_termcodes(v, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col "." - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s" ~= nil
+end
+
+local function tab(fallback)
+    local luasnip = require "luasnip"
+    if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t "<C-n>", "n")
+    elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+    elseif check_back_space() then
+        vim.fn.feedkeys(t "<tab>", "n")
+    else
+        fallback()
+    end
+end
+
+local function shift_tab(fallback)
+    local luasnip = require "luasnip"
+    if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t "<C-p>", "n")
+    elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+    else
+        fallback()
+    end
+end
+
 local function configure()
   cmp.setup({
     completion = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, scrollbar = "║" },
@@ -39,9 +72,8 @@ local function configure()
             word = before .. "..."
           end
 
-          if
-            entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-            and string.sub(vim_item.abbr, -1, -1) == "~"
+          if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+              and string.sub(vim_item.abbr, -1, -1) == "~"
           then
             word = word .. "~"
           end
@@ -51,40 +83,30 @@ local function configure()
         end,
       }),
     },
-     snippet = {
-       -- REQUIRED - you must specify a snippet engine
-       expand = function(args)
-         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-       end,
-     },
-     mapping = {
-       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-       ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
-       ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
-       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-       ['<C-y>'] = cmp.config.disable,
-       ['<C-e>'] = cmp.mapping({
-         i = cmp.mapping.complete(),
-         c = cmp.mapping.close(),
-       }),
-       ['<CR>'] = cmp.mapping.confirm({ select = true }),
-     },
-
-    -- You should specify your *installed* sources.
-     sources = cmp.config.sources{
-       { name = 'nvim_lsp' },
-       { name = 'vsnip' }, -- For vsnip users.
-       -- { name = 'luasnip' }, -- For luasnip users.
-       -- { name = 'ultisnips' }, -- For ultisnips users.
-       -- { name = 'snippy' }, -- For snippy users.
-     },
-     experimental = {
-     ghost_text = true,
-     },
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = {
+      ["<Tab>"] = cmp.mapping(tab, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(shift_tab, { "i", "s" }),
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
+      ["<CR>"] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      },
+    },
+    sources = cmp.config.sources {
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+    },
+    experimental = {
+      ghost_text = true,
+    },
   })
 
   require('cmp').setup.cmdline(":", {
