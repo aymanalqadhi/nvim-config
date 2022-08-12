@@ -4,36 +4,36 @@ local str = require("cmp.utils.str")
 local lspkind = require("lspkind")
 
 local function t(v)
-    return vim.api.nvim_replace_termcodes(v, true, true, true)
+  return vim.api.nvim_replace_termcodes(v, true, true, true)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s" ~= nil
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s" ~= nil
 end
 
 local function tab(fallback)
-    local luasnip = require "luasnip"
-    if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t "<C-n>", "n")
-    elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
-    elseif check_back_space() then
-        vim.fn.feedkeys(t "<tab>", "n")
-    else
-        fallback()
-    end
+  local luasnip = require "luasnip"
+  if vim.fn.pumvisible() == 1 then
+    vim.fn.feedkeys(t "<C-n>", "n")
+  elseif luasnip.expand_or_jumpable() then
+    vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+  elseif check_back_space() then
+    vim.fn.feedkeys(t "<tab>", "n")
+  else
+    fallback()
+  end
 end
 
 local function shift_tab(fallback)
-    local luasnip = require "luasnip"
-    if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t "<C-p>", "n")
-    elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
-    else
-        fallback()
-    end
+  local luasnip = require "luasnip"
+  if vim.fn.pumvisible() == 1 then
+    vim.fn.feedkeys(t "<C-p>", "n")
+  elseif luasnip.jumpable(-1) then
+    vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+  else
+    fallback()
+  end
 end
 
 local function configure()
@@ -91,7 +91,7 @@ local function configure()
     mapping = {
       ["<Tab>"] = cmp.mapping(tab, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(shift_tab, { "i", "s" }),
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
@@ -99,6 +99,8 @@ local function configure()
         behavior = cmp.ConfirmBehavior.Insert,
         select = true,
       },
+      ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+      ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
     },
     sources = cmp.config.sources {
       { name = 'nvim_lsp' },
