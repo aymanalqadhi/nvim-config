@@ -50,6 +50,7 @@ return require('packer').startup(function(use)
   use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
+  use 'wfxr/minimap.vim'
 
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
   use {
