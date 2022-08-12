@@ -43,7 +43,7 @@ vim.o.lazyredraw = true
 vim.o.signcolumn = 'yes'
 
 -- colorscheme
-vim.g.tokyodark_transparent_background = false
+vim.g.tokyodark_transparent_background = true
 vim.g.tokyodark_enable_italic_comment = true
 vim.g.tokyodark_enable_italic = true
 vim.g.tokyodark_color_gamma = "1.0"
