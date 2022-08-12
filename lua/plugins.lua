@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
   use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
   use 'kyazdani42/nvim-tree.lua'
+  use 'rmagatti/goto-preview'
 
   -- syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -125,6 +126,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.feline').configure()
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.illuminate').configure()
+  require('pluginsconfig.gotopreview').configure()
 
   --  manually configure plugins --
   require('rust-tools').setup{}
