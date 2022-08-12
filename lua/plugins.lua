@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
   use 'adrian5/oceanic-next-vim'
   use 'kyazdani42/blue-moon'
   use 'olimorris/onedarkpro.nvim'
+  use 'tiagovla/tokyodark.nvim'
 
   -- icons
   use 'kyazdani42/nvim-web-devicons'
@@ -120,6 +121,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.barbar').configure()
   require('pluginsconfig.feline').configure()
   require('pluginsconfig.indentblankline').configure()
+  require('pluginsconfig.illuminate').configure()
 
   --  manually configure plugins --
   require('rust-tools').setup{}
