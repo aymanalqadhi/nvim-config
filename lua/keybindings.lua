@@ -82,8 +82,8 @@ map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 map('n', '<A-s>', '<cmd>SymbolsOutline<CR>', opts)
 
 -- illumniate
-map('n', '<a-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
-map('n', '<a-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+map('n', '<A-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+map('n', '<A-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
--- nvim tree
-map('n', '<a-t>', '<cmd>NvimTreeToggle<CR>', opts)
+-- neo-tree
+map('n', '<A-t>', '<cmd>Neotree toggle<CR>', opts)
