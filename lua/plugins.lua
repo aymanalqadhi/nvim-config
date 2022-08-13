@@ -39,7 +39,7 @@ return require('packer').startup(function(use)
   use 'simrat39/symbols-outline.nvim'
   use 'RRethy/vim-illuminate'
 
-  -- version control
+  -- source control
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
 
@@ -51,6 +51,7 @@ return require('packer').startup(function(use)
   use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
   use 'wfxr/minimap.vim'
+  use 'akinsho/toggleterm.nvim'
 
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
   use {
@@ -135,6 +136,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.neotree').configure()
+  require('pluginsconfig.toggleterm').configure()
 
   -- manually configure plugins --
   require('rust-tools').setup {}
