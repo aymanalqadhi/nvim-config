@@ -9,12 +9,8 @@ map('n', '<Right>', '<Nop>', opts)
 
 -- telescope
 map('n', ';f', '<cmd>Telescope find_files<cr>', opts)
-map('n', ';r', [[
-    <cmd>lua require('telescope.builtin').live_grep()<cr>
-]], opts)
-map('n', ';b', [[
-    <cmd>lua require('telescope.builtin').file_browser()<cr>
-]], opts)
+map('n', ';r', [[ <cmd>lua require('telescope.builtin').live_grep()<cr> ]], opts)
+map('n', ';b', [[ <cmd>lua require('telescope.builtin').file_browser()<cr> ]], opts)
 map('n', '\\\\', '<cmd>Telescope buffers<cr>', opts)
 map('n', ';;', '<cmd>Telescope help_tags<cr>', opts)
 --map('n', ' .', '<cmd>Telescope lsp_code_actions<cr>', opts)
@@ -30,8 +26,8 @@ map('v', '<A-l>', ":MoveHBlock(1)<CR>", opts)
 map('v', '<A-h>', ":MoveHBlock(-1)<CR>", opts)
 
 -- hover.nvim
-vim.keymap.set('n',  'K', require('hover').hover       , { desc='hover.nvim'         })
-vim.keymap.set('n', 'gK', require('hover').hover_select, { desc='hover.nvim (select)' })
+vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
+vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
 
 -- lspconfig
 map('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -58,13 +54,13 @@ map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
 map("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
 
 -- barbar
-  -- Move to previous/next
+-- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
-  -- Re-order to previous/next
+-- Re-order to previous/next
 map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
 map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
-  -- Goto buffer in position...
+-- Goto buffer in position...
 map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
 map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
 map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
@@ -91,3 +87,26 @@ map('n', '<A-t>', '<cmd>Neotree toggle<CR>', opts)
 -- codemap
 map('n', '``', '<cmd>nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>', opts)
 map('n', '<A-m>', '<cmd>MinimapToggle<CR>', opts)
+
+-- toggleterm
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+
+_G.lazygit = require('toggleterm.terminal').Terminal:new({
+  cmd = 'lazygit',
+  dir = 'git_dir',
+  direction = 'float',
+  float_opts = {
+    border = 'double',
+  },
+  on_open = function(term)
+    vim.cmd('startinsert!')
+    vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', opts)
+  end,
+})
+
+vim.keymap.set('n', '<space>g', [[ <cmd>lua _G.lazygit:toggle()<CR> ]], opts)
