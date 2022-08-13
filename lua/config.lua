@@ -8,7 +8,7 @@ vim.o.shortmess = "filnxtToOF" .. "I"
 vim.o.magic = true
 vim.o.backup = false
 vim.o.writebackup = false
-vim.o.mouse = 'a'
+vim.o.mouse = '' -- disable mouse
 
 -- indentation config
 vim.o.showmatch = true
