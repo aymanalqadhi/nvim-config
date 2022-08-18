@@ -35,7 +35,7 @@ local function configure()
 
   lsp.preset('lsp-compe')
   lsp.nvim_workspace()
- 
+
   lsp.on_attach(function(client, _)
     require 'illuminate'.on_attach(client)
   end)
