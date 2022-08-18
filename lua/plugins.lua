@@ -142,6 +142,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.neotree').configure()
   require('pluginsconfig.toggleterm').configure()
   require('pluginsconfig.rusttools').configure()
+  require('pluginsconfig.dap').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
