@@ -41,8 +41,8 @@ map('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_fol
 map('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 map('n', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-map("n", '<space>f', '<cmd>lua vim.lsp.buf.format{ async =true }<CR>', opts)
-map('x', '<space>f', '<cmd>lua vim.lsp.buf.range_formatting({})<CR>', opts)
+map("n", '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 
 -- trouble
 map("n", "<space>t", "<cmd>TroubleToggle<cr>", opts)
@@ -119,4 +119,3 @@ map('n', ',i', "<cmd>lua require'dap'.step_in()<CR>", opts)
 map('n', ',o', "<cmd>lua require'dap'.step_over()<CR>", opts)
 map('n', ',u', "<cmd>lua require'dapui'.toggle() <CR>", opts)
 map('n', ',e', "<cmd>lua require'dapui'.eval()<CR>", opts)
-
