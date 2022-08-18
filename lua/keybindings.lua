@@ -112,9 +112,11 @@ _G.lazygit = require('toggleterm.terminal').Terminal:new({
 vim.keymap.set('n', '<space>g', [[ <cmd>lua _G.lazygit:toggle()<CR> ]], opts)
 
 -- dap
-map('n', '<F4>', "<cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
-map('n', '<F5>', "<cmd>lua require'dap'.continue()<CR>", opts)
-map('n', '<F7>', "<cmd>lua require('dapui').toggle() <CR>", opts)
-map('n', '<F8>', "<cmd>lua require'dap'.repl.open()<CR>", opts)
-map('n', '<F9>', "<cmd>lua require'dap'.step_in()<CR>", opts)
-map('n', '<F10>', "<cmd>lua require'dap'.step_over()<CR>", opts)
+map('n', ',b', "<cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
+map('n', ',c', "<cmd>lua require'dap'.continue()<CR>", opts)
+map('n', ',r', "<cmd>lua require'dap'.repl.open()<CR>", opts)
+map('n', ',i', "<cmd>lua require'dap'.step_in()<CR>", opts)
+map('n', ',o', "<cmd>lua require'dap'.step_over()<CR>", opts)
+map('n', ',u', "<cmd>lua require('dapui').toggle() <CR>", opts)
+map('n', ',e', "<cmd>lua require('dapui').eval()<CR>", opts)
+
