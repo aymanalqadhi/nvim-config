@@ -43,6 +43,10 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
 
+  -- debugging
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+
   -- productivity
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
@@ -137,9 +141,9 @@ return require('packer').startup(function(use)
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.neotree').configure()
   require('pluginsconfig.toggleterm').configure()
+  require('pluginsconfig.rusttools').configure()
 
   -- manually configure plugins --
-  require('rust-tools').setup {}
   require('trouble').setup {}
   require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
