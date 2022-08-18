@@ -143,6 +143,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.toggleterm').configure()
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.dap').configure()
+  require('pluginsconfig.dapui').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
