@@ -149,5 +149,6 @@ return require('packer').startup(function(use)
   require('trouble').setup {}
   require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
+  require('symbols-outline').setup()
 
 end)
