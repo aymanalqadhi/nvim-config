@@ -126,6 +126,7 @@ return require('packer').startup(function(use)
   --- configure plugins with configuration files ---
   require('pluginsconfig.lspzero').configure()
   require('pluginsconfig.cmp').configure()
+  require('pluginsconfig.treesitter').configure()
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.emmetls').configure()
   require('pluginsconfig.crates').configure()
