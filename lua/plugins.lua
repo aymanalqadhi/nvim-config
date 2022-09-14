@@ -38,6 +38,7 @@ return require('packer').startup(function(use)
   use 'saecki/crates.nvim'
   use 'simrat39/symbols-outline.nvim'
   use 'RRethy/vim-illuminate'
+  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
 
   -- source control
   use 'tpope/vim-fugitive'
@@ -147,6 +148,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
+  require('pluginsconfig.fluttertools').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
