@@ -5,8 +5,8 @@ local function configure()
     sources = {
       null_ls.builtins.code_actions.gitsigns,
     },
-    on_init = function(new_client, _) 
-      new_client.offset_encoding = 'utf-8'
+    on_init = function(new_client, _)
+      new_client.offset_encoding = 'utf-16'
     end,
   }
 end
