@@ -5,7 +5,6 @@ local function configure()
     auto_install = true,
 
     autotag = { enable = true },
-    indent = { enable = true },
     illuminate = { enable = true },
     incremental_selection = { enable = true },
 
