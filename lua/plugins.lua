@@ -58,6 +58,7 @@ return require('packer').startup(function(use)
   use 'wfxr/minimap.vim'
   use 'akinsho/toggleterm.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'ThePrimeagen/refactoring.nvim'
 
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
   use {
