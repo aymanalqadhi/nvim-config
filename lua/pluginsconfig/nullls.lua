@@ -16,7 +16,6 @@ local function configure()
 
       -- formatters
       formatting.black,
-      formatting.eslint_d,
       formatting.rustfmt,
       formatting.prettier,
       formatting.clang_format,
