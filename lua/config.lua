@@ -1,6 +1,6 @@
 --- general config ---
 vim.o.encoding = "UTF-8"
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "noinsert,menuone,noselect"
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 5
 vim.o.inccommand = "nosplit"
@@ -8,7 +8,15 @@ vim.o.shortmess = "filnxtToOF" .. "I"
 vim.o.magic = true
 vim.o.backup = false
 vim.o.writebackup = false
-vim.o.mouse = '' -- disable mouse
+vim.o.mouse = "a" -- disable mouse
+vim.o.clipboard = "unnamedplus"
+vim.o.swapfile = false
+vim.o.title = true
+vim.o.wildmenu = true
+
+-- better expression folding 
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldmethod = "manual"
 
 -- indentation config
 vim.o.showmatch = true
