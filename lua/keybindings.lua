@@ -40,7 +40,7 @@ map('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts
 map('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 map('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-map('n', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+map('', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 map("n", '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 
