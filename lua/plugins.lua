@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
   use 'saecki/crates.nvim'
   use 'simrat39/symbols-outline.nvim'
   use 'RRethy/vim-illuminate'
-  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+  use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- source control
   use 'tpope/vim-fugitive'
@@ -125,7 +125,11 @@ return require('packer').startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons'
   }
 
+  -- tmux integration
+  use 'aserowy/tmux.nvim'
+
   --- configure plugins with configuration files ---
+  require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.treesitter').configure()
