@@ -14,36 +14,36 @@ local function configure()
   }
 
   local colors = {
-    bg = '#0000',
-    --bg = '#282828',
-    black = '#282828',
-    yellow = '#d8a657',
-    cyan = '#89b482',
-    oceanblue = '#45707a',
-    green = '#a9b665',
-    orange = '#e78a4e',
-    violet = '#d3869b',
-    magenta = '#c14a4a',
+    --bg = '#0000',
+    bg = '#1a1b26',
+    black = '#414868',
+    yellow = '#e0af68',
+    cyan = '#41a6b5',
+    oceanblue = '#c0caf5',
+    green = '#51dda8',
+    orange = '#73daca', -- To be replaced...
+    violet = '#bb9af7', -- To be replaced...
+    magenta = '#bb9af7',
     white = '#a89984',
-    fg = '#a89984',
-    skyblue = '#7daea3',
-    red = '#ea6962',
+    fg = '#a9b1d6',
+    skyblue = '#7aa2f7',
+    red = '#f7768e',
   }
 
   local vi_mode_colors = {
-    NORMAL = 'green',
+    NORMAL = 'cyan',
     OP = 'green',
-    INSERT = 'red',
+    INSERT = 'green',
     CONFIRM = 'red',
     VISUAL = 'skyblue',
     LINES = 'skyblue',
-    BLOCK = 'skyblue',
+    BLOCK = 'oceanblue',
     REPLACE = 'violet',
     ['V-REPLACE'] = 'violet',
     ENTER = 'cyan',
     MORE = 'cyan',
     SELECT = 'orange',
-    COMMAND = 'green',
+    COMMAND = 'red',
     SHELL = 'green',
     TERM = 'green',
     NONE = 'yellow'
