@@ -40,10 +40,6 @@ local function configure()
     require 'illuminate'.on_attach(client)
   end)
 
-  lsp.configure('tsserver', {
-    filetypes = { "json", "jsonc" }
-  })
-
   lsp.setup()
 end
 
