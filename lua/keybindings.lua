@@ -10,9 +10,9 @@ map('n', '<Right>', '<Nop>', opts)
 -- telescope
 map('n', ';f', '<cmd>Telescope find_files<cr>', opts)
 map('n', ';r', [[ <cmd>lua require('telescope.builtin').live_grep()<cr> ]], opts)
-map('n', ';b', [[ <cmd>lua require('telescope.builtin').file_browser()<cr> ]], opts)
-map('n', '\\\\', '<cmd>Telescope buffers<cr>', opts)
-map('n', ';;', '<cmd>Telescope help_tags<cr>', opts)
+--map('n', ';b', [[ <cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown())<cr> ]], opts)
+map('n', '\\\\', '<cmd>Telescope buffers theme=dropdown<cr>', opts)
+map('n', ';;', '<cmd>Telescope help_tags theme=dropdown<cr>', opts)
 --map('n', ' .', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
 -- move.nvim
@@ -43,6 +43,7 @@ map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 map('', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 map("n", '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
+map('n', '<space>s', '<cmd>Telescope spell_suggest theme=dropdown<CR>', opts)
 
 -- trouble
 map("n", "<space>t", "<cmd>TroubleToggle<cr>", opts)
