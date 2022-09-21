@@ -37,7 +37,7 @@ vim.o.smartindent = true
 -- searching
 vim.o.incsearch = true
 
---- apperance config ---
+--- appearance config ---
 vim.o.syntax = 'on'
 vim.o.termguicolors = true
 vim.o.background = 'dark'
