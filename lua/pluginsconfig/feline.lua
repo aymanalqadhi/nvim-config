@@ -14,8 +14,8 @@ local function configure()
   }
 
   local colors = {
-    --bg = '#0000',
-    bg = '#1a1b26',
+    bg = '#0000',
+    --bg = '#1a1b26',
     black = '#414868',
     yellow = '#e0af68',
     cyan = '#41a6b5',
