@@ -78,7 +78,7 @@ return require('packer').startup(function(use)
   use 'adrian5/oceanic-next-vim'
   use 'kyazdani42/blue-moon'
   use 'olimorris/onedarkpro.nvim'
-  use 'tiagovla/tokyodark.nvim'
+  use 'folke/tokyonight.nvim'
 
   -- icons
   use 'kyazdani42/nvim-web-devicons'
@@ -103,11 +103,8 @@ return require('packer').startup(function(use)
 
   -- telescope
   use 'nvim-lua/popup.nvim'
+  use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  }
 
   -- typescript
   use 'jose-elias-alvarez/typescript.nvim'
@@ -136,7 +133,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.emmetls').configure()
   require('pluginsconfig.crates').configure()
-  require('pluginsconfig.telescope').configure()
   require('pluginsconfig.typescript').configure()
   require('pluginsconfig.gitsigns').configure()
   require('pluginsconfig.nvimtsautotag').configure()
@@ -154,6 +150,8 @@ return require('packer').startup(function(use)
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()
+  require('pluginsconfig.telescope').configure()
+  require('pluginsconfig.tokyonight').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
