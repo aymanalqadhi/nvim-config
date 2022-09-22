@@ -51,10 +51,14 @@ local function configure()
       },
     },
 
-    extensions_list = { "themes", "terms" },
+    extensions = {
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown {}
+      },
+    }
   }
 
-  vim.cmd("colorscheme tokyonight")
+  telescope.load_extension("ui-select")
 
 end
 
