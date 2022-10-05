@@ -29,7 +29,6 @@ local function configure()
       diagnostics.gitlint,
       diagnostics.flake8,
       diagnostics.eslint_d,
-      diagnostics.codespell,
       diagnostics.cmake_lint,
 
       -- hover
