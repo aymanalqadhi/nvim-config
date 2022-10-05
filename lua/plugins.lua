@@ -146,12 +146,12 @@ return require('packer').startup(function(use)
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.neotree').configure()
   require('pluginsconfig.toggleterm').configure()
-  require('pluginsconfig.rusttools').configure()
+  require('pluginsconfig.tokyonight').configure()
+  require('pluginsconfig.telescope').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()
-  require('pluginsconfig.telescope').configure()
-  require('pluginsconfig.tokyonight').configure()
+  require('pluginsconfig.rusttools').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
