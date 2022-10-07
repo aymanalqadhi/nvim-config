@@ -61,7 +61,6 @@ return require('packer').startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
 
-  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -75,6 +74,7 @@ return require('packer').startup(function(use)
   -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-context'
+  use 'folke/todo-comments.nvim'
 
   -- colorschems
   use 'adrian5/oceanic-next-vim'
@@ -119,10 +119,7 @@ return require('packer').startup(function(use)
   use 'lewis6991/hover.nvim'
 
   -- diagnostics list
-  use {
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons'
-  }
+  use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
   -- folding
   use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
@@ -172,5 +169,6 @@ return require('packer').startup(function(use)
   require('fold-preview').setup()
   require('neoscroll').setup()
   require('treesitter-context').setup()
+  require("todo-comments").setup()
 
 end)
