@@ -1,5 +1,5 @@
 local opts = { noremap = true, silent = true }
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
 -- disable arrows
 map('n', '<Up>', '<Nop>', opts)
@@ -26,8 +26,8 @@ map('v', '<A-l>', ":MoveHBlock(1)<CR>", opts)
 map('v', '<A-h>', ":MoveHBlock(-1)<CR>", opts)
 
 -- hover.nvim
-vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
-vim.keymap.set('n', 'gK', require('hover').hover_select, { desc = 'hover.nvim (select)' })
+map('n', 'K', require('hover').hover, opts)
+map('n', 'gK', require('hover').hover_select, opts)
 
 -- lspconfig
 map('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -90,12 +90,12 @@ map('n', '``', '<cmd>nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>', op
 map('n', '<A-m>', '<cmd>MinimapToggle<CR>', opts)
 
 -- toggleterm
-vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+map('t', '<esc>', [[<C-\><C-n>]], opts)
+map('t', 'jk', [[<C-\><C-n>]], opts)
+map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 
 _G.lazygit = require('toggleterm.terminal').Terminal:new({
   cmd = 'lazygit',
@@ -121,3 +121,15 @@ map('n', ',o', "<cmd>lua require'dap'.step_over()<CR>", opts)
 map('n', ',t', "<cmd>lua require'dap'.terminate()<CR>", opts)
 map('n', ',u', "<cmd>lua require'dapui'.toggle() <CR>", opts)
 map('n', ',e', "<cmd>lua require'dapui'.eval()<CR>", opts)
+
+-- folding (ufo)
+map('n', 'zR', require('ufo').openAllFolds)
+map('n', 'zM', require('ufo').closeAllFolds)
+map('n', 'zr', require('ufo').openFoldsExceptKinds)
+map('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+map('n', 'K', function()
+    local winid = require('ufo').peekFoldedLinesUnderCursor()
+    if not winid then
+        vim.lsp.buf.hover()
+    end
+end, opts)
