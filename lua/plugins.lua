@@ -130,6 +130,9 @@ return require('packer').startup(function(use)
   -- tmux integration
   use 'aserowy/tmux.nvim'
 
+  -- scrolling
+  use 'karb94/neoscroll.nvim'
+
   --- configure plugins with configuration files ---
   require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
@@ -165,6 +168,7 @@ return require('packer').startup(function(use)
   require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
   require('symbols-outline').setup()
+  require('neoscroll').setup()
   require('treesitter-context').setup()
 
 end)
