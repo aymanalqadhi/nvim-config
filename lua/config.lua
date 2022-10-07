@@ -13,10 +13,14 @@ vim.o.clipboard = "unnamedplus"
 vim.o.swapfile = false
 vim.o.title = true
 vim.o.wildmenu = true
+vim.o.updatetime = 250
 
 -- better expression folding 
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldmethod = "manual"
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- indentation config
 vim.o.showmatch = true
