@@ -125,6 +125,7 @@ return require('packer').startup(function(use)
 
   -- folding
   use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
   -- tmux integration
   use 'aserowy/tmux.nvim'
 
@@ -154,6 +155,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
+  require('pluginsconfig.ufo').configure()
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
 
