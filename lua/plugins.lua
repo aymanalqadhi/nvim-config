@@ -123,6 +123,8 @@ return require('packer').startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons'
   }
 
+  -- folding
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
   -- tmux integration
   use 'aserowy/tmux.nvim'
 
