@@ -125,7 +125,8 @@ return require('packer').startup(function(use)
   }
 
   -- folding
-  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+  use { 'anuvyklack/fold-preview.nvim', requires = 'anuvyklack/keymap-amend.nvim' }
 
   -- tmux integration
   use 'aserowy/tmux.nvim'
@@ -168,6 +169,7 @@ return require('packer').startup(function(use)
   require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
   require('symbols-outline').setup()
+  require('fold-preview').setup()
   require('neoscroll').setup()
   require('treesitter-context').setup()
 
