@@ -72,8 +72,9 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- syntax highlighting
+  -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter-context'
 
   -- colorschems
   use 'adrian5/oceanic-next-vim'
@@ -164,5 +165,6 @@ return require('packer').startup(function(use)
   require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
   require('symbols-outline').setup()
+  require('treesitter-context').setup()
 
 end)
