@@ -16,15 +16,14 @@ local function configure()
 
       -- formatters
       formatting.black,
-      formatting.rustfmt,
-      formatting.prettier,
+      formatting.prettierd,
       formatting.clang_format,
       formatting.prettierd,
       formatting.dart_format,
       formatting.cmake_format,
 
       -- diagnostics
-      diagnostics.eslint,
+      diagnostics.eslint_d,
       diagnostics.yamllint,
       diagnostics.gitlint,
       diagnostics.flake8,
