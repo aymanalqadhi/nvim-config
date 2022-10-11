@@ -11,16 +11,9 @@ end
 
 local function configure()
   cmp.setup({
-    completion = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, scrollbar = "║" },
     window = {
-      documentation = {
-        border = "rounded",
-        scrollbar = "║",
-      },
-      completion = {
-        border = "rounded",
-        scrollbar = "║",
-      },
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     formatting = {
       fields = {
