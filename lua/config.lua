@@ -1,6 +1,6 @@
 --- general config ---
 vim.o.encoding = "UTF-8"
-vim.o.completeopt = "noinsert,menuone,noselect"
+vim.o.completeopt = "menu,menuone,noselect"
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 5
 vim.o.inccommand = "nosplit"
