@@ -64,6 +64,7 @@ local function configure()
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'calc' },
+      { name = 'treesitter' },
     },
     experimental = {
       ghost_text = true,
@@ -76,6 +77,7 @@ local function configure()
       { name = 'cmdline_history' }
     }
   })
+
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
@@ -84,6 +86,7 @@ local function configure()
     --{ { name = 'cmdline' } }
     )
   })
+
 end
 
 return {
