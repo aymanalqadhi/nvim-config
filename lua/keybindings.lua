@@ -84,7 +84,7 @@ map('n', '<A-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', 
 map('n', '<A-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
 -- neo-tree
-map('n', '<A-t>', '<cmd>Neotree toggle<CR>', opts)
+map('n', '<A-t>', '<cmd>NvimTreeToggle<CR>', opts)
 
 -- codemap
 map('n', '``', '<cmd>nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>', opts)
