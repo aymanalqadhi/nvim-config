@@ -1,52 +1,46 @@
+local feline = require('feline')
+local lsp = require('feline.providers.lsp')
+local vi_mode = require('feline.providers.vi_mode')
+local tn_colors = require('tokyonight.colors').setup { style = 'storm' }
+
 local function configure()
-  local lsp = require('feline.providers.lsp')
-  local vi_mode_utils = require('feline.providers.vi_mode')
-
-  local force_inactive = {
-    filetypes = {},
-    buftypes = {},
-    bufnames = {}
-  }
-
-  local components = {
-    active = {{}, {}, {}},
-    inactive = {{}, {}, {}},
-  }
-
   local colors = {
-    bg = '#0000',
-    --bg = '#1a1b26',
-    black = '#414868',
-    yellow = '#e0af68',
-    cyan = '#41a6b5',
-    oceanblue = '#c0caf5',
-    green = '#51dda8',
-    orange = '#73daca', -- To be replaced...
-    violet = '#bb9af7', -- To be replaced...
-    magenta = '#bb9af7',
-    white = '#a89984',
-    fg = '#a9b1d6',
-    skyblue = '#7aa2f7',
-    red = '#f7768e',
+    bg = tn_colors.bg_statusline,
+    fg = tn_colors.fg,
+    yellow = tn_colors.yellow,
+    cyan = tn_colors.cyan,
+    darkblue = tn_colors.blue0,
+    green = tn_colors.green,
+    orange = tn_colors.orange,
+    violet = tn_colors.purple,
+    magenta = tn_colors.magenta,
+    blue = tn_colors.blue,
+    red = tn_colors.red,
+    light_bg = tn_colors.bg_highlight,
+    primary_blue = tn_colors.blue5,
   }
 
   local vi_mode_colors = {
-    NORMAL = 'cyan',
-    OP = 'green',
-    INSERT = 'green',
-    CONFIRM = 'red',
-    VISUAL = 'skyblue',
-    LINES = 'skyblue',
-    BLOCK = 'oceanblue',
-    REPLACE = 'violet',
-    ['V-REPLACE'] = 'violet',
-    ENTER = 'cyan',
-    MORE = 'cyan',
-    SELECT = 'orange',
-    COMMAND = 'red',
-    SHELL = 'green',
-    TERM = 'green',
-    NONE = 'yellow'
+    NORMAL = colors.primary_blue,
+    OP = colors.primary_blue,
+    INSERT = colors.yellow,
+    VISUAL = colors.magenta,
+    LINES = colors.magenta,
+    BLOCK = colors.magenta,
+    REPLACE = colors.red,
+    ['V-REPLACE'] = colors.red,
+    ENTER = colors.cyan,
+    MORE = colors.cyan,
+    SELECT = colors.orange,
+    COMMAND = colors.blue,
+    SHELL = colors.green,
+    TERM = colors.green,
+    NONE = colors.green,
+  }
+
+  local components = {
+    active = { {}, {}, {} },
+    inactive = { {}, {}, {} },
   }
 
   local vi_mode_text = {
@@ -68,19 +62,6 @@ local function configure()
     CONFIRM = '|>'
   }
 
-  force_inactive.filetypes = {
-    'NvimTree',
-    'dbui',
-    'packer',
-    'startify',
-    'fugitive',
-    'fugitiveblame'
-  }
-
-  force_inactive.buftypes = {
-    'terminal'
-  }
-
   -- STATUSLINE
   -- LEFT
 
@@ -90,7 +71,7 @@ local function configure()
     hl = function()
       local val = {}
 
-      val.bg = vi_mode_utils.get_mode_color()
+      val.bg = vi_mode.get_mode_color()
       val.fg = 'black'
       val.style = 'bold'
 
@@ -102,11 +83,11 @@ local function configure()
   -- vi-symbol
   components.active[1][2] = {
     provider = function()
-      return vi_mode_text[vi_mode_utils.get_vim_mode()]
+      return vi_mode_text[vi_mode.get_vim_mode()]
     end,
     hl = function()
       local val = {}
-      val.fg = vi_mode_utils.get_mode_color()
+      val.fg = vi_mode.get_mode_color()
       val.bg = 'bg'
       val.style = 'bold'
       return val
@@ -117,19 +98,19 @@ local function configure()
   -- fileIcon
   components.active[1][3] = {
     provider = function()
-      local filename = vim.fn.expand('%:t')
+      local filename  = vim.fn.expand('%:t')
       local extension = vim.fn.expand('%:e')
-      local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
+      local icon      = require 'nvim-web-devicons'.get_icon(filename, extension)
       if icon == nil then
         icon = ''
       end
       return icon
     end,
     hl = function()
-      local val = {}
-      local filename = vim.fn.expand('%:t')
-      local extension = vim.fn.expand('%:e')
-      local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+      local val        = {}
+      local filename   = vim.fn.expand('%:t')
+      local extension  = vim.fn.expand('%:e')
+      local icon, name = require 'nvim-web-devicons'.get_icon(filename, extension)
       if icon ~= nil then
         val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
       else
@@ -146,10 +127,10 @@ local function configure()
   components.active[1][4] = {
     provider = 'file_type',
     hl = function()
-      local val = {}
-      local filename = vim.fn.expand('%:t')
-      local extension = vim.fn.expand('%:e')
-      local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+      local val        = {}
+      local filename   = vim.fn.expand('%:t')
+      local extension  = vim.fn.expand('%:e')
+      local icon, name = require 'nvim-web-devicons'.get_icon(filename, extension)
       if icon ~= nil then
         val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
       else
@@ -349,14 +330,24 @@ local function configure()
     }
   }
 
-  require('feline').setup({
+  feline.setup {
     theme = colors,
-    default_bg = colors.bg,
-    default_fg = colors.fg,
     vi_mode_colors = vi_mode_colors,
     components = components,
-    force_inactive = force_inactive,
-  })
+    force_inactive = {
+      filetypes = {
+        'NvimTree',
+        'packer',
+        'fugitive',
+        'fugitiveblame',
+        'dbui',
+        'startify',
+      },
+      buftypes = { "terminal" },
+      bufnames = {}
+    },
+  }
+
 
 end
 
