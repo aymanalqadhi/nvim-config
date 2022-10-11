@@ -105,6 +105,7 @@ local function configure()
     sources = cmp.config.sources {
       { name = 'nvim_lsp' },
       { name = 'luasnip' }, -- For luasnip users.
+      { name = 'calc' },
     },
     experimental = {
       ghost_text = true,
