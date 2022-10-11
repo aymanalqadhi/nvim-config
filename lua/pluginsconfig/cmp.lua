@@ -82,8 +82,8 @@ local function configure()
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
       { { name = 'path' } },
-      { { name = 'cmdline_history', keyword_length = 2 } }
-    --{ { name = 'cmdline' } }
+      { { name = 'cmdline_history', keyword_length = 4 } },
+      { { name = 'cmdline' } }
     )
   })
 
