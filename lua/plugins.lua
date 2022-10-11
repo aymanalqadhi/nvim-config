@@ -63,8 +63,8 @@ return require('packer').startup(function(use)
   use 'akinsho/toggleterm.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
-
   use 'kyazdani42/nvim-tree.lua'
+  use 'ggandor/leap.nvim'
 
   -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -165,5 +165,6 @@ return require('packer').startup(function(use)
   require('neoscroll').setup()
   require('treesitter-context').setup()
   require("todo-comments").setup()
+  require('leap').set_default_keymaps()
 
 end)
