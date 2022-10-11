@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-nvim-lua' },
       { 'hrsh7th/cmp-calc' },
+      { 'dmitmel/cmp-cmdline-history' },
       { 'ray-x/lsp_signature.nvim' },
 
       -- snippets

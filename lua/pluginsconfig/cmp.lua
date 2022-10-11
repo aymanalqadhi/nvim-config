@@ -70,10 +70,19 @@ local function configure()
     },
   })
 
-  require('cmp').setup.cmdline(":", {
-    sources = {
-      { name = "cmdline", keyword_length = 2 },
-    },
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(), sources = {
+      { name = 'buffer' },
+      { name = 'cmdline_history' }
+    }
+  })
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+      { { name = 'path' } },
+      { { name = 'cmdline_history', keyword_length = 2 } }
+    --{ { name = 'cmdline' } }
+    )
   })
 end
 
