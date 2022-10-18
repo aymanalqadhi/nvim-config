@@ -28,6 +28,7 @@ local function configure()
       diagnostics.gitlint,
       diagnostics.flake8,
       diagnostics.cmake_lint,
+      diagnostics.todo_comments,
       diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
       -- hover
