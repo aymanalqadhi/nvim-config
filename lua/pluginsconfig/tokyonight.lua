@@ -2,7 +2,7 @@ local tokyonight = require('tokyonight')
 
 local function configure()
   tokyonight.setup {
-    style = "storm",
+    style = "night",
     transparent = true,
     terminal_colors = true,
 
@@ -11,8 +11,8 @@ local function configure()
       keywords = { italic = true },
       functions = {},
       variables = {},
-      sidebars = "dark",
-      floats = "dark",
+      sidebars = "storm",
+      floats = "night",
     },
 
     sidebars = { "qf", "help" },
