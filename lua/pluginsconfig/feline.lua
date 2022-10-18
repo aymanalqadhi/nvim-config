@@ -1,7 +1,7 @@
 local feline = require('feline')
 local lsp = require('feline.providers.lsp')
 local vi_mode = require('feline.providers.vi_mode')
-local tn_colors = require('tokyonight.colors').setup { style = 'storm' }
+local tn_colors = require('tokyonight.colors').setup { style = 'night' }
 
 local function configure()
   local colors = {
@@ -77,7 +77,8 @@ local function configure()
 
       return val
     end,
-    right_sep = ' '
+    --right_sep = ' '
+    right_sep = ' '
   }
 
   -- vi-symbol
