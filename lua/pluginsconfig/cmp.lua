@@ -21,7 +21,7 @@ local function configure()
         cmp.ItemField.Abbr,
         cmp.ItemField.Menu,
       },
-      format = lspkind.cmp_format{},
+      format = lspkind.cmp_format {},
     },
     snippet = {
       expand = function(args)
@@ -82,8 +82,8 @@ local function configure()
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
       { { name = 'path' } },
-      { { name = 'cmdline_history', keyword_length = 4 } },
-      { { name = 'cmdline' } }
+      { { name = 'cmdline', keyword_length = 3 } },
+      { { name = 'cmdline_history' } }
     )
   })
 
