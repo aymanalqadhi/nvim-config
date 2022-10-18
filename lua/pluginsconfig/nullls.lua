@@ -21,6 +21,7 @@ local function configure()
       formatting.prettierd,
       formatting.dart_format,
       formatting.cmake_format,
+      formatting.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
       -- diagnostics
       diagnostics.eslint_d,
@@ -29,6 +30,7 @@ local function configure()
       diagnostics.flake8,
       diagnostics.eslint_d,
       diagnostics.cmake_lint,
+      diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
       -- hover
       hover.printenv,
