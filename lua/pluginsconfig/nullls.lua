@@ -27,7 +27,6 @@ local function configure()
       diagnostics.yamllint,
       diagnostics.gitlint,
       diagnostics.flake8,
-      diagnostics.eslint_d,
       diagnostics.cmake_lint,
       diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
