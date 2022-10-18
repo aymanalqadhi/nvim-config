@@ -11,7 +11,6 @@ local function configure()
       -- code actions
       code_actions.eslint_d,
       code_actions.gitsigns,
-      code_actions.proselint,
       code_actions.refactoring,
 
       -- formatters
