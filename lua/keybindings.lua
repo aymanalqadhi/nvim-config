@@ -42,7 +42,7 @@ map('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_fol
 map('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 map('', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-map("n", '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+map("n", '<space>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 map('n', '<space>s', '<cmd>Telescope spell_suggest theme=dropdown<CR>', opts)
 
