@@ -169,7 +169,7 @@ ins_left {
 
 ins_left {
   function()
-    return string.format(' V01D |', mode_text())
+    return string.format(' %s |', mode_alias())
   end,
   color = function() return { fg = mode_color() } end,
   padding = { right = 1 },
