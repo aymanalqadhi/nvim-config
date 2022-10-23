@@ -51,7 +51,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.colorcolumn = '80'
 vim.o.conceallevel = 2
-vim.o.lazyredraw = true
+--vim.o.lazyredraw = true
 vim.o.signcolumn = 'yes'
 
 --- per-filetype config
