@@ -31,7 +31,6 @@ return require('packer').startup(function(use)
       { 'L3MON4D3/LuaSnip' },
       { 'saadparwaiz1/cmp_luasnip' },
       { 'rafamadriz/friendly-snippets' },
-
     }
   }
 
@@ -163,6 +162,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.ufo').configure()
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
+  require('pluginsconfig.notify').configure()
 
   -- manually configure plugins --
   require('trouble').setup {}
