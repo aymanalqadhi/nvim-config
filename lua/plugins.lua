@@ -165,9 +165,10 @@ return require('packer').startup(function(use)
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.notify').configure()
+  require('pluginsconfig.noice').configure()
 
   -- manually configure plugins --
-  require('trouble').setup {}
+  require('trouble').setup()
   require('luasnip.loaders.from_vscode').lazy_load()
   require('symbols-outline').setup()
   require('fold-preview').setup()
@@ -175,6 +176,5 @@ return require('packer').startup(function(use)
   require('treesitter-context').setup()
   require('todo-comments').setup()
   require('leap').set_default_keymaps()
-  require('noice').setup()
 
 end)
