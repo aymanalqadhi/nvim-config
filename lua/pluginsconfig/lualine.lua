@@ -13,6 +13,45 @@ local colors = {
   magenta = tn_colors.magenta,
   blue = tn_colors.blue,
   red = tn_colors.red,
+  light_bg = tn_colors.bg_highlight,
+  primary_blue = tn_colors.blue5,
+}
+
+local mode_colors = {
+  NORMAL = colors.primary_blue,
+  OP = colors.primary_blue,
+  INSERT = colors.yellow,
+  VISUAL = colors.magenta,
+  LINES = colors.magenta,
+  BLOCK = colors.magenta,
+  REPLACE = colors.red,
+  ['V-REPLACE'] = colors.red,
+  ENTER = colors.cyan,
+  MORE = colors.cyan,
+  SELECT = colors.orange,
+  COMMAND = colors.blue,
+  SHELL = colors.green,
+  TERM = colors.green,
+  NONE = colors.green,
+}
+
+local mode_texts = {
+  NORMAL = '<|',
+  OP = '<|',
+  INSERT = '|>',
+  VISUAL = '<>',
+  LINES = '<>',
+  BLOCK = '<>',
+  REPLACE = '<>',
+  ['V-REPLACE'] = '<>',
+  ENTER = '<>',
+  MORE = '<>',
+  SELECT = '<>',
+  COMMAND = '<|',
+  SHELL = '<|',
+  TERM = '<|',
+  NONE = '<>',
+  CONFIRM = '|>'
 }
 
 local conditions = {
@@ -32,13 +71,9 @@ local conditions = {
 -- Config
 local config = {
   options = {
-    -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
     theme = {
-      -- We are going to use lualine_c an lualine_x as left and
-      -- right section. Both are highlighted by c theme .  So we
-      -- are just setting default looks o statusline
       normal = { c = { fg = colors.fg, bg = colors.bg } },
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
@@ -74,45 +109,69 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
+-- Gets current mode color
+local function mode_alias()
+  local aliases = {
+    ['n'] = 'NORMAL',
+    ['no'] = 'OP',
+    ['nov'] = 'OP',
+    ['noV'] = 'OP',
+    ['no'] = 'OP',
+    ['niI'] = 'NORMAL',
+    ['niR'] = 'NORMAL',
+    ['niV'] = 'NORMAL',
+    ['v'] = 'VISUAL',
+    ['vs'] = 'VISUAL',
+    ['V'] = 'LINES',
+    ['Vs'] = 'LINES',
+    [''] = 'BLOCK',
+    ['s'] = 'BLOCK',
+    ['s'] = 'SELECT',
+    ['S'] = 'SELECT',
+    [''] = 'BLOCK',
+    ['i'] = 'INSERT',
+    ['ic'] = 'INSERT',
+    ['ix'] = 'INSERT',
+    ['R'] = 'REPLACE',
+    ['Rc'] = 'REPLACE',
+    ['Rv'] = 'V-REPLACE',
+    ['Rx'] = 'REPLACE',
+    ['c'] = 'COMMAND',
+    ['cv'] = 'COMMAND',
+    ['ce'] = 'COMMAND',
+    ['r'] = 'ENTER',
+    ['rm'] = 'MORE',
+    ['r?'] = 'CONFIRM',
+    ['!'] = 'SHELL',
+    ['t'] = 'TERM',
+    ['nt'] = 'TERM',
+    ['null'] = 'NONE',
+  }
+
+  return aliases[vim.fn.mode()]
+end
+
+local function mode_color()
+  return mode_colors[mode_alias()]
+end
+
+local function mode_text()
+  return mode_texts[mode_alias()]
+end
+
 ins_left {
   function()
-    return '▊'
+    return string.format(' %s', mode_text())
   end,
-  color = { fg = colors.blue }, -- Sets highlighting of component
-  padding = { left = 0, right = 1 }, -- We don't need space before this
+  color = function() return { bg = mode_color(), fg = '#000000' } end,
+  padding = { right = 1 },
 }
 
 ins_left {
-  -- mode component
   function()
-    return ''
+    return string.format(' V01D |', mode_text())
   end,
-  color = function()
-    -- auto change color according to neovims mode
-    local mode_color = {
-      n = colors.red,
-      i = colors.green,
-      v = colors.blue,
-      [''] = colors.blue,
-      V = colors.blue,
-      c = colors.magenta,
-      no = colors.red,
-      s = colors.orange,
-      S = colors.orange,
-      [''] = colors.orange,
-      ic = colors.yellow,
-      R = colors.violet,
-      Rv = colors.violet,
-      cv = colors.red,
-      ce = colors.red,
-      r = colors.cyan,
-      rm = colors.cyan,
-      ['r?'] = colors.cyan,
-      ['!'] = colors.red,
-      t = colors.red,
-    }
-    return { fg = mode_color[vim.fn.mode()] }
-  end,
+  color = function() return { fg = mode_color() } end,
   padding = { right = 1 },
 }
 
@@ -135,7 +194,7 @@ ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 ins_left {
   'diagnostics',
   sources = { 'nvim_diagnostic' },
-  symbols = { error = ' ', warn = ' ', info = ' ' },
+  symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
     color_error = { fg = colors.red },
     color_warn = { fg = colors.yellow },
@@ -209,7 +268,7 @@ ins_right {
   function()
     return '▊'
   end,
-  color = { fg = colors.blue },
+  color = function() return { fg = mode_color() } end,
   padding = { left = 1 },
 }
 
@@ -218,4 +277,3 @@ return {
     lualine.setup(config)
   end
 }
-
