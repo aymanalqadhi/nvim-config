@@ -172,6 +172,7 @@ return require('packer').startup(function(use)
   require('treesitter-context').setup()
   require('todo-comments').setup()
   require('leap').set_default_keymaps()
+  require('scrollbar').setup()
   require('codewindow').setup()
 
 end)
