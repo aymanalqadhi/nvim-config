@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
-  use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
   use 'akinsho/toggleterm.nvim'
