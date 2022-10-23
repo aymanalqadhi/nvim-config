@@ -47,13 +47,15 @@ map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 map('n', '<space>s', '<cmd>Telescope spell_suggest theme=dropdown<CR>', opts)
 
 -- trouble
-map("n", "<space>t", "<cmd>TroubleToggle<cr>", opts)
-map("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
-map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
-map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opts)
-map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
-map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
+map("n", "<space>tt", "<cmd>TroubleToggle<cr>", opts)
+map("n", "<space>tw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
+map("n", "<space>td", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
+map("n", "<space>tl", "<cmd>TroubleToggle loclist<cr>", opts)
+map("n", "<space>t.", "<cmd>TroubleToggle quickfix<cr>", opts)
+map("n", "<space>tr", "<cmd>TroubleRefresh<cr>", opts)
 map("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
+map("n", "[t", [[ <cmd>lua require("trouble").previous{skip_groups = true, jump = true}<cr> ]], opts)
+map("n", "]t", [[ <cmd>lua require("trouble").next{skip_groups = true, jump = true}<cr> ]], opts)
 
 -- barbar
 -- Move to previous/next
@@ -129,8 +131,8 @@ map('n', 'zM', require('ufo').closeAllFolds)
 map('n', 'zr', require('ufo').openFoldsExceptKinds)
 map('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 map('n', 'K', function()
-    local winid = require('ufo').peekFoldedLinesUnderCursor()
-    if not winid then
-        vim.lsp.buf.hover()
-    end
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
 end, opts)
