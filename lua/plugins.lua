@@ -56,7 +56,6 @@ return require('packer').startup(function(use)
   use 'cohama/lexima.vim'
   use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
-  use 'wfxr/minimap.vim'
   use 'akinsho/toggleterm.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
@@ -124,14 +123,11 @@ return require('packer').startup(function(use)
   use 'karb94/neoscroll.nvim'
 
   -- ui
-  use {
-    'folke/noice.nvim',
-    event = 'VimEnter',
-    requires = {
-      { 'rcarriga/nvim-notify' },
-      { 'MunifTanjim/nui.nvim' }
-    }
-  }
+  use 'petertriho/nvim-scrollbar'
+  use 'gorbit99/codewindow.nvim'
+  use 'rcarriga/nvim-notify'
+  use 'MunifTanjim/nui.nvim'
+  use 'folke/noice.nvim'
   -- startup time
   use 'lewis6991/impatient.nvim'
 
@@ -176,5 +172,6 @@ return require('packer').startup(function(use)
   require('treesitter-context').setup()
   require('todo-comments').setup()
   require('leap').set_default_keymaps()
+  require('codewindow').setup()
 
 end)
