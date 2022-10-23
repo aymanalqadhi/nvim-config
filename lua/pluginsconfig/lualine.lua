@@ -1,20 +1,6 @@
 local lualine = require('lualine')
 local tn_colors = require('tokyonight.colors').setup { style = 'night' }
 
--- local colors = {
---   bg       = '#202328',
---   fg       = '#bbc2cf',
---   yellow   = '#ECBE7B',
---   cyan     = '#008080',
---   darkblue = '#081633',
---   green    = '#98be65',
---   orange   = '#FF8800',
---   violet   = '#a9a1e1',
---   magenta  = '#c678dd',
---   blue     = '#51afef',
---   red      = '#ec5f67',
--- }
-
 local colors = {
   bg = tn_colors.bg_statusline,
   fg = tn_colors.fg,
@@ -27,8 +13,6 @@ local colors = {
   magenta = tn_colors.magenta,
   blue = tn_colors.blue,
   red = tn_colors.red,
-  light_bg = tn_colors.bg_highlight,
-  primary_blue = tn_colors.blue5,
 }
 
 local conditions = {
