@@ -132,6 +132,8 @@ return require('packer').startup(function(use)
       { 'MunifTanjim/nui.nvim' }
     }
   }
+  -- startup time
+  use 'lewis6991/impatient.nvim'
 
   --- configure plugins with configuration files ---
   require('pluginsconfig.tmux').configure()
