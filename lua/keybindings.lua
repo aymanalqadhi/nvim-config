@@ -88,9 +88,9 @@ map('n', '<A-p>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap
 -- neo-tree
 map('n', '<A-t>', '<cmd>NvimTreeToggle<CR>', opts)
 
--- codemap
-map('n', '``', '<cmd>nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>', opts)
-map('n', '<A-m>', '<cmd>MinimapToggle<CR>', opts)
+-- codewindow
+map('n', ';m', require 'codewindow'.toggle_minimap, opts)
+map('n', ';M', require 'codewindow'.toggle_focus, opts)
 
 -- toggleterm
 map('t', '<esc>', [[<C-\><C-n>]], opts)
