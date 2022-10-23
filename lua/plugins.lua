@@ -124,6 +124,16 @@ return require('packer').startup(function(use)
   -- scrolling
   use 'karb94/neoscroll.nvim'
 
+  -- ui
+  use {
+    'folke/noice.nvim',
+    event = 'VimEnter',
+    requires = {
+      { 'rcarriga/nvim-notify' },
+      { 'MunifTanjim/nui.nvim' }
+    }
+  }
+
   --- configure plugins with configuration files ---
   require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
@@ -156,13 +166,13 @@ return require('packer').startup(function(use)
 
   -- manually configure plugins --
   require('trouble').setup {}
-  require('fidget').setup {}
   require('luasnip.loaders.from_vscode').lazy_load()
   require('symbols-outline').setup()
   require('fold-preview').setup()
   require('neoscroll').setup()
   require('treesitter-context').setup()
-  require("todo-comments").setup()
+  require('todo-comments').setup()
   require('leap').set_default_keymaps()
+  require('noice').setup()
 
 end)
