@@ -1,6 +1,4 @@
 local cmp = require("cmp")
-local types = require("cmp.types")
-local str = require("cmp.utils.str")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 
