@@ -293,14 +293,6 @@ local function configure()
     },
     right_sep = ' '
   }
-  -- scrollBar
-  components.active[3][7] = {
-    provider = 'scroll_bar',
-    hl = {
-      fg = 'yellow',
-      bg = 'bg',
-    },
-  }
 
   -- INACTIVE
 
