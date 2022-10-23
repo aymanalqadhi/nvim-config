@@ -85,6 +85,7 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
   use 'feline-nvim/feline.nvim'
+  use 'nvim-lualine/lualine.nvim'
   use 'SmiteshP/nvim-gps'
 
   -- startup page
@@ -146,7 +147,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
-  require('pluginsconfig.feline').configure()
+  require('pluginsconfig.lualine').configure()
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
