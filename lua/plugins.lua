@@ -60,6 +60,7 @@ return require('packer').startup(function(use)
   use 'ThePrimeagen/refactoring.nvim'
   use 'kyazdani42/nvim-tree.lua'
   use 'ggandor/leap.nvim'
+  use 'windwp/nvim-autopairs'
 
   -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -174,5 +175,6 @@ return require('packer').startup(function(use)
   require('leap').set_default_keymaps()
   require('scrollbar').setup()
   require('codewindow').setup()
+  require('nvim-autopairs').setup()
 
 end)
