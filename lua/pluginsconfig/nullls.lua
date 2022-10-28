@@ -26,9 +26,8 @@ local function configure()
       diagnostics.eslint_d,
       diagnostics.yamllint,
       diagnostics.gitlint,
-      diagnostics.flake8,
       diagnostics.cmake_lint,
-      diagnostics.todo_comments,
+      diagnostics.flake8,
       diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
       -- hover
