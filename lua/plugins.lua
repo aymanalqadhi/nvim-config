@@ -62,6 +62,8 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-tree.lua'
   use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
+  use 'folke/which-key.nvim'
+
 
   -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
@@ -165,6 +167,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.notify').configure()
   require('pluginsconfig.noice').configure()
   require('pluginsconfig.twilight').configure()
+  require('pluginsconfig.whichkey').configure()
 
   -- manually configure plugins --
   require('trouble').setup()
