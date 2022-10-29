@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-nvim-lua' },
       { 'hrsh7th/cmp-calc' },
       { 'dmitmel/cmp-cmdline-history' },
-      { 'ray-x/cmp-treesitter' },
       { 'ray-x/lsp_signature.nvim' },
 
       -- snippets

@@ -64,7 +64,6 @@ local function configure()
       { name = 'nvim_lua' },
       { name = 'luasnip' },
       { name = 'calc' },
-      { name = 'treesitter' },
     },
     experimental = {
       ghost_text = true,
