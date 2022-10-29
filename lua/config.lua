@@ -53,6 +53,8 @@ vim.o.colorcolumn = '80'
 vim.o.conceallevel = 2
 vim.o.laststatus = 3
 vim.o.signcolumn = 'yes'
+vim.o.winblend = 15
+vim.o.pumblend = 15
 
 --- per-filetype config
 -- *.lua
