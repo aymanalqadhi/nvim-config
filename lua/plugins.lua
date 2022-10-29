@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-calc' },
       { 'dmitmel/cmp-cmdline-history' },
       { 'ray-x/lsp_signature.nvim' },
+      { 'andersevenrud/cmp-tmux' },
 
       -- snippets
       { 'L3MON4D3/LuaSnip' },

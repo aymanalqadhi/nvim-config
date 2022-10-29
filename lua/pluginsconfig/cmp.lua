@@ -63,6 +63,7 @@ local function configure()
       { name = 'nvim_lsp' },
       { name = 'nvim_lua' },
       { name = 'luasnip' },
+      { name = 'tmux' },
       { name = 'calc' },
     },
     experimental = {
