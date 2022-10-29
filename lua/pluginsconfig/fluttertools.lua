@@ -3,64 +3,65 @@ local flutter = require("flutter-tools");
 local function configure()
   flutter.setup {
     ui = {
-      border = "rounded",
-      notification_style = 'plugin' -- 'native' | 'plugin'
+      border = "rounded", -- "single" | "shadow" | {<table-of-eight-chars>}
+      notification_style = 'plugin'
     },
     decorations = {
       statusline = {
-        -- set to true to be able use the 'flutter_tools_decorations.app_version' in your statusline
-        -- this will show the current version of the flutter app from the pubspec.yaml file
         app_version = true,
-        -- set to true to be able use the 'flutter_tools_decorations.device' in your statusline
-        -- this will show the currently running device if an application was started with a specific
-        -- device
         device = true,
       }
     },
-    debugger = { -- integrate with nvim dap + install dart code debugger
-      enabled = false,
-      run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
-      -- register_configurations = function(paths)
-      --   require("dap").configurations.dart = {
-      --   }
-      -- end,
+    debugger = {
+      enabled = true,
+      run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
+      exception_breakpoints = {},
+      register_configurations = function(_)
+        require("dap").configurations.dart = {}
+        require("dap.ext.vscode").load_launchjs()
+      end,
     },
-    flutter_path = "/opt/flutter/bin/flutter", -- <-- this takes priority over the lookup
-    flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
-    fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+    --flutter_path = "<full/path/if/needed>",
+    --flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
     widget_guides = {
-      enabled = false,
+      enabled = true,
     },
     closing_tags = {
       highlight = "Comment", -- highlight for the closing tag
-      prefix = "//", -- character to use for close tag e.g. > Widget
-      enabled = true -- set to false to disable
+      prefix = "<//",
+      enabled = true,
     },
     dev_log = {
       enabled = true,
-      open_cmd = "tabedit", -- command to use to open the log buffer
+      open_cmd = "tabedit",
     },
     dev_tools = {
-      autostart = false, -- autostart devtools server if not detected
+      autostart = false,
       auto_open_browser = false, -- Automatically opens devtools in the browser
     },
     outline = {
-      open_cmd = "30vnew", -- command to use to open the outline buffer
-      auto_open = false -- if true this will open the outline automatically when it is first populated
+      open_cmd = "30vnew",
+      auto_open = false,
     },
     lsp = {
-      color = { -- show the derived colours for dart variables
+      color = {
         enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
         background = true, -- highlight the background
-        foreground = true, -- highlight the foreground
+        foreground = false, -- highlight the foreground
         virtual_text = true, -- show the highlight using virtual text
         virtual_text_str = "■", -- the virtual text character to highlight
       },
+      --capabilities = function(config)
+      --  --config.specificThingIDontWant = false
+      --  return config
+      --end,
+      -- see the link below for details on each option:
+      -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
       settings = {
         showTodos = true,
         completeFunctionCalls = true,
-        -- analysisExcludedFolders = {"<path-to-flutter-sdk-packages>"},
-        renameFilesWithClasses = "prompt", -- "always"
+        analysisExcludedFolders = { "/opt/flutter/" },
+        renameFilesWithClasses = "prompt",
         enableSnippets = true,
       }
     }
