@@ -14,7 +14,7 @@ local function configure()
     floating_window_off_x = 1,
     floating_window_off_y = 0,
     close_timeout = 4000,
-    fix_pos = false,
+    fix_pos = true,
 
     hint_enable = true,
     hint_prefix = "🐼 ",
@@ -22,7 +22,7 @@ local function configure()
     hi_parameter = "LspSignatureActiveParameter",
 
     handler_opts = {
-      border = "rounded",
+      border = 'rounded',
     },
 
     always_trigger = false,
@@ -31,7 +31,7 @@ local function configure()
 
     zindex = 200,
     padding = '',
-    --transparency = 70,
+    transparency = 70,
     --shadow_blend = 36,
     shadow_guibg = 'Black',
 
