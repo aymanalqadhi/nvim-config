@@ -3,7 +3,7 @@ local tokyonight = require('tokyonight')
 local function configure()
   tokyonight.setup {
     style = "night",
-    transparent = true,
+    transparent = false,
     terminal_colors = true,
 
     styles = {
