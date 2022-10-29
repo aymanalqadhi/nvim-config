@@ -33,9 +33,6 @@ local function configure()
       -- hover
       hover.printenv,
     },
-    on_init = function(new_client, _)
-      new_client.offset_encoding = 'utf-16'
-    end,
   }
 end
 
