@@ -6,7 +6,11 @@ local function configure()
   toggleterm.setup {
     open_mapping = [[<c-\>]],
     shade_terminals = true,
-    direction = 'float'
+    direction = 'float',
+    float_opts = {
+      border = 'curved',
+      winblend = 15,
+    }
   }
 end
 
