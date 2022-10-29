@@ -12,9 +12,9 @@ map('n', ';f', '<cmd>Telescope find_files<cr>', opts)
 --map('n', ';b', [[ <cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown())<cr> ]], opts)
 map('n', '\\\\', '<cmd>Telescope buffers theme=dropdown<cr>', opts)
 map('n', ';;', '<cmd>Telescope help_tags theme=dropdown<cr>', opts)
---map('n', ' .', '<cmd>Telescope lsp_code_actions<cr>', opts)
 map('n', ';s', '<cmd>Telescope live_grep theme=dropdown<cr>', opts)
 map('n', ';r', '<cmd>Telescope grep_string theme=dropdown<cr>', opts)
+map('n', ';F', '<cmd>Telescope flutter commands theme=dropdown<cr>', opts) -- flutter commands
 
 -- move.nvim
 map('n', '<A-j>', ":MoveLine(1)<CR>", opts)
