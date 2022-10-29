@@ -37,9 +37,12 @@ return require('packer').startup(function(use)
   -- language-specific lsp addons
   use 'simrat39/rust-tools.nvim'
   use 'saecki/crates.nvim'
-  use 'simrat39/symbols-outline.nvim'
   use 'RRethy/vim-illuminate'
   use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
+
+  -- lsp addons
+  use 'simrat39/symbols-outline.nvim'
+  use 'folke/twilight.nvim'
 
   -- source control
   use 'tpope/vim-fugitive'
@@ -163,6 +166,7 @@ return require('packer').startup(function(use)
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.notify').configure()
   require('pluginsconfig.noice').configure()
+  require('pluginsconfig.twilight').configure()
 
   -- manually configure plugins --
   require('trouble').setup()

@@ -136,3 +136,6 @@ map('n', 'K', function()
     vim.lsp.buf.hover()
   end
 end, opts)
+
+-- twilight
+map('n', ';t', '<cmd>Twilight<cr>', opts)
