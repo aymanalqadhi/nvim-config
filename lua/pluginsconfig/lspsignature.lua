@@ -31,9 +31,9 @@ local function configure()
 
     zindex = 200,
     padding = '',
-    transparency = 70,
+    --transparency = 70,
     --shadow_blend = 36,
-    shadow_guibg = 'Black',
+    --shadow_guibg = 'Black',
 
     timer_interval = 200,
     toggle_key = nil,
