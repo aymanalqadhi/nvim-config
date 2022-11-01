@@ -13,7 +13,7 @@ map('n', '\\\\', '<cmd>Telescope buffers theme=dropdown<cr>', opts)
 map('n', ';;', '<cmd>Telescope help_tags theme=dropdown<cr>', opts)
 map('n', ';s', '<cmd>Telescope live_grep theme=dropdown<cr>', opts)
 map('n', ';r', '<cmd>Telescope grep_string theme=dropdown<cr>', opts)
-map('n', ';F', '<cmd>Telescope flutter commands theme=dropdown<cr>', opts) -- flutter commands
+map('n', ';F', '<cmd>Telescope flutter commands theme=dropdown<cr>', opts)
 
 -- move.nvim
 map('n', '<A-j>', ":MoveLine(1)<CR>", opts)
@@ -39,11 +39,11 @@ map('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
 map('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
 map('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 map('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 map('', '<space>.', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 map("n", '<space>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 map('n', '<space>s', '<cmd>Telescope spell_suggest theme=dropdown<CR>', opts)
+map('n', "<space>rn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true })
 
 -- trouble
 map("n", "<space>tt", "<cmd>TroubleToggle<cr>", opts)
@@ -98,7 +98,7 @@ _G.term_lazygit.on_open = function(t)
 end
 
 map('n', '<space>g', '<cmd>lua _G.term_lazygit:toggle()<cr>', opts)
-map({'n','i','v'}, '<C-t>', '<cmd>lua _G.term_horizontal:toggle()<cr>', opts)
+map({ 'n', 'i', 'v' }, '<C-t>', '<cmd>lua _G.term_horizontal:toggle()<cr>', opts)
 map('t', '<C-t>', '<cmd>ToggleTermToggleAll<cr>', opts)
 map('t', '<esc>', [[<C-\><C-n>]], opts)
 map('t', 'jk', [[<C-\><C-n>]], opts)
@@ -132,6 +132,6 @@ end, opts)
 -- twilight
 map('n', ';t', '<cmd>Twilight<cr>', opts)
 
--- window 
-map({'n', 't'}, [[<C-=>]], '<cmd>reize +2<cr>vertical resize +2<cr>', opts)
-map({'n', 't'}, [[<C-->]], '<cmd>reize -2<cr>vertical resize -2<cr>', opts)
+-- window
+map({ 'n', 't' }, [[<C-=>]], '<cmd>reize +2<cr>vertical resize +2<cr>', opts)
+map({ 'n', 't' }, [[<C-->]], '<cmd>reize -2<cr>vertical resize -2<cr>', opts)
