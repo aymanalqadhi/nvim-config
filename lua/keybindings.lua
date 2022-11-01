@@ -44,6 +44,8 @@ map("n", '<space>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 map('x', '<space>f', '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', opts)
 map('n', '<space>s', '<cmd>Telescope spell_suggest theme=dropdown<CR>', opts)
 map('n', "<space>rn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true })
+map("n", "]d", vim.diagnostic.goto_next, opts)
+map("n", "[d", vim.diagnostic.goto_prev, opts)
 
 -- trouble
 map("n", "<space>tt", "<cmd>TroubleToggle<cr>", opts)
