@@ -7,7 +7,8 @@ return {
         signature = {
           enabled = false,
         }
-      }
+      },
+      presets = { inc_rename = true }
     }
   end
 }
