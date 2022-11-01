@@ -9,7 +9,6 @@ map('n', '<Right>', '<Nop>', opts)
 
 -- telescope
 map('n', ';f', '<cmd>Telescope find_files<cr>', opts)
---map('n', ';b', [[ <cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_dropdown())<cr> ]], opts)
 map('n', '\\\\', '<cmd>Telescope buffers theme=dropdown<cr>', opts)
 map('n', ';;', '<cmd>Telescope help_tags theme=dropdown<cr>', opts)
 map('n', ';s', '<cmd>Telescope live_grep theme=dropdown<cr>', opts)
