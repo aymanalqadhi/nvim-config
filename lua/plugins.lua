@@ -5,6 +5,10 @@ return require('packer').startup(function(use)
   -- common
   use 'nvim-lua/plenary.nvim'
 
+  -- optimaizations
+  use 'lewis6991/impatient.nvim'
+  use { 'nathom/filetype.nvim', ext = 'filetype' }
+
   -- lsp
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -133,8 +137,6 @@ return require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'
   use 'MunifTanjim/nui.nvim'
   use 'folke/noice.nvim'
-  -- startup time
-  use 'lewis6991/impatient.nvim'
 
   --- configure plugins with configuration files ---
   require('pluginsconfig.tmux').configure()
