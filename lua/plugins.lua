@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
   -- lsp addons
   use 'simrat39/symbols-outline.nvim'
   use 'folke/twilight.nvim'
+  use 'smjonas/inc-rename.nvim'
 
   -- source control
   use 'tpope/vim-fugitive'
@@ -181,5 +182,6 @@ return require('packer').startup(function(use)
   require('scrollbar').setup()
   require('codewindow').setup()
   require('nvim-autopairs').setup()
+  require('inc_rename').setup()
 
 end)
