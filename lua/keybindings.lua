@@ -93,24 +93,20 @@ map('n', ';m', require 'codewindow'.toggle_minimap, opts)
 map('n', ';M', require 'codewindow'.toggle_focus, opts)
 
 -- toggleterm
+_G.term_lazygit.on_open = function(t)
+  vim.cmd('startinsert!')
+  vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', opts)
+end
+
+map('n', '<space>g', '<cmd>lua _G.term_lazygit:toggle()<cr>', opts)
+map({'n','i','v'}, '<C-t>', '<cmd>lua _G.term_horizontal:toggle()<cr>', opts)
+map('t', '<C-t>', '<cmd>ToggleTermToggleAll<cr>', opts)
 map('t', '<esc>', [[<C-\><C-n>]], opts)
 map('t', 'jk', [[<C-\><C-n>]], opts)
 map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
 map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
 map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
 map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-
-_G.lazygit = require('toggleterm.terminal').Terminal:new({
-  cmd = 'lazygit',
-  dir = 'git_dir',
-  direction = 'float',
-  on_open = function(term)
-    vim.cmd('startinsert!')
-    vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', opts)
-  end,
-})
-
-vim.keymap.set('n', '<space>g', [[ <cmd>lua _G.lazygit:toggle()<CR> ]], opts)
 
 -- dap
 map('n', ',b', "<cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
@@ -136,3 +132,7 @@ end, opts)
 
 -- twilight
 map('n', ';t', '<cmd>Twilight<cr>', opts)
+
+-- window 
+map({'n', 't'}, [[<C-=>]], '<cmd>reize +2<cr>vertical resize +2<cr>', opts)
+map({'n', 't'}, [[<C-->]], '<cmd>reize -2<cr>vertical resize -2<cr>', opts)
