@@ -40,8 +40,6 @@ function plugin.configure()
   dashboard.section.buttons.opts.hl = 'Keyword'
   dashboard.opts.opts.noautocmd = true
 
-  vim.cmd([[autocmd User AlphaReady echo 'ready']])
-
   require('alpha').setup(dashboard.opts)
 end
 
