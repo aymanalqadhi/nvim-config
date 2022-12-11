@@ -95,10 +95,6 @@ function M.configure()
     color = { fg = palette.magenta, gui = 'bold' },
   }
 
-  ins_left { 'location' }
-
-  ins_left { 'progress', color = { fg = palette.fg, gui = 'bold' } }
-
   ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
@@ -140,6 +136,10 @@ function M.configure()
   }
 
   -- Add components to right sections
+
+  ins_right { 'location' }
+  ins_right { 'progress', color = { fg = palette.fg, gui = 'bold' } }
+
   ins_right {
     'o:encoding', -- option component same as &encoding in viml
     fmt = string.upper, -- I'm not sure why it's upper case either ;)
