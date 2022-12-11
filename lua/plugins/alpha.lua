@@ -4,7 +4,7 @@ local plugin = {}
 plugin.uri = 'goolord/alpha-nvim'
 
 -- plugin requirements
-plugin.requires = { 'kyazdani42/nvim-web-devicons' }
+plugin.requires = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin configuration function
 function plugin.configure()
