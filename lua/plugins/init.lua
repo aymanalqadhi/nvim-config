@@ -1,8 +1,15 @@
-return {
-  -- appearance
-  'nightfox',        -- colorscheme
-  'bufferline',      -- bar
-  'indentblankline', -- indentation markers
-  'lualine',         -- status line
-  'alpha',           -- startup page
-}
+local function merge_plugins(mods)
+  local ret = {}
+
+  for _, mod in ipairs(mods) do
+    local submods = require('plugins.' .. mod)
+
+    for _, submod in ipairs(submods) do
+      table.insert(ret, mod .. '.' .. submod)
+    end
+  end
+
+  return ret
+end
+
+return merge_plugins({ 'ui' })
