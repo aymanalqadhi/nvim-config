@@ -1,47 +1,48 @@
-return {
-  'goolord/alpha-nvim',
+local plugin = {}
 
-  -- requires `nvim-web-devicons` to display icons
-  requires = {
-    'kyazdani42/nvim-web-devicons'
-  },
+-- plugin uri
+plugin.uri = 'goolord/alpha-nvim'
 
-  -- configuration function
-  config = function()
-    local db = require('alpha.themes.dashboard')
+-- plugin requirements
+plugin.requires = { 'kyazdani42/nvim-web-devicons' }
 
-    -- buttons definitions
-    db.section.buttons.val = {
-      db.button('<C-P>', '  Find file', ':Telescope find_files <CR>'),
-      db.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
-      db.button('p', '  Find project', ':Telescope projects <CR>'),
-      db.button('r', '  Recently used files', ':Telescope oldfiles <CR>'),
-      db.button('<CS-F>', '  Find text', ':Telescope live_grep <CR>'),
-      db.button('c', '  Configuration', ':e ~/.config/nvim/init.lua <CR>'),
-      db.button('q', '  Quit Neovim', ':qa<CR>'),
-    }
+-- plugin configuration function
+function plugin.configure()
+  local dashboard = require('alpha.themes.dashboard')
 
-    -- footer generator using fortune
-    local function footer()
-      local handle = io.popen('fortune')
+  -- buttons definitions
+  dashboard.section.buttons.val = {
+    dashboard.button('<C-P>', '  Find file', ':Telescope find_files <CR>'),
+    dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
+    dashboard.button('p', '  Find project', ':Telescope projects <CR>'),
+    dashboard.button('r', '  Recently used files', ':Telescope oldfiles <CR>'),
+    dashboard.button('<CS-F>', '  Find text', ':Telescope live_grep <CR>'),
+    dashboard.button('c', '  Configuration', ':e ~/.config/nvim/init.lua <CR>'),
+    dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
+  }
 
-      if handle == nil then
-        return ''
-      end
+  -- footer generator using fortune
+  local function footer()
+    local handle = io.popen('fortune')
 
-      local fortune = handle:read('*a')
-      handle:close()
-      return fortune
+    if handle == nil then
+      return ''
     end
 
-    db.section.footer.val = footer()
-    db.section.footer.opts.hl = 'Type'
-    db.section.header.opts.hl = 'Include'
-    db.section.buttons.opts.hl = 'Keyword'
-    db.opts.opts.noautocmd = true
-
-    vim.cmd([[autocmd User AlphaReady echo 'ready']])
-
-    require('alpha').setup(db.opts)
+    local fortune = handle:read('*a')
+    handle:close()
+    return fortune
   end
-}
+
+  dashboard.section.footer.val = footer()
+  dashboard.section.footer.opts.hl = 'Type'
+  dashboard.section.header.opts.hl = 'Include'
+  dashboard.section.buttons.opts.hl = 'Keyword'
+  dashboard.opts.opts.noautocmd = true
+
+  vim.cmd([[autocmd User AlphaReady echo 'ready']])
+
+  require('alpha').setup(dashboard.opts)
+end
+
+return plugin

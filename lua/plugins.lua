@@ -188,7 +188,11 @@ return require('packer').startup(function(use)
     if not loaded then
       print('Could not load plugin: ' .. plugin_name)
     else
-      use(plugin)
+      use({
+        plugin.uri,
+        requires = plugin.requires,
+        config = plugin.configure
+      })
     end
   end
 
