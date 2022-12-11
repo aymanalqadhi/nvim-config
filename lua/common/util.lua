@@ -1,6 +1,6 @@
 local M = {}
 
--- Gets current mode color
+-- gets current mode color
 function M.mode_alias()
   local aliases = {
     ['n'] = 'NORMAL',
@@ -40,6 +40,29 @@ function M.mode_alias()
   }
 
   return aliases[vim.fn.mode()]
+end
+
+-- gets current mode label
+function M.mode_label()
+  local labels = {
+    NORMAL = '<|',
+    OP = '<|',
+    INSERT = '|>',
+    VISUAL = '<>',
+    LINES = '<>',
+    BLOCK = '<>',
+    REPLACE = '<>',
+    ['V-REPLACE'] = '<>',
+    ENTER = '<>',
+    MORE = '<>',
+    SELECT = '<>',
+    COMMAND = '<|',
+    SHELL = '<|',
+    TERM = '<|',
+    NONE = '<>',
+    CONFIRM = '|>'
+  }
+  return labels[M.mode_alias()]
 end
 
 return M

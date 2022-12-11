@@ -8,47 +8,9 @@ M.requires = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin configuration function
 function M.configure()
-  local lualine = require('lualine')
-
-  local colors = require('../common.colors')
-  local util = require('../common.util')
-
-  local mode_colors = {
-    NORMAL = colors.blue,
-    OP = colors.blue,
-    INSERT = colors.yellow,
-    VISUAL = colors.magenta,
-    LINES = colors.magenta,
-    BLOCK = colors.magenta,
-    REPLACE = colors.red,
-    ['V-REPLACE'] = colors.red,
-    ENTER = colors.cyan,
-    MORE = colors.cyan,
-    SELECT = colors.orange,
-    COMMAND = colors.blue,
-    SHELL = colors.green,
-    TERM = colors.green,
-    NONE = colors.green,
-  }
-
-  local mode_texts = {
-    NORMAL = '<|',
-    OP = '<|',
-    INSERT = '|>',
-    VISUAL = '<>',
-    LINES = '<>',
-    BLOCK = '<>',
-    REPLACE = '<>',
-    ['V-REPLACE'] = '<>',
-    ENTER = '<>',
-    MORE = '<>',
-    SELECT = '<>',
-    COMMAND = '<|',
-    SHELL = '<|',
-    TERM = '<|',
-    NONE = '<>',
-    CONFIRM = '|>'
-  }
+  local colors = require('common.colors')
+  local palette = colors.palette
+  local util = require('common.util')
 
   local conditions = {
     buffer_not_empty = function()
@@ -70,8 +32,8 @@ function M.configure()
       component_separators = '',
       section_separators = '',
       theme = {
-        normal = { c = { fg = colors.fg, bg = colors.bg } },
-        inactive = { c = { fg = colors.fg, bg = colors.bg } },
+        normal = { c = { fg = palette.fg, bg = palette.bg } },
+        inactive = { c = { fg = palette.fg, bg = palette.bg } },
       },
     },
     sections = {
@@ -105,19 +67,11 @@ function M.configure()
     table.insert(config.sections.lualine_x, component)
   end
 
-  local function mode_color()
-    return mode_colors[util.mode_alias()]
-  end
-
-  local function mode_text()
-    return mode_texts[util.mode_alias()]
-  end
-
   ins_left {
     function()
-      return string.format(' %s', mode_text())
+      return string.format(' %s', util.mode_label())
     end,
-    color = function() return { bg = mode_color(), fg = '#000000' } end,
+    color = function() return { bg = colors.mode_color(), fg = palette.bg } end,
     padding = { right = 1 },
   }
 
@@ -125,7 +79,7 @@ function M.configure()
     function()
       return string.format(' %s |', util.mode_alias())
     end,
-    color = function() return { fg = mode_color() } end,
+    color = function() return { fg = colors.mode_color() } end,
     padding = { right = 1 },
   }
 
@@ -138,21 +92,21 @@ function M.configure()
   ins_left {
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = palette.magenta, gui = 'bold' },
   }
 
   ins_left { 'location' }
 
-  ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+  ins_left { 'progress', color = { fg = palette.fg, gui = 'bold' } }
 
   ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     symbols = { error = ' ', warn = ' ', info = ' ' },
     diagnostics_color = {
-      color_error = { fg = colors.red },
-      color_warn = { fg = colors.yellow },
-      color_info = { fg = colors.cyan },
+      color_error = { fg = palette.red },
+      color_warn = { fg = palette.yellow },
+      color_info = { fg = palette.cyan },
     },
   }
 
@@ -190,20 +144,20 @@ function M.configure()
     'o:encoding', -- option component same as &encoding in viml
     fmt = string.upper, -- I'm not sure why it's upper case either ;)
     cond = conditions.hide_in_width,
-    color = { fg = colors.green, gui = 'bold' },
+    color = { fg = palette.green, gui = 'bold' },
   }
 
   ins_right {
     'fileformat',
     fmt = string.upper,
     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = colors.green, gui = 'bold' },
+    color = { fg = palette.green, gui = 'bold' },
   }
 
   ins_right {
     'branch',
     icon = '',
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = palette.magenta, gui = 'bold' },
   }
 
   ins_right {
@@ -211,9 +165,9 @@ function M.configure()
     -- Is it me or the symbol for modified us really weird
     symbols = { added = ' ', modified = '柳 ', removed = ' ' },
     diff_color = {
-      added = { fg = colors.green },
-      modified = { fg = colors.orange },
-      removed = { fg = colors.red },
+      added = { fg = palette.green },
+      modified = { fg = palette.orange },
+      removed = { fg = palette.red },
     },
     cond = conditions.hide_in_width,
   }
@@ -222,11 +176,11 @@ function M.configure()
     function()
       return '▊'
     end,
-    color = function() return { fg = mode_color() } end,
+    color = function() return { fg = colors.mode_color() } end,
     padding = { left = 1 },
   }
 
-  lualine.setup(config)
+  require('lualine').setup(config)
 end
 
 return M
