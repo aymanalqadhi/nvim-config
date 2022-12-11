@@ -74,17 +74,10 @@ return require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-context'
   use 'folke/todo-comments.nvim'
 
-  -- colorschems
-  use 'adrian5/oceanic-next-vim'
-  use 'kyazdani42/blue-moon'
-  use 'olimorris/onedarkpro.nvim'
-
   -- icons
   use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
 
-  use 'feline-nvim/feline.nvim'
-  use 'nvim-lualine/lualine.nvim'
   use 'SmiteshP/nvim-gps'
 
   -- telescope
@@ -137,7 +130,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.typescript').configure()
   require('pluginsconfig.gitsigns').configure()
   require('pluginsconfig.nvimtsautotag').configure()
-  require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
