@@ -86,11 +86,6 @@ return require('packer').startup(function(use)
   -- indenation markers
   use 'lukas-reineke/indent-blankline.nvim'
 
-  -- line
-  use {
-    'romgrk/barbar.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
   use 'feline-nvim/feline.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'SmiteshP/nvim-gps'
@@ -147,7 +142,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.prettier').configure()
-  require('pluginsconfig.barbar').configure()
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
