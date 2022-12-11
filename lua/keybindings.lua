@@ -25,10 +25,6 @@ map('n', '<A-h>', ":MoveHChar(-1)<CR>", opts)
 map('v', '<A-l>', ":MoveHBlock(1)<CR>", opts)
 map('v', '<A-h>', ":MoveHBlock(-1)<CR>", opts)
 
--- hover.nvim
-map('n', 'K', require('hover').hover, opts)
-map('n', 'gK', require('hover').hover_select, opts)
-
 -- lspconfig
 map('n', 'gd', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
 map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)

@@ -7,7 +7,6 @@ return require('packer').startup(function(use)
 
   -- optimaizations
   use 'lewis6991/impatient.nvim'
-  use { 'nathom/filetype.nvim', ext = 'filetype' }
 
   -- lsp
   use {
@@ -91,9 +90,6 @@ return require('packer').startup(function(use)
 
   -- move
   use 'fedepujol/move.nvim'
-
-  -- hover
-  use 'lewis6991/hover.nvim'
 
   -- diagnostics list
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
