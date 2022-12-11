@@ -1,25 +1,11 @@
 local lualine = require('lualine')
-local tn_colors = require('tokyonight.colors').setup { style = 'night' }
 
-local colors = {
-  bg = tn_colors.bg_statusline,
-  fg = tn_colors.fg,
-  yellow = tn_colors.yellow,
-  cyan = tn_colors.cyan,
-  darkblue = tn_colors.blue0,
-  green = tn_colors.green,
-  orange = tn_colors.orange,
-  violet = tn_colors.purple,
-  magenta = tn_colors.magenta,
-  blue = tn_colors.blue,
-  red = tn_colors.red,
-  light_bg = tn_colors.bg_highlight,
-  primary_blue = tn_colors.blue5,
-}
+local colors = require('../common.colors')
+local util = require('../common.util')
 
 local mode_colors = {
-  NORMAL = colors.primary_blue,
-  OP = colors.primary_blue,
+  NORMAL = colors.blue,
+  OP = colors.blue,
   INSERT = colors.yellow,
   VISUAL = colors.magenta,
   LINES = colors.magenta,
@@ -109,54 +95,12 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
--- Gets current mode color
-local function mode_alias()
-  local aliases = {
-    ['n'] = 'NORMAL',
-    ['no'] = 'OP',
-    ['nov'] = 'OP',
-    ['noV'] = 'OP',
-    ['no'] = 'OP',
-    ['niI'] = 'NORMAL',
-    ['niR'] = 'NORMAL',
-    ['niV'] = 'NORMAL',
-    ['v'] = 'VISUAL',
-    ['vs'] = 'VISUAL',
-    ['V'] = 'LINES',
-    ['Vs'] = 'LINES',
-    [''] = 'BLOCK',
-    ['s'] = 'BLOCK',
-    ['s'] = 'SELECT',
-    ['S'] = 'SELECT',
-    [''] = 'BLOCK',
-    ['i'] = 'INSERT',
-    ['ic'] = 'INSERT',
-    ['ix'] = 'INSERT',
-    ['R'] = 'REPLACE',
-    ['Rc'] = 'REPLACE',
-    ['Rv'] = 'V-REPLACE',
-    ['Rx'] = 'REPLACE',
-    ['c'] = 'COMMAND',
-    ['cv'] = 'COMMAND',
-    ['ce'] = 'COMMAND',
-    ['r'] = 'ENTER',
-    ['rm'] = 'MORE',
-    ['r?'] = 'CONFIRM',
-    ['!'] = 'SHELL',
-    ['t'] = 'TERM',
-    ['nt'] = 'TERM',
-    ['null'] = 'NONE',
-  }
-
-  return aliases[vim.fn.mode()]
-end
-
 local function mode_color()
-  return mode_colors[mode_alias()]
+  return mode_colors[util.mode_alias()]
 end
 
 local function mode_text()
-  return mode_texts[mode_alias()]
+  return mode_texts[util.mode_alias()]
 end
 
 ins_left {
@@ -169,7 +113,7 @@ ins_left {
 
 ins_left {
   function()
-    return string.format(' %s |', mode_alias())
+    return string.format(' %s |', util.mode_alias())
   end,
   color = function() return { fg = mode_color() } end,
   padding = { right = 1 },
@@ -249,7 +193,7 @@ ins_right {
 ins_right {
   'branch',
   icon = '',
-  color = { fg = colors.violet, gui = 'bold' },
+  color = { fg = colors.magenta, gui = 'bold' },
 }
 
 ins_right {

@@ -148,7 +148,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
-  require('pluginsconfig.lualine').configure()
   require('pluginsconfig.indentblankline').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
@@ -193,5 +192,6 @@ return require('packer').startup(function(use)
       })
     end
   end
+  require('pluginsconfig.lualine').configure()
 
 end)
