@@ -78,7 +78,6 @@ return require('packer').startup(function(use)
   use 'adrian5/oceanic-next-vim'
   use 'kyazdani42/blue-moon'
   use 'olimorris/onedarkpro.nvim'
-  use 'folke/tokyonight.nvim'
 
   -- icons
   use 'kyazdani42/nvim-web-devicons'
@@ -155,7 +154,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.toggleterm').configure()
   require('pluginsconfig.nvimtree').configure()
-  --require('pluginsconfig.tokyonight').configure()
   require('pluginsconfig.telescope').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
