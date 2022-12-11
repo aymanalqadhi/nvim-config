@@ -1,10 +1,10 @@
-local plugin = {}
+local M = {}
 
 -- plugin uri
-plugin.uri = 'EdenEast/nightfox.nvim'
+M.uri = 'EdenEast/nightfox.nvim'
 
 -- plugin configuration function
-function plugin.configure()
+function M.configure()
   require('nightfox').setup({
     options = {
       transparent = false,
@@ -35,4 +35,4 @@ function plugin.configure()
   vim.cmd [[ colorscheme nordfox ]]
 end
 
-return plugin
+return M

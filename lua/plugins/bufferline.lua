@@ -1,13 +1,13 @@
-local plugin = {}
+local M = {}
 
 -- plugin uri
-plugin.uri = 'akinsho/bufferline.nvim'
+M.uri = 'akinsho/bufferline.nvim'
 
 -- plugin requirements
-plugin.requires = { 'nvim-tree/nvim-web-devicons' }
+M.requires = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin configuration function
-function plugin.configure()
+function M.configure()
   require('bufferline').setup {
     options = {
       offsets = {
@@ -35,4 +35,4 @@ function plugin.configure()
   }
 end
 
-return plugin
+return M

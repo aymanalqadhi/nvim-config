@@ -1,13 +1,13 @@
-local plugin = {}
+local M = {}
 
 -- plugin uri
-plugin.uri = 'goolord/alpha-nvim'
+M.uri = 'goolord/alpha-nvim'
 
 -- plugin requirements
-plugin.requires = { 'nvim-tree/nvim-web-devicons' }
+M.requires = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin configuration function
-function plugin.configure()
+function M.configure()
   local dashboard = require('alpha.themes.dashboard')
 
   -- buttons definitions
@@ -43,4 +43,4 @@ function plugin.configure()
   require('alpha').setup(dashboard.opts)
 end
 
-return plugin
+return M
