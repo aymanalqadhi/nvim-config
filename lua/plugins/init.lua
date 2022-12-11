@@ -1,3 +1,4 @@
 return {
-  'alpha',
+  'alpha',   -- startup page
+  'nordvim', -- colorscheme
 }
