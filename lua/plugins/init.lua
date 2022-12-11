@@ -1,3 +1,4 @@
 return {
-  'alpha',   -- startup page
+  'alpha',    -- startup page
+  'nightfox', -- colorscheme
 }
