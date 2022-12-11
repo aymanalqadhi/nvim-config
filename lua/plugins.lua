@@ -69,7 +69,6 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'folke/which-key.nvim'
 
-
   -- better syntax highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-context'
@@ -96,12 +95,6 @@ return require('packer').startup(function(use)
   use 'feline-nvim/feline.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'SmiteshP/nvim-gps'
-
-  -- startup page
-  use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-  }
 
   -- telescope
   use 'nvim-lua/popup.nvim'
@@ -138,6 +131,9 @@ return require('packer').startup(function(use)
   use 'MunifTanjim/nui.nvim'
   use 'folke/noice.nvim'
 
+  require('pluginsconfig.notify').configure()
+
+
   --- configure plugins with configuration files ---
   require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
@@ -150,7 +146,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.typescript').configure()
   require('pluginsconfig.gitsigns').configure()
   require('pluginsconfig.nvimtsautotag').configure()
-  require('pluginsconfig.alpha').configure()
   require('pluginsconfig.onedarkpro').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.barbar').configure()
@@ -167,7 +162,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.ufo').configure()
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
-  require('pluginsconfig.notify').configure()
   require('pluginsconfig.noice').configure()
   require('pluginsconfig.twilight').configure()
   require('pluginsconfig.whichkey').configure()
@@ -185,5 +179,17 @@ return require('packer').startup(function(use)
   require('codewindow').setup()
   require('nvim-autopairs').setup()
   require('inc_rename').setup()
+
+  local plugins = require('plugins.init')
+
+  for _, plugin_name in ipairs(plugins) do
+    local loaded, plugin = pcall(require, 'plugins.' .. plugin_name)
+
+    if not loaded then
+      print('Could not load plugin: ' .. plugin_name)
+    else
+      use(plugin)
+    end
+  end
 
 end)
