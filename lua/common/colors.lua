@@ -1,17 +1,13 @@
-local tn_colors = require('tokyonight.colors').setup { style = 'night' }
-
 return {
-  bg = tn_colors.bg_statusline,
-  fg = tn_colors.fg,
-  yellow = tn_colors.yellow,
-  cyan = tn_colors.cyan,
-  darkblue = tn_colors.blue0,
-  green = tn_colors.green,
-  orange = tn_colors.orange,
-  violet = tn_colors.purple,
-  magenta = tn_colors.magenta,
-  blue = tn_colors.blue,
-  red = tn_colors.red,
-  light_bg = tn_colors.bg_highlight,
-  primary_blue = tn_colors.blue5,
+  fg = "#abb2bf",
+  bg = "#1e2024",
+  green = "#98c379",
+  yellow = "#e5c07b",
+  purple = "#c678dd",
+  orange = "#d19a66",
+  peanut = "#f6d5a4",
+  red = "#e06c75",
+  aqua = "#61afef",
+  darkblue = "#282c34",
+  dark_red = "#f75f5f",
 }
