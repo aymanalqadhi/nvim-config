@@ -174,6 +174,5 @@ return require('packer').startup(function(use)
       })
     end
   end
-  require('pluginsconfig.lualine').configure()
 
 end)
