@@ -74,7 +74,6 @@ return require('packer').startup(function(use)
 
   -- telescope
   use 'nvim-lua/popup.nvim'
-  use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
 
   -- typescript
@@ -120,7 +119,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.toggleterm').configure()
   require('pluginsconfig.nvimtree').configure()
-  require('pluginsconfig.telescope').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.ufo').configure()
