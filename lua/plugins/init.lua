@@ -12,4 +12,7 @@ local function merge_plugins(mods)
   return ret
 end
 
-return merge_plugins({ 'ui' })
+return merge_plugins({
+  'core',
+  'ui'
+})
