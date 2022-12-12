@@ -14,8 +14,6 @@ return require('packer').startup(function(use)
     requires = {
       -- lsp support
       { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
       { 'jose-elias-alvarez/null-ls.nvim' },
 
       -- autocompletion
@@ -106,11 +104,8 @@ return require('packer').startup(function(use)
   -- ui
   use 'petertriho/nvim-scrollbar'
   use 'gorbit99/codewindow.nvim'
-  use 'rcarriga/nvim-notify'
   use 'MunifTanjim/nui.nvim'
   use 'folke/noice.nvim'
-
-  require('pluginsconfig.notify').configure()
 
 
   --- configure plugins with configuration files ---
