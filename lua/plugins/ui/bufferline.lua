@@ -35,4 +35,15 @@ function M.configure()
   }
 end
 
+-- keymaps
+function M.keymaps()
+  return {
+    ["<C-p>"] = { "<cmd>BufferLinePick<cr>", "Pick a Buffer" },
+    ["<A-.>"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
+    ["<A-,>"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
+    ["<A-<>"] = { "<cmd>BufferLineMoveNext<cr>", "Move Forward" },
+    ["<A->>"] = { "<cmd>BufferLineMovePrev<cr>", "Move Back" },
+  }
+end
+
 return M
