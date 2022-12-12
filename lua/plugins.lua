@@ -166,6 +166,10 @@ return require('packer').startup(function(use)
         requires = plugin.requires,
         config = plugin.configure
       })
+
+      if plugin.keymaps then
+        require('which-key').register(plugin.keymaps())
+      end
     end
   end
 
