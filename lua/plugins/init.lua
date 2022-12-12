@@ -14,5 +14,8 @@ end
 
 return merge_plugins({
   'core',
-  'ui'
+  'ui',
+  'misc',
+  'lsp',
+  'scm',
 })

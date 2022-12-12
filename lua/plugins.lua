@@ -44,10 +44,6 @@ return require('packer').startup(function(use)
   use 'folke/twilight.nvim'
   use 'smjonas/inc-rename.nvim'
 
-  -- source control
-  use 'tpope/vim-fugitive'
-  use 'lewis6991/gitsigns.nvim'
-
   -- debugging
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
@@ -118,7 +114,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.emmetls').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.typescript').configure()
-  require('pluginsconfig.gitsigns').configure()
   require('pluginsconfig.nvimtsautotag').configure()
   require('pluginsconfig.prettier').configure()
   require('pluginsconfig.illuminate').configure()

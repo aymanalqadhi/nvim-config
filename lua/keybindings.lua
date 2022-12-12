@@ -95,7 +95,7 @@ _G.term_lazygit.on_open = function(t)
   vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', opts)
 end
 
-map('n', '<space>g', '<cmd>lua _G.term_lazygit:toggle()<cr>', opts)
+--map('n', '<space>g', '<cmd>lua _G.term_lazygit:toggle()<cr>', opts)
 map({ 'n', 'i', 'v' }, '<C-t>', '<cmd>lua _G.term_horizontal:toggle()<cr>', opts)
 map('t', '<C-t>', '<cmd>ToggleTermToggleAll<cr>', opts)
 map('t', '<esc>', [[<C-\><C-n>]], opts)

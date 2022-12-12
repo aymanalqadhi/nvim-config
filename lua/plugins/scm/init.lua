@@ -1,0 +1,3 @@
+return {
+  'gitsigns', -- git utilities
+}

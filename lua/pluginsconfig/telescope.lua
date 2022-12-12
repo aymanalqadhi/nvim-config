@@ -57,7 +57,7 @@ local function configure()
   }
 
   telescope.load_extension("ui-select")
-  telescope.load_extension("notify")
+  --telescope.load_extension("notify")
   telescope.load_extension("flutter")
 
 end
