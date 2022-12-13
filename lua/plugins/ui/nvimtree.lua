@@ -1,16 +1,20 @@
-local nvtree = require("nvim-tree")
+local M = {}
 
-local function configure()
+-- plugin uri
+M.uri = 'nvim-tree/nvim-tree.lua'
 
-  local config = {
+-- plugin requirements
+M.requires = { 'nvim-tree/nvim-web-devicons' }
+
+-- plugin configuration function
+function M.configure()
+  require('nvim-tree').setup {
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = true,
     open_on_setup_file = true,
     sort_by = "name",
     root_dirs = {},
-    --prefer_startup_root = true,
-    --sync_root_with_cwd = true,
-    --reload_on_bufenter = true,
+
     select_prompts = true,
 
     view = {
@@ -19,7 +23,6 @@ local function configure()
       width = 40,
       hide_root_folder = false,
       signcolumn = "yes",
-
       mappings = {
         list = {
           { key = "u", action = "dir_up" },
@@ -61,14 +64,15 @@ local function configure()
         "packages.json",
       },
     },
+
     update_focused_file = {
       enable = true,
       ignore_list = {},
     },
+
     diagnostics = {
       enable = true,
       show_on_dirs = true,
-      debounce_delay = 50,
       icons = {
         hint = "",
         info = "",
@@ -76,19 +80,19 @@ local function configure()
         error = "",
       },
     },
+
     filters = {
       dotfiles = true,
       custom = {
         "target", "node_modules", "build", "bin", "obj",
       },
-      exclude = {},
     },
+
     git = {
       enable = true,
       ignore = true,
-      show_on_dirs = true,
-      timeout = 400,
     },
+
     actions = {
       use_system_clipboard = true,
       expand_all = {
@@ -96,19 +100,12 @@ local function configure()
         exclude = { "node_modules" },
       },
     },
-    trash = {
-      cmd = "gio trash",
-      require_confirm = true,
-    },
+
     live_filter = {
-      prefix = "[FILTER]: ",
-      always_show_folders = true,
+      prefix = "   ",
     },
   }
 
-  nvtree.setup(config)
 end
 
-return {
-  configure = configure
-}
+return M

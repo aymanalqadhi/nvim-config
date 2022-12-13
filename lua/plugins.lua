@@ -57,7 +57,6 @@ return require('packer').startup(function(use)
   use 'akinsho/toggleterm.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
-  use 'kyazdani42/nvim-tree.lua'
   use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
 
@@ -103,7 +102,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.toggleterm').configure()
-  require('pluginsconfig.nvimtree').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()
