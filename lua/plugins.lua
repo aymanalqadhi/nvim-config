@@ -48,7 +48,6 @@ return require('packer').startup(function(use)
   -- productivity
   use 'tpope/vim-surround'
   use 'tpope/vim-eunuch'
-  use 'rmagatti/goto-preview'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
@@ -73,7 +72,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.illuminate').configure()
-  require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()
