@@ -70,10 +70,6 @@ return require('packer').startup(function(use)
 
   use 'SmiteshP/nvim-gps'
 
-  -- typescript
-  use 'jose-elias-alvarez/typescript.nvim'
-  use 'windwp/nvim-ts-autotag'
-
   -- move
   use 'fedepujol/move.nvim'
 
@@ -104,9 +100,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.lspsignature').configure()
   require('pluginsconfig.emmetls').configure()
   require('pluginsconfig.crates').configure()
-  require('pluginsconfig.typescript').configure()
-  require('pluginsconfig.nvimtsautotag').configure()
-  require('pluginsconfig.prettier').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
   require('pluginsconfig.toggleterm').configure()
