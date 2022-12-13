@@ -6,39 +6,46 @@ M.uri = 'nvim-telescope/telescope.nvim'
 -- plugin requirements
 M.requires = {
   'nvim-lua/plenary.nvim',
-  'nvim-telescope/telescope-ui-select.nvim'
+  'nvim-telescope/telescope-ui-select.nvim',
+  'nvim-telescope/telescope-file-browser.nvim',
 }
 
 -- plugin configuration function
 function M.configure()
 
-  require("telescope").setup {
+  require('telescope').setup {
     defaults = {
-      prompt_prefix = "  ",
-      selection_caret = " ",
-      entry_prefix = " ",
+      prompt_prefix = '  ',
+      selection_caret = ' ',
+      entry_prefix = ' ',
       winblend = 15,
     },
     extensions = {
-      ["ui-select"] = {
+      ['ui-select'] = {
         require("telescope.themes").get_dropdown {}
-      }
-    }
+      },
+      file_browser = {
+        hijack_netrw = true,
+      },
+    },
   }
 
   -- extensions loading
-  require("telescope").load_extension("ui-select")
+  require('telescope').load_extension('ui-select')
+  require('telescope').load_extension('file_browser')
 
 end
 
 -- plugin keymaps
 function M.keymaps()
+  local telescope = require('telescope')
   local builtin = require('telescope.builtin')
 
   return {
     ['<space>f'] = {
       name = 'telescope',
       f = { builtin.find_files, 'Find Files' },
+      F = { telescope.extensions.file_browser.file_browser, 'File Browser' },
       r = { builtin.live_grep, 'Find Text' },
       s = { builtin.live_grep, 'Find Occurrences' },
       b = { builtin.buffers, 'Buffers' },
