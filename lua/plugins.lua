@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
       { 'hrsh7th/cmp-nvim-lua' },
       { 'andersevenrud/cmp-tmux' },
       { 'hrsh7th/cmp-cmdline' },
-      { 'ray-x/lsp_signature.nvim' },
 
       -- snippets
       { 'L3MON4D3/LuaSnip' },
@@ -40,9 +39,7 @@ return require('packer').startup(function(use)
   use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- lsp addons
-  use 'simrat39/symbols-outline.nvim'
   use 'folke/twilight.nvim'
-  use 'smjonas/inc-rename.nvim'
 
   -- debugging
   use 'mfussenegger/nvim-dap'
@@ -50,11 +47,8 @@ return require('packer').startup(function(use)
 
   -- productivity
   use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
-  use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
@@ -63,10 +57,7 @@ return require('packer').startup(function(use)
   use 'folke/todo-comments.nvim'
 
   -- icons
-  use 'kyazdani42/nvim-web-devicons'
   use 'onsails/lspkind-nvim'
-
-  use 'SmiteshP/nvim-gps'
 
   -- move
   use 'fedepujol/move.nvim'
@@ -74,15 +65,7 @@ return require('packer').startup(function(use)
   -- diagnostics list
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
-  -- folding
-  use { 'anuvyklack/fold-preview.nvim', requires = 'anuvyklack/keymap-amend.nvim' }
-
-  -- scrolling
-  use 'karb94/neoscroll.nvim'
-
   -- ui
-  use 'petertriho/nvim-scrollbar'
-  use 'gorbit99/codewindow.nvim'
   use 'MunifTanjim/nui.nvim'
   use 'folke/noice.nvim'
 
@@ -105,13 +88,9 @@ return require('packer').startup(function(use)
   -- manually configure plugins --
   require('trouble').setup()
   require('luasnip.loaders.from_vscode').lazy_load()
-  require('symbols-outline').setup()
-  require('fold-preview').setup()
-  require('neoscroll').setup()
   require('todo-comments').setup()
   require('leap').set_default_keymaps()
   require('scrollbar').setup()
-  require('codewindow').setup()
   require('nvim-autopairs').setup()
   require('inc_rename').setup()
 
