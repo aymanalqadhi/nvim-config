@@ -72,10 +72,6 @@ return require('packer').startup(function(use)
 
   use 'SmiteshP/nvim-gps'
 
-  -- telescope
-  use 'nvim-lua/popup.nvim'
-  use 'nvim-telescope/telescope-ui-select.nvim'
-
   -- typescript
   use 'jose-elias-alvarez/typescript.nvim'
   use 'windwp/nvim-ts-autotag'
