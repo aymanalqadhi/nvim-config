@@ -1,3 +1,4 @@
 return {
-  'whichkey', -- keymaps
+  'treesitter', -- better text handling
+  'whichkey',   -- keymaps
 }

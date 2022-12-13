@@ -62,8 +62,6 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
 
   -- better syntax highlighting
-  use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
-  use 'nvim-treesitter/nvim-treesitter-context'
   use 'folke/todo-comments.nvim'
 
   -- icons
@@ -103,7 +101,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
   require('pluginsconfig.cmp').configure()
-  require('pluginsconfig.treesitter').configure()
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.lspsignature').configure()
   require('pluginsconfig.emmetls').configure()
@@ -129,7 +126,6 @@ return require('packer').startup(function(use)
   require('symbols-outline').setup()
   require('fold-preview').setup()
   require('neoscroll').setup()
-  require('treesitter-context').setup()
   require('todo-comments').setup()
   require('leap').set_default_keymaps()
   require('scrollbar').setup()
