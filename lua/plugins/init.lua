@@ -17,5 +17,6 @@ return merge_plugins({
   'ui',
   'misc',
   'lsp',
+  'prod',
   'scm',
 })

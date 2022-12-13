@@ -15,20 +15,6 @@ return require('packer').startup(function(use)
       -- lsp support
       { 'neovim/nvim-lspconfig' },
       { 'jose-elias-alvarez/null-ls.nvim' },
-
-      -- autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'andersevenrud/cmp-tmux' },
-      { 'hrsh7th/cmp-cmdline' },
-
-      -- snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'rafamadriz/friendly-snippets' },
     }
   }
 
@@ -38,18 +24,9 @@ return require('packer').startup(function(use)
   use 'RRethy/vim-illuminate'
   use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-  -- lsp addons
-  use 'folke/twilight.nvim'
-
   -- debugging
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
-
-  -- productivity
-  use 'tpope/vim-surround'
-  use 'tpope/vim-eunuch'
-  use 'ThePrimeagen/refactoring.nvim'
-  use 'windwp/nvim-autopairs'
 
   -- icons
   use 'onsails/lspkind-nvim'
@@ -64,7 +41,6 @@ return require('packer').startup(function(use)
 
   --- configure plugins with configuration files ---
   require('pluginsconfig.lspzero').configure()
-  require('pluginsconfig.cmp').configure()
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.illuminate').configure()
@@ -73,12 +49,9 @@ return require('packer').startup(function(use)
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.noice').configure()
-  require('pluginsconfig.twilight').configure()
 
   -- manually configure plugins --
   require('trouble').setup()
-  require('luasnip.loaders.from_vscode').lazy_load()
-  require('nvim-autopairs').setup()
 
   local plugins = require('plugins.init')
 

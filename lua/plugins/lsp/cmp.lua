@@ -1,14 +1,33 @@
-local cmp = require("cmp")
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local luasnip = require("luasnip")
-local lspkind = require("lspkind")
+local M = {}
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+-- plugin uri
+M.uri = 'hrsh7th/nvim-cmp'
 
-local function configure()
+-- plugin requirements
+M.requirements = {
+  'onsails/lspkind-nvim',
+  'L3MON4D3/LuaSnip',
+  'windwp/nvim-autopairs',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-nvim-lua',
+  'andersevenrud/cmp-tmux',
+  'hrsh7th/cmp-cmdline',
+}
+
+-- plugin configuration function
+function M.configure()
+  local cmp = require("cmp")
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local luasnip = require("luasnip")
+  local lspkind = require("lspkind")
+
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
   cmp.setup({
     window = {
       completion = cmp.config.window.bordered(),
@@ -64,7 +83,6 @@ local function configure()
       { name = 'nvim_lua' },
       { name = 'luasnip' },
       { name = 'tmux' },
-      { name = 'calc' },
     },
     experimental = {
       ghost_text = true,
@@ -92,6 +110,4 @@ local function configure()
 
 end
 
-return {
-  configure = configure
-}
+return M
