@@ -53,9 +53,6 @@ return require('packer').startup(function(use)
   use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
 
-  -- better syntax highlighting
-  use 'folke/todo-comments.nvim'
-
   -- icons
   use 'onsails/lspkind-nvim'
 
@@ -87,7 +84,6 @@ return require('packer').startup(function(use)
   -- manually configure plugins --
   require('trouble').setup()
   require('luasnip.loaders.from_vscode').lazy_load()
-  require('todo-comments').setup()
   require('leap').set_default_keymaps()
   require('nvim-autopairs').setup()
 
