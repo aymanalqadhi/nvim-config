@@ -54,7 +54,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-eunuch'
   use 'MunifTanjim/prettier.nvim'
   use 'rmagatti/goto-preview'
-  use 'akinsho/toggleterm.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ggandor/leap.nvim'
@@ -101,7 +100,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
-  require('pluginsconfig.toggleterm').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()

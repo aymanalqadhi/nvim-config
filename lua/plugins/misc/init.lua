@@ -1,4 +1,5 @@
 return {
-  'telescope', -- picker
-  'mason', -- software installation helper
+  'mason',      -- software installation helper
+  'telescope',  -- picker
+  'toggleterm', -- terminal utils
 }
