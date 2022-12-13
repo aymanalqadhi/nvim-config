@@ -4,7 +4,7 @@ local M = {}
 M.uri = 'DaikyXendo/nvim-tree.lua'
 
 -- plugin requirements
-M.requires = { 'DaikyXendo/nvim-material-icon' }
+M.requirements = { 'DaikyXendo/nvim-material-icon' }
 
 -- plugin configuration function
 function M.configure()

@@ -4,7 +4,7 @@ local M = {}
 M.uri = 'nvim-lualine/lualine.nvim'
 
 -- plugin requirements
-M.requires = { 'nvim-tree/nvim-web-devicons' }
+M.requirements = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin configuration function
 function M.configure()

@@ -4,7 +4,7 @@ local M = {}
 M.uri = 'kevinhwang91/nvim-ufo'
 
 -- plugin requirements
-M.requires = { 'kevinhwang91/promise-async' }
+M.requirements = { 'kevinhwang91/promise-async' }
 
 -- plugin configuration function
 function M.configure()

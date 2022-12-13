@@ -5,15 +5,17 @@ M.uri = 'hrsh7th/nvim-cmp'
 
 -- plugin requirements
 M.requirements = {
-  'onsails/lspkind-nvim',
-  'L3MON4D3/LuaSnip',
-  'windwp/nvim-autopairs',
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-nvim-lua',
-  'andersevenrud/cmp-tmux',
   'hrsh7th/cmp-cmdline',
+  'andersevenrud/cmp-tmux',
+  'onsails/lspkind-nvim',
+  'L3MON4D3/LuaSnip',
+  'windwp/nvim-autopairs',
 }
 
 -- plugin configuration function
@@ -83,9 +85,6 @@ function M.configure()
       { name = 'nvim_lua' },
       { name = 'luasnip' },
       { name = 'tmux' },
-    },
-    experimental = {
-      ghost_text = true,
     },
   })
 
