@@ -1,10 +1,10 @@
 local M = {}
 
 -- plugin uri
-M.uri = 'nvim-tree/nvim-tree.lua'
+M.uri = 'DaikyXendo/nvim-tree.lua'
 
 -- plugin requirements
-M.requires = { 'nvim-tree/nvim-web-devicons' }
+M.requires = { 'DaikyXendo/nvim-material-icon' }
 
 -- plugin configuration function
 function M.configure()
@@ -105,6 +105,23 @@ function M.configure()
       prefix = "   ",
     },
   }
+
+  -- configure material icons
+  local web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")
+
+  if not web_devicons_ok then
+    return
+  end
+
+  local material_icon_ok, material_icon = pcall(require, "nvim-material-icon")
+
+  if not material_icon_ok then
+    return
+  end
+
+  web_devicons.setup({
+    override = material_icon.get_icons(),
+  })
 
 end
 
