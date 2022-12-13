@@ -49,14 +49,10 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-eunuch'
   use 'ThePrimeagen/refactoring.nvim'
-  use 'ggandor/leap.nvim'
   use 'windwp/nvim-autopairs'
 
   -- icons
   use 'onsails/lspkind-nvim'
-
-  -- move
-  use 'fedepujol/move.nvim'
 
   -- diagnostics list
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
@@ -82,7 +78,6 @@ return require('packer').startup(function(use)
   -- manually configure plugins --
   require('trouble').setup()
   require('luasnip.loaders.from_vscode').lazy_load()
-  require('leap').set_default_keymaps()
   require('nvim-autopairs').setup()
 
   local plugins = require('plugins.init')
