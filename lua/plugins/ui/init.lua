@@ -1,7 +1,8 @@
 return {
-  'nightfox',        -- colorscheme
+  'alpha',           -- startup page
   'bufferline',      -- bar
   'indentblankline', -- indentation markers
   'lualine',         -- status line
-  'alpha',           -- startup page
+  'nightfox',        -- colorscheme
+  'ufo',             -- folding
 }

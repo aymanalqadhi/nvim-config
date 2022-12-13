@@ -81,7 +81,6 @@ return require('packer').startup(function(use)
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
   -- folding
-  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
   use { 'anuvyklack/fold-preview.nvim', requires = 'anuvyklack/keymap-amend.nvim' }
 
   -- tmux integration
@@ -114,7 +113,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.nvimtree').configure()
   require('pluginsconfig.dap').configure()
   require('pluginsconfig.dapui').configure()
-  require('pluginsconfig.ufo').configure()
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.noice').configure()
