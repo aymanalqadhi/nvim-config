@@ -77,9 +77,6 @@ return require('packer').startup(function(use)
   -- folding
   use { 'anuvyklack/fold-preview.nvim', requires = 'anuvyklack/keymap-amend.nvim' }
 
-  -- tmux integration
-  use 'aserowy/tmux.nvim'
-
   -- scrolling
   use 'karb94/neoscroll.nvim'
 
@@ -91,12 +88,10 @@ return require('packer').startup(function(use)
 
 
   --- configure plugins with configuration files ---
-  require('pluginsconfig.tmux').configure()
   require('pluginsconfig.lspzero').configure()
   require('pluginsconfig.cmp').configure()
   require('pluginsconfig.nullls').configure()
   require('pluginsconfig.lspsignature').configure()
-  require('pluginsconfig.emmetls').configure()
   require('pluginsconfig.crates').configure()
   require('pluginsconfig.illuminate').configure()
   require('pluginsconfig.gotopreview').configure()
