@@ -17,10 +17,6 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
 
-  -- ui
-  use 'MunifTanjim/nui.nvim'
-  use 'folke/noice.nvim'
-
 
   local plugins = require('plugins.init')
 
@@ -48,7 +44,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.dapui').configure()
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
-  require('pluginsconfig.noice').configure()
 
 
 end)
