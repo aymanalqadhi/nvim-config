@@ -8,7 +8,7 @@ function M.keymaps()
   return {
     ['<space>l'] = {
       name = 'lsp',
-      a = { vim.lsp.buf.code_actions, 'Code Actions' },
+      a = { vim.lsp.buf.code_action, 'Code Actions' },
       f = { vim.lsp.buf.format, 'Format Code' },
       r = { vim.lsp.buf.rename, 'Rename' },
       s = { '<cmd>Telescope spell_suggest theme=dropdown<cr>', 'Spell' },

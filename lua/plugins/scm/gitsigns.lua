@@ -28,7 +28,7 @@ function M.keymaps()
       w = { '<cmd>Gitsigns toggle_word_diff<cr>', 'Toggle Word Diff' },
     },
     -- Text object
-    ['ih'] = { ':<C-U>Gitsigns select_hunk<CR>', 'Select Hunk' },
+    ['ih'] = { mode = { 'o', 'x' }, ':<C-U>Gitsigns select_hunk<CR>', 'Select Hunk' },
 
     -- -- Navigation
     [']c'] = {

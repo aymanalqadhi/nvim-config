@@ -10,13 +10,6 @@ M.requirements = { 'nvim-tree/nvim-web-devicons' }
 function M.configure()
   require('bufferline').setup {
     options = {
-      offsets = {
-        {
-          filetype = 'NvimTree',
-          text = '',
-          separator = true
-        }
-      },
       color_icons = true,
       show_buffer_icons = true,
       show_buffer_close_icons = true,
@@ -26,11 +19,30 @@ function M.configure()
       persist_buffer_sort = true,
       --separator_style = 'slant',
       always_show_bufferline = false,
+
+      -- offsets
+      offsets = {
+        {
+          filetype = 'NvimTree',
+          text = 'Files',
+          separator = true,
+        },
+      },
+
+      -- hover
       hover = {
         enabled = true,
         delay = 200,
         reveal = { 'close' }
       },
+
+      -- lsp
+      diagnostics = 'nvim_lsp',
+
+      -- numbers
+      numbers = function(opts)
+        return string.format('%s', opts.raise(opts.ordinal))
+      end,
     }
   }
 end

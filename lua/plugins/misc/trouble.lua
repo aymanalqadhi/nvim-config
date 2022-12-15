@@ -9,7 +9,7 @@ M.requirements = { 'kyazdani42/nvim-web-devicons' }
 -- plugin configuration function
 function M.configure()
   require('trouble').setup {
-    auto_open = true,
+    auto_open = false,
     auto_close = true,
     use_diagnostic_signs = true,
   }
@@ -19,6 +19,7 @@ end
 -- plugin keymaps
 function M.keymaps()
   local trouble = require('trouble')
+  local opts = { skip_groups = true, jump = true }
 
   return {
     ['<space>t'] = {
@@ -29,8 +30,8 @@ function M.keymaps()
       l = { '<cmd>TroubleToggle loclist<cr>', 'Toggle Trouble LocList' },
       q = { '<cmd>TroubleToggle quickfix<cr>', 'Toggle Trouble QuickFix' },
     },
-    [']t'] = { trouble.next { skip_groups = true, jump = true }, 'Next Diagnostic' },
-    ['[t'] = { trouble.previous { skip_groups = true, jump = true }, 'Previous Diagnostic' },
+    [']t'] = { function() trouble.next(opts) end, 'Next Diagnostic' },
+    ['[t'] = { function() trouble.previous(opts) end,'Previous Diagnostic' },
   }
 
 end

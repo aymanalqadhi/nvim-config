@@ -18,12 +18,12 @@ function M.keymaps()
   return {
     gp = {
       name = 'Go-To Preview',
-      d = { gp.goto_preview_definition(), desc = 'Preview Definition' },
-      t = { gp.goto_preview_type_definition(), desc = 'Preview Type Definition' },
-      i = { gp.goto_preview_implementation(), desc = 'Preview Implementation' },
-      r = { gp.goto_preview_references(), desc = 'Preview References' },
+      d = { gp.goto_preview_definition, 'Preview Definition' },
+      t = { gp.goto_preview_type_definition, 'Preview Type Definition' },
+      i = { gp.goto_preview_implementation, 'Preview Implementation' },
+      r = { gp.goto_preview_references, 'Preview References' },
     },
-    gP = { gp.close_all_win(), desc = 'Close Go-To Windows' },
+    gP = { gp.close_all_win, 'Close Go-To Windows' },
   }
 end
 

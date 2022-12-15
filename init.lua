@@ -7,5 +7,5 @@ require 'impatient'
 -- plugins
 require 'plugins'
 
--- key bindings
-require 'keybindings'
+-- key mappings
+require 'keymaps'

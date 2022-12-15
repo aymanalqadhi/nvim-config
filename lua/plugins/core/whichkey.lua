@@ -15,9 +15,9 @@ function M.configure()
     },
     operators = { gc = "Comments" },
     key_labels = {
-      -- ["<space>"] = "SPC",
-      -- ["<cr>"] = "RET",
-      -- ["<tab>"] = "TAB",
+      ["<space>"] = "SPC",
+      ["<cr>"] = "RET",
+      ["<tab>"] = "TAB",
     },
     window = {
       border = "rounded", -- none, single, double, shadow
