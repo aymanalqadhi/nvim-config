@@ -1,6 +1,12 @@
-local dap = require('dap')
+local M = {}
 
-local function configure_codelldb()
+-- plugin uri
+M.uri = 'mfussenegger/nvim-dap'
+
+-- plugin configuration function
+function M.configure()
+  local dap = require('dap')
+
   -- server
   dap.adapters.codelldb = {
     type = 'server',
@@ -31,15 +37,16 @@ local function configure_codelldb()
   dap.configurations.c = dap.configurations.cpp
   dap.configurations.rust = dap.configurations.cpp
 
-  -- signs
+  -- better colors
   vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#993939', bg = '#31353f' })
   vim.api.nvim_set_hl(0, 'DapLogPoint', { fg = '#61afef', bg = '#31353f' })
   vim.api.nvim_set_hl(0, 'DapStopped', { fg = '#98c379', bg = '#31353f' })
 
   local function set_sign(group, icon, hl)
-    vim.fn.sign_define(group, { text = icon, texthl = hl, linehl = '', numhl = hl})
+    vim.fn.sign_define(group, { text = icon, texthl = hl, linehl = '', numhl = hl })
   end
 
+  -- better icons
   set_sign('DapBreakpoint', '', 'DapBreakpoint')
   set_sign('DapBreakpointCondition', 'ﳁ', 'DapBreakpoint')
   set_sign('DapBreakpointRejected', '', 'DapBreakpoint')
@@ -48,10 +55,29 @@ local function configure_codelldb()
   set_sign('DapLogPoint', '', 'DapStopped')
 end
 
-local function configure()
-  configure_codelldb()
+-- plugin keymaps
+function M.keymaps()
+  local dap = require('dap')
+
+  return {
+    [','] = {
+      name = 'dap',
+      a = { dap.attach, 'Attach' },
+
+      bt = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
+      bl = { dap.list_breakpoints, 'List Breakpoints' },
+      bc = { dap.clear_breakpoints, 'Clear Breakpoints' },
+
+      c = { dap.continue, 'Continue' },
+      C = { dap.run_to_cursor, 'Run To Cursor' },
+      i = { dap.step_in, 'Step In' },
+      o = { dap.step_over, 'Step Over' },
+      u = { dap.step_out, 'Step Out' },
+
+      t = { dap.terminate, 'Terminate' },
+      r = { dap.repl.toggle, 'Toggle REPL' },
+    }
+  }
 end
 
-return {
-  configure = configure
-}
+return M

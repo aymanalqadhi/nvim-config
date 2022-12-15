@@ -19,4 +19,6 @@ return merge_plugins({
   'lsp',
   'prod',
   'scm',
+  'langtools',
+  'dap',
 })

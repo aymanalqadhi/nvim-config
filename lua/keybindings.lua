@@ -81,14 +81,6 @@ map('n', '<A-t>', '<cmd>NvimTreeToggle<CR>', opts)
 -- map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 
 -- dap
-map('n', ',b', "<cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
-map('n', ',c', "<cmd>lua require'dap'.continue()<CR>", opts)
-map('n', ',r', "<cmd>lua require'dap'.repl.open()<CR>", opts)
-map('n', ',i', "<cmd>lua require'dap'.step_in()<CR>", opts)
-map('n', ',o', "<cmd>lua require'dap'.step_over()<CR>", opts)
-map('n', ',t', "<cmd>lua require'dap'.terminate()<CR>", opts)
-map('n', ',u', "<cmd>lua require'dapui'.toggle() <CR>", opts)
-map('n', ',e', "<cmd>lua require'dapui'.eval()<CR>", opts)
 
 -- folding (ufo)
 map('n', 'zR', require('ufo').openAllFolds)
