@@ -1,11 +1,32 @@
-local null_ls = require("null-ls")
+local M = {}
 
-local code_actions = null_ls.builtins.code_actions
-local diagnostics = null_ls.builtins.diagnostics
-local formatting = null_ls.builtins.formatting
-local hover = null_ls.builtins.hover
+-- plugin uri
+M.uri = 'jose-elias-alvarez/null-ls.nvim'
 
-local function configure()
+-- plugin requirements
+M.requirements = {
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-nvim-lua',
+  'hrsh7th/cmp-cmdline',
+  'andersevenrud/cmp-tmux',
+  'onsails/lspkind-nvim',
+  'L3MON4D3/LuaSnip',
+  'windwp/nvim-autopairs',
+}
+
+-- plugin configuration function
+function M.configure()
+  local null_ls = require("null-ls")
+
+  local code_actions = null_ls.builtins.code_actions
+  local diagnostics = null_ls.builtins.diagnostics
+  local formatting = null_ls.builtins.formatting
+  local hover = null_ls.builtins.hover
+
   null_ls.setup {
     sources = {
       -- code actions
@@ -36,6 +57,4 @@ local function configure()
   }
 end
 
-return {
-  configure = configure
-}
+return M

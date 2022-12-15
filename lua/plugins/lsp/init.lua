@@ -1,6 +1,7 @@
 return {
   'cmp',            -- completion
   'lspconfig',      -- lsp configuration
-  'masonlspconfig', -- software installation helper
   'lspzero',        -- lsp configuration
+  'masonlspconfig', -- software installation helper
+  'nullls',         -- virtual lsp server
 }
