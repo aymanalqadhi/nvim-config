@@ -125,4 +125,11 @@ function M.configure()
 
 end
 
+-- plugin keymaps
+function M.keymaps()
+  return {
+    ['<A-t>'] = { '<cmd>NvimTreeToggle<cr>', 'Toggle Tree' },
+  }
+end
+
 return M

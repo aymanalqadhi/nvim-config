@@ -47,7 +47,7 @@ function M.keymaps()
       f = { builtin.find_files, 'Find Files' },
       F = { telescope.extensions.file_browser.file_browser, 'File Browser' },
       r = { builtin.live_grep, 'Find Text' },
-      s = { builtin.live_grep, 'Find Occurrences' },
+      s = { builtin.grep_string, 'Find Occurrences' },
       b = { builtin.buffers, 'Buffers' },
       h = { builtin.help_tags, 'Help Tags' },
       q = { builtin.quickfix, 'Quick-fix List' },

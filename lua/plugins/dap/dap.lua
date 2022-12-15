@@ -53,6 +53,10 @@ function M.configure()
   set_sign('DapBreakpointRejected', '', 'DapBreakpoint')
   set_sign('DapLogPoint', '', 'DapLogPoint')
   set_sign('DapLogPoint', '', 'DapStopped')
+
+  -- repl
+  vim.cmd [[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
+
 end
 
 -- plugin keymaps
@@ -60,11 +64,10 @@ function M.keymaps()
   local dap = require('dap')
 
   return {
-    [','] = {
+    ['<space>d'] = {
       name = 'dap',
-      a = { dap.attach, 'Attach' },
 
-      bt = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
+      bb = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
       bl = { dap.list_breakpoints, 'List Breakpoints' },
       bc = { dap.clear_breakpoints, 'Clear Breakpoints' },
 

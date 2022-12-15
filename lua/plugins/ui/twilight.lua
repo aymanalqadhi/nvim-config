@@ -12,4 +12,11 @@ function M.configure()
   }
 end
 
+-- plugin keymaps
+function M.keymaps()
+  return {
+    ['<space>T'] = { '<cmd>Twilight<cr>', 'Toggle Twilight' }
+  }
+end
+
 return M

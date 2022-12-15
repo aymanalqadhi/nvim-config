@@ -54,4 +54,28 @@ function M.configure()
 
 end
 
+-- pluginin keymaps
+function M.keymaps()
+  local ufo = require('ufo')
+
+  return {
+    z = {
+      name = 'ufo',
+      R = { ufo.openAllFolds, 'Open All Folds' },
+      M = { ufo.closeAllFolds, 'Close All Folds' },
+      r = { ufo.openFoldsExceptKinds, 'Open Folds Except' },
+      m = { ufo.closeFoldsWith, 'Close Folds With' },
+    },
+    K = {
+      function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end,
+      'Hover'
+    }
+  }
+end
 return M
+
