@@ -24,7 +24,7 @@ function M.configure()
       show_close_icon = true,
       show_tab_indicators = true,
       persist_buffer_sort = true,
-      separator_style = 'slant',
+      --separator_style = 'slant',
       always_show_bufferline = false,
       hover = {
         enabled = true,
