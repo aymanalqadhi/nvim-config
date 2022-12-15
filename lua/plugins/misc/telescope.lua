@@ -8,6 +8,7 @@ M.requirements = {
   'nvim-lua/plenary.nvim',
   'nvim-telescope/telescope-ui-select.nvim',
   'nvim-telescope/telescope-file-browser.nvim',
+  'rcarriga/nvim-notify',
 }
 
 -- plugin configuration function
@@ -55,6 +56,7 @@ function M.keymaps()
       j = { builtin.jumplist, 'Jump List' },
       R = { builtin.registers, 'Registers' },
       p = { builtin.pickers, 'Pickers' },
+      -- git
       g = {
         name = 'telescope-git',
         b = { builtin.git_branches, 'Git Branches' },
@@ -62,6 +64,8 @@ function M.keymaps()
         S = { builtin.git_stash, 'Git Stashes' },
         h = { builtin.git_bcommits, 'File History' },
       },
+      -- notify
+      n = { '<cmd>Telescope notify<cr>', 'Notifications' },
     },
   }
 end
