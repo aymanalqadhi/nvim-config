@@ -28,30 +28,30 @@ function M.configure()
         lookahead = true,
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
-          ['af'] = { query = '@function.outer', desc = 'A Function' },
-          ['if'] = { query = '@function.inner', desc = 'In Function' },
-          ['ac'] = { query = '@class.outer', desc = 'A Class' },
-          ['ic'] = { query = '@class.in', desc = 'In Class' },
+          ['af'] = { query = '@function.outer', 'A Function' },
+          ['if'] = { query = '@function.inner', 'In Function' },
+          ['ac'] = { query = '@class.outer', 'A Class' },
+          ['ic'] = { query = '@class.in', 'In Class' },
         },
       },
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          [']m'] = { query = '@function.outer', desc = 'Next Function Start' },
-          [']]'] = { query = '@class.outer', desc = 'Next Class Start' },
+          [']m'] = { query = '@function.outer', 'Next Function Start' },
+          [']]'] = { query = '@class.outer', 'Next Class Start' },
         },
         goto_next_end = {
-          [']M'] = { query = '@function.outer', desc = 'Next Function End' },
-          [']['] = { query = '@class.outer', desc = 'Next Class End' },
+          [']M'] = { query = '@function.outer', 'Next Function End' },
+          [']['] = { query = '@class.outer', 'Next Class End' },
         },
         goto_previous_start = {
-          ['[m'] = { query = '@function.outer', desc = 'Previous Function Start' },
-          ['[['] = { query = '@class.outer', desc = 'Previous Class Start' },
+          ['[m'] = { query = '@function.outer', 'Previous Function Start' },
+          ['[['] = { query = '@class.outer', 'Previous Class Start' },
         },
         goto_previous_end = {
-          ['[M'] = { query = '@function.outer', desc = 'Previous Function End' },
-          ['[]'] = { query = '@class.outer', desc = 'Previous Class End' },
+          ['[M'] = { query = '@function.outer', 'Previous Function End' },
+          ['[]'] = { query = '@class.outer', 'Previous Class End' },
         },
       },
     },

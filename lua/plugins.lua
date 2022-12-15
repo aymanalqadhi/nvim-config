@@ -17,14 +17,6 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
 
-  -- diagnostics list
-  use {
-    'folke/trouble.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    }
-  }
-
   -- ui
   use 'MunifTanjim/nui.nvim'
   use 'folke/noice.nvim'
@@ -57,9 +49,6 @@ return require('packer').startup(function(use)
   require('pluginsconfig.fluttertools').configure()
   require('pluginsconfig.rusttools').configure()
   require('pluginsconfig.noice').configure()
-
-  -- manually configure plugins --
-  require('trouble').setup()
 
 
 end)

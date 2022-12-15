@@ -33,17 +33,6 @@ map('n', "<space>rn", function() return ":IncRename " .. vim.fn.expand("<cword>"
 map("n", "]d", vim.diagnostic.goto_next, opts)
 map("n", "[d", vim.diagnostic.goto_prev, opts)
 
--- trouble
-map("n", "<space>tt", "<cmd>TroubleToggle<cr>", opts)
-map("n", "<space>tw", "<cmd>TroubleToggle workspace_diagnostics<cr>", opts)
-map("n", "<space>td", "<cmd>TroubleToggle document_diagnostics<cr>", opts)
-map("n", "<space>tl", "<cmd>TroubleToggle loclist<cr>", opts)
-map("n", "<space>t.", "<cmd>TroubleToggle quickfix<cr>", opts)
-map("n", "<space>tr", "<cmd>TroubleRefresh<cr>", opts)
-map("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
-map("n", "[t", [[ <cmd>lua require("trouble").previous{skip_groups = true, jump = true}<cr> ]], opts)
-map("n", "]t", [[ <cmd>lua require("trouble").next{skip_groups = true, jump = true}<cr> ]], opts)
-
 -- barbar
 -- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
