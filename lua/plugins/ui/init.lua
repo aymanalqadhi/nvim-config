@@ -9,4 +9,5 @@ return {
   'tokyonight',      -- colorscheme
   'twilight',        -- focus mode
   'ufo',             -- folding
+  'tint',           -- inactive dim
 }
