@@ -29,6 +29,7 @@ function M.keymaps()
       w = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Toggle Workspace Trouble' },
       l = { '<cmd>TroubleToggle loclist<cr>', 'Toggle Trouble LocList' },
       q = { '<cmd>TroubleToggle quickfix<cr>', 'Toggle Trouble QuickFix' },
+      r = { '<cmd>TroubleToggle lsp_references<cr>', 'Lsp References' },
     },
     [']t'] = { function() trouble.next(opts) end, 'Next Diagnostic' },
     ['[t'] = { function() trouble.previous(opts) end,'Previous Diagnostic' },
