@@ -26,8 +26,8 @@ end
 -- plugin keymaps
 function M.keymaps()
   return {
-    [',,'] = { require('dapui').toggle(), 'Toggle dap-ui' },
-    [',e'] = { require('dapui').eval(), 'Evaluate' },
+    [',,'] = { require('dapui').toggle, 'Toggle dap-ui' },
+    [',e'] = { require('dapui').eval, 'Evaluate' },
   }
 end
 
