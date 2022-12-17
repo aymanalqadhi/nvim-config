@@ -5,4 +5,5 @@ return {
   'lspzero',        -- lsp configuration
   'masonlspconfig', -- software installation helper
   'nullls',         -- virtual lsp server
+  'lspcolors',      -- better lsp colors
 }
