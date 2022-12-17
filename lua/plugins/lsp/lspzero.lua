@@ -14,20 +14,26 @@ M.requirements = {
 function M.configure()
   local lsp = require('lsp-zero')
 
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.offsetEncoding = { "utf-16" }
+
   lsp.preset('lsp-compe')
 
-  local function configure_clangd()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.offsetEncoding = { "utf-16" }
-
-    lsp.configure('clangd', {
-      capabilities = capabilities,
-      cmd = { "clangd", '--background-index', '--clang-tidy' }
-    })
-  end
+  -- icons
+  lsp.set_preferences {
+    sign_icons = {
+      error = '',
+      warn = '',
+      hint = '',
+      info = '',
+    }
+  }
 
   -- servers config
-  configure_clangd()
+  lsp.configure('clangd', {
+    capabilities = capabilities,
+    cmd = { "clangd", '--background-index', '--clang-tidy' }
+  })
 
   lsp.nvim_workspace()
   lsp.setup()
