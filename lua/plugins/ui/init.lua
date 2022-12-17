@@ -9,5 +9,6 @@ return {
   'tokyonight',      -- colorscheme
   'twilight',        -- focus mode
   'ufo',             -- folding
-  'tint',           -- inactive dim
+  'tint',            -- inactive dim
+  'barbecue',        -- navic ui
 }
