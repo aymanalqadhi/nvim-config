@@ -51,7 +51,6 @@ end
 function M.keymaps()
   return {
     ["<C-p>"] = { "<cmd>BufferLinePick<cr>", "Pick a Buffer" },
-    ["<A-c>"] = { "<cmd>BufferLinePickClose<cr>", "Close a Buffer" },
     ["<A-.>"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
     ["<A-,>"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<A-<>"] = { "<cmd>BufferLineMoveNext<cr>", "Move Forward" },
