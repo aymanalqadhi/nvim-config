@@ -1,7 +1,15 @@
 local opts = { noremap = true, silent = true }
 
+local map = vim.api.nvim_set_keymap
+
 -- disable arrows
-vim.keymap.set('n', '<Up>', '<Nop>', opts)
-vim.keymap.set('n', '<Down>', '<Nop>', opts)
-vim.keymap.set('n', '<Left>', '<Nop>', opts)
-vim.keymap.set('n', '<Right>', '<Nop>', opts)
+map('n', '<Up>', '<Nop>', opts)
+map('n', '<Down>', '<Nop>', opts)
+map('n', '<Left>', '<Nop>', opts)
+map('n', '<Right>', '<Nop>', opts)
+
+-- window navigation
+map('n', '<C-h>', '<cmd>wincmd h<cr>', opts)
+map('n', '<C-j>', '<cmd>wincmd j<cr>', opts)
+map('n', '<C-k>', '<cmd>wincmd k<cr>', opts)
+map('n', '<C-l>', '<cmd>wincmd l<cr>', opts)
