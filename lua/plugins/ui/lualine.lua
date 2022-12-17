@@ -96,14 +96,15 @@ function M.configure()
   }
 
   ins_left {
-    'diagnostics',
-    sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
-    diagnostics_color = {
-      color_error = { fg = palette.red },
-      color_warn = { fg = palette.yellow },
-      color_info = { fg = palette.cyan },
+    'diff',
+    -- Is it me or the symbol for modified us really weird
+    symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+    diff_color = {
+      added = { fg = palette.green },
+      modified = { fg = palette.orange },
+      removed = { fg = palette.red },
     },
+    cond = conditions.hide_in_width,
   }
 
   -- Insert mid section. You can make any number of sections in neovim :)
@@ -135,6 +136,18 @@ function M.configure()
     color = { fg = '#ffffff', gui = 'bold' },
   }
 
+  ins_left {
+    'diagnostics',
+    sources = { 'nvim_diagnostic' },
+    symbols = { error = ' ', warn = ' ', info = ' ' },
+    diagnostics_color = {
+      color_error = { fg = palette.red },
+      color_warn = { fg = palette.yellow },
+      color_info = { fg = palette.cyan },
+    },
+  }
+
+
   -- Add components to right sections
 
   ins_right { 'location' }
@@ -158,18 +171,6 @@ function M.configure()
     'branch',
     icon = '',
     color = { fg = palette.magenta, gui = 'bold' },
-  }
-
-  ins_right {
-    'diff',
-    -- Is it me or the symbol for modified us really weird
-    symbols = { added = ' ', modified = '柳 ', removed = ' ' },
-    diff_color = {
-      added = { fg = palette.green },
-      modified = { fg = palette.orange },
-      removed = { fg = palette.red },
-    },
-    cond = conditions.hide_in_width,
   }
 
   ins_right {
