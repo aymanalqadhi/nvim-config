@@ -37,15 +37,7 @@ function M.configure()
       indent_width = 2,
 
       indent_markers = {
-        enable = true,
-        inline_arrows = true,
-        icons = {
-          corner = "└",
-          edge = "│",
-          item = "│",
-          bottom = "─",
-          none = " ",
-        },
+        enable = false,
       },
       icons = {
         webdev_colors = true,
@@ -74,10 +66,10 @@ function M.configure()
       enable = true,
       show_on_dirs = true,
       icons = {
-        hint = "",
-        info = "",
-        warning = "",
-        error = "",
+        error = '',
+        warning = '',
+        hint = '',
+        info = '',
       },
     },
 
