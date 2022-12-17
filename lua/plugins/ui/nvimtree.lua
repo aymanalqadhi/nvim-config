@@ -11,7 +11,7 @@ function M.configure()
   require('nvim-tree').setup {
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = true,
-    open_on_setup_file = true,
+    open_on_setup_file = false,
     sort_by = "name",
     root_dirs = {},
 
