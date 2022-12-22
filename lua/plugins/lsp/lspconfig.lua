@@ -23,8 +23,8 @@ function M.keymaps()
     },
     ['gl'] = {
       name = 'lsp-jump',
-      d = { vim.lsp.buf.declaration, 'Declaration' },
-      D = { vim.lsp.buf.definition, 'Definition' },
+      d = { vim.lsp.buf.definition, 'Definition' },
+      D = { vim.lsp.buf.declaration, 'Declaration' },
       t = { vim.lsp.buf.type_definition, 'Type' },
       i = { vim.lsp.buf.implementation, 'Implementation' },
       r = { vim.lsp.buf.references, 'References' },
