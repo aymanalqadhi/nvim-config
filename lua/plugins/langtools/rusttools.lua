@@ -25,6 +25,28 @@ function M.configure()
     dap = {
       adapter = rt_dap.get_codelldb_adapter(codelldb_path, liblldb_path),
     },
+    server = {
+      settings = {
+        ['rust-analyzer'] = {
+          hover = {
+            actions = {
+              enable = true,
+              references = true,
+            }
+          },
+          lens = {
+            enable = true,
+            location = 'above_name',
+            references = true,
+          },
+          typing = {
+            autoClosingAngleBrackets = {
+              enalbe = true
+            }
+          }
+        },
+      },
+    }
   }
 
   require('crates').setup()
