@@ -12,6 +12,8 @@ function M.keymaps()
       f = { vim.lsp.buf.format, 'Format Code' },
       r = { vim.lsp.buf.rename, 'Rename' },
       s = { '<cmd>Telescope spell_suggest theme=dropdown<cr>', 'Spell' },
+      l = { vim.lsp.codelens.display, 'Display CodeLens' },
+      L = { vim.lsp.codelens.refresh, 'Refresh CodeLens' },
       w = {
         name = 'workspace',
         l = { vim.lsp.buf.list_workspace_folders, 'List' },
