@@ -15,11 +15,11 @@ vim.o.title = true
 vim.o.wildmenu = true
 vim.o.updatetime = 250
 
--- better expression folding 
+-- better expression folding
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:╱]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:╱,vert:▏]]
 
 -- indentation config
 vim.o.showmatch = true
@@ -41,6 +41,7 @@ vim.o.smartindent = true
 vim.o.incsearch = true
 
 --- appearance config ---
+vim.opt.guifont = { 'JetBrains Mono', ':h8' }
 vim.o.syntax = 'on'
 vim.o.termguicolors = true
 vim.o.background = 'dark'
