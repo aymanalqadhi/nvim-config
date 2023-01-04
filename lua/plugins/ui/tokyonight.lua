@@ -15,15 +15,14 @@ function M.configure()
       keywords = { italic = true },
       functions = {},
       variables = {},
-      sidebars = 'night',
-      floats = 'night',
+      sidebars = 'dark',
+      floats = 'normal',
     },
     sidebars = { "qf", "vista_kind", "terminal", "packer" },
     day_brightness = 0.3,
-    hide_inactive_statusline = false,
+    hide_inactive_statusline = true,
     dim_inactive = false,
-    lualine_bold = false,
-
+    lualine_bold = true,
   })
 
   vim.cmd [[ colorscheme tokyonight ]]
