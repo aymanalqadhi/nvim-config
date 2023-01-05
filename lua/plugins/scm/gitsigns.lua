@@ -9,10 +9,11 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local gs = require('gitsigns')
 
-  return {
+  -- normal mode keys (<space> prefix)
+  k.register({
     ['<space>g'] = {
       name = 'git',
       a = { gs.stage_buffer, 'Stage Buffer' },
@@ -27,10 +28,10 @@ function M.keymaps()
       l = { '<cmd>Gitsigns toggle_linehl<cr>', 'Toggle Line Highlight' },
       w = { '<cmd>Gitsigns toggle_word_diff<cr>', 'Toggle Word Diff' },
     },
-    -- Text object
-    ['ih'] = { mode = { 'o', 'x' }, ':<C-U>Gitsigns select_hunk<CR>', 'Select Hunk' },
+  }, { prefix = '<space>'})
 
-    -- -- Navigation
+  -- normal mode keys (navigation)
+  k.register({
     [']c'] = {
       function()
         if vim.wo.diff then
@@ -43,7 +44,6 @@ function M.keymaps()
       end,
       'Next Hunk',
     },
-
     ['[c'] = {
       function()
         if vim.wo.diff then
@@ -56,7 +56,13 @@ function M.keymaps()
       end,
       'Previous Hunk',
     },
-  }
+  })
+
+  -- text object modes keys
+  k.register({
+    ['ih'] = { mode = { 'o', 'x' }, ':<C-U>Gitsigns select_hunk<CR>', 'Select Hunk' },
+  }, { mode = { 'o', 'x' } })
+
 end
 
 return M

@@ -38,12 +38,13 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local telescope = require('telescope')
   local builtin = require('telescope.builtin')
 
-  return {
-    ['<space>f'] = {
+  -- normal mode keys
+  k.register({
+    f = {
       name = 'telescope',
       f = { builtin.find_files, 'Find Files' },
       F = { telescope.extensions.file_browser.file_browser, 'File Browser' },
@@ -67,7 +68,8 @@ function M.keymaps()
       -- notify
       n = { '<cmd>Telescope notify<cr>', 'Notifications' },
     },
-  }
+  }, { prefix = '<space>' })
+
 end
 
 return M

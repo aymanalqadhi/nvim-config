@@ -5,19 +5,25 @@ M.uri = 'fedepujol/move.nvim'
 
 -- plugin configuration
 function M.configure()
-  local opts = { noremap = true, silent = true }
+end
 
-  -- Normal-mode commands
-  vim.keymap.set('n', '<A-j>', ':MoveLine(1)<CR>', opts)
-  vim.keymap.set('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
-  vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
-  vim.keymap.set('n', '<A-l>', ':MoveHChar(1)<CR>', opts)
+-- plugin keymaps
+function M.set_keymaps(k)
+  -- normal mode keys
+  k.register({
+    ['<A-j>'] = { '<cmd>MoveLine(1)<cr>', 'Move Line Down' },
+    ['<A-k>'] = { '<cmd>MoveLine(-1)<cr>', 'Move Line Up' },
+    ['<A-h>'] = { '<cmd>MoveHChar(-1)<cr>', 'Move Character Left' },
+    ['<A-l>'] = { '<cmd>MoveHChar(1)<cr>', 'Move Character Right' },
+  })
 
-  -- Visual-mode commands
-  vim.keymap.set('v', '<A-j>', ':MoveBlock(1)<CR>', opts)
-  vim.keymap.set('v', '<A-k>', ':MoveBlock(-1)<CR>', opts)
-  vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
-  vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
+  -- visual mode keys
+  k.register({
+    ['<A-j>'] = { '<cmd>MoveBlock(1)<cr>', 'Move Block Down' },
+    ['<A-k>'] = { '<cmd>MoveBlock(-1)<cr>', 'Move Block Up' },
+    ['<A-h>'] = { '<cmd>MoveHBlock(-1)<cr>', 'Move Block Left' },
+    ['<A-l>'] = { '<cmd>MoveHBlock(1)<cr>', 'Move Block Right' },
+  }, { mode = 'v' })
 
 end
 

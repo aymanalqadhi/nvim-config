@@ -32,11 +32,11 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local term = require('toggleterm.terminal');
 
-  return {
-    -- lazygit
+  -- normal mode keys
+  k.register({
     ['<A-g>'] = {
       function()
         term.Terminal:new {
@@ -52,28 +52,26 @@ function M.keymaps()
       end,
       'Lazygit',
     },
-    -- floating
+  })
+
+  -- all modes except `terminal` keys
+  k.register({
     ['<C-t>'] = {
-      {
-        mode = { 'n', 'i', 'v' },
-        function()
-          term.Terminal:new {
-            direction = 'float',
-          }:toggle()
-        end,
-        'Floating Terminal',
-      },
-      {
-        mode = 't',
-        '<cmd>ToggleTermToggleAll<cr>',
-        'Toggle All Terminals'
-      },
+      function()
+        term.Terminal:new { direction = 'float' }:toggle()
+      end,
+      'Floating Terminal',
     },
-    ['<C-h>'] = { mode = 't', '<cmd>wincmd h<cr>', 'Jump Left' },
-    ['<C-j>'] = { mode = 't', '<cmd>wincmd h<cr>', 'Jump Up' },
-    ['<C-k>'] = { mode = 't', '<cmd>wincmd h<cr>', 'Jump Down' },
-    ['<C-l>'] = { mode = 't', '<cmd>wincmd h<cr>', 'Jump Right' },
-  }
+  }, { mode = { 'n', 'i', 'v' } })
+
+  -- terminal mode keys
+  k.register({
+    ['<C-t>'] = { '<cmd>ToggleTermToggleAll<cr>', 'Toggle All Terminals' },
+    ['<C-h>'] = { '<cmd>wincmd h<cr>', 'Jump Left' },
+    ['<C-j>'] = { '<cmd>wincmd h<cr>', 'Jump Up' },
+    ['<C-k>'] = { '<cmd>wincmd h<cr>', 'Jump Down' },
+    ['<C-l>'] = { '<cmd>wincmd h<cr>', 'Jump Right' },
+  })
 
 end
 

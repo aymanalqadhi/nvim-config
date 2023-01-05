@@ -12,10 +12,11 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local gp = require('goto-preview')
 
-  return {
+  -- normal mode keys
+  k.register({
     gp = {
       name = 'Go-To Preview',
       d = { gp.goto_preview_definition, 'Preview Definition' },
@@ -24,7 +25,8 @@ function M.keymaps()
       r = { gp.goto_preview_references, 'Preview References' },
     },
     gP = { gp.close_all_win, 'Close Go-To Windows' },
-  }
+  })
+
 end
 
 return M

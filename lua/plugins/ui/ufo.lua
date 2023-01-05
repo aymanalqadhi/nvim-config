@@ -55,10 +55,11 @@ function M.configure()
 end
 
 -- pluginin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local ufo = require('ufo')
 
-  return {
+  -- normal mode keys
+  k.register({
     z = {
       name = 'ufo',
       R = { ufo.openAllFolds, 'Open All Folds' },
@@ -75,7 +76,8 @@ function M.keymaps()
       end,
       'Hover'
     }
-  }
-end
-return M
+  })
 
+end
+
+return M

@@ -13,10 +13,12 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
-  return {
-    ['<space>T'] = { '<cmd>Twilight<cr>', 'Toggle Twilight' }
-  }
+function M.set_keymaps(k)
+  -- normal mode keys
+  k.register({
+    T = { '<cmd>Twilight<cr>', 'Toggle Twilight' }
+  }, { prefix = '<space>' })
+
 end
 
 return M

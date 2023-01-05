@@ -16,7 +16,16 @@ local function merge_plugins(mods)
       table.insert(ret, {
         plugin.uri,
         dependencies = plugin.dependencies,
-        config = plugin.configure
+        config =
+          plugin.set_keymaps and
+            function()
+              if plugin.configure ~= nil then
+                plugin.configure()
+              end
+
+              plugin.set_keymaps(require('which-key'))
+            end
+          or plugin.configure
       })
     end
   end

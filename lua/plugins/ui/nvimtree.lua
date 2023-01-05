@@ -118,10 +118,12 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
-  return {
+function M.set_keymaps(k)
+  -- normal mode keys
+  k.register({
     ['<A-t>'] = { '<cmd>NvimTreeToggle<cr>', 'Toggle Tree' },
-  }
+  })
+
 end
 
 return M

@@ -24,11 +24,17 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
-  return {
-    [',,'] = { require('dapui').toggle, 'Toggle dap-ui' },
-    [',e'] = { require('dapui').eval, 'Evaluate' },
-  }
+function M.set_keymaps(k)
+
+  -- normal mode keys
+  k.register({
+    du = {
+      name = 'dap-ui',
+      u = { require('dapui').toggle, 'Toggle dap-ui' },
+      e = { require('dapui').eval, 'Evaluate' },
+    }
+  }, { prefix = '<space>' })
+
 end
 
 return M

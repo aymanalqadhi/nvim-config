@@ -72,18 +72,20 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local rt = require('rust-tools')
 
-  return {
-    ['<space>r'] = {
+  -- normal mode keys
+  k.register({
+    r = {
       name = 'rust-tools',
-      h = { function() rt.hover_actions.hover_actions() end, 'Hover Actions' },
-      a = { function() rt.code_action_group.code_action_group() end, 'Code Actions' },
-      e = { function() rt.expand_macro.expand_macro() end, 'Expand Macro' },
-      m = { function() rt.parent_module.parent_module() end, 'Parent Module' },
+      h = { rt.hover_actions.hover_actions, 'Hover Actions' },
+      a = { rt.code_action_group.code_action_group, 'Code Actions' },
+      e = { rt.expand_macro.expand_macro, 'Expand Macro' },
+      m = { rt.parent_module.parent_module, 'Parent Module' },
     }
-  }
+  }, { prefix = '<space>' })
+
 end
 
 return M

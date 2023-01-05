@@ -17,11 +17,12 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local trouble = require('trouble')
   local opts = { skip_groups = true, jump = true }
 
-  return {
+  -- normal mode keys
+  k.register({
     ['<space>t'] = {
       name = 'trouble',
       t = { '<cmd>TroubleToggle<cr>', 'Toggle Trouble' },
@@ -33,7 +34,7 @@ function M.keymaps()
     [']t'] = { function() trouble.next(opts) end, 'Next Diagnostic' },
     ['[t'] = { function() trouble.previous(opts) end, 'Previous Diagnostic' },
     gtr = { '<cmd>TroubleToggle lsp_references<cr>', 'Lsp References' }
-  }
+  }, { skip_groups = true, jump = true})
 
 end
 

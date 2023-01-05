@@ -4,9 +4,10 @@ local M = {}
 M.uri = 'neovim/nvim-lspconfig'
 
 -- plugin keymaps
-function M.keymaps()
-  return {
-    ['<space>l'] = {
+function M.set_keymaps(k)
+  -- normal mode keys (`<space>` prefix)
+  k.register({
+    l = {
       name = 'lsp',
       a = { vim.lsp.buf.code_action, 'Code Actions' },
       f = { vim.lsp.buf.format, 'Format Code' },
@@ -20,8 +21,12 @@ function M.keymaps()
         a = { vim.lsp.buf.add_workspace_folder, 'Add' },
         d = { vim.lsp.buf.remove_workspace_folder, 'Remove' },
       }
-    },
-    ['gl'] = {
+    }
+  }, { prefix = '<space>' })
+
+  -- normal mode keys (`g` prefix)
+  k.register({
+    l = {
       name = 'lsp-jump',
       d = { vim.lsp.buf.definition, 'Definition' },
       D = { vim.lsp.buf.declaration, 'Declaration' },
@@ -32,11 +37,20 @@ function M.keymaps()
       C = { vim.lsp.buf.incoming_calls, 'Incoming Calls' },
       s = { vim.lsp.buf.document_symbol, 'Document Symbol' },
       S = { vim.lsp.buf.workspace_symbol, 'Workspace Symbol' },
-    },
+    }
+  }, { prefix = '<space>' })
+
+  -- normal mode keys (misc)
+  k.register({
     [']d'] = { vim.diagnostic.goto_next, 'Next Diagnostic' },
     ['[d'] = { vim.diagnostic.goto_prev, 'Previous Diagnostic' },
+  })
+
+  -- insert mode keys
+  k.register({
     ['<C-k>'] = { mode = 'i', vim.lsp.buf.signature_help, 'Signature Help' },
-  }
+  }, { mode = 'i' })
+
 end
 
 return M

@@ -7,14 +7,16 @@ M.uri = 'sindrets/diffview.nvim'
 M.dependencies = { 'nvim-lua/plenary.nvim' }
 
 -- plugin keymaps
-function M.keymaps()
-  return {
-    ['<space>g'] = {
+function M.set_keymaps(k)
+  -- normal mode keys
+  k.register({
+    g = {
       name = 'git',
       h = { '<cmd>DiffviewFileHistory %f<cr>', 'Current File History' },
       H = { '<cmd>DiffviewFileHistory<cr>', 'Current File History' },
     }
-  }
+  }, { prefix = '<space>' })
+
 end
 
 return M

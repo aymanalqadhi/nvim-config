@@ -60,11 +60,12 @@ function M.configure()
 end
 
 -- plugin keymaps
-function M.keymaps()
+function M.set_keymaps(k)
   local dap = require('dap')
 
-  return {
-    ['<space>d'] = {
+  -- normal mode keys
+  k.register({
+    d = {
       name = 'dap',
 
       bb = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
@@ -80,7 +81,8 @@ function M.keymaps()
       t = { dap.terminate, 'Terminate' },
       r = { dap.repl.toggle, 'Toggle REPL' },
     }
-  }
+  }, { prefix = '<space>' })
+
 end
 
 return M

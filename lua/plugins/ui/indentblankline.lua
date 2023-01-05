@@ -10,7 +10,6 @@ function M.configure()
   vim.opt.listchars:append("space:⋅")
 
   require("indent_blankline").setup {
-    --char = '🭲',
     char = '🭱',
     show_current_context = true,
     show_trailing_blankline_indent = false,
