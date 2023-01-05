@@ -6,6 +6,10 @@ M.uri = 'folke/trouble.nvim'
 -- plugin dependencies
 M.dependencies = { 'kyazdani42/nvim-web-devicons' }
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<space>t'
+
 -- plugin configuration function
 function M.configure()
   require('trouble').setup {

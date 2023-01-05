@@ -3,6 +3,9 @@ local M = {}
 -- plugin uri
 M.uri = 'folke/twilight.nvim'
 
+-- plugin options
+M.lazy = true
+
 -- plugin configuration function
 function M.configure()
   require('twilight').setup {

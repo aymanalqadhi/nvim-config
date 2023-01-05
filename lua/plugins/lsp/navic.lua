@@ -6,6 +6,10 @@ M.uri = 'SmiteshP/nvim-navic'
 -- plugin dependencies
 M.dependencies = { 'neovim/nvim-lspconfig'}
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'LspAttach'
+
 -- plugin configuration
 function M.configure()
   require('nvim-navic').setup {

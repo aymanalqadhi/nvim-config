@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'famiu/bufdelete.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<A-c>'
+
 -- plugin keymaps
 function M.set_keymaps(k)
   -- normal mode keys

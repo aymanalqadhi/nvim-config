@@ -3,6 +3,9 @@ local M = {}
 -- plugin uri
 M.uri = 'williamboman/mason.nvim'
 
+-- plugin options
+M.lazy = true
+
 -- plugin configuration
 function M.configure()
   require("mason").setup({

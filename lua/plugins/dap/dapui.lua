@@ -6,6 +6,10 @@ M.uri = 'rcarriga/nvim-dap-ui'
 -- plugin dependencies
 M.dependencies = { 'mfussenegger/nvim-dap' }
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<space>duu'
+
 -- plugin configuration function
 function M.configure()
   local dap, dapui = require("dap"), require("dapui")

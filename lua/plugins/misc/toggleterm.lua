@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'akinsho/toggleterm.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = { [[<C-\>]], '<C-t>', '<A-g>' }
+
 -- plugin configuration function
 function M.configure()
   require('toggleterm').setup {

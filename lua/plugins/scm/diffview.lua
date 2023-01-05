@@ -6,6 +6,10 @@ M.uri = 'sindrets/diffview.nvim'
 -- plugin dependencies
 M.dependencies = { 'nvim-lua/plenary.nvim' }
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<space>g'
+
 -- plugin keymaps
 function M.set_keymaps(k)
   -- normal mode keys

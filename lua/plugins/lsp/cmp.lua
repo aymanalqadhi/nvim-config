@@ -17,6 +17,8 @@ M.dependencies = {
   'L3MON4D3/LuaSnip',
   'windwp/nvim-autopairs',
 }
+-- plugin options
+M.lazy = true
 
 -- plugin configuration function
 function M.configure()

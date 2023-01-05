@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'folke/noice.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'LspAttach'
+
 -- plugin dependencies
 M.dependencies = {
   'MunifTanjim/nui.nvim',

@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'mfussenegger/nvim-dap'
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<space>d'
+
 -- plugin configuration function
 function M.configure()
   local dap = require('dap')

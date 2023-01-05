@@ -25,7 +25,10 @@ local function merge_plugins(mods)
 
               plugin.set_keymaps(require('which-key'))
             end
-          or plugin.configure
+          or plugin.configure,
+        lazy = plugin.lazy,
+        keys = plugin.load_on_keys,
+        event = plugin.load_on_event,
       })
     end
   end

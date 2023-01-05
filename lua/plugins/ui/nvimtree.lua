@@ -6,6 +6,10 @@ M.uri = 'DaikyXendo/nvim-tree.lua'
 -- plugin dependencies
 M.dependencies = { 'DaikyXendo/nvim-material-icon' }
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<A-t>'
+
 -- plugin configuration function
 function M.configure()
   require('nvim-tree').setup {

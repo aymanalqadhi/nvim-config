@@ -6,6 +6,10 @@ M.uri = 'rmagatti/goto-preview'
 -- plugin dependencies
 M.dependencies = { 'nvim-telescope/telescope.nvim' }
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = 'gp'
+
 -- plugin configuration function
 function M.configure()
   require('goto-preview').setup {}

@@ -3,6 +3,9 @@ local M = {}
 -- plugin uri
 M.uri = 'neovim/nvim-lspconfig'
 
+-- plugin options
+M.lazy = true
+
 -- plugin keymaps
 function M.set_keymaps(k)
   -- normal mode keys (`<space>` prefix)

@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'simrat39/rust-tools.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'BufEnter *.rs'
+
 -- plugin dependencies
 M.dependencies = {
   'nvim-lua/plenary.nvim',

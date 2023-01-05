@@ -18,6 +18,10 @@ M.dependencies = {
   'windwp/nvim-autopairs',
 }
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'LspAttach'
+
 -- plugin configuration function
 function M.configure()
   local null_ls = require("null-ls")

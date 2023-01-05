@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'lewis6991/gitsigns.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_keys = '<space>g'
+
 -- plugin configuration function
 function M.configure()
   require('gitsigns').setup()
