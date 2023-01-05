@@ -3,3 +3,6 @@ bak
 
 # plugins' files
 /plugin/
+
+# `lazy.nvim` files
+lazy-lock.json
