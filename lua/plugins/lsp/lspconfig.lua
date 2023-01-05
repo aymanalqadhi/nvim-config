@@ -41,7 +41,7 @@ function M.set_keymaps(k)
       s = { vim.lsp.buf.document_symbol, 'Document Symbol' },
       S = { vim.lsp.buf.workspace_symbol, 'Workspace Symbol' },
     }
-  }, { prefix = '<space>' })
+  }, { prefix = 'g' })
 
   -- normal mode keys (misc)
   k.register({
