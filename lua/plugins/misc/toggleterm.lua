@@ -75,7 +75,7 @@ function M.set_keymaps(k)
     ['<C-j>'] = { '<cmd>wincmd h<cr>', 'Jump Up' },
     ['<C-k>'] = { '<cmd>wincmd h<cr>', 'Jump Down' },
     ['<C-l>'] = { '<cmd>wincmd h<cr>', 'Jump Right' },
-  })
+  }, { mode = 't' })
 
 end
 
