@@ -25,7 +25,18 @@ function M.configure()
     dap = {
       adapter = rt_dap.get_codelldb_adapter(codelldb_path, liblldb_path),
     },
+    tools = {
+      autoSetHints = true,
+      runnables = {
+        use_telescope = true
+      },
+      inlay_hints = {
+        show_parameter_hints = true,
+        other_hints_prefix = "-> "
+      },
+    },
     server = {
+      standalone = false,
       settings = {
         ['rust-analyzer'] = {
           hover = {
@@ -42,6 +53,14 @@ function M.configure()
           typing = {
             autoClosingAngleBrackets = {
               enalbe = true
+            }
+          },
+          checkOnSave = {
+            command = "clippy"
+          },
+          completion = {
+            callable = {
+              snippets = "fill_arguments"
             }
           }
         },
