@@ -3,10 +3,6 @@ local M = {}
 -- plugin uri
 M.uri = 'lewis6991/gitsigns.nvim'
 
--- plugin options
-M.lazy = true
-M.load_on_keys = '<space>g'
-
 -- plugin configuration function
 function M.configure()
   require('gitsigns').setup()
@@ -18,7 +14,7 @@ function M.set_keymaps(k)
 
   -- normal mode keys (<space> prefix)
   k.register({
-    ['<space>g'] = {
+    g = {
       name = 'git',
       a = { gs.stage_buffer, 'Stage Buffer' },
       u = { gs.undo_stage_hunk, 'Unstage Hunk' },
