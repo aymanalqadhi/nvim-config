@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'sindrets/diffview.nvim'
 
--- plugin requirements
-M.requirements = { 'nvim-lua/plenary.nvim' }
+-- plugin dependencies
+M.dependencies = { 'nvim-lua/plenary.nvim' }
 
 -- plugin keymaps
 function M.keymaps()

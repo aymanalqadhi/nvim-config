@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'rmagatti/goto-preview'
 
--- plugin requirements
-M.requirements = { 'nvim-telescope/telescope.nvim' }
+-- plugin dependencies
+M.dependencies = { 'nvim-telescope/telescope.nvim' }
 
 -- plugin configuration function
 function M.configure()

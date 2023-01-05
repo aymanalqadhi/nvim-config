@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'SmiteshP/nvim-navic'
 
--- plugin requirements
-M.requirements = { 'neovim/nvim-lspconfig'}
+-- plugin dependencies
+M.dependencies = { 'neovim/nvim-lspconfig'}
 
 -- plugin configuration
 function M.configure()

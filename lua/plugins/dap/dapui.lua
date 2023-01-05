@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'rcarriga/nvim-dap-ui'
 
--- plugin requirements
-M.requirements = { 'mfussenegger/nvim-dap' }
+-- plugin dependencies
+M.dependencies = { 'mfussenegger/nvim-dap' }
 
 -- plugin configuration function
 function M.configure()

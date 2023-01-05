@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'folke/noice.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'MunifTanjim/nui.nvim',
   'rcarriga/nvim-notify',
 }

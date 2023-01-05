@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'nvim-telescope/telescope.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'nvim-lua/plenary.nvim',
   'nvim-telescope/telescope-ui-select.nvim',
   'nvim-telescope/telescope-file-browser.nvim',

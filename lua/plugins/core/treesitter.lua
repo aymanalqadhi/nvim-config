@@ -3,14 +3,13 @@ local M = {}
 -- plugin uri
 M.uri = 'nvim-treesitter/nvim-treesitter'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'nvim-treesitter/nvim-treesitter-textobjects'
 }
 
 -- plugin configuration function
 function M.configure()
-
   require('nvim-treesitter.configs').setup {
     -- auto install missing parsers
     auto_install = true,

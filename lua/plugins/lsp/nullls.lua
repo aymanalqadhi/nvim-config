@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'jose-elias-alvarez/null-ls.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'neovim/nvim-lspconfig',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',

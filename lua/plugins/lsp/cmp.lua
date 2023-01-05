@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'hrsh7th/nvim-cmp'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'neovim/nvim-lspconfig',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
@@ -13,7 +13,7 @@ M.requirements = {
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-cmdline',
   'andersevenrud/cmp-tmux',
-  'onsails/lspkind-nvim',
+  'onsails/lspkind.nvim',
   'L3MON4D3/LuaSnip',
   'windwp/nvim-autopairs',
 }

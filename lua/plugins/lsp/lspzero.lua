@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'VonHeikemen/lsp-zero.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'neovim/nvim-lspconfig',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',

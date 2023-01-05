@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'utilyre/barbecue.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'neovim/nvim-lspconfig',
   'smiteshp/nvim-navic',
   'kyazdani42/nvim-web-devicons',

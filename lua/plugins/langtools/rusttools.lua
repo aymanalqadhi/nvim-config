@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'simrat39/rust-tools.nvim'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'nvim-lua/plenary.nvim',
   'neovim/nvim-lspconfig',
   'mfussenegger/nvim-dap',

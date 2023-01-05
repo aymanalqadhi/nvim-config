@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'folke/trouble.nvim'
 
--- plugin requirements
-M.requirements = { 'kyazdani42/nvim-web-devicons' }
+-- plugin dependencies
+M.dependencies = { 'kyazdani42/nvim-web-devicons' }
 
 -- plugin configuration function
 function M.configure()

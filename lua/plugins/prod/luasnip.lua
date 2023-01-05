@@ -3,8 +3,8 @@ local M = {}
 -- plugin uri
 M.uri = 'L3MON4D3/LuaSnip'
 
--- plugin requirements
-M.requirements = {
+-- plugin dependencies
+M.dependencies = {
   'saadparwaiz1/cmp_luasnip',
   'rafamadriz/friendly-snippets',
 }

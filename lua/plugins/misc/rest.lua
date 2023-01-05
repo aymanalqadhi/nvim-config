@@ -3,6 +3,9 @@ local M = {}
 -- plugin uri
 M.uri = 'rest-nvim/rest.nvim'
 
+-- plugin dependencies
+M.dependencies = { "nvim-lua/plenary.nvim" }
+
 -- plugin configuration
 function M.configure()
   require("rest-nvim").setup {
