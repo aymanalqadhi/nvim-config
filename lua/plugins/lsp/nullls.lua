@@ -41,7 +41,6 @@ function M.configure()
       -- formatters
       formatting.black,
       formatting.prettierd,
-      formatting.clang_format,
       formatting.prettierd,
       formatting.dart_format,
       formatting.cmake_format,
