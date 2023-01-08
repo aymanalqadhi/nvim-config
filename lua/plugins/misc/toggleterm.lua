@@ -17,8 +17,8 @@ function M.configure()
     float_opts = {
       border = 'curved',
       winblend = 15,
-      width = math.ceil(vim.o.columns * 0.8),
-      height = math.ceil(vim.o.columns * 0.2),
+      width = math.ceil(vim.api.nvim_win_get_width(0) * .8),
+      height = math.ceil(vim.api.nvim_win_get_height(0) * .8)
     },
     highlights = {
       FloatBorder = {
