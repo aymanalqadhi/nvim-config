@@ -1,7 +1,7 @@
 local M = {}
 
 -- plugin uri
-M.uri = 'SmiteshP/nvim-navic'
+M.uri = 'smiteshp/nvim-navic'
 
 -- plugin dependencies
 M.dependencies = { 'neovim/nvim-lspconfig'}

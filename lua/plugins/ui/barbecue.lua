@@ -7,7 +7,7 @@ M.uri = 'utilyre/barbecue.nvim'
 M.dependencies = {
   'neovim/nvim-lspconfig',
   'smiteshp/nvim-navic',
-  'kyazdani42/nvim-web-devicons',
+  'nvim-tree/nvim-web-devicons',
 }
 
 -- plugin configuration function

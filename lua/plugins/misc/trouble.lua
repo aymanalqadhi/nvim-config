@@ -4,7 +4,7 @@ local M = {}
 M.uri = 'folke/trouble.nvim'
 
 -- plugin dependencies
-M.dependencies = { 'kyazdani42/nvim-web-devicons' }
+M.dependencies = { 'nvim-tree/nvim-web-devicons' }
 
 -- plugin options
 M.lazy = true
