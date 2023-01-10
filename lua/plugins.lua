@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- initialize plugins
 require('lazy').setup(require('plugins.init'), {
-  defaults = { version = '*' },
+  defaults = { colorscheme = 'tokyonight', version = '*' },
   concurrency = 12,
   ui = {
     size = { width = 0.8, height = 0.8 },
