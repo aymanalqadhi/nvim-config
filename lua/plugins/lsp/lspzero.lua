@@ -32,7 +32,8 @@ function M.configure()
   -- servers config
   lsp.configure('clangd', {
     capabilities = capabilities,
-    cmd = { "clangd", '--background-index', '--clang-tidy' }
+    filetypes = { 'c', 'cpp' },
+    cmd = { 'clangd', '--background-index', '--clang-tidy' }
   })
 
   -- setup custom attach callback
