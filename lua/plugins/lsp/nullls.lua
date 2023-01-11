@@ -3,25 +3,6 @@ local M = {}
 -- plugin uri
 M.uri = 'jose-elias-alvarez/null-ls.nvim'
 
--- plugin dependencies
-M.dependencies = {
-  'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-nvim-lua',
-  'hrsh7th/cmp-cmdline',
-  'andersevenrud/cmp-tmux',
-  'onsails/lspkind-nvim',
-  'L3MON4D3/LuaSnip',
-  'windwp/nvim-autopairs',
-}
-
--- plugin options
-M.lazy = true
-M.load_on_event = 'LspAttach'
-
 -- plugin configuration function
 function M.configure()
   local null_ls = require("null-ls")
@@ -39,20 +20,20 @@ function M.configure()
       code_actions.refactoring,
 
       -- formatters
+      formatting.cmake_format,
       formatting.black,
       formatting.prettierd,
       formatting.prettierd,
       formatting.dart_format,
-      formatting.cmake_format,
       formatting.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
 
       -- diagnostics
-      diagnostics.eslint_d,
-      diagnostics.yamllint,
-      diagnostics.gitlint,
       diagnostics.cmake_lint,
+      diagnostics.eslint_d,
       diagnostics.flake8,
+      diagnostics.gitlint,
       diagnostics.sqlfluff.with { extra_args = { "--dialect", "postgres" } },
+      diagnostics.yamllint,
 
       -- hover
       hover.printenv,
