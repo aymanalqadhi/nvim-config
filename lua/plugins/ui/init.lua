@@ -3,7 +3,8 @@ return {
   'bufferline',      -- bar
   'illuminate',      -- highlight current word
   'indentblankline', -- indentation markers
-  'lualine',         -- status line
+  --'lualine',         -- status line
+  'feline',         -- status line
   'noice',           -- ui addons
   'nvimtree',        -- file tree
   'tokyonight',      -- colorscheme
