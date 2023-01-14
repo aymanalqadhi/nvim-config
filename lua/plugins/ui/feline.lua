@@ -8,7 +8,6 @@ M.dependencies = 'lewis6991/gitsigns.nvim'
 -- plugin configuration function
 function M.configure()
   local util = require('common.util')
-  local lsp = require('common.lsp')
   local colors = require('common.colors')
 
   -- components map
@@ -32,7 +31,7 @@ function M.configure()
     hl = { bg = colors.bg_highlight },
     file_readonly_icon = '',
     left_sep = "block",
-    right_sep = "block",
+    right_sep = " ",
   }
 
   -- git branch
@@ -40,8 +39,8 @@ function M.configure()
     provider = "git_branch",
     hl = { fg = colors.fg, bg = colors.darkblue, style = "bold" },
     icon = { str = ' ', hl = { fg = colors.primary_blue } },
-    left_sep = "block",
-    right_sep = "█",
+    left_sep = "left_rounded",
+    right_sep = "right_rounded",
   }
 
   -- git diff (add)
@@ -49,7 +48,7 @@ function M.configure()
     provider = "git_diff_added",
     icon = '  ',
     hl = { fg = colors.green },
-    right_sep = { str = " ・", hl = { fg = colors.fg } },
+    right_sep = { str = "・", hl = { fg = colors.fg } },
   }
 
   -- git diff (delete)
@@ -57,7 +56,7 @@ function M.configure()
     provider = "git_diff_removed",
     icon = ' ',
     hl = { fg = colors.red },
-    right_sep = { str = " ・", hl = { fg = colors.fg } },
+    right_sep = { str = "・", hl = { fg = colors.fg } },
   }
 
   -- git diff (change)
@@ -72,8 +71,8 @@ function M.configure()
     provider = "diagnostic_errors",
     hl = { fg = colors.bg, bg = colors.red },
     icon = { str = ' ' },
-    right_sep = "block",
-    left_sep = "block",
+    left_sep = "left_rounded",
+    right_sep = " ",
   }
 
   -- lsp diag (warnings)
@@ -81,8 +80,8 @@ function M.configure()
     provider = "diagnostic_warnings",
     hl = { fg = colors.bg, bg = colors.orange },
     icon = { str = ' ' },
-    right_sep = "block",
-    left_sep = "block",
+    left_sep = "left_rounded",
+    right_sep = " ",
   }
 
   -- lsp diag (hints)
@@ -90,8 +89,8 @@ function M.configure()
     provider = "diagnostic_hints",
     hl = { fg = colors.bg, bg = colors.blue },
     icon = { str = ' ' },
-    right_sep = "block",
-    left_sep = "block",
+    left_sep = "left_rounded",
+    right_sep = " ",
   }
 
   -- lsp diag (info)
@@ -99,51 +98,17 @@ function M.configure()
     provider = "diagnostic_info",
     hl = { fg = colors.bg, bg = colors.cyan },
     icon = { str = ' ' },
-    right_sep = "block",
-    left_sep = "block",
+    left_sep = "left_rounded",
+    right_sep = "right_rounded",
   }
 
-  -- lsp info
-  C.lsp = {
-    provider = function()
-      if not rawget(vim, "lsp") then
-        return ""
-      end
-
-      local progress = vim.lsp.util.get_progress_messages()[1]
-
-      if vim.o.columns < 120 then
-        return ""
-      end
-
-      local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-
-      if #clients ~= 0 then
-        if progress then
-          local spinners = { "◜ ", "◠ ", "◝ ", "◞ ", "◡ ", "◟ " }
-          local ms = vim.loop.hrtime() / 1000000
-          local frame = math.floor(ms / 120) % #spinners
-          local content = string.format("%%<%s", spinners[frame + 1])
-          return content or ""
-        else
-          return "לּ " .. lsp.active_clients_formatted_names()
-        end
-      end
-      return ""
-    end,
-    hl = function()
-      local progress = vim.lsp.util.get_progress_messages()[1]
-      return {
-        fg = progress and "yellow" or "green",
-        bg = colors.bg_highlight,
-        style = "bold",
-      }
-    end,
-    -- left_sep = " █",
-    -- right_sep = "█ ",
-    left_sep = "block",
-    right_sep = "block",
-
+  -- lsp clients
+  C.lsp_client_names = {
+    provider = "lsp_client_names",
+    hl = { bg = colors.bg_highlight, style = 'bold' },
+    icon = { str = ' ', hl = { fg = colors.yellow } },
+    left_sep = "left_rounded",
+    right_sep = " ",
   }
 
   -- file format by platform
@@ -172,48 +137,44 @@ function M.configure()
         " ", " ", " ", " ", " ", " ", " ",
       }
 
-      local line_ratio = vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0)
-      local position = math.floor(line_ratio * 100)
+      local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+      local position = row .. '・' .. col
 
-      if position <= 5 then
-        return " TOP"
-      elseif position >= 95 then
-        return " BOT"
+      local line_ratio = math.floor((row / vim.api.nvim_buf_line_count(0)) * 100)
+      local approx = ''
+
+      if line_ratio <= 5 then
+        approx = " TOP"
+      elseif line_ratio >= 95 then
+        approx = " BOT"
       else
-        return chars[math.floor(line_ratio * #chars)] .. position
+        approx = chars[math.floor((line_ratio / 100) * #chars)] .. line_ratio
       end
+
+      return approx .. '  ' .. position
     end,
     hl = {
       fg = colors.fg,
       bg = colors.bg_highlight,
       style = 'bold',
     },
-    left_sep = "block",
+    left_sep = " ",
     right_sep = "block",
   }
 
   -- encoding
   C.file_encoding = {
     provider = 'file_encoding',
-    hl = { bg = colors.bg, style = 'bold' },
-    left_sep = "block",
-    right_sep = "block",
-  }
-
-  -- position
-  C.position = {
-    provider = 'position',
-    padding = true,
-    format = ' {line} ・ {col}',
-    left_sep = "block",
-    right_sep = "block",
+    hl = { bg = colors.darkblue, style = 'bold' },
+    left_sep = " ",
+    right_sep = "right_rounded",
   }
 
   -- file size
   C.file_size = {
     provider = 'file_size',
-    hl = { bg = colors.darkblue },
-    left_sep = "█",
+    hl = { bg = colors.bg, fg = colors.green },
+    left_sep = "block",
     right_sep = "block",
   }
 
@@ -232,7 +193,7 @@ function M.configure()
 
         -- middle
         {
-          C.lsp,
+          C.lsp_client_names,
           C.diagnostic_errors,
           C.diagnostic_warnings,
           C.diagnostic_hints,
@@ -242,9 +203,8 @@ function M.configure()
 
         -- right
         {
-          C.position,
-          C.file_encoding,
           C.file_size,
+          C.file_encoding,
           C.scroll_bar,
           C.file_format
         }
