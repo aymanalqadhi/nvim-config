@@ -45,22 +45,21 @@ end
 -- gets current mode label
 function M.mode_label()
   local labels = {
-    NORMAL = '<|',
-    OP = '<|',
-    INSERT = '|>',
-    VISUAL = '<>',
-    LINES = '<>',
-    BLOCK = '<>',
-    REPLACE = '<>',
-    ['V-REPLACE'] = '<>',
-    ENTER = '<>',
-    MORE = '<>',
-    SELECT = '<>',
-    COMMAND = '<|',
-    SHELL = '<|',
-    TERM = '<|',
-    NONE = '<>',
-    CONFIRM = '|>'
+    NORMAL = '  ',
+    INSERT = '  ',
+    VISUAL = ' ﬔ ',
+    LINES = ' ﲖ ',
+    BLOCK = '  ',
+    REPLACE = '  ',
+    ['V-REPLACE'] = '  ',
+    ENTER = '  ',
+    MORE = '  ',
+    SELECT = '  ',
+    COMMAND = ' גּ ',
+    SHELL = '  ',
+    TERM = '  ',
+    NONE = ' ⏺︎ ',
+    CONFIRM = ' ᐅ '
   }
   return labels[M.mode_alias()]
 end
