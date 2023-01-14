@@ -9,12 +9,14 @@ M.dependencies = { 'nvim-tree/nvim-web-devicons' }
 -- plugin configuration function
 function M.configure()
   local colors = require('common.colors')
-  local palette = colors.palette
+  local palette = colors
+
   local util = require('common.util')
+  local lsp = require('common.lsp')
 
   local conditions = {
     buffer_not_empty = function()
-      return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+      return not vim.fn.empty(vim.fn.expand('%:t'))
     end,
     hide_in_width = function()
       return vim.fn.winwidth(0) > 80
@@ -32,154 +34,123 @@ function M.configure()
       component_separators = '',
       section_separators = '',
       theme = {
-        normal = { c = { fg = palette.fg, bg = palette.bg } },
-        inactive = { c = { fg = palette.fg, bg = palette.bg } },
-      },
+        normal = {
+          -- left
+          a = function() return { fg = palette.bg, bg = colors.mode_color() } end,
+          b = { fg = palette.fg, bg = palette.bg_highlight },
+          c = { gui = 'bold' },
+          -- middle
+          x = {},
+          -- right
+          y = {},
+          z = {},
+        },
+      }
     },
     sections = {
-      -- these are to remove the defaults
-      lualine_a = {},
-      lualine_b = {},
-      lualine_y = {},
-      lualine_z = {},
-      -- These will be filled later
-      lualine_c = {},
-      lualine_x = {},
+      lualine_a = { util.mode_label },
+      lualine_b = {
+        {
+          'filetype',
+          icon_only = true,
+          padding = { left = 1, right = -1 },
+        },
+        {
+          'filename',
+          newfile_status = true,
+          symbols = {
+            modified = '',
+            readonly = '',
+            unnamed = '',
+            newfile = '',
+          },
+        },
+      },
+      lualine_c = {
+        {
+          'branch',
+          padding = { left = 1, right = 1 },
+        },
+        {
+          'diff',
+          symbols = { added = ' ', modified = ' ', removed = ' ' },
+        },
+        function() return '%=' end,
+        {
+          lsp.active_clients_formatted_names,
+          cond = lsp.is_lsp_active,
+          color = { bg = palette.bg_highlight, gui = 'bold' },
+          icon = { '', color = { fg = palette.yellow } }
+        },
+      },
+      lualine_x = {
+        {
+          'diagnostics',
+          sources = { 'nvim_workspace_diagnostic', 'nvim_diagnostic' },
+          update_in_insert = false,
+          always_visible = false,
+        },
+        function() return '%=' end,
+        {
+          'filesize',
+          cond = conditions.buffer_not_empty,
+          color = { fg = palette.green, gui = 'bold' }
+        },
+      },
+      lualine_y = {
+        {
+          'progress',
+          color = { gui = 'bold' },
+        },
+        { 'location' },
+        {
+          'o:encoding', -- option component same as &encoding in viml
+          color = { bg = palette.bg_highlight }
+        }
+      },
+      lualine_z = {
+        {
+          'hostname',
+          color = function() return { fg = palette.bg, bg = colors.mode_color() } end,
+        },
+        {
+          'fileformat',
+          symbols = {
+            unix = '',
+            dos = '',
+            mac = '',
+          },
+          padding = { left = 1, right = 1 },
+          color = function() return { fg = palette.bg, bg = colors.mode_color() } end,
+        }
+      },
     },
-    inactive_sections = {
-      -- these are to remove the defaults
-      lualine_a = {},
-      lualine_b = {},
-      lualine_y = {},
-      lualine_z = {},
-      lualine_c = {},
-      lualine_x = {},
-    },
+    globalstatus = true,
+    --always_divide_middle = true,
+    extensions = {
+      'man', 'nvim-tree', 'toggleterm'
+    }
   }
 
   -- Inserts a component in lualine_c at left section
   local function ins_left(component)
+    table.insert(config.sections.lualine_a, component)
+  end
+
+  local function ins_mid1(component)
+    table.insert(config.sections.lualine_c, component)
+  end
+
+  local function ins_mid2(component)
     table.insert(config.sections.lualine_c, component)
   end
 
   -- Inserts a component in lualine_x ot right section
   local function ins_right(component)
-    table.insert(config.sections.lualine_x, component)
+    table.insert(config.sections.lualine_z, component)
   end
 
-  ins_left {
-    function()
-      return string.format(' %s', util.mode_label())
-    end,
-    color = function() return { bg = colors.mode_color(), fg = palette.bg } end,
-    padding = { right = 1 },
-  }
-
-  ins_left {
-    function()
-      return string.format(' %s |', util.mode_alias())
-    end,
-    color = function() return { fg = colors.mode_color() } end,
-    padding = { right = 1 },
-  }
-
-  ins_left {
-    -- filesize component
-    'filesize',
-    cond = conditions.buffer_not_empty,
-  }
-
-  ins_left {
-    'filename',
-    cond = conditions.buffer_not_empty,
-    color = { fg = palette.magenta, gui = 'bold' },
-  }
-
-  ins_left {
-    'diff',
-    -- Is it me or the symbol for modified us really weird
-    symbols = { added = ' ', modified = '柳 ', removed = ' ' },
-    diff_color = {
-      added = { fg = palette.green },
-      modified = { fg = palette.orange },
-      removed = { fg = palette.red },
-    },
-    cond = conditions.hide_in_width,
-  }
-
-  -- Insert mid section. You can make any number of sections in neovim :)
-  -- for lualine it's any number greater then 2
-  ins_left {
-    function()
-      return '%='
-    end,
-  }
-
-  ins_left {
-    -- Lsp server name .
-    function()
-      local msg = 'No Active Lsp'
-      local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-      local clients = vim.lsp.get_active_clients()
-      if next(clients) == nil then
-        return msg
-      end
-      for _, client in ipairs(clients) do
-        local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-          return client.name
-        end
-      end
-      return msg
-    end,
-    icon = ' LSP:',
-    color = { fg = '#ffffff', gui = 'bold' },
-  }
-
-  ins_left {
-    'diagnostics',
-    sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
-    diagnostics_color = {
-      color_error = { fg = palette.red },
-      color_warn = { fg = palette.yellow },
-      color_info = { fg = palette.cyan },
-    },
-  }
-
-
   -- Add components to right sections
-
-  ins_right { 'location' }
-  ins_right { 'progress', color = { fg = palette.fg, gui = 'bold' } }
-
-  ins_right {
-    'o:encoding', -- option component same as &encoding in viml
-    fmt = string.upper, -- I'm not sure why it's upper case either ;)
-    cond = conditions.hide_in_width,
-    color = { fg = palette.green, gui = 'bold' },
-  }
-
-  ins_right {
-    'fileformat',
-    fmt = string.upper,
-    icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = palette.green, gui = 'bold' },
-  }
-
-  ins_right {
-    'branch',
-    icon = '',
-    color = { fg = palette.magenta, gui = 'bold' },
-  }
-
-  ins_right {
-    function()
-      return '▊'
-    end,
-    color = function() return { fg = colors.mode_color() } end,
-    padding = { left = 1 },
-  }
 
   require('lualine').setup(config)
 end
