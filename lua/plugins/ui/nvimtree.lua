@@ -80,7 +80,7 @@ function M.configure()
     filters = {
       dotfiles = true,
       custom = {
-        "target", "node_modules", "build", "bin", "obj",
+        "target/", "node_modules/", "build/", "bin/", "obj/",
       },
     },
 
