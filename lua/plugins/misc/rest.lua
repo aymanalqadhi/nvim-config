@@ -8,6 +8,7 @@ M.dependencies = { "nvim-lua/plenary.nvim" }
 
 -- plugin options
 M.lazy = true
+M.filetypes = 'http'
 
 -- plugin configuration
 function M.configure()
