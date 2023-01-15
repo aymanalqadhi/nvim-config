@@ -40,7 +40,7 @@ function M.configure()
     hl = { fg = colors.fg, bg = colors.darkblue, style = "bold" },
     icon = { str = ' ', hl = { fg = colors.primary_blue } },
     left_sep = "left_rounded",
-    right_sep = "right_rounded",
+    right_sep = " ",
   }
 
   -- git diff (add)
@@ -106,7 +106,7 @@ function M.configure()
   C.lsp_client_names = {
     provider = "lsp_client_names",
     hl = { bg = colors.bg_highlight, style = 'bold' },
-    icon = { str = ' ', hl = { fg = colors.yellow } },
+    icon = { str = ' ', hl = { fg = colors.yellow } },
     left_sep = "left_rounded",
     right_sep = " ",
   }
