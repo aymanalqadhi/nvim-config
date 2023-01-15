@@ -198,7 +198,7 @@ function M.configure()
           C.diagnostic_warnings,
           C.diagnostic_hints,
           C.diagnostic_info,
-          { hl = { gui = 'NONE' } }
+          { hl = { bg = colors.bg } }
         },
 
         -- right
@@ -209,6 +209,19 @@ function M.configure()
           C.file_format
         }
       },
+      inactive = {
+        -- left
+        {
+          C.file_info,
+          C.git_add,
+          C.git_delete,
+          C.git_change,
+        },
+        -- right
+        {
+          C.scroll_bar,
+        }
+      }
     },
     theme = colors,
     vi_mode_colors = colors.mode_colors,
