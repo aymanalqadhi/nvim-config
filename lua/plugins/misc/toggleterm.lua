@@ -38,6 +38,7 @@ end
 -- plugin keymaps
 function M.set_keymaps(k)
   local term = require('toggleterm.terminal');
+  local floating = term.Terminal:new { direction = 'float' }
 
   -- normal mode keys
   k.register({
@@ -62,7 +63,7 @@ function M.set_keymaps(k)
   k.register({
     ['<C-t>'] = {
       function()
-        term.Terminal:new { direction = 'float' }:toggle()
+        floating:toggle()
       end,
       'Floating Terminal',
     },
