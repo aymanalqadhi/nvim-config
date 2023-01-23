@@ -3,6 +3,10 @@ local M = {}
 -- plugin uri
 M.uri = 'lukas-reineke/indent-blankline.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'ColorScheme'
+
 -- plugin configuration function
 function M.configure()
   vim.opt.list = true

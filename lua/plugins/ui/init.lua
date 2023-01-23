@@ -1,4 +1,5 @@
 return {
+  'tokyonight',      -- colorscheme
   'alpha',           -- startup page
   'bufferline',      -- bar
   'illuminate',      -- highlight current word
@@ -6,7 +7,6 @@ return {
   'feline',         -- status line
   'noice',           -- ui addons
   'nvimtree',        -- file tree
-  'tokyonight',      -- colorscheme
   'twilight',        -- focus mode
   'ufo',             -- folding
   'tint',            -- inactive dim

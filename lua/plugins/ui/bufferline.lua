@@ -6,6 +6,10 @@ M.uri = 'akinsho/bufferline.nvim'
 -- plugin dependencies
 M.dependencies = { 'nvim-tree/nvim-web-devicons' }
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'ColorScheme'
+
 -- plugin configuration function
 function M.configure()
   require('bufferline').setup {
