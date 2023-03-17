@@ -41,7 +41,6 @@ vim.o.smartindent = true
 vim.o.incsearch = true
 
 --- appearance config ---
-vim.opt.guifont = { 'JetBrains Mono', ':h8' }
 vim.o.syntax = 'on'
 vim.o.termguicolors = true
 vim.o.background = 'dark'
