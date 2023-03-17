@@ -13,16 +13,16 @@ function M.configure()
     styles = {
       comments = { italic = true },
       keywords = { italic = true },
-      functions = {},
+      functions = { italic = true },
       variables = {},
       sidebars = 'dark',
       floats = 'normal',
     },
-    sidebars = { "qf", "vista_kind", "terminal", "packer" },
+    sidebars = { "qf", "help", "vista_kind", "terminal", "packer" },
     day_brightness = 0.3,
     hide_inactive_statusline = true,
     dim_inactive = false,
-    lualine_bold = true,
+    lualine_bold = false,
   })
 
   vim.cmd [[ colorscheme tokyonight ]]
