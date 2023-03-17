@@ -5,7 +5,6 @@ return {
   'lspzero',                   -- lsp configuration
   'masonlspconfig',            -- software installation helper
   'navic',                     -- context winbax
-  'nullls',                    -- virtual lsp server
   'lspcolors',                 -- better lsp colors
   'customdiagnostichighlight', -- highlight unused items
 }
