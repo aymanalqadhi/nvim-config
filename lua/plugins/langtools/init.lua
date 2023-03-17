@@ -1,5 +1,4 @@
 return {
   'flutter',
-  'nvim',
   'rust',
 }
