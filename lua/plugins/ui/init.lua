@@ -1,6 +1,7 @@
 return {
   'tokyonight',      -- colorscheme
   'alpha',           -- startup page
+  'statuscol',       -- status column
   'bufferline',      -- bar
   'illuminate',      -- highlight current word
   'indentblankline', -- indentation markers
