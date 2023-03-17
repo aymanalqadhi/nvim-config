@@ -1,8 +1,9 @@
 local M = {}
 
 -- plugin uri
-M.uri = 'feline-nvim/feline.nvim'
+M.uri = 'freddiehaddad/feline.nvim'
 
+-- plugin dependencies
 M.dependencies = 'lewis6991/gitsigns.nvim'
 
 -- plugin configuration function
