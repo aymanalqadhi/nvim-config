@@ -26,31 +26,38 @@ function M.configure()
         enable = true,
         lookahead = true,
         keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
           ['af'] = { query = '@function.outer', 'A Function' },
           ['if'] = { query = '@function.inner', 'In Function' },
           ['ac'] = { query = '@class.outer', 'A Class' },
           ['ic'] = { query = '@class.in', 'In Class' },
         },
+        selection_modes = {
+          ['@parameter.outer'] = 'v',
+          ['@function.outer'] = 'V',
+          ['@class.outer'] = '<c-v>',
+        },
+        include_surrounding_whitespace = true,
       },
       move = {
         enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
+        set_jumps = true,
         goto_next_start = {
-          [']m'] = { query = '@function.outer', 'Next Function Start' },
-          [']]'] = { query = '@class.outer', 'Next Class Start' },
+          ["]m"] = "@function.outer",
+          ["]]"] = { query = "@class.outer", desc = "Next class start" },
+          ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+          ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
         },
         goto_next_end = {
-          [']M'] = { query = '@function.outer', 'Next Function End' },
-          [']['] = { query = '@class.outer', 'Next Class End' },
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
         },
         goto_previous_start = {
-          ['[m'] = { query = '@function.outer', 'Previous Function Start' },
-          ['[['] = { query = '@class.outer', 'Previous Class Start' },
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
         },
         goto_previous_end = {
-          ['[M'] = { query = '@function.outer', 'Previous Function End' },
-          ['[]'] = { query = '@class.outer', 'Previous Class End' },
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
         },
       },
     },
