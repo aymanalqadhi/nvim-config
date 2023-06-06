@@ -4,6 +4,5 @@ return {
   'lspconfig',                 -- lsp configuration
   'lspzero',                   -- lsp configuration
   'masonlspconfig',            -- software installation helper
-  'lspcolors',                 -- better lsp colors
   'customdiagnostichighlight', -- highlight unused items
 }
