@@ -49,7 +49,6 @@ function M.configure()
       format = lspkind.cmp_format({
         mode = 'symbol_text',
         maxwidth = 80,
-        symbol_map = { Codeium = "" },
       })
     },
     snippet = {
@@ -91,7 +90,6 @@ function M.configure()
     },
     sources = cmp.config.sources {
       { name = 'nvim_lsp' },
-      { name = 'codeium' },
       { name = 'nvim_lua' },
       { name = 'luasnip' },
       { name = 'tmux' },
