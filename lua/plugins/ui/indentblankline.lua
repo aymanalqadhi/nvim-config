@@ -19,6 +19,7 @@ function M.configure()
     show_current_context = true,
     show_trailing_blankline_indent = true,
     use_treesitter = true,
+    filetype_exclude = { 'dashboard' },
   }
 
 end
