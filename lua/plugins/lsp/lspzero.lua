@@ -36,14 +36,6 @@ function M.configure()
     cmd = { 'clangd', '--background-index', '--clang-tidy' }
   })
 
-  -- setup custom attach callback
-
-  lsp.on_attach(function(client, bufnr)
-    if client.server_capabilities.documentSymbolProvider then
-        require('nvim-navic').attach(client, bufnr)
-    end
-  end)
-
   -- setup plugin
   lsp.nvim_workspace()
   lsp.setup()

@@ -5,7 +5,8 @@ M.uri = 'nvim-treesitter/nvim-treesitter'
 
 -- plugin dependencies
 M.dependencies = {
-  'nvim-treesitter/nvim-treesitter-textobjects'
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  'nvim-treesitter/nvim-treesitter-context',
 }
 
 -- plugin configuration function
@@ -63,6 +64,15 @@ function M.configure()
     },
   }
 
+  require 'treesitter-context'.setup {}
+end
+
+-- plugin keymaps
+function M.set_keymaps(k)
+  -- normal mode keys
+  k.register({
+    ['[x'] = { require("treesitter-context").go_to_context, 'Upper Context' }
+  })
 end
 
 return M
