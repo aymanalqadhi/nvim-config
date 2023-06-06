@@ -1,6 +1,6 @@
 return {
   'tokyonight',      -- colorscheme
-  'alpha',           -- startup page
+  'dashboard',       -- startup page
   'statuscol',       -- status column
   'bufferline',      -- bar
   'illuminate',      -- highlight current word
