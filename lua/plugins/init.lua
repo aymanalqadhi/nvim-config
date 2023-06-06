@@ -29,6 +29,7 @@ local function merge_plugins(mods)
         lazy = plugin.lazy,
         keys = plugin.load_on_keys,
         event = plugin.load_on_event,
+        cmd = plugin.load_on_cmd,
         ft = plugin.filetypes,
       })
     end
