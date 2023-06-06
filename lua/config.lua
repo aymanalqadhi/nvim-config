@@ -55,6 +55,7 @@ vim.o.signcolumn = 'yes'
 vim.o.winblend = 15
 vim.o.pumblend = 15
 vim.o.lazyredraw = false
+vim.o.cmdheight = 0
 
 --- per-filetype config
 -- *.lua
