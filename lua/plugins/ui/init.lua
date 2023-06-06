@@ -8,8 +8,6 @@ return {
   'feline',         -- status line
   'noice',           -- ui addons
   'nvimtree',        -- file tree
-  'twilight',        -- focus mode
   'ufo',             -- folding
   'tint',            -- inactive dim
-  'barbecue',        -- navic ui
 }
