@@ -4,7 +4,10 @@ local M = {}
 M.uri = 'akinsho/bufferline.nvim'
 
 -- plugin dependencies
-M.dependencies = { 'nvim-tree/nvim-web-devicons' }
+M.dependencies = {
+  'nvim-tree/nvim-web-devicons',
+  'famiu/bufdelete.nvim'
+}
 
 -- plugin options
 M.lazy = true
@@ -59,8 +62,8 @@ function M.set_keymaps(k)
     ["<A-,>"] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<A-<>"] = { "<cmd>BufferLineMoveNext<cr>", "Move Forward" },
     ["<A->>"] = { "<cmd>BufferLineMovePrev<cr>", "Move Back" },
+    ["<A-c>"] = { function() require('bufdelete').bufdelete(0) end, "Close a Buffer" },
   })
-
 end
 
 return M

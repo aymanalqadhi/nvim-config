@@ -5,5 +5,4 @@ return {
   'todocomments', -- marker comments highlighting
   'toggleterm',   -- terminal utils
   'trouble',      -- diagnostics list
-  'bufdelete',    -- delete buffer
 }
