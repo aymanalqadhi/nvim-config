@@ -68,7 +68,7 @@ function M.set_keymaps(k)
     },
     K = {
       function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        local winid = ufo.peekFoldedLinesUnderCursor()
         if not winid then
           vim.lsp.buf.hover()
         end
