@@ -1,7 +1,7 @@
 return {
-  'autopairs',   -- auto token matching
-  'comment',     -- comments helper
-  'leap',        -- motion
-  'luasnip',     -- snippets
-  'surround',    -- text-objects surround
+  'autopairs', -- auto token matching
+  'comment',   -- comments helper
+  'leap',      -- motion
+  'luasnip',   -- snippets
+  'surround',  -- text-objects surround
 }

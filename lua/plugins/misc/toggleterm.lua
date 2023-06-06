@@ -32,7 +32,6 @@ function M.configure()
       end
     },
   }
-
 end
 
 -- plugin keymaps
@@ -77,7 +76,6 @@ function M.set_keymaps(k)
     ['<C-k>'] = { '<cmd>wincmd h<cr>', 'Jump Down' },
     ['<C-l>'] = { '<cmd>wincmd h<cr>', 'Jump Right' },
   }, { mode = 't' })
-
 end
 
 return M

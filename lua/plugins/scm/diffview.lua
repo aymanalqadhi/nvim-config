@@ -20,7 +20,6 @@ function M.set_keymaps(k)
       H = { '<cmd>DiffviewFileHistory<cr>', 'Current File History' },
     }
   }, { prefix = '<space>' })
-
 end
 
 return M

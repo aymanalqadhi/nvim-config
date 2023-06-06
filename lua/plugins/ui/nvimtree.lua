@@ -118,7 +118,6 @@ function M.configure()
   web_devicons.setup({
     override = material_icon.get_icons(),
   })
-
 end
 
 -- plugin keymaps
@@ -127,7 +126,6 @@ function M.set_keymaps(k)
   k.register({
     ['<A-t>'] = { '<cmd>NvimTreeToggle<cr>', 'Toggle Tree' },
   })
-
 end
 
 return M

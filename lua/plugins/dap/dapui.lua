@@ -29,7 +29,6 @@ end
 
 -- plugin keymaps
 function M.set_keymaps(k)
-
   -- normal mode keys
   k.register({
     du = {
@@ -38,7 +37,6 @@ function M.set_keymaps(k)
       e = { require('dapui').eval, 'Evaluate' },
     }
   }, { prefix = '<space>' })
-
 end
 
 return M

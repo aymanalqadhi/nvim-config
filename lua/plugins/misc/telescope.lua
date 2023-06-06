@@ -13,7 +13,6 @@ M.dependencies = {
 
 -- plugin configuration function
 function M.configure()
-
   require('telescope').setup {
     defaults = {
       prompt_prefix = '  ',
@@ -34,7 +33,6 @@ function M.configure()
   -- extensions loading
   require('telescope').load_extension('ui-select')
   require('telescope').load_extension('file_browser')
-
 end
 
 -- plugin keymaps
@@ -69,7 +67,6 @@ function M.set_keymaps(k)
       n = { '<cmd>Telescope notify<cr>', 'Notifications' },
     },
   }, { prefix = '<space>' })
-
 end
 
 return M

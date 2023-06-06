@@ -64,7 +64,6 @@ function M.configure()
 
   -- repl
   vim.cmd [[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
-
 end
 
 -- plugin keymaps
@@ -90,7 +89,6 @@ function M.set_keymaps(k)
       r = { dap.repl.toggle, 'Toggle REPL' },
     }
   }, { prefix = '<space>' })
-
 end
 
 return M

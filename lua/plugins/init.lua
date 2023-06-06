@@ -17,7 +17,7 @@ local function merge_plugins(mods)
         plugin.uri,
         dependencies = plugin.dependencies,
         config =
-          plugin.set_keymaps and
+            plugin.set_keymaps and
             function()
               if plugin.configure ~= nil then
                 plugin.configure()
@@ -25,7 +25,7 @@ local function merge_plugins(mods)
 
               plugin.set_keymaps(require('which-key'))
             end
-          or plugin.configure,
+            or plugin.configure,
         lazy = plugin.lazy,
         keys = plugin.load_on_keys,
         event = plugin.load_on_event,

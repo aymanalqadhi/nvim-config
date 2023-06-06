@@ -53,7 +53,6 @@ function M.set_keymaps(k)
   k.register({
     ['<C-k>'] = { mode = 'i', vim.lsp.buf.signature_help, 'Signature Help' },
   }, { mode = 'i' })
-
 end
 
 return M

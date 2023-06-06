@@ -17,7 +17,6 @@ function M.configure()
     auto_close = true,
     use_diagnostic_signs = true,
   }
-
 end
 
 -- plugin keymaps
@@ -38,8 +37,7 @@ function M.set_keymaps(k)
     [']t'] = { function() trouble.next(opts) end, 'Next Diagnostic' },
     ['[t'] = { function() trouble.previous(opts) end, 'Previous Diagnostic' },
     gtr = { '<cmd>TroubleToggle lsp_references<cr>', 'Lsp References' }
-  }, { skip_groups = true, jump = true})
-
+  }, { skip_groups = true, jump = true })
 end
 
 return M

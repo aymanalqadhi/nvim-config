@@ -8,7 +8,6 @@ M.lazy = true
 
 -- plugin configuration function
 function M.configure()
-
   require('which-key').setup {
     plugins = {
       spelling = {
@@ -37,7 +36,6 @@ function M.configure()
     ignore_missing = true,
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   }
-
 end
 
 return M

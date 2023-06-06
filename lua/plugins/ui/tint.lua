@@ -15,8 +15,8 @@ function M.configure()
       local bufid = vim.api.nvim_win_get_buf(winid)
 
       return string.find(vim.api.nvim_buf_get_name(bufid), 'NvimTree') or
-             vim.api.nvim_buf_get_option(bufid, 'buftype') == 'terminal' or
-             vim.api.nvim_win_get_config(winid).relative ~= ''
+          vim.api.nvim_buf_get_option(bufid, 'buftype') == 'terminal' or
+          vim.api.nvim_win_get_config(winid).relative ~= ''
     end
   })
 end

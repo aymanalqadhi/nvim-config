@@ -30,7 +30,6 @@ function M.set_keymaps(k)
     },
     gP = { gp.close_all_win, 'Close Go-To Windows' },
   })
-
 end
 
 return M

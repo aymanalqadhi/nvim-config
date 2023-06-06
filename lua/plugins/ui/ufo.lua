@@ -51,7 +51,6 @@ function M.configure()
   }
 
   ufo.setFoldVirtTextHandler(vim.api.nvim_get_current_buf(), handler)
-
 end
 
 -- pluginin keymaps
@@ -77,7 +76,6 @@ function M.set_keymaps(k)
       'Hover'
     }
   })
-
 end
 
 return M

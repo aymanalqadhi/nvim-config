@@ -29,9 +29,8 @@ function M.configure()
   require('mason-null-ls').setup { automatic_setup = true, }
   require('null-ls').setup {}
   require('mason-null-ls').setup {
-      automatic_setup = true,
+    automatic_setup = true,
   }
-
 end
 
 return M

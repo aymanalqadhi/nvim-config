@@ -89,7 +89,6 @@ function M.set_keymaps(k)
       m = { rt.parent_module.parent_module, 'Parent Module' },
     }
   }, { prefix = '<space>' })
-
 end
 
 return M

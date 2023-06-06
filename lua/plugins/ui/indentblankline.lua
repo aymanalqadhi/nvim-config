@@ -21,7 +21,6 @@ function M.configure()
     use_treesitter = true,
     filetype_exclude = { 'dashboard' },
   }
-
 end
 
 return M
