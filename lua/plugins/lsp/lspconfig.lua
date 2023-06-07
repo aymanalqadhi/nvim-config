@@ -3,8 +3,77 @@ local M = {}
 -- plugin uri
 M.uri = 'neovim/nvim-lspconfig'
 
+-- plugin dependencies
+M.dependencies = {
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'hrsh7th/cmp-nvim-lsp',
+}
+
 -- plugin options
 M.lazy = true
+
+-- plugin configuration function
+function M.configure()
+  -- sign icons
+  local sign = function(opts)
+    vim.fn.sign_define(opts.name, {
+      texthl = opts.name,
+      text = opts.text,
+      numhl = ''
+    })
+  end
+
+  sign({ name = 'DiagnosticSignError', text = '' })
+  sign({ name = 'DiagnosticSignWarn', text = '' })
+  sign({ name = 'DiagnosticSignHint', text = '' })
+  sign({ name = 'DiagnosticSignInfo', text = '' })
+
+  -- diagnostics
+  vim.diagnostic.config({
+    virtual_text = { prefix = '●' },
+    severity_sort = true,
+    float = {
+      source = 'always',
+      border = 'rounded',
+    },
+  })
+
+  vim.cmd [[
+    autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
+  ]]
+
+  -- setup lsp servers
+  local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local lspconfig = require('lspconfig')
+
+  require('mason-lspconfig').setup_handlers({
+    function(server_name)
+      lspconfig[server_name].setup({
+        on_attach = function() end,
+        capabilities = lsp_capabilities,
+      })
+    end,
+  })
+
+  -- custom servers setup
+  lspconfig.lua_ls.setup {
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          globals = { 'vim', 'require' },
+        },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        telemetry = { enable = false },
+      },
+    },
+  }
+end
 
 -- plugin keymaps
 function M.set_keymaps(k)
