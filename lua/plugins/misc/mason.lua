@@ -4,6 +4,7 @@ local M = {}
 M.uri = 'williamboman/mason.nvim'
 --
 -- plugin dependencies
+M.dependencies = 'nvim-telescope/telescope.nvim'
 
 -- plugin options
 M.lazy = true
