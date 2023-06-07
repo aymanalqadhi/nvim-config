@@ -16,6 +16,13 @@ function M.configure()
     auto_open = false,
     auto_close = true,
     use_diagnostic_signs = true,
+    signs = {
+      error = '',
+      warning = '',
+      hint = '',
+      information = '',
+      other = '',
+    },
   }
 end
 

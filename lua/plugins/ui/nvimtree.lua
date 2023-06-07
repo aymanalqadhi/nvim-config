@@ -70,9 +70,9 @@ function M.configure()
       enable = true,
       show_on_dirs = true,
       icons = {
-        error = '',
-        warning = '',
-        hint = '',
+        error = '',
+        warning = '',
+        hint = '',
         info = '',
       },
     },
