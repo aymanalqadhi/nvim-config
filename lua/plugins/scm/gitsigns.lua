@@ -3,9 +3,17 @@ local M = {}
 -- plugin uri
 M.uri = 'lewis6991/gitsigns.nvim'
 
+-- plugin options
+M.lazy = true
+M.load_on_event = 'BufRead'
+
 -- plugin configuration function
 function M.configure()
-  require('gitsigns').setup { signs = { untracked = { text = '¦' } } }
+  require('gitsigns').setup {
+    signs = {
+      untracked = { text = '¦' }
+    }
+  }
 end
 
 -- plugin keymaps

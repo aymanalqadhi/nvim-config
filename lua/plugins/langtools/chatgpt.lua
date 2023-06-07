@@ -14,7 +14,11 @@ M.lazy = true
 M.load_on_cmd = 'ChatGPT'
 
 -- plugin configuration function
-function M.configure() require("chatgpt").setup { keymaps = { submit = "<C-s>" } } end
+function M.configure()
+  require("chatgpt").setup {
+    keymaps = { submit = "<C-s>" }
+  }
+end
 
 -- plugin keymaps
 function M.set_keymaps(k)
