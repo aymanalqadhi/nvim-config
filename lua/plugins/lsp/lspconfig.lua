@@ -39,8 +39,22 @@ function M.configure()
     },
   })
 
+  _G.LspDiagnosticsPopupHandler = function()
+    local current_cursor = vim.api.nvim_win_get_cursor(0)
+    local last_popup_cursor = vim.w.lsp_diagnostics_last_cursor or { nil, nil }
+
+    if not (current_cursor[1] == last_popup_cursor[1] and
+            current_cursor[2] == last_popup_cursor[2]) then
+      vim.w.lsp_diagnostics_last_cursor = current_cursor
+      vim.diagnostic.open_float(0, { scope = "cursor" })
+    end
+  end
+
   vim.cmd [[
-    autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
+    augroup LSPDiagnosticsOnHover
+      autocmd!
+      autocmd CursorHold *   lua _G.LspDiagnosticsPopupHandler()
+    augroup END
   ]]
 
   -- setup lsp servers
