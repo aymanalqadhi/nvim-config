@@ -3,9 +3,6 @@ local M = {}
 -- plugin uri
 M.uri = 'freddiehaddad/feline.nvim'
 
--- plugin dependencies
-M.dependencies = 'lewis6991/gitsigns.nvim'
-
 -- plugin configuration function
 function M.configure()
   local util = require('common.util')
@@ -71,7 +68,7 @@ function M.configure()
   C.diagnostic_errors = {
     provider = "diagnostic_errors",
     hl = { fg = colors.bg, bg = colors.red },
-    icon = { str = ' ' },
+    icon = { str = ' ' },
     left_sep = "left_rounded",
     right_sep = " ",
   }
@@ -80,7 +77,7 @@ function M.configure()
   C.diagnostic_warnings = {
     provider = "diagnostic_warnings",
     hl = { fg = colors.bg, bg = colors.orange },
-    icon = { str = ' ' },
+    icon = { str = ' ' },
     left_sep = "left_rounded",
     right_sep = " ",
   }
@@ -89,7 +86,7 @@ function M.configure()
   C.diagnostic_hints = {
     provider = "diagnostic_hints",
     hl = { fg = colors.bg, bg = colors.blue },
-    icon = { str = ' ' },
+    icon = { str = ' ' },
     left_sep = "left_rounded",
     right_sep = " ",
   }
