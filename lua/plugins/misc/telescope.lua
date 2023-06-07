@@ -11,6 +11,11 @@ M.dependencies = {
   'rcarriga/nvim-notify',
 }
 
+-- plugin options
+M.lazy = true
+M.load_on_cmd = 'Telescope'
+M.load_on_keys = '<space>f'
+
 -- plugin configuration function
 function M.configure()
   require('telescope').setup {

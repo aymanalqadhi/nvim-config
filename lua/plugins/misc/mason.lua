@@ -11,6 +11,7 @@ M.dependencies = {
 
 -- plugin options
 M.lazy = true
+M.load_on_cmd = 'Mason'
 
 -- plugin configuration
 function M.configure()

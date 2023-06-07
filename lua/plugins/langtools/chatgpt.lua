@@ -9,6 +9,10 @@ M.dependencies = {
   'nvim-telescope/telescope.nvim'
 }
 
+-- plugin
+M.lazy = true
+M.load_on_cmd = 'ChatGPT'
+
 -- plugin configuration function
 function M.configure() require("chatgpt").setup { keymaps = { submit = "<C-s>" } } end
 
