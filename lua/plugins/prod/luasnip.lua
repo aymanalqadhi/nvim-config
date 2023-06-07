@@ -8,10 +8,7 @@ M.lazy = true
 M.load_on_event = 'LspAttach'
 
 -- plugin dependencies
-M.dependencies = {
-  'saadparwaiz1/cmp_luasnip',
-  'rafamadriz/friendly-snippets',
-}
+M.dependencies = 'rafamadriz/friendly-snippets'
 
 -- plugin configuration function
 function M.configure()
