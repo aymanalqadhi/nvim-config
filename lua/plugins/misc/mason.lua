@@ -2,12 +2,8 @@ local M = {}
 
 -- plugin uri
 M.uri = 'williamboman/mason.nvim'
-
+--
 -- plugin dependencies
-M.dependencies = {
-  'jose-elias-alvarez/null-ls.nvim',
-  'jay-babu/mason-null-ls.nvim',
-}
 
 -- plugin options
 M.lazy = true
@@ -25,13 +21,6 @@ function M.configure()
       },
     },
   })
-
-  -- null-ls integration
-  require('mason-null-ls').setup { automatic_setup = true, }
-  require('null-ls').setup {}
-  require('mason-null-ls').setup {
-    automatic_setup = true,
-  }
 end
 
 return M
