@@ -12,6 +12,7 @@ M.dependencies = {
 
 -- plugin options
 M.lazy = true
+M.load_on_event = 'BufRead'
 
 -- plugin configuration function
 function M.configure()
