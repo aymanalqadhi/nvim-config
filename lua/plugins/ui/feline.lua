@@ -16,7 +16,7 @@ function M.configure()
     provider = util.mode_label,
     hl = function()
       return {
-        fg = "bg",
+        fg = colors.bg,
         bg = colors.mode_color(),
         style = "bold",
       }
@@ -26,7 +26,7 @@ function M.configure()
   -- file info
   C.file_info = {
     provider = 'file_info',
-    hl = { bg = colors.bg_highlight },
+    hl = { bg = colors.bg_highlight, },
     file_readonly_icon = '',
     left_sep = "block",
     right_sep = " ",
@@ -117,7 +117,7 @@ function M.configure()
       return ' ' .. hostname .. ' '
     end,
     hl = function()
-      return { fg = "bg", bg = colors.mode_color(), style = 'bold' }
+      return { fg = colors.bg, bg = colors.mode_color(), style = 'bold' }
     end,
   }
 
@@ -167,9 +167,7 @@ function M.configure()
   -- file size
   C.file_size = {
     provider = 'file_size',
-    hl = { bg = colors.bg, fg = colors.green },
-    left_sep = "block",
-    right_sep = "block",
+    hl = { bg = colors.none, fg = colors.green },
   }
 
   require('feline').setup {
@@ -192,7 +190,7 @@ function M.configure()
           C.diagnostic_warnings,
           C.diagnostic_hints,
           C.diagnostic_info,
-          { hl = { bg = colors.bg } }
+          { hl = { bg = colors.none } }
         },
 
         -- right
@@ -217,7 +215,10 @@ function M.configure()
         }
       }
     },
-    theme = colors,
+    theme = {
+      bg = colors.none,
+      fg = colors.fg
+    },
     vi_mode_colors = colors.mode_colors,
   }
 end
