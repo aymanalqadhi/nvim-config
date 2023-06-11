@@ -20,11 +20,6 @@ function M.configure()
       width = math.ceil(vim.api.nvim_win_get_width(0) * .8),
       height = math.ceil(vim.api.nvim_win_get_height(0) * .8)
     },
-    highlights = {
-      FloatBorder = {
-        guifg = '#27a1b9',
-      },
-    },
     winbar = {
       enabled = false,
       name_formatter = function(t)
