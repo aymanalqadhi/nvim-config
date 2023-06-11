@@ -3,7 +3,7 @@ return {
   'nordic',          -- colorscheme
   'dashboard',       -- startup page
   'statuscol',       -- status column
-  'bufferline',      -- bar
+  'barbar',          -- bar
   'illuminate',      -- highlight current word
   'indentblankline', -- indentation markers
   'feline',          -- status line
