@@ -9,8 +9,8 @@ if use_theme == 'nordic' then
 
   -- background
   M.bg = colors.black
-  M.bg_dark = colors.gray2
-  M.bg_highlight = colors.gray4
+  M.bg_dark = colors.gray0
+  M.bg_highlight = colors.gray2
 
   -- foreground
   M.fg = colors.white2
@@ -19,8 +19,8 @@ if use_theme == 'nordic' then
   -- base colors
   M.red = colors.red.base
   M.green = colors.green.base
-  M.blue = colors.blue2
-  M.darkblue = colors.blue.dim
+  M.blue = colors.blue0
+  M.darkblue = colors.gray2
   M.primary_blue = colors.blue.bright
 
   -- extra colors
@@ -53,7 +53,7 @@ end
 
 -- mode colors
 M.mode_colors = {
-  NORMAL = M.blue,
+  NORMAL = M.primary_blue,
   OP = M.darkblue,
   INSERT = M.yellow,
   VISUAL = M.magenta,
