@@ -30,6 +30,14 @@ function M.configure()
     noice = { style = 'classic' },
     telescope = { style = 'classic' },
     leap = { dim_backdrop = true },
+
+    -- overrides
+    override = {
+      DiagnosticUnderlineError = { undercurl = true },
+      DiagnosticUnderlineWarn = { undercurl = true },
+      DiagnosticUnderlineInfo = { underdashed = true },
+      DiagnosticUnderlineHint = { underdotted = true },
+    }
   }
 
   vim.cmd [[ colorscheme nordic ]]
