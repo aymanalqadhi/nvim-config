@@ -41,8 +41,17 @@ function M.configure()
       indent_width = 2,
 
       indent_markers = {
-        enable = false,
+        enable = true,
+        inline_arrows = true,
+        icons = {
+          corner = "╰",
+          edge = "│",
+          item = "│",
+          bottom = "─",
+          none = " ",
+        },
       },
+
       icons = {
         webdev_colors = true,
         git_placement = "after",
