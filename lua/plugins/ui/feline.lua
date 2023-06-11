@@ -110,18 +110,14 @@ function M.configure()
   }
 
   -- file format by platform
-  C.file_format = {
+  C.hostname = {
     provider = function()
-      if vim.bo.fileformat == 'unix' then
-        return '  '
-      elseif vim.bo.fileformat == 'mac' then
-        return '  '
-      else
-        return '  '
-      end
+      local hostname = vim.loop.os_gethostname()
+
+      return ' ' .. hostname .. ' '
     end,
     hl = function()
-      return { fg = "bg", bg = colors.mode_color() }
+      return { fg = "bg", bg = colors.mode_color(), style = 'bold' }
     end,
   }
 
@@ -204,7 +200,7 @@ function M.configure()
           C.file_size,
           C.file_encoding,
           C.scroll_bar,
-          C.file_format
+          C.hostname
         }
       },
       inactive = {
