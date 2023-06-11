@@ -41,7 +41,7 @@ function M.configure()
     local last_popup_cursor = vim.w.lsp_diagnostics_last_cursor or { nil, nil }
 
     if not (current_cursor[1] == last_popup_cursor[1] and
-            current_cursor[2] == last_popup_cursor[2]) then
+          current_cursor[2] == last_popup_cursor[2]) then
       vim.w.lsp_diagnostics_last_cursor = current_cursor
       vim.diagnostic.open_float(0, { scope = 'cursor', focus = false })
     end
@@ -61,7 +61,11 @@ function M.configure()
   require('mason-lspconfig').setup_handlers({
     function(server_name)
       lspconfig[server_name].setup({
-        on_attach = function() end,
+        on_attach = function(_, buf)
+          vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+          vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
+          vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
+        end,
         capabilities = lsp_capabilities,
       })
     end,
