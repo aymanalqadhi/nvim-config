@@ -12,6 +12,7 @@ M.dependencies = {
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-cmdline',
+  'zbirenbaum/copilot-cmp',
   'L3MON4D3/LuaSnip',
   'windwp/nvim-autopairs',
 }
@@ -118,10 +119,14 @@ function M.configure()
       ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
     },
     sources = cmp.config.sources {
-      { name = 'nvim_lsp' },
-      { name = 'nvim_lua' },
-      { name = 'luasnip' },
+      { name = 'copilot',  group_index = 2 },
+      { name = 'nvim_lsp', group_index = 2 },
+      { name = 'path',     group_index = 2 },
+      { name = 'luasnip',  group_index = 2 },
     },
+    experimental = {
+      ghost_text = true,
+    }
   })
 
   cmp.setup.cmdline(':', {
