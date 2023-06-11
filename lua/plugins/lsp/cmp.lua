@@ -33,38 +33,39 @@ function M.configure()
   end
 
   local cmp_kinds = {
-    Text = '',
+    Text = '󰀬',
     Method = '',
-    Function = '',
-    Constructor = '',
+    Function = '󰊕',
+    Constructor = '󰈏',
     Field = '',
-    Variable = '',
+    Variable = '󰝄',
     Class = '',
     Interface = '',
     Module = '',
     Property = '',
-    Unit = '',
-    Value = '',
+    Unit = '',
+    Value = '',
     Enum = '',
-    Keyword = '',
-    Snippet = '',
+    Keyword = '',
+    Snippet = '',
     Color = '',
-    File = '󰈙',
-    Reference = '',
+    File = '',
+    Reference = '',
     Folder = '',
-    EnumMember = '',
+    EnumMember = '󰉺',
     Constant = '󰏿',
     Struct = '',
     Event = '',
-    Operator = '󰆕',
-    TypeParameter = '',
-    Copilot = '',
+    Operator = '',
+    TypeParameter = '',
+    Copilot = '',
+    Default = ''
   }
 
   cmp.setup({
     window = {
       completion = cmp.config.window.bordered({
-        winhighlight = 'FloatBorder:LspInfoBorder',
+        --winhighlight = 'FloatBorder:LspInfoBorder',
       }),
       documentation = cmp.config.window.bordered(),
     },
@@ -76,7 +77,8 @@ function M.configure()
       },
       format = function(_, vim_item)
         vim_item.menu = '     · ' .. (vim_item.kind or '')
-        vim_item.kind = (cmp_kinds[vim_item.kind] or vim_item.kind) .. ' '
+        vim_item.kind = (cmp_kinds[vim_item.kind] or vim_item.kind) .. ' '
+        --vim_item.kind = (cmp_kinds[vim_item.kind] or vim_item.kind) .. ' '
 
         return vim_item
       end,
