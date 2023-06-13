@@ -5,7 +5,9 @@ M.uri = 'AlexvZyl/nordic.nvim'
 
 -- plugin configuration function
 function M.configure()
-  require 'nordic'.setup {
+  local colors = require('nordic.colors')
+
+  require('nordic').setup {
     -- available: 'nordic', 'onedark'.
     theme = 'nordic',
 
@@ -33,10 +35,18 @@ function M.configure()
 
     -- overrides
     override = {
+      -- dianostic highlights
       DiagnosticUnderlineError = { undercurl = true },
       DiagnosticUnderlineWarn = { undercurl = true },
       DiagnosticUnderlineInfo = { underdashed = true },
       DiagnosticUnderlineHint = { underdotted = true },
+
+      -- illuminate highlights
+      illuminatedWord = { bg = colors.gray1 },
+      illuminatedCurWord = { underline = true, bg = colors.gray1 },
+      illuminatedWordText = { underline = true, bg = colors.gray1 },
+      illuminatedWordRead = { bg = colors.gray2 },
+      illuminatedWordWrite = { bg = colors.gray2 },
     }
   }
 
