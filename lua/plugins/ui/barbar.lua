@@ -114,8 +114,8 @@ function M.set_keymaps(k)
     ["<A-9>"] = { "<cmd>BufferGoto 9<cr>", "Go-To Buffer #9" },
 
     -- buffer managment
-    ["<A-p>"] = { "<cmd>BufferPin", "Pin Buffer" },
-    ["<A-c>"] = { "<cmd>BufferClose", "Close Buffer" },
+    ["<A-p>"] = { "<cmd>BufferPin<cr>", "Pin Buffer" },
+    ["<A-c>"] = { "<cmd>BufferClose<cr>", "Close Buffer" },
     ["<C-p>"] = { "<cmd>BufferPick<cr>", "Pick a Buffer" },
   })
 end
