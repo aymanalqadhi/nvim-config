@@ -15,11 +15,11 @@ vim.o.title = true
 vim.o.wildmenu = true
 vim.o.updatetime = 250
 
--- better expression folding
+-- folding
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:╱,vert:▏]]
+vim.o.foldcolumn = '1'
 
 -- indentation config
 vim.o.showmatch = true
@@ -56,6 +56,7 @@ vim.o.winblend = 15
 vim.o.pumblend = 15
 vim.o.lazyredraw = false
 vim.o.cmdheight = 0
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:╱,vert:▏]]
 
 --- per-filetype config
 -- *.lua
