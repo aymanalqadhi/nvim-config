@@ -35,6 +35,7 @@ function M.configure()
         use_telescope = true
       },
       inlay_hints = {
+        auto = false,
         show_parameter_hints = true,
         other_hints_prefix = "-> "
       },
