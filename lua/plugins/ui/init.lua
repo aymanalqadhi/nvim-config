@@ -8,6 +8,6 @@ return {
   'indentblankline', -- indentation markers
   'feline',          -- status line
   'noice',           -- ui addons
-  'nvimtree',        -- file tree
+  'neotree',         -- file tree
   'ufo',             -- folding
 }
