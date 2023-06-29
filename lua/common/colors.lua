@@ -30,6 +30,9 @@ if use_theme == 'nordic' then
   M.violet = colors.magenta.dim
   M.magenta = colors.magenta.base
 
+  -- compat
+  M.border_nb = colors.border_nb
+
 elseif use_theme == 'tokyonight' then
   local tn_colors = require('tokyonight.colors').setup { style = 'night' }
 
