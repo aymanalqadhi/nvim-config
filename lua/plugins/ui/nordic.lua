@@ -2,6 +2,7 @@ local M = {}
 
 -- plugin uri
 M.uri = 'AlexvZyl/nordic.nvim'
+M.branch = 'dev'
 
 -- plugin configuration function
 function M.configure()
@@ -18,7 +19,7 @@ function M.configure()
     bright_border = true,
 
     -- theme variant options
-    nordic = { reduced_blue = true },
+    nordic = { reduced_blue = false },
     onedark = { brighter_whites = true },
 
     -- cursorline options
@@ -30,7 +31,7 @@ function M.configure()
 
     -- plugin specific options
     noice = { style = 'classic' },
-    telescope = { style = 'classic' },
+    telescope = { style = 'flat' },
     leap = { dim_backdrop = true },
 
     -- overrides
@@ -47,6 +48,22 @@ function M.configure()
       illuminatedWordText = { underline = true, bg = colors.gray1 },
       illuminatedWordRead = { bg = colors.gray2 },
       illuminatedWordWrite = { bg = colors.gray2 },
+
+      -- fold column
+      FoldColumn = { bg = colors.bg, fg = colors.fg },
+
+      -- winbar
+      WinBar = { bg = colors.bg, fg = colors.fg },
+      WinBarNC = { bg = colors.bg, fg = colors.fg },
+
+      -- cmp
+      CmpNormal = { bg = colors.bg_highlight, fg = colors.fg },
+      CmpCompletionBorder = { bg = colors.bg_highlight, fg = colors.border_nb },
+      PmenuSel = { bg = colors.fg, fg = colors.bg, bold = true },
+      --PmenuSel = { bg = colors.bg_dark, fg = colors.fg },
+
+      -- floats
+      FloatBorder = { fg = colors.border_nb }
     }
   }
 

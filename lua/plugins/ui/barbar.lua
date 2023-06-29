@@ -27,27 +27,27 @@ function M.configure()
 
     -- icons
     icons = {
-      buffer_index = true,
+      buffer_index = false,
       buffer_number = false,
       button = '',
 
       -- lsp diagnostics
       diagnostics = {
-        [vim.diagnostic.severity.ERROR] = { enabled = true, icon = '' },
-        [vim.diagnostic.severity.WARN] = { enabled = false, icon = '' },
-        [vim.diagnostic.severity.INFO] = { enabled = false, icon = '' },
-        [vim.diagnostic.severity.HINT] = { enabled = true, icon = '' },
+        [vim.diagnostic.severity.ERROR] = { enabled = true, icon = ' ' },
+        [vim.diagnostic.severity.WARN] = { enabled = true, icon = ' ' },
+        [vim.diagnostic.severity.INFO] = { enabled = true, icon = ' ' },
+        [vim.diagnostic.severity.HINT] = { enabled = true, icon = ' ' },
       },
 
       gitsigns = {
-        added = { enabled = true, icon = '+' },
+        added = { enabled = false, icon = '+' },
         changed = { enabled = true, icon = '~' },
-        deleted = { enabled = true, icon = '-' },
+        deleted = { enabled = false, icon = '-' },
       },
 
       -- filetype icons
       filetype = {
-        custom_colors = false,
+        custom_colors = true,
         enabled = true,
       },
 
@@ -63,8 +63,8 @@ function M.configure()
       preset = 'default',
 
       -- custom buffer settings
-      -- alternate = { filetype = { enabled = false } },
-      -- current = { buffer_index = true },
+      -- alternate = { filetype = { enabled = true } },
+      -- current = { buffer_index = false, button = '' },
       -- inactive = { button = '×' },
       -- visible = { modified = { buffer_number = false } },
     },
@@ -83,6 +83,7 @@ function M.configure()
     -- sidebar integration
     sidebar_filetypes = {
       NvimTree = true,
+      ['neo-tree'] = { text = '               EXPLORER               ', event = 'BufWipeout' },
     },
 
     letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',

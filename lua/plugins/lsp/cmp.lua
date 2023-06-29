@@ -36,15 +36,18 @@ function M.configure()
   cmp.setup({
     window = {
       completion = cmp.config.window.bordered({
-        --winhighlight = 'FloatBorder:LspInfoBorder',
+        border = { '', '', '', '', '', '', '', '│' }, -- ║
+        winhighlight = "Normal:CmpNormal,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None",
       }),
-      documentation = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered({
+        winhighlight = "Normal:CmpNormal,FloatBorder:CmpCompletionBorder",
+      }),
     },
     formatting = {
       fields = {
         cmp.ItemField.Kind,
         cmp.ItemField.Abbr,
-        cmp.ItemField.Menu,
+        --cmp.ItemField.Menu,
       },
       format = function(_, vim_item)
         vim_item.menu = '     · ' .. (vim_item.kind or '')
