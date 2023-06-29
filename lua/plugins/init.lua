@@ -15,6 +15,8 @@ local function merge_plugins(mods)
 
       table.insert(ret, {
         plugin.uri,
+        branch = plugin.branch,
+        priority = plugin.priority,
         dependencies = plugin.dependencies,
         config =
             plugin.set_keymaps and
