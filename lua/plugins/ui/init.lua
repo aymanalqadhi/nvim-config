@@ -10,5 +10,4 @@ return {
   'noice',           -- ui addons
   'nvimtree',        -- file tree
   'ufo',             -- folding
-  'tint',            -- inactive dim
 }
