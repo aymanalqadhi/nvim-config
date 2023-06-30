@@ -1,7 +1,7 @@
 local M = {}
 
 -- plugin uri
-M.uri = 'ErichDonGubler/lsp_lines.nvim'
+M.uri = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 
 -- plugin options
 M.lazy = true
