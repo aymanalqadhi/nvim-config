@@ -16,7 +16,17 @@ end
 function M.set_keymaps(k)
   -- normal mode keys
   k.register({
-    li = { require("lsp_lines").toggle, 'Toggle lsp lines' }
+    li = {
+      function()
+        local new_value = not vim.diagnostic.config().virtual_lines
+
+        vim.diagnostic.config({
+          virtual_lines = new_value,
+          virtual_text = not new_value,
+        })
+      end,
+      'Toggle lsp lines'
+    }
   }, { prefix = '<space>' })
 end
 
