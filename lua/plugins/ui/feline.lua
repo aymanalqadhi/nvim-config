@@ -18,7 +18,7 @@ function M.configure()
       return {
         fg = colors.bg,
         bg = colors.mode_color(),
-        style = "bold",
+        style = 'bold',
       }
     end,
   }
@@ -28,85 +28,85 @@ function M.configure()
     provider = 'file_info',
     hl = { bg = colors.bg_highlight, },
     file_readonly_icon = '',
-    left_sep = "block",
-    right_sep = " ",
+    left_sep = 'block',
+    right_sep = ' ',
   }
 
   -- git branch
   C.git_branch = {
-    provider = "git_branch",
-    hl = { fg = colors.fg, bg = colors.darkblue, style = "bold" },
+    provider = 'git_branch',
+    hl = { fg = colors.fg, bg = colors.darkblue, style = 'bold' },
     icon = { str = ' ', hl = { fg = colors.primary_blue } },
-    left_sep = "left_rounded",
-    right_sep = " ",
+    left_sep = 'left_rounded',
+    right_sep = ' ',
   }
 
   -- git diff (add)
   C.git_add = {
-    provider = "git_diff_added",
+    provider = 'git_diff_added',
     icon = '  ',
     hl = { fg = colors.green },
-    right_sep = { str = "・", hl = { fg = colors.fg } },
+    right_sep = { str = '・', hl = { fg = colors.fg } },
   }
 
   -- git diff (delete)
   C.git_delete = {
-    provider = "git_diff_removed",
+    provider = 'git_diff_removed',
     icon = ' ',
     hl = { fg = colors.red },
-    right_sep = { str = "・", hl = { fg = colors.fg } },
+    right_sep = { str = '・', hl = { fg = colors.fg } },
   }
 
   -- git diff (change)
   C.git_change = {
-    provider = "git_diff_changed",
+    provider = 'git_diff_changed',
     icon = ' ',
     hl = { fg = colors.yellow },
   }
 
   -- lsp diag (errors)
   C.diagnostic_errors = {
-    provider = "diagnostic_errors",
+    provider = 'diagnostic_errors',
     hl = { fg = colors.bg, bg = colors.red },
     icon = { str = ' ' },
-    left_sep = "left_rounded",
-    right_sep = " ",
+    left_sep = 'left_rounded',
+    right_sep = ' ',
   }
 
   -- lsp diag (warnings)
   C.diagnostic_warnings = {
-    provider = "diagnostic_warnings",
+    provider = 'diagnostic_warnings',
     hl = { fg = colors.bg, bg = colors.orange },
     icon = { str = ' ' },
-    left_sep = "left_rounded",
-    right_sep = " ",
+    left_sep = 'left_rounded',
+    right_sep = ' ',
   }
 
   -- lsp diag (hints)
   C.diagnostic_hints = {
-    provider = "diagnostic_hints",
+    provider = 'diagnostic_hints',
     hl = { fg = colors.bg, bg = colors.blue },
     icon = { str = ' ' },
-    left_sep = "left_rounded",
-    right_sep = " ",
+    left_sep = 'left_rounded',
+    right_sep = ' ',
   }
 
   -- lsp diag (info)
   C.diagnostic_info = {
-    provider = "diagnostic_info",
+    provider = 'diagnostic_info',
     hl = { fg = colors.bg, bg = colors.cyan },
     icon = { str = ' ' },
-    left_sep = "left_rounded",
-    right_sep = "right_rounded",
+    left_sep = 'left_rounded',
+    right_sep = 'right_rounded',
   }
 
   -- lsp clients
   C.lsp_client_names = {
-    provider = "lsp_client_names",
+    provider = 'lsp_client_names',
     hl = { bg = colors.bg_highlight, style = 'bold' },
     icon = { str = ' ', hl = { fg = colors.yellow } },
-    left_sep = "left_rounded",
-    right_sep = " ",
+    left_sep = 'left_rounded',
+    right_sep = ' ',
   }
 
   -- file format by platform
@@ -125,10 +125,10 @@ function M.configure()
   C.scroll_bar = {
     provider = function()
       local chars = {
-        " ", " ", " ", " ", " ", " ", " ",
-        " ", " ", " ", " ", " ", " ", " ",
-        " ", " ", " ", " ", " ", " ", " ",
-        " ", " ", " ", " ", " ", " ", " ",
+        ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+        ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+        ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+        ' ', ' ', ' ', ' ', ' ', ' ', ' ',
       }
 
       local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -138,9 +138,9 @@ function M.configure()
       local approx = ''
 
       if line_ratio <= 5 then
-        approx = " TOP"
+        approx = ' TOP'
       elseif line_ratio >= 95 then
-        approx = " BOT"
+        approx = ' BOT'
       else
         approx = chars[math.floor((line_ratio / 100) * #chars)] .. line_ratio
       end
@@ -152,16 +152,16 @@ function M.configure()
       bg = colors.bg_highlight,
       style = 'bold',
     },
-    left_sep = " ",
-    right_sep = "block",
+    left_sep = ' ',
+    right_sep = 'block',
   }
 
   -- encoding
   C.file_encoding = {
     provider = 'file_encoding',
     hl = { bg = colors.darkblue, style = 'bold' },
-    left_sep = " ",
-    right_sep = "right_rounded",
+    left_sep = ' ',
+    right_sep = 'right_rounded',
   }
 
   -- file size
@@ -169,6 +169,30 @@ function M.configure()
     provider = 'file_size',
     hl = { bg = colors.none, fg = colors.green },
   }
+
+  -- '@recording'
+  local loaded, noice = pcall(require, 'noice')
+
+  if loaded and noice ~= nil then
+    C.macro_indicator = {
+      provider = function()
+        if not noice.api.statusline.mode.has() then
+          return ''
+        end
+
+        local mode = noice.api.statusline.mode.get()
+        local _, _, reg = mode:find('@([0-9A-Za-z]+)')
+
+        return reg or ''
+      end,
+      hl = { fg = colors.bg_dark, bg = colors.orange, style = 'bold' },
+      icon = { str = '󰑋 ', hl = { fg = colors.bg_dark } },
+      left_sep = 'left_rounded',
+      right_sep = '  ',
+    }
+  else
+    C.macro_indicator = nil
+  end
 
   require('feline').setup {
     components = {
@@ -195,6 +219,7 @@ function M.configure()
 
         -- right
         {
+          C.macro_indicator,
           C.file_size,
           C.file_encoding,
           C.scroll_bar,
