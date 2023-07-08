@@ -8,13 +8,13 @@ if use_theme == 'nordic' then
   M.none = colors.none
 
   -- background
-  M.bg = colors.black
-  M.bg_dark = colors.gray0
-  M.bg_highlight = colors.gray2
+  M.bg = colors.bg
+  M.bg_dark = colors.bg_dark
+  M.bg_highlight = colors.bg_highlight
 
   -- foreground
-  M.fg = colors.white2
-  M.fg_dark = colors.white0
+  M.fg = colors.fg
+  M.fg_dark = colors.fg_dark
 
   -- base colors
   M.red = colors.red.base
