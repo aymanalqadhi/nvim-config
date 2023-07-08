@@ -37,10 +37,10 @@ function M.configure()
     window = {
       completion = cmp.config.window.bordered({
         border = { '', '', '', '', '', '', '', '│' }, -- ║
-        winhighlight = "Normal:CmpNormal,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None",
+        winhighlight = "Normal:CmpCompletionNormal,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None",
       }),
       documentation = cmp.config.window.bordered({
-        winhighlight = "Normal:CmpNormal,FloatBorder:CmpCompletionBorder",
+        winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder",
       }),
     },
     formatting = {

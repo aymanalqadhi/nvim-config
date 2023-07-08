@@ -10,7 +10,7 @@ if use_theme == 'nordic' then
   -- background
   M.bg = colors.bg
   M.bg_dark = colors.bg_dark
-  M.bg_highlight = colors.bg_highlight
+  M.bg_highlight = colors.gray2
 
   -- foreground
   M.fg = colors.fg
@@ -20,7 +20,7 @@ if use_theme == 'nordic' then
   M.red = colors.red.base
   M.green = colors.green.base
   M.blue = colors.blue0
-  M.darkblue = colors.gray2
+  M.darkblue = colors.gray4
   M.primary_blue = colors.blue.bright
 
   -- extra colors

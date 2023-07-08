@@ -16,7 +16,7 @@ function M.configure()
     bold_keywords = true,
     italic_comments = true,
     transparent_bg = false,
-    bright_border = true,
+    bright_border = false,
 
     -- theme variant options
     nordic = { reduced_blue = false },
@@ -30,7 +30,7 @@ function M.configure()
     },
 
     -- plugin specific options
-    noice = { style = 'classic' },
+    noice = { style = 'flat' },
     telescope = { style = 'flat' },
     leap = { dim_backdrop = true },
 
@@ -57,13 +57,19 @@ function M.configure()
       WinBarNC = { bg = colors.bg, fg = colors.fg },
 
       -- cmp
-      CmpNormal = { bg = colors.bg_highlight, fg = colors.fg },
-      CmpCompletionBorder = { bg = colors.bg_highlight, fg = colors.border_nb },
+      CmpCompletionNormal = { bg = colors.gray1, fg = colors.fg },
+      CmpCompletionBorder = { bg = colors.gray1, fg = colors.orange.base },
+      CmpDocNormal = { bg = colors.bg_highlight, fg = colors.fg },
+      CmpDocBorder = { bg = colors.bg_highlight, fg = colors.border_float_fg },
       PmenuSel = { bg = colors.fg, fg = colors.bg, bold = true },
-      --PmenuSel = { bg = colors.bg_dark, fg = colors.fg },
 
       -- floats
-      FloatBorder = { fg = colors.border_nb }
+      FloatBorder = { fg = colors.orange.base },
+
+      -- noice
+      NoiceNormal = { bg = colors.bg_dark, fg = colors.fg },
+      NoiceFloatNormal = { bg = colors.bg_dark, fg = colors.fg },
+      NoiceFloatBorder = { bg = colors.bg_dark, fg = colors.orange.base },
     }
   }
 

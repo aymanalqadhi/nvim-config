@@ -5,7 +5,7 @@ M.uri = 'simrat39/rust-tools.nvim'
 
 -- plugin options
 M.lazy = true
-M.filetypes = 'rust'
+M.load_on_event = 'BufReadPost *.rs'
 
 -- plugin dependencies
 M.dependencies = {
