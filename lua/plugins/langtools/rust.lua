@@ -37,13 +37,23 @@ function M.configure()
       inlay_hints = {
         auto = false,
         show_parameter_hints = true,
-        other_hints_prefix = "-> "
+        other_hints_prefix = '-> '
       },
     },
     server = {
       standalone = false,
       settings = {
         ['rust-analyzer'] = {
+          -- enable clippy on save
+          checkOnSave = {
+            command = 'clippy',
+            extraArgs = { '--all', '--', '-W', 'clippy::all' },
+          },
+          rustfmt = {
+            extraArgs = { '+nightly' },
+          },
+          cargo = { loadOutDirsFromCheck = true },
+          procMacro = { enable = true },
           hover = {
             actions = {
               enable = true,
@@ -56,17 +66,10 @@ function M.configure()
             references = true,
           },
           typing = {
-            autoClosingAngleBrackets = {
-              enalbe = true
-            }
-          },
-          checkOnSave = {
-            command = "clippy"
+            autoClosingAngleBrackets = { enalbe = true }
           },
           completion = {
-            callable = {
-              snippets = "fill_arguments"
-            }
+            callable = { snippets = 'fill_arguments' }
           }
         },
       },
