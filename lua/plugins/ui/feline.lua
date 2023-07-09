@@ -32,6 +32,7 @@ function M.configure()
     provider = 'file_info',
     hl = { bg = colors.bg_highlight, },
     file_readonly_icon = '',
+    type = 'short-path',
     left_sep = 'block',
     right_sep = ' ',
   }
@@ -39,7 +40,7 @@ function M.configure()
   -- git branch
   C.git_branch = {
     provider = 'git_branch',
-    hl = { fg = colors.fg, bg = colors.darkblue, style = 'bold' },
+    hl = { fg = colors.fg, bg = colors.bg_highlight, style = 'bold' },
     icon = { str = ' ', hl = { fg = colors.primary_blue } },
     left_sep = 'left_rounded',
     right_sep = ' ',
@@ -177,28 +178,13 @@ function M.configure()
   }
 
   -- '@recording'
-  local loaded, noice = pcall(require, 'noice')
-
-  if loaded and noice ~= nil then
-    C.macro_indicator = {
-      provider = function()
-        if not noice.api.statusline.mode.has() then
-          return ''
-        end
-
-        local mode = noice.api.statusline.mode.get()
-        local _, _, reg = mode:find('@([0-9A-Za-z]+)')
-
-        return reg or ''
-      end,
-      hl = { fg = colors.bg_dark, bg = colors.orange, style = 'bold' },
-      icon = { str = '󰑋 ', hl = { fg = colors.bg_dark } },
-      left_sep = 'left_rounded',
-      right_sep = '  ',
-    }
-  else
-    C.macro_indicator = nil
-  end
+  C.macro = {
+    provider = 'macro',
+    hl = { fg = colors.bg_dark, bg = colors.orange, style = 'bold' },
+    icon = { str = '󰑋 ', hl = { fg = colors.bg_dark } },
+    left_sep = 'left_rounded',
+    right_sep = '  ',
+  }
 
   require('feline').setup {
     disable = {
@@ -230,7 +216,7 @@ function M.configure()
 
         -- right
         {
-          C.macro_indicator,
+          C.macro,
           C.file_size,
           C.file_encoding,
           C.scroll_bar,
