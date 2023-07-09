@@ -7,6 +7,10 @@ M.uri = 'freddiehaddad/feline.nvim'
 function M.configure()
   local util = require('common.util')
   local colors = require('common.colors')
+  local icons = require('common.icons').lsp_kinds
+
+  -- cache hostname value
+  local hostname = ' ' .. vim.loop.os_gethostname() .. ' '
 
   -- components map
   local C = {}
@@ -102,23 +106,30 @@ function M.configure()
 
   -- lsp clients
   C.lsp_client_names = {
-    provider = 'lsp_client_names',
+    provider = function()
+      local clients = vim.lsp.buf_get_clients()
+      local names = {}
+
+      for _, client in pairs(clients) do
+        table.insert(names, client.name)
+      end
+
+      return table.concat(names, ', ')
+    end,
     hl = { bg = colors.bg_highlight, style = 'bold' },
-    icon = { str = ' ', hl = { fg = colors.yellow } },
+    icon = { str = icons.Lsp, hl = { fg = colors.yellow } },
     left_sep = 'left_rounded',
     right_sep = ' ',
+    update = { 'LspAttach', 'LspDetach' },
   }
 
   -- file format by platform
   C.hostname = {
-    provider = function()
-      local hostname = vim.loop.os_gethostname()
-
-      return ' ' .. hostname .. ' '
-    end,
+    provider = hostname,
     hl = function()
       return { fg = colors.bg, bg = colors.mode_color(), style = 'bold' }
     end,
+    update = false,
   }
 
   -- scroll_bar
@@ -131,21 +142,16 @@ function M.configure()
         ' ', ' ', ' ', ' ', ' ', ' ', ' ',
       }
 
-      local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-      local position = row .. '・' .. col
-
+      local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
       local line_ratio = math.floor((row / vim.api.nvim_buf_line_count(0)) * 100)
-      local approx = ''
 
       if line_ratio <= 5 then
-        approx = ' TOP'
+        return ' TOP'
       elseif line_ratio >= 95 then
-        approx = ' BOT'
+        return ' BOT'
       else
-        approx = chars[math.floor((line_ratio / 100) * #chars)] .. line_ratio
+        return chars[math.floor((line_ratio / 100) * #chars)] .. line_ratio .. '%%'
       end
-
-      return approx .. '  ' .. position
     end,
     hl = {
       fg = colors.fg,
@@ -195,6 +201,11 @@ function M.configure()
   end
 
   require('feline').setup {
+    disable = {
+      buftypes = {
+        'nofile',
+      },
+    },
     components = {
       active = {
         -- left
