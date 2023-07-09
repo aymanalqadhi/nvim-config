@@ -13,7 +13,7 @@ M.dependencies = {
 function M.configure()
   require 'barbar'.setup {
     animation = true,
-    auto_hide = true,
+    auto_hide = false,
     tabpages = true,
     clickable = true,
     semantic_letters = true,
@@ -22,7 +22,7 @@ function M.configure()
 
     -- highlighting
     highlight_alternate = false,
-    highlight_inactive_file_icons = false,
+    highlight_inactive_file_icons = true,
     highlight_visible = true,
 
     -- icons
@@ -52,8 +52,9 @@ function M.configure()
       },
 
       -- separator
-      separator = { left = '▎', right = '' },
-      separator_at_end = true,
+      --separator = { left = '▎', right = '' },
+      separator = { left = ' ', right = ' ' },
+      separator_at_end = false,
 
       -- indicators
       modified = { button = '●' },
@@ -83,7 +84,7 @@ function M.configure()
     -- sidebar integration
     sidebar_filetypes = {
       NvimTree = true,
-      ['neo-tree'] = { text = '               EXPLORER               ', event = 'BufWipeout' },
+      ['neo-tree'] = { text = '               nullptr               ', event = 'BufWipeout' },
     },
 
     letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',

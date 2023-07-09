@@ -7,6 +7,8 @@ M.branch = 'dev'
 -- plugin configuration function
 function M.configure()
   local colors = require('nordic.colors')
+  local active_bg = colors.grey2
+  local inactive_bg = colors.gray1
 
   require('nordic').setup {
     -- available: 'nordic', 'onedark'.
@@ -70,6 +72,35 @@ function M.configure()
       NoiceNormal = { bg = colors.bg_dark, fg = colors.fg },
       NoiceFloatNormal = { bg = colors.bg_dark, fg = colors.fg },
       NoiceFloatBorder = { bg = colors.bg_dark, fg = colors.orange.base },
+
+      -- barbar
+      ---- visible
+      BufferVisible = { bg = inactive_bg, fg = colors.white0 },
+      BufferVisibleADDED = { bg = inactive_bg, fg = colors.git.add },
+      BufferVisibleCHANGED = { bg = inactive_bg, fg = colors.git.change },
+      BufferVisibleDELETED = { bg = inactive_bg, fg = colors.git.delete },
+      BufferVisibleHINT = { bg = inactive_bg, fg = colors.hint },
+      BufferVisibleINFO = { bg = inactive_bg, fg = colors.info },
+      BufferVisibleWARN = { bg = inactive_bg, fg = colors.warning },
+      BufferVisibleERROR = { bg = inactive_bg, fg = colors.error },
+      BufferVisibleMod = { bg = inactive_bg, fg = colors.fg },
+      BufferVisibleTarget = { bg = inactive_bg, fg = colors.fg_bright, bold = true },
+      BufferVisibleSign = { fg = inactive_bg, bg = colors.bg_dark },
+      ---- active
+      BufferCurrent = { bg = active_bg, fg = colors.fg },
+      BufferCurrentADDED = { bg = active_bg, fg = colors.git.add },
+      BufferCurrentCHANGED = { bg = active_bg, fg = colors.git.change },
+      BufferCurrentDELETED = { bg = active_bg, fg = colors.git.delete },
+      BufferCurrentHINT = { bg = active_bg, fg = colors.hint },
+      BufferCurrentINFO = { bg = active_bg, fg = colors.info },
+      BufferCurrentWARN = { bg = active_bg, fg = colors.warning },
+      BufferCurrentERROR = { bg = active_bg, fg = colors.error },
+      BufferCurrentMod = { bg = active_bg, fg = colors.fg_bright, bold = true },
+      BufferCurrentTarget = { bg = active_bg, fg = colors.orange.base },
+      BufferCurrentSign = { fg = active_bg, bg = colors.bg_dark },
+      ---- inactive 
+      BufferInactiveSign = { bg = colors.bg_dark, fg = colors.bg_dark },
+      BufferInactiveTarget = { bg = colors.bg_dark, fg = colors.orange.bright },
     }
   }
 
