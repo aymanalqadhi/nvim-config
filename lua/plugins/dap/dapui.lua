@@ -4,7 +4,11 @@ local M = {}
 M.uri = 'rcarriga/nvim-dap-ui'
 
 -- plugin dependencies
-M.dependencies = { 'mfussenegger/nvim-dap' }
+M.dependencies = {
+  'mfussenegger/nvim-dap',
+  'nvim-treesitter/nvim-treesitter',
+  'theHamsta/nvim-dap-virtual-text',
+}
 
 -- plugin options
 M.lazy = true
@@ -25,6 +29,19 @@ function M.configure()
   dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close {}
   end
+
+  -- virtual text
+  require("nvim-dap-virtual-text").setup {
+    enabled = true,
+    highlight_new_as_changed = true,
+    commented = true,
+    all_references = true,
+
+    -- experimental features:
+    all_frames = false,
+    virt_lines = false,
+    virt_text_win_col = nil,
+  }
 end
 
 -- plugin keymaps
