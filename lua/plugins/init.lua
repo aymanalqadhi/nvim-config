@@ -32,6 +32,7 @@ local function merge_plugins(mods)
         keys = plugin.load_on_keys,
         event = plugin.load_on_event,
         cmd = plugin.load_on_cmd,
+        build = plugin.build,
         ft = plugin.filetypes,
       })
     end

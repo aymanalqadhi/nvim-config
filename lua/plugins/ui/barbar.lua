@@ -53,7 +53,7 @@ function M.configure()
 
       -- separator
       --separator = { left = '▎', right = '' },
-      separator = { left = ' ', right = ' ' },
+      separator = { left = ' ', right = '' },
       separator_at_end = false,
 
       -- indicators

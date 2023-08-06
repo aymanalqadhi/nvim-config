@@ -7,6 +7,8 @@ M.branch = 'dev'
 -- plugin configuration function
 function M.configure()
   local colors = require('nordic.colors')
+  colors.extend_palette()
+
   local active_bg = colors.grey2
   local inactive_bg = colors.gray1
 
@@ -19,6 +21,7 @@ function M.configure()
     italic_comments = true,
     transparent_bg = false,
     bright_border = false,
+    swap_backgrounds = false,
 
     -- theme variant options
     nordic = { reduced_blue = false },
@@ -29,6 +32,7 @@ function M.configure()
       bold = false,
       theme = 'light',
       hide_unfocused = true,
+      blend = 0.4,
     },
 
     -- plugin specific options
@@ -52,7 +56,7 @@ function M.configure()
       illuminatedWordWrite = { bg = colors.gray2 },
 
       -- fold column
-      FoldColumn = { bg = colors.bg, fg = colors.fg },
+      FoldColumn = { bg = colors.bg, fg = colors.fg_fold },
 
       -- winbar
       WinBar = { bg = colors.bg, fg = colors.fg },
@@ -104,7 +108,8 @@ function M.configure()
     }
   }
 
-  vim.cmd [[ colorscheme nordic ]]
+  --require('nordic').load()
+  vim.cmd.colorscheme 'nordic'
 end
 
 return M
