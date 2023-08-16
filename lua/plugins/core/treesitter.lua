@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 local M = {}
 
 -- plugin uri
@@ -24,7 +26,7 @@ function M.configure()
     },
 
     incremental_selection = {
-      enable = enable,
+      enable = false,
       keymaps = {
         -- mappings for incremental selection (visual mappings)
         init_selection = "gnn",    -- maps in normal mode to init the node/scope selection
@@ -38,17 +40,9 @@ function M.configure()
       -- syntax-aware textobjects
       enable = enable,
       lsp_interop = {
-        enable = enable,
-        peek_definition_code = {
-          ["DF"] = "@function.outer",
-          ["DF"] = "@class.outer"
-        }
+        enable = true,
       },
       keymaps = {
-        ["iL"] = {
-          -- you can define your own textobjects directly here
-          go = "(function_definition) @function",
-        },
         -- or you use the queries from supported languages with textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
@@ -67,7 +61,7 @@ function M.configure()
         ["im"] = "@call.inner"
       },
       move = {
-        enable = enable,
+        enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           ["]m"] = "@function.outer",
@@ -87,25 +81,17 @@ function M.configure()
         }
       },
       select = {
-        enable = enable,
+        enable = true,
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
-          -- Or you can define your own textobjects like this
-          ["iF"] = {
-            python = "(function_definition) @function",
-            cpp = "(function_definition) @function",
-            c = "(function_definition) @function",
-            java = "(method_declaration) @function",
-            go = "(method_declaration) @function"
-          }
         }
       },
       swap = {
-        enable = enable,
+        enable = true,
         swap_next = {
           ["<leader>a"] = "@parameter.inner"
         },
