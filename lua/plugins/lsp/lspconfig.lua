@@ -61,10 +61,14 @@ function M.configure()
   require('mason-lspconfig').setup_handlers({
     function(server_name)
       lspconfig[server_name].setup({
-        on_attach = function(_, buf)
+        on_attach = function(client, buf)
           vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
           vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
           vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
+
+          if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint(buf, true)
+          end
         end,
         capabilities = lsp_capabilities,
       })

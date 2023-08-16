@@ -4,6 +4,6 @@ return {
   'nullls',                    -- extra lsp support
   'customdiagnostichighlight', -- highlight unused items
   'gotopreview',               -- floating window lsp utils
-  'inlayhints',                -- inlay hints
+  --'inlayhints',                -- inlay hints
   'lsplines',                  -- detailed lsp diagnostics
 }
