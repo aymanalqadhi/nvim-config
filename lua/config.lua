@@ -63,3 +63,7 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:╱,v
 vim.api.nvim_command [[
   autocmd FileType lua setlocal shiftwidth=2 softtabstop=2 expandtab
 ]]
+-- *.go
+vim.api.nvim_command [[
+  autocmd FileType lua setlocal nolist
+]]

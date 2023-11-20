@@ -21,7 +21,7 @@ function M.configure()
       },
     },
     suggestion = {
-      enabled = false,
+      enabled = true,
       auto_trigger = true,
       debounce = 75,
       keymap = {
@@ -40,6 +40,8 @@ function M.configure()
       python = true,
       rust = true,
       toml = true,
+      go = true,
+      sql = true,
     },
     server_opts_overrides = {},
   }

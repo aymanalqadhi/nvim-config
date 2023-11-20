@@ -76,6 +76,14 @@ function M.configure()
   })
 
   -- custom servers setup
+  --- clangd
+  lspconfig.clangd.setup({
+    cmd = { 'clangd', '--background-index', '--clang-tidy', '--header-insertion=iwyu' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+    root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git'),
+  })
+
+  --- lua_ls
   lspconfig.lua_ls.setup {
     settings = {
       Lua = {

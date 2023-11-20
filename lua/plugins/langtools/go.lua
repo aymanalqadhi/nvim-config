@@ -30,11 +30,11 @@ function M.configure()
   require("mason-lspconfig").setup()
 
   require('go').setup {
-    max_line_len = 80,
+    max_line_len = 88,
     lsp_cfg = false,
     lsp_keymaps = false,
     lsp_inlay_hints = {
-      enable = true,
+      enable = false,
       parameter_hints_prefix = "󰊕 ",
       show_parameter_hints = true,
       other_hints_prefix = "=> ",
@@ -50,14 +50,14 @@ function M.configure()
   require('lspconfig').gopls.setup(cfg)
 
   -- format on save
-  -- local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-  -- vim.api.nvim_create_autocmd("BufWritePre", {
-  --   pattern = "*.go",
-  --   callback = function()
-  --     require('go.format').gofmt()
-  --   end,
-  --   group = format_sync_grp,
-  -- })
+  local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+      require('go.format').gofmt()
+    end,
+    group = format_sync_grp,
+  })
 
   -- keymaps
   vim.cmd [[ autocmd FileType go nmap <space>lgl GoLint ]]

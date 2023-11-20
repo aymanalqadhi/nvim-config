@@ -13,32 +13,27 @@ function M.configure()
   local inactive_bg = colors.gray1
 
   require('nordic').setup {
-    -- available: 'nordic', 'onedark'.
-    theme = 'nordic',
-
     -- theme options
     bold_keywords = true,
     italic_comments = true,
     transparent_bg = false,
     bright_border = false,
+    reduced_blue = false,
     swap_backgrounds = false,
-
-    -- theme variant options
-    nordic = { reduced_blue = false },
-    onedark = { brighter_whites = true },
 
     -- cursorline options
     cursorline = {
       bold = false,
-      theme = 'light',
-      hide_unfocused = true,
-      blend = 0.4,
+      bold_number = true,
+      theme = 'dark',
+      blend = 0.7,
     },
 
     -- plugin specific options
     noice = { style = 'flat' },
     telescope = { style = 'flat' },
     leap = { dim_backdrop = true },
+    ts_context = { dark_background = true },
 
     -- overrides
     override = {
@@ -105,6 +100,10 @@ function M.configure()
       ---- inactive 
       BufferInactiveSign = { bg = colors.bg_dark, fg = colors.bg_dark },
       BufferInactiveTarget = { bg = colors.bg_dark, fg = colors.orange.bright },
+
+      -- tree
+      NvimTreeNormal = { fg = colors.fg, bg = colors.black0 },
+      NvimTreeNormalNC = { fg = colors.fg, bg = colors.black0 }
     }
   }
 

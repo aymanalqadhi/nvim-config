@@ -3,4 +3,6 @@ return {
   'telescope',  -- picker
   'toggleterm', -- terminal utils
   'trouble',    -- diagnostics list
+  'godbolt',    -- godbolt integration
+  --'hardtime',   -- hints
 }

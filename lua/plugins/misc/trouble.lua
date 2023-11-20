@@ -15,14 +15,15 @@ function M.configure()
   require('trouble').setup {
     auto_open = false,
     auto_close = true,
+    auto_fold = false,
     use_diagnostic_signs = true,
-    signs = {
-      error = '',
-      warning = '',
-      hint = '',
-      information = '',
-      other = '',
-    },
+    -- signs = {
+    --   error = '',
+    --   warning = '',
+    --   hint = '',
+    --   information = '',
+    --   other = '',
+    -- },
   }
 end
 

@@ -21,7 +21,7 @@ if use_theme == 'nordic' then
   M.green = colors.green.base
   M.blue = colors.blue0
   M.darkblue = colors.gray4
-  M.primary_blue = colors.blue.bright
+  M.primary_blue = colors.blue3
 
   -- extra colors
   M.yellow = colors.yellow.base

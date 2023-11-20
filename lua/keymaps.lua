@@ -15,7 +15,7 @@ map('n', '<C-k>', '<cmd>wincmd k<cr>', opts)
 map('n', '<C-l>', '<cmd>wincmd l<cr>', opts)
 
 -- move
-vim.api.nvim_set_keymap('v', '<A-j>', ":m +1<cr>gv=gv", opts)
-vim.api.nvim_set_keymap('v', '<A-k>', ":m '<-2<cr>gv=gv", opts)
-vim.api.nvim_set_keymap('n', '<A-j>', "<cmd>m +1<cr>", opts)
-vim.api.nvim_set_keymap('n', '<A-k>', "<cmd>m -2<cr>", opts)
+map('v', '<A-j>', ":m +1<cr>gv=gv", opts)
+map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts)
+map('n', '<A-j>', "<cmd>m +1<cr>", opts)
+map('n', '<A-k>', "<cmd>m -2<cr>", opts)

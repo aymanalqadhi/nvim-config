@@ -1,5 +1,13 @@
 local M = {}
 
+local lsp_signs = {
+  error = '',
+  warning = '',
+  hint = '',
+  information = '',
+  other = '',
+}
+
 M.lsp_kinds = {
   Array = '󰅪 ',
   Boolean = ' ',
