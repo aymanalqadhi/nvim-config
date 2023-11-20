@@ -1,8 +1,9 @@
--- editor configurations
-require 'config'
+-- set leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
--- plugins
-require 'plugins'
+-- global state
+Void = require("void")
 
--- key mappings
-require 'keymaps'
+-- bootstrap editor
+require("boot").bootstrap({})

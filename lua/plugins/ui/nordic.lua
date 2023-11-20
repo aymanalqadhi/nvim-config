@@ -1,114 +1,53 @@
-local M = {}
+return {
+  "AlexvZyl/nordic.nvim",
 
--- plugin uri
-M.uri = 'AlexvZyl/nordic.nvim'
-M.branch = 'dev'
+  -- branch = "dev",
+  priority = 1000,
+  lazy = false,
 
--- plugin configuration function
-function M.configure()
-  local colors = require('nordic.colors')
-  colors.extend_palette()
+  opts = function()
+    local colors = require("nordic.colors")
 
-  local active_bg = colors.grey2
-  local inactive_bg = colors.gray1
+    return {
+      bold_keyword = true,
+      transparent_bg = true,
+      reduced_blue = false,
 
-  require('nordic').setup {
-    -- theme options
-    bold_keywords = true,
-    italic_comments = true,
-    transparent_bg = false,
-    bright_border = false,
-    reduced_blue = false,
-    swap_backgrounds = false,
+      cursorline = {
+        theme = "light",
+      },
 
-    -- cursorline options
-    cursorline = {
-      bold = false,
-      bold_number = true,
-      theme = 'dark',
-      blend = 0.7,
-    },
+      override = {
+        -- fold column
+        FoldColumn = { bg = colors.none, fg = colors.fg_fold },
 
-    -- plugin specific options
-    noice = { style = 'flat' },
-    telescope = { style = 'flat' },
-    leap = { dim_backdrop = true },
-    ts_context = { dark_background = true },
+        -- illuminate highlights
+        illuminatedWord = { bg = colors.gray1 },
+        illuminatedCurWord = { underline = true, bg = colors.gray1 },
+        illuminatedWordText = { underline = true, bg = colors.gray1 },
+        illuminatedWordRead = { bg = colors.gray2 },
+        illuminatedWordWrite = { bg = colors.gray2 },
 
-    -- overrides
-    override = {
-      -- dianostic highlights
-      DiagnosticUnderlineError = { undercurl = true },
-      DiagnosticUnderlineWarn = { undercurl = true },
-      DiagnosticUnderlineInfo = { underdashed = true },
-      DiagnosticUnderlineHint = { underdotted = true },
+        -- cmp
+        PmenuSel = { bg = colors.gray2 },
 
-      -- illuminate highlights
-      illuminatedWord = { bg = colors.gray1 },
-      illuminatedCurWord = { underline = true, bg = colors.gray1 },
-      illuminatedWordText = { underline = true, bg = colors.gray1 },
-      illuminatedWordRead = { bg = colors.gray2 },
-      illuminatedWordWrite = { bg = colors.gray2 },
-
-      -- fold column
-      FoldColumn = { bg = colors.bg, fg = colors.fg_fold },
-
-      -- winbar
-      WinBar = { bg = colors.bg, fg = colors.fg },
-      WinBarNC = { bg = colors.bg, fg = colors.fg },
-
-      -- cmp
-      CmpCompletionNormal = { bg = colors.gray1, fg = colors.fg },
-      CmpCompletionBorder = { bg = colors.gray1, fg = colors.orange.base },
-      CmpDocNormal = { bg = colors.bg_highlight, fg = colors.fg },
-      CmpDocBorder = { bg = colors.bg_highlight, fg = colors.border_float_fg },
-      PmenuSel = { bg = colors.fg, fg = colors.bg, bold = true },
-
-      -- floats
-      FloatBorder = { fg = colors.orange.base },
-
-      -- noice
-      NoiceNormal = { bg = colors.bg_dark, fg = colors.fg },
-      NoiceFloatNormal = { bg = colors.bg_dark, fg = colors.fg },
-      NoiceFloatBorder = { bg = colors.bg_dark, fg = colors.orange.base },
-
-      -- barbar
-      ---- visible
-      BufferVisible = { bg = inactive_bg, fg = colors.white0 },
-      BufferVisibleADDED = { bg = inactive_bg, fg = colors.git.add },
-      BufferVisibleCHANGED = { bg = inactive_bg, fg = colors.git.change },
-      BufferVisibleDELETED = { bg = inactive_bg, fg = colors.git.delete },
-      BufferVisibleHINT = { bg = inactive_bg, fg = colors.hint },
-      BufferVisibleINFO = { bg = inactive_bg, fg = colors.info },
-      BufferVisibleWARN = { bg = inactive_bg, fg = colors.warning },
-      BufferVisibleERROR = { bg = inactive_bg, fg = colors.error },
-      BufferVisibleMod = { bg = inactive_bg, fg = colors.fg },
-      BufferVisibleTarget = { bg = inactive_bg, fg = colors.fg_bright, bold = true },
-      BufferVisibleSign = { fg = inactive_bg, bg = colors.bg_dark },
-      ---- active
-      BufferCurrent = { bg = active_bg, fg = colors.fg },
-      BufferCurrentADDED = { bg = active_bg, fg = colors.git.add },
-      BufferCurrentCHANGED = { bg = active_bg, fg = colors.git.change },
-      BufferCurrentDELETED = { bg = active_bg, fg = colors.git.delete },
-      BufferCurrentHINT = { bg = active_bg, fg = colors.hint },
-      BufferCurrentINFO = { bg = active_bg, fg = colors.info },
-      BufferCurrentWARN = { bg = active_bg, fg = colors.warning },
-      BufferCurrentERROR = { bg = active_bg, fg = colors.error },
-      BufferCurrentMod = { bg = active_bg, fg = colors.fg_bright, bold = true },
-      BufferCurrentTarget = { bg = active_bg, fg = colors.orange.base },
-      BufferCurrentSign = { fg = active_bg, bg = colors.bg_dark },
-      ---- inactive 
-      BufferInactiveSign = { bg = colors.bg_dark, fg = colors.bg_dark },
-      BufferInactiveTarget = { bg = colors.bg_dark, fg = colors.orange.bright },
-
-      -- tree
-      NvimTreeNormal = { fg = colors.fg, bg = colors.black0 },
-      NvimTreeNormalNC = { fg = colors.fg, bg = colors.black0 }
+        -- lighter markers
+        CursorLine = { bg = colors.black1 },
+        CursorColumn = { bg = colors.black1 },
+        ColorColumn = { bg = colors.gray0 },
+        Visual = { bg = colors.gray2 },
+      },
     }
-  }
+  end,
 
-  --require('nordic').load()
-  vim.cmd.colorscheme 'nordic'
-end
+  config = function(_, opts)
+    require("nordic").setup(opts)
 
-return M
+    vim.cmd.colorscheme("nordic")
+  end,
+
+  cond = function()
+    local cfg = require("config").current
+    return cfg and cfg.colorscheme == "nordic"
+  end,
+}

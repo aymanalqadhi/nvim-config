@@ -1,54 +1,60 @@
---- @brief merges plugin groups
---- @param mods table Plugin groups to be merged
---- @return table ret Merged groups table
-local function merge_plugins(mods)
-  local ret = {}
+return {
+  -- core
+  core = {
+    "treesitter", -- better highlighting
+    "lsp", -- LSP support
+    "none-ls", -- additional LSP support
+  },
 
-  for _, mod in ipairs(mods) do
-    local submods = require('plugins.' .. mod)
+  -- editor addons
+  editor = {
+    "luasnip", -- snippets engine
+    "cmp", -- completion engine
+    "mini", -- useful utilities
+    "flash", -- better search
+    "illuminate", -- cursor word
+    "persistence", -- session management
+    "nvim-autopairs", -- smart character pairs matching
+    "nvim-surround", -- text surround utils
+    "tabout", -- tab completion
+    -- "multicursors", -- multiple cursors
+  },
 
-    for _, submod in ipairs(submods) do
-      local plugin_path = 'plugins.' .. mod .. '.' .. submod
-      local loaded, plugin = pcall(require, plugin_path)
+  -- tooling integration
+  tooling = {
+    "telescope", -- fuzzy finder
+    "conform", -- formatter
+    "gitsigns", -- git integration
+    "toggleterm", -- terminal integration
+    "mason", -- external tools installation
+  },
 
-      assert(loaded, "could not load plugin at `" .. plugin_path .. "`")
+  -- language support
+  lang = {
+    "copilot",
+    "docker",
+    "go",
+    "rust",
+    "sql",
+  },
 
-      table.insert(ret, {
-        plugin.uri,
-        branch = plugin.branch,
-        priority = plugin.priority,
-        dependencies = plugin.dependencies,
-        config =
-            plugin.set_keymaps and
-            function()
-              if plugin.configure ~= nil then
-                plugin.configure()
-              end
+  -- user interface
+  ui = {
+    "dashboard", -- startup screen
+    "ibl", -- indent guide lines
+    -- "dressing", -- better ui
+    "bufferline", -- buffer bar
+    "whichkey", -- keybindings popup
+    "noice", -- better messages & popup menus.
+    "notify", -- better `vim.notify()`
+    "nvim-tree", -- file tree
+    "lualine", -- status line
+    "trouble", -- better lists
+    "symbol-usage", -- lsp symbol counter
+    -- "tint", -- tinting
 
-              plugin.set_keymaps(require('which-key'))
-            end
-            or plugin.configure,
-        lazy = plugin.lazy,
-        keys = plugin.load_on_keys,
-        event = plugin.load_on_event,
-        cmd = plugin.load_on_cmd,
-        build = plugin.build,
-        ft = plugin.filetypes,
-      })
-    end
-  end
-
-  return ret
-end
-
--- return merged plugin groups
-return merge_plugins({
-  'core',
-  'ui',
-  'misc',
-  'lsp',
-  'prod',
-  'scm',
-  'langtools',
-  'dap',
-})
+    -- colorschemes
+    "onedark",
+    "tokyonight",
+  },
+}

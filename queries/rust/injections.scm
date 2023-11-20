@@ -1,20 +1,13 @@
-; sqlx `query` macro
+;; sqlx `query*` macros
 (macro_invocation
+  ;; query macro
   (scoped_identifier
     path: (identifier) @_path (#eq? @_path "sqlx")
-    name: (identifier) @_name (#eq? @_name "query"))
+    name: (identifier) @_name (#match? @_name "^query"))
 
-  (token_tree
-    (raw_string_literal) @sql)
-    (#offset! @sql 1 0 0 0))
+  ;; query string
+  (token_tree [(string_literal)     @injection.content
+               (raw_string_literal) @injection.content])
 
-; sqlx `query_as` macro
-(macro_invocation
-  (scoped_identifier
-    path: (identifier) @_path (#eq? @_path "sqlx")
-    name: (identifier) @_name (#eq? @_name "query_as"))
-
-  (token_tree
-    (identifier)
-    (raw_string_literal) @sql)
-    (#offset! @sql 1 0 0 0))
+  (#offset! @injection.content 1 0 0 0)
+  (#set! injection.language "sql"))

@@ -1,31 +1,23 @@
-local M = {}
+return {
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
 
--- plugin uri
-M.uri = 'folke/tokyonight.nvim'
-
--- plugin configuration function
-function M.configure()
-  require('tokyonight').setup({
-    style = 'night',
-    light_style = 'day',
+  opts = {
+    style = "night",
     transparent = false,
-    terminal_colors = true,
     styles = {
-      comments = { italic = true },
-      keywords = { italic = true },
-      functions = { italic = true },
-      variables = {},
-      sidebars = 'dark',
-      floats = 'normal',
+      sidebars = "storm",
     },
-    sidebars = { "qf", "help", "vista_kind", "terminal", "packer" },
-    day_brightness = 0.3,
-    hide_inactive_statusline = true,
-    dim_inactive = false,
-    lualine_bold = false,
-  })
+  },
 
-  vim.cmd [[ colorscheme tokyonight ]]
-end
+  config = function(_, opts)
+    require("tokyonight").setup(opts)
 
-return M
+    vim.cmd.colorscheme("tokyonight")
+  end,
+
+  cond = function()
+    return require("config").current.colorscheme == "tokyonight"
+  end,
+}
