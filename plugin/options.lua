@@ -1,58 +1,52 @@
-local g = vim.g
-local o = vim.opt
+local opt     = vim.opt
 
 -- system integration
-o.autowrite = true -- Enable auto write
-o.clipboard = "unnamedplus" -- Sync with system clipboard
-o.formatoptions = "jcroqlnt" -- tcqj
-o.grepformat = "%f:%l:%c:%m"
-o.grepprg = "rg --vimgrep"
-o.mouse = "a" -- Enable mouse mode
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
+opt.mouse     = "a"           -- Enable mouse mode
+opt.formatoptions:remove "o"
 
 -- behaviour
-o.confirm = true -- Confirm to save changes before exiting modified buffer
-o.inccommand = "nosplit" -- preview incremental substitute
-o.splitbelow = true -- Put new windows below current
-o.splitkeep = "screen"
-o.splitright = true -- Put new windows right of current
-o.timeoutlen = 300
-o.undofile = true
-o.undolevels = 10000
-o.updatetime = 200 -- Save swap file and trigger CursorHold
-o.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-o.wildmode = "longest:full,full" -- Command-line completion mode
-o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
-o.smoothscroll = true
+opt.inccommand     = "split"
+opt.splitbelow     = true
+opt.splitright     = true
+opt.undofile       = true
+opt.undolevels     = 10000
+opt.shada          = { "'10", "<0", "s10", "h" }
+opt.timeout        = true
+opt.timeoutlen     = 300
 
 -- editing
-o.ignorecase = true -- Ignore case
-o.smartcase = true -- Don't ignore case with capitals
-o.expandtab = true -- Use spaces instead of tabs
-o.shiftround = true -- Round indent
-o.shiftwidth = 2 -- Size of an indent
-o.tabstop = 2 -- Number of spaces tabs count for
-o.smartindent = true -- Insert indents automatically
-o.shortmess:append({ W = true, I = true, c = true, C = true })
-o.spelllang = { "en" }
-o.wrap = false -- Disable line wrap
+opt.ignorecase     = true
+opt.smartcase      = true
+opt.expandtab      = true
+opt.smartindent    = true
+opt.wrap           = false
+opt.number         = true
+opt.relativenumber = true
+opt.scrolloff      = 4
+opt.sidescrolloff  = 8
+opt.completeopt    = { "menu", "menuone", "noselect" }
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.tabstop       = 4
+opt.shiftwidth    = 4
+opt.softtabstop   = 4
+opt.expandtab     = true
 
 -- appearance
-o.title = true
-o.termguicolors = true -- True color support
-o.conceallevel = 3 -- Hide * markup for bold and italic
-o.number = true -- Print line number
-o.relativenumber = true -- Relative line numbers
---o.showmode = false -- Dont show mode since we have a statusline
-o.pumblend = 15 -- Popup blend
-o.winblend = 15
-o.laststatus = 3 -- global statusline
-o.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-o.colorcolumn = "80"
-o.cursorline = true -- Enable highlighting of the current line
-o.cursorcolumn = true -- Enable highlighting of the current column
-o.scrolloff = 4 -- Lines of context
-o.sidescrolloff = 8 -- Columns of context
-o.fillchars = {
+opt.title         = true
+opt.termguicolors = true
+opt.winblend      = 0
+opt.pumblend      = 0
+opt.pumheight     = 10
+opt.signcolumn    = "yes"
+opt.colorcolumn   = "80"
+opt.cursorline    = true
+opt.cursorcolumn  = true
+opt.showmode      = false
+opt.cmdheight     = 1
+opt.conceallevel  = 3
+opt.visualbell    = true
+opt.fillchars     = {
   eob = " ",
   fold = " ",
   foldclose = "",
@@ -62,31 +56,12 @@ o.fillchars = {
   diff = "╱",
   vert = "▏",
 }
-o.listchars = {
+opt.listchars     = {
   space = " ",
   trail = "⋅",
-  tab = "  ",
-  eol = "⌍",
+  tab = "  ▸",
+  -- eol = "↵" | "⌍" | "↩",
   extends = "❯",
   precedes = "❮",
   nbsp = "␣",
 }
-o.statuscolumn = [[%!v:lua.require'util.ui'.statuscolumn()]]
-o.winminwidth = 5 -- Minimum window width
-o.visualbell = true
-
--- completion
-o.completeopt = "menu,menuone,noselect,preview"
-o.list = true -- Show some invisible characters (tabs...
-o.pumheight = 10 -- Maximum number of entries in a popup
-
--- Folding
-o.foldlevel = 99
-o.foldtext = "v:lua.require'util.ui'.foldtext()"
--- o.foldtext = "v:lua.vim.treesitter.foldtext()"
-o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-o.foldmethod = "expr"
-
--- misc
-g.markdown_recommended_style = 0
-o.formatexpr = "v:lua.require'util'.format.formatexpr()"

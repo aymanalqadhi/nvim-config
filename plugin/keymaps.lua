@@ -1,107 +1,48 @@
--- register keybindings
-Void.core.keys.register_many({
-  -- better up/down
-  {
-    j = { "v:count == 0 ? 'gj' : 'j'", "Up" },
-    k = { "v:count == 0 ? 'gk' : 'k'", "Up" },
-    mode = { "n", "x" },
-    opts = { expr = true },
-  },
+local set = vim.keymap.set
 
-  -- hjkl window movement
-  {
-    ["<C-h>"] = { "<C-w>h", "Go to left window" },
-    ["<C-j>"] = { "<C-w>j", "Go to lower window" },
-    ["<C-k>"] = { "<C-w>k", "Go to upper window" },
-    ["<C-l>"] = { "<C-w>l", "Go to right window" },
-    mode = "n",
-  },
+-- window navigation
+set("n", "<c-h>", "<c-w><c-h>", { desc = "left window" })
+set("n", "<c-j>", "<c-w><c-j>", { desc = "lower window" })
+set("n", "<c-k>", "<c-w><c-k>", { desc = "upper window" })
+set("n", "<c-l>", "<c-w><c-l>", { desc = "right window" })
 
-  -- window resizing
-  {
-    ["<C-Up>"] = { "<cmd>resize +2<cr>", "Increase window height" },
-    ["<C-Down>"] = { "<cmd>resize -2<cr>", "Decrease window height" },
-    ["<C-Left>"] = { "<cmd>vertical resize -2<cr>", "Decrease window width" },
-    ["<C-Right>"] = { "<cmd>vertical resize +2<cr>", "Increase window width" },
-    mode = "n",
-  },
+-- window resizing
+set("n", "<c-left>", "<cmd>vert resize 1<cr>", { desc = "shrink window" })
+set("n", "<c-down>", "<cmd>resize -2<cr>", { desc = "shorten window" })
+set("n", "<c-up>", "<cmd>resize +3<cr>", { desc = "longen window" })
+set("n", "<c-right>", "<cmd>vert resize +2<cr>", { desc = "widen window" })
 
-  -- window management
-  {
-    ww = { "<cmd>wincmd p<cr>", "Other window" },
-    wd = { "<cmd>wincmd c<cr>", "Close window" },
-    wx = { "<cmd>wincmd x<cr>", "Switch windows" },
-    wq = { "<cmd>q<cr>", "Quit" },
-    ["-"] = { "<cmd>wincmd s<cr>", "Split window below" },
-    ["|"] = { "<cmd>wincmd v<cr>", "Split window right" },
-    ["="] = { "<cmd>wincmd =<cr>", "Justify windows" },
+-- buffer navigation
+set("n", "[b", "<cmd>bnext<cr>", { desc = "prev buffer" })
+set("n", "]b", "<cmd>bprevious<cr>", { desc = "next buffer" })
 
-    prefix = "<leader>",
-    opts = { silent = true, remap = true },
-  },
+-- buffer managemenet
+set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "prev buffer" })
+set("n", "<leader>ba", "<cmd>ball<cr>", { desc = "prev buffer" })
 
-  -- terminal keymaps
-  {
-    ["<esc>"] = { "<C-\\><C-n>", "Escape terminal mode" },
-    ["<C-h>"] = { "<cmd>wincmd h<cr>", "Go to left window" },
-    ["<C-j>"] = { "<cmd>wincmd j<cr>", "Go to lower window" },
-    ["<C-k>"] = { "<cmd>wincmd k<cr>", "Go to upper window" },
-    ["<C-l>"] = { "<cmd>wincmd l<cr>", "Go to right window" },
-    -- ["<C-w>"] = { "<C-\\><C-n><C-w>", "Escape terminal mode" },
+-- clear `hlsearch` with `esc`
+set({ "n", "i" }, "<esc>", "<cmd>nohlsearch<cr><esc>", { desc = "clear `hlsearch`" })
 
-    mode = "t",
-  },
+-- better visual-mode indentation
+set("v", "<", "<gv", { desc = "indent left" })
+set("v", ">", ">gv", { desc = "indent right" })
 
-  -- move lines
-  {
-    {
-      ["<A-j>"] = { "<cmd>m .+1<cr>==", "Move down" },
-      ["<A-k>"] = { "<cmd>m .-2<cr>==", "Move up" },
-      mode = "n",
-    },
-    {
-      ["<A-j>"] = { "<esc><cmd>m .+1<cr>==gi", "Move down" },
-      ["<A-k>"] = { "<esc><cmd>m .-2<cr>==gi", "Move up" },
-      mode = "i",
-    },
-    {
-      ["<A-j>"] = { ":m '>+1<cr>gv=gv", "Move down" },
-      ["<A-k>"] = { ":m '<-2<cr>gv=gv", "Move up" },
-      mode = "v",
-    },
-  },
+-- move lines
+set("n", "<m-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
+set("n", "<m-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })
+set("i", "<m-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "move line down" })
+set("i", "<m-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "move line up" })
+set("v", "<m-j>", ":m '>+1<cr>gv=gv", { desc = "move selection down" })
+set("v", "<m-k>", ":m '<-2<cr>gv=gv", { desc = "move selection up" })
 
-  -- clear search with <esc>
-  {
-    ["<esc>"] = { "<cmd>noh<cr><esc>", "Escape and clear hlsearch" },
-    mode = { "i", "n" },
-  },
+-- terminal
+function _G.set_terminal_keymaps()
+  local opts = { buffer = 0 }
 
-  -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-  {
-    {
-      n = { "'Nn'[v:searchforward].'zv'", "Next search result" },
-      N = { "'nN'[v:searchforward].'zv'", "Prev search result" },
-      mode = "n",
-    },
-    {
-      n = { "'Nn'[v:searchforward]", "Next search result" },
-      N = { "'nN'[v:searchforward]", "Prev search result" },
-      mode = { "x", "o" },
-    },
-    opts = { expr = true },
-  },
-
-  -- keywordprg
-  {
-    ["<leader>K"] = { "<cmd>norm! K<cr>", "Keywordprg" },
-    mode = "n",
-  },
-
-  -- better indentations
-  {
-    ["<"] = "<gv",
-    [">"] = ">gv",
-    mode = "v",
-  },
-})
+  set("t", "<esc><esc>", "<c-\\><c-n>", opts)
+  set("t", "<c-h>", "<cmd>wincmd h<cr>", opts)
+  set("t", "<c-j>", "<cmd>wincmd j<cr>", opts)
+  set("t", "<c-k>", "<cmd>wincmd k<cr>", opts)
+  set("t", "<c-l>", "<cmd>wincmd l<cr>", opts)
+end
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")

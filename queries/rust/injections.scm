@@ -6,8 +6,33 @@
     name: (identifier) @_name (#match? @_name "^query"))
 
   ;; query string
-  (token_tree [(string_literal)     @injection.content
-               (raw_string_literal) @injection.content])
+  (token_tree (raw_string_literal) @injection.content)
 
   (#offset! @injection.content 1 0 0 0)
+  (#set! injection.language "sql"))
+
+;; `(sqlx|diesel)::(.*query.*)` functions with raw string literals
+(call_expression
+  ;; query function
+  (scoped_identifier
+    path: (identifier) @_path (#any-of? @_path "sqlx" "diesel")
+    name: (identifier) @_name (#contains? @_name "query"))
+
+  ;; query string
+  (arguments (raw_string_literal) @injection.content)
+
+  (#offset! @injection.content 1 0 0 0)
+  (#set! injection.language "sql"))
+
+;; `(sqlx|diesel)::(.*query.*)` functions with string literals
+(call_expression
+  ;; query function
+  (scoped_identifier
+    path: (identifier) @_path (#any-of? @_path "sqlx" "diesel")
+    name: (identifier) @_name (#contains? @_name "query"))
+
+  ;; query string
+  (arguments (string_literal) @injection.content)
+
+  (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "sql"))
