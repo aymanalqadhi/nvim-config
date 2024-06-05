@@ -4,15 +4,6 @@ return {
 
     ft = { "rust" },
 
-    keys = {
-      { "K",   "<cmd>RustHoverActions<cr>", desc = "rust: hover actions" },
-      { ",ra", "<cmd>RustCodeAction<cr>",   desc = "rust: code actions" },
-      { ",rd", "<cmd>RustDebuggables<cr>",  desc = "rust: debuggables" },
-      { ",re", "<cmd>RustExpand<cr>",       desc = "rust: expand" },
-      { ",rt", "<cmd>RustTest<cr>",         desc = "rust: test" },
-      { ",rr", "<cmd>RustRun<cr>",          desc = "rust: test" },
-    },
-
     init = function()
       vim.g.rustaceanvim = {
         server = {
@@ -40,6 +31,32 @@ return {
           },
         },
       }
+    end,
+
+    config = function()
+      vim.api.nvim_create_augroup("void-rust", { clear = true })
+      vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+        pattern = "rust",
+        callback = function(args)
+          local bufnr = args.bufnr
+
+          local function set(lhs, rhs, opt)
+            vim.keymap.set(opt.mode or "n", lhs, rhs, {
+              buffer = bufnr,
+              noremap = true,
+              silent = true,
+              desc = opt.desc,
+            })
+          end
+
+          set("K", "<cmd>RustHoverActions<cr>", { desc = "rust: hover actions" })
+          set(",ra", "<cmd>RustCodeAction<cr>", { desc = "rust: code actions" })
+          set(",rd", "<cmd>RustDebuggables<cr>", { desc = "rust: debuggables" })
+          set(",re", "<cmd>RustExpand<cr>", { desc = "rust: expand" })
+          set(",rt", "<cmd>RustTest<cr>", { desc = "rust: test" })
+          set(",rr", "<cmd>RustRun<cr>", { desc = "rust: test" })
+        end,
+      })
     end,
   },
 
