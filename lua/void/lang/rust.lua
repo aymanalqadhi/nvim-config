@@ -2,8 +2,6 @@ return {
   {
     "mrcjkb/rustaceanvim",
 
-    ft = { "rust" },
-
     init = function()
       vim.g.rustaceanvim = {
         server = {
@@ -34,27 +32,36 @@ return {
     end,
 
     config = function()
-      vim.api.nvim_create_augroup("void-rust", { clear = true })
       vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
         pattern = "rust",
+        group = vim.api.nvim_create_augroup("void-rust", { clear = true }),
         callback = function(args)
-          local bufnr = args.bufnr
+          require("void.core.keymap").register({
+            {
+              a = { "<cmd>RustLsp codeAction<cr>", "rust: code actions" },
+              d = { "<cmd>RustLsp debuggables<cr>", "rust: debuggables" },
+              D = { "<cmd>RustLsp debug<cr>", "rust: debug" },
+              e = { "<cmd>RustLsp explainError<cr>", "rust: explain error" },
+              h = {
+                a = { "<cmd>RustLsp hover actions<cr>", "rust: hover actions" },
+                r = { "<cmd>RustLsp hover range<cr>", "rust: hover range" },
+              },
+              m = { "<cmd>RustLsp expandMacro<cr>", "rust: expand macro" },
+              r = { "<cmd>RustLsp runnables<cr>", "rust: runnables" },
+              R = { "<cmd>RustLsp run<cr>", "rust: run" },
+              t = { "<cmd>RustLsp testables<cr>", "rust: testables" },
+              T = { "<cmd>RustTest<cr>", "rust: test" },
+              v = {
+                a = { "<cmd>RustEmitAsm<cr>", "rust: view asm" },
+                i = { "<cmd>RustEmitIr<cr>", "rust: view llvm ir" },
+                h = { "<cmd>RustLsp view hir<cr>", "rust: view hir" },
+                m = { "<cmd>RustLsp view mir<cr>", "rust: view mir" },
+              },
+              prefix = ",r",
+            },
 
-          local function set(lhs, rhs, opt)
-            vim.keymap.set(opt.mode or "n", lhs, rhs, {
-              buffer = bufnr,
-              noremap = true,
-              silent = true,
-              desc = opt.desc,
-            })
-          end
-
-          set("K", "<cmd>RustHoverActions<cr>", { desc = "rust: hover actions" })
-          set(",ra", "<cmd>RustCodeAction<cr>", { desc = "rust: code actions" })
-          set(",rd", "<cmd>RustDebuggables<cr>", { desc = "rust: debuggables" })
-          set(",re", "<cmd>RustExpand<cr>", { desc = "rust: expand" })
-          set(",rt", "<cmd>RustTest<cr>", { desc = "rust: test" })
-          set(",rr", "<cmd>RustRun<cr>", { desc = "rust: test" })
+            opts = { buffer = args.bufnr },
+          })
         end,
       })
     end,
@@ -65,24 +72,30 @@ return {
     "Saecki/crates.nvim",
 
     event = { "BufRead Cargo.toml" },
-    keys = {
-      {
-        "K",
-        function()
-          if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-            require("crates").show_popup()
-          else
-            vim.lsp.buf.hover()
-          end
-        end,
-        desc = "Show Crate Documentation",
+
+    opts = {
+      completion = {
+        cmp = { enabled = true },
+        crates = { enabled = true },
       },
     },
 
-    opts = {
-      source = {
-        cmp = { enabled = true },
-      },
-    },
+    config = function(_, opts)
+      local crates = require("crates")
+
+      crates.setup(opts)
+
+      vim.api.nvim_create_autocmd("BufRead", {
+        pattern = { "Cargo.toml" },
+        group = vim.api.nvim_create_augroup("void-crates", { clear = true }),
+        callback = function(args)
+          require("void.core.keymap").register({
+            K = { crates.show_popup, "rust: show crate documentation" },
+
+            opts = { buffer = args.bufnr },
+          })
+        end
+      })
+    end
   },
 }

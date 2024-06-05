@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
 
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 
   dependencies = {
     {
@@ -17,7 +17,7 @@ return {
 
   opts = {
     -- diagnostic
-    diagnostic = {
+    diagnostics = {
       underline = true,
       update_in_insert = false,
       virtual_text = {
@@ -67,20 +67,64 @@ return {
           clangdFileStatus = true,
         },
       },
+
       gopls = {
+        filetypes = { 'go', 'gomod', 'gosum', 'gotmpl', 'gohtmltmpl', 'gotexttmpl' },
+        message_level = vim.lsp.protocol.MessageType.Error,
+        cmd = { 'gopls', '-remote.debug=:0' },
+        flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
+        capabilities = {
+          textDocument = {
+            completion = {
+              completionItem = {
+                commitCharactersSupport = true,
+                deprecatedSupport = true,
+                documentationFormat = { 'markdown', 'plaintext' },
+                preselectSupport = true,
+                insertReplaceSupport = true,
+                labelDetailsSupport = true,
+                snippetSupport = true,
+                resolveSupport = {
+                  properties = {
+                    'documentation',
+                    'details',
+                    'additionalTextEdits',
+                  },
+                },
+              },
+              contextSupport = true,
+              dynamicRegistration = true,
+            },
+          },
+        },
+
         settings = {
           gopls = {
-            gofumpt = true,
-            codelenses = {
-              gc_details = false,
-              generate = true,
-              regenerate_cgo = true,
-              run_govulncheck = true,
-              test = true,
-              tidy = true,
-              upgrade_dependency = true,
-              vendor = true,
+            analyses = {
+              unreachable = true,
+              nilness = true,
+              unusedparams = true,
+              useany = true,
+              unusedwrite = true,
+              ST1003 = true,
+              undeclaredname = true,
+              fillreturns = true,
+              nonewvars = true,
+              fieldalignment = true,
+              shadow = true,
             },
+
+            -- codelenses = {
+            --   generate = true,
+            --   gc_details = true,
+            --   run_govulncheck = true,
+            --   test = true,
+            --   tidy = true,
+            --   vendor = true,
+            --   regenerate_cgo = true,
+            --   upgrade_dependency = true,
+            -- },
+
             hints = {
               assignVariableTypes = true,
               compositeLiteralFields = true,
@@ -90,21 +134,22 @@ return {
               parameterNames = true,
               rangeVariableTypes = true,
             },
-            analyses = {
-              fieldalignment = true,
-              nilness = true,
-              unusedparams = true,
-              unusedwrite = true,
-              useany = true,
-            },
+
             usePlaceholders = true,
             completeUnimported = true,
             staticcheck = true,
-            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+            matcher = 'Fuzzy',
+            diagnosticsDelay = '500ms',
+            symbolMatcher = 'fuzzy',
             semanticTokens = true,
+            -- noSemanticTokens = true,
+            buildFlags = { '-tags', 'integration' },
+            gofumpt = true,
+            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
           },
         },
       },
+
       lua_ls = {
         capabilities = {},
         settings = {
@@ -125,13 +170,14 @@ return {
           },
         },
       },
+
       pyright = {},
     },
   },
 
   config = function(_, opts)
     -- setup diagnostics
-    vim.diagnostic.config(opts.diagnostic)
+    vim.diagnostic.config(opts.diagnostics)
 
     -- per-server configuration
     local lspconfig = require("lspconfig")
@@ -141,18 +187,16 @@ return {
       capabilities = require("cmp_nvim_lsp").default_capabilities()
     end
 
-    for server, server_opts in pairs(opts.servers) do
-      if server_opts == true then
-        server_opts = {}
-      end
+    local function setup(server, config)
+      config = vim.tbl_deep_extend("keep", config or {}, {
+        capabilities = capabilities,
+      })
 
-      if server_opts and not server_opts.manual then
-        server_opts = vim.tbl_deep_extend("force", {
-          capabilities = capabilities
-        }, server_opts)
+      lspconfig[server].setup(config)
+    end
 
-        lspconfig[server].setup(server_opts)
-      end
+    for server, config in pairs(opts.servers) do
+      setup(server, config)
     end
 
     -- extra servers installed via mason
@@ -169,49 +213,58 @@ return {
     -- on-attach config
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
-        local bufnr = args.bufnr
-
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-        vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
+        vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = opts.bufnr })
 
-        local function set(lhs, rhs, opt)
-          vim.keymap.set(opt.mode or "n", lhs, rhs, {
-            buffer = bufnr,
-            noremap = true,
-            silent = true,
-            desc = opt.desc,
-          })
-        end
+        -- keymaps
+        require("void.core.keymap").register({
+          -- code navigation
+          {
+            d = { vim.lsp.buf.definition, "lsp: definition" },
+            D = { vim.lsp.buf.declaration, "lsp: declaration" },
+            i = { vim.lsp.buf.implementation, "lsp: implementation" },
+            t = { vim.lsp.buf.type_definition, "lsp: type definition" },
+            c = { vim.lsp.buf.outgoing_calls, "lsp: outgoing calls" },
+            C = { vim.lsp.buf.incoming_calls, "lsp: incoming calls" },
+            r = { vim.lsp.buf.references, "lsp: references" },
+            s = { vim.lsp.buf.document_symbol, "lsp: document symbol" },
+            S = { vim.lsp.buf.workspace_symbol, "lsp: workspace symbol" },
 
-        -- code navigation
-        set("gld", vim.lsp.buf.definition, { desc = "lsp: definition" })
-        set("glD", vim.lsp.buf.declaration, { desc = "lsp: declaration" })
-        set("gli", vim.lsp.buf.implementation, { desc = "lsp: implementation" })
-        set("glt", vim.lsp.buf.type_definition, { desc = "lsp: type definition" })
-        set("glc", vim.lsp.buf.outgoing_calls, { desc = "lsp: outgoing calls" })
-        set("glC", vim.lsp.buf.incoming_calls, { desc = "lsp: incoming calls" })
-        set("glr", vim.lsp.buf.references, { desc = "lsp: references" })
-        set("gls", vim.lsp.buf.document_symbol, { desc = "lsp: document symbol" })
-        set("glS", vim.lsp.buf.workspace_symbol, { desc = "lsp: workspace symbol" })
+            prefix = "gl",
+          },
 
-        -- code actions
-        set("<leader>la", vim.lsp.buf.code_action, { desc = "lsp: code action" })
-        set("<leader>lr", vim.lsp.buf.rename, { desc = "lsp: rename" })
-        set("<leader>ld", vim.diagnostic.open_float, { desc = "lsp: show diagnostic" })
+          -- code actions
+          {
+            a = { vim.lsp.buf.code_action, "lsp: code action" },
+            r = { vim.lsp.buf.rename, "lsp: rename" },
+            f = { vim.lsp.buf.format, "lsp: format" },
+            h = {
+              function()
+                local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = opts.bufnr })
+                vim.lsp.inlay_hint.enable(not is_enabled)
+              end,
+              "lsp: toggle inlay hints",
+            },
 
-        -- assits
-        set("<c-s>", vim.lsp.buf.signature_help, { desc = "lsp: signature help", mode = { "n", "i" } })
-        set("K", vim.lsp.buf.hover, { desc = "lsp: hover" })
-        set("[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "lsp: prev diagnostic" })
-        set("]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "lsp: next diagnostic" })
+            prefix = "<leader>l"
+          },
 
-        -- code formatting
-        set("<leader>lf", vim.lsp.buf.format, { desc = "lsp: format" })
+          -- diagnostics
+          {
+            ["gd"] = { vim.diagnostic.open_float, "lsp: show diagnostic" },
+            ["[d"] = { function() vim.diagnostic.jump({ count = -1 }) end, "lsp: prev diagnostic" },
+            ["]d"] = { function() vim.diagnostic.jump({ count = 1 }) end, "lsp: next diagnostic" },
+          },
 
-        -- inlay hints
-        set("<leader>lh", function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
-        end, { desc = "lsp: toggle inlay hints" })
+          -- assist
+          {
+            K = { vim.lsp.buf.hover, "lsp: hover" },
+
+            ["<c-s>"] = { vim.lsp.buf.signature_help, "lsp: signature help", mode = { "n", "i" } },
+          },
+
+          opts = { buffer = args.bufnr },
+        })
       end
     })
   end,

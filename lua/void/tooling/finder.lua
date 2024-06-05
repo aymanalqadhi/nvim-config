@@ -21,6 +21,7 @@ return {
     { "<leader>fw",  "<cmd>Telescope grep_string<cr>",                        desc = "find: word" },
     { "<leader>fw",  "<cmd>Telescope grep_string<cr>",                        desc = "find: selection",            mode = "v" },
     { "<leader>fm",  "<cmd>Telescope marks<cr>",                              desc = "find: marks" },
+    { "<leader>fk",  "<cmd>Telescope keymaps<cr>",                            desc = "find: keymaps" },
     { '<leader>f"',  "<cmd>Telescope registers<cr>",                          desc = "find: registers" },
     { "<leader>/",   "<cmd>Telescope live_grep<cr>",                          desc = "find: live grep" },
     { "<leader>:",   "<cmd>Telescope command_history<cr>",                    desc = "find: command history" },

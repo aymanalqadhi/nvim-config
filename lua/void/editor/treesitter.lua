@@ -4,9 +4,10 @@ return {
 
     branch = "main",
     build = ":TSUpdate",
-    event = "VeryLazy",
+    lazy = false,
 
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter").setup({
         sync_install = false,
         auto_install = true,
@@ -36,7 +37,9 @@ return {
 
       local select = require("nvim-treesitter-textobjects.select")
       local function map_select(lhs, cap)
-        set({ "x", "o" }, lhs, function() select.select_textobject(cap, "textobjects") end)
+        set({ "x", "o" }, lhs, function()
+          select.select_textobject(cap, "textobjects")
+        end, { desc = "ts: select " .. cap })
       end
 
       map_select("af", "@function.outer")
@@ -47,20 +50,28 @@ return {
       map_select("ip", "@parameter.inner")
 
       local swap = require("nvim-treesitter-textobjects.swap")
-      local function map_swap_next(lhs, cap) set("n", lhs, swap.swap_next(cap)) end
-      local function map_swap_prev(lhs, cap) set("n", lhs, swap.swap_previous(cap)) end
+      local function map_swap_next(lhs, cap)
+        set("n", lhs, swap.swap_next(cap), { desc = "ts: swap next " .. cap })
+      end
+      local function map_swap_prev(lhs, cap)
+        set("n", lhs, swap.swap_previous(cap), { desc = "ts: swap previous " .. cap })
+      end
 
       map_swap_next("<leader>tsp", "@parameter.inner")
+      map_swap_next("<leader>tsP", "@parameter.outer")
       map_swap_prev("<leader>tSp", "@parameter.inner")
+      map_swap_prev("<leader>tSP", "@parameter.outer")
 
       local move = require("nvim-treesitter-textobjects.move")
       local function map_move_next(lhs, cap)
-        local opt = { desc = "move: next " .. cap }
-        set({ "n", "x", "o" }, lhs, function() move.goto_next_start(cap, "textobjects") end, opt)
+        set({ "n", "x", "o" }, lhs, function()
+          move.goto_next_start(cap, "textobjects")
+        end, { desc = "ts: next " .. cap })
       end
       local function map_move_prev(lhs, cap)
-        local opt = { desc = "move: prev " .. cap }
-        set({ "n", "x", "o" }, lhs, function() move.goto_previous_start(cap, "textobjects") end, opt)
+        set({ "n", "x", "o" }, lhs, function()
+          move.goto_previous_start(cap, "textobjects")
+        end, { desc = "ts: prev " .. cap })
       end
 
       map_move_next("]p", "@parameter.inner")
@@ -71,17 +82,22 @@ return {
       map_move_prev("[c", "@class.outer")
 
       local ts_rm = require "nvim-treesitter-textobjects.repeatable_move"
-      set({ "n", "x", "o" }, ";", ts_rm.repeat_last_move)
-      set({ "n", "x", "o" }, ",", ts_rm.repeat_last_move_opposite)
-      set({ "n", "x", "o" }, "f", ts_rm.builtin_f_expr)
-      set({ "n", "x", "o" }, "F", ts_rm.builtin_F_expr)
-      set({ "n", "x", "o" }, "t", ts_rm.builtin_t_expr)
-      set({ "n", "x", "o" }, "T", ts_rm.builtin_T_expr)
+
+      set({ "n", "x", "o" }, ";", ts_rm.repeat_last_move_next)
+      set({ "n", "x", "o" }, ",", ts_rm.repeat_last_move_previous)
+      set({ "n", "x", "o" }, "f", ts_rm.builtin_f_expr, { expr = true })
+      set({ "n", "x", "o" }, "F", ts_rm.builtin_F_expr, { expr = true })
+      set({ "n", "x", "o" }, "t", ts_rm.builtin_t_expr, { expr = true })
+      set({ "n", "x", "o" }, "T", ts_rm.builtin_T_expr, { expr = true })
     end
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "UIEnter",
+
+    keys = {
+      { "<leader>tc", "<cmd>TSContextToggle<cr>", desc = "ts: toggle context" },
+    },
 
     opts = {
       enable = true,

@@ -19,31 +19,24 @@ return {
       lsp_cfg = false,
       lsp_keymaps = false,
       lsp_gofumpt = true,
+      dap_debug_keymap = false,
+      diagnostic = false,
+      textobjects = false,
 
-      diagnostics = {
-        hdlr = true,
-      },
-
-      trouble = true,
-      luasnip = true,
+      -- trouble = true,
+      -- luasnip = true,
     })
 
     vim.api.nvim_create_augroup("void-rust", { clear = true })
     vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
       pattern = { "go", "gomod", "gowork", "gosum" },
       callback = function(args)
-        local bufnr = args.bufnr
+        require("void.core.keymap").register({
+          r = { "<cmd>GoRun<cr>", "go: run" },
 
-        local function set(lhs, rhs, opt)
-          vim.keymap.set(opt.mode or "n", lhs, rhs, {
-            buffer = bufnr,
-            noremap = true,
-            silent = true,
-            desc = opt.desc,
-          })
-        end
-
-        set(",gr", "<cmd>GoRun<cr>", { desc = "go: run" })
+          opts = { buffer = args.bufnr },
+          prefix = "<localeader>g"
+        })
       end,
     })
   end,
