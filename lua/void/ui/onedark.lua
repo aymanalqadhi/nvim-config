@@ -4,6 +4,16 @@ return {
   lazy = false,
   priority = 1000,
 
+  dependencies = {
+    {
+      "rachartier/tiny-devicons-auto-colors.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+
+      config = function()
+      end
+    },
+  },
+
   opts = {
     style = "dark",
     transparent = true,
@@ -35,5 +45,9 @@ return {
   config = function(_, opts)
     require("onedark").setup(opts)
     require("onedark").load()
+
+    require('tiny-devicons-auto-colors').setup({
+      colors = require("onedark.palette").dark,
+    })
   end,
 }

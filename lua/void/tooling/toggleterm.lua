@@ -9,7 +9,7 @@ return {
 
   config = function()
     require("toggleterm").setup({
-      open_mapping = [[<C-\>]],
+      open_mapping = "<c-\\>",
       shade_terminals = true,
       winbar = {
         enabled = false,

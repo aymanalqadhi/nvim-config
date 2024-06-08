@@ -5,43 +5,10 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
 
     ft = { "c", "cpp" },
-    keys = {
-      { ",ci", "<cmd>ClangdToggleInlayHints<cr>",   desc = "c/cpp: toggle inlay hints" },
-      { ",cH", "<cmd>ClangdTypeHierarchy<cr>",      desc = "c/cpp: type hierarchy" },
-      { ",ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "c/cpp: switch source/header" },
-      { ",ca", "<cmd>ClangdAst<cr>",                desc = "c/cpp: show ast" },
-      { ",cm", "<cmd>ClangdMemoryUsage<cr>",        desc = "c/cpp: memory usage" },
-    },
 
     opts = {
-      ast = {
-        role_icons = {
-          type = "",
-          declaration = "",
-          expression = "",
-          specifier = "",
-          statement = "",
-          ["template argument"] = "",
-        },
-        kind_icons = {
-          Compound = "",
-          Recovery = "",
-          TranslationUnit = "",
-          PackExpansion = "",
-          TemplateTypeParm = "",
-          TemplateTemplateParm = "",
-          TemplateParamObject = "",
-        },
-        highlights = {
-          detail = "Comment",
-        },
-      },
-      memory_usage = {
-        border = "none",
-      },
-      symbol_info = {
-        border = "none",
-      },
+      memory_usage = { border = "none" },
+      symbol_info = { border = "none" },
     },
 
     config = function(_, opts)
@@ -54,6 +21,17 @@ return {
           if ft == "c" or ft == "cpp" then
             require("clangd_extensions.inlay_hints").setup_autocmd()
             require("clangd_extensions.inlay_hints").set_inlay_hints()
+
+            require("void.core.keymap").set({
+              ["<localleader>c"] = {
+                i = { "<cmd>ClangdToggleInlayHints<cr>", "c/cpp: toggle inlay hints" },
+                h = { "<cmd>ClangdSwitchSourceHeader<cr>", "c/cpp: switch source/header" },
+                H = { "<cmd>ClangdTypeHierarchy<cr>", "c/cpp: type hierarchy" },
+                a = { "<cmd>ClangdAst<cr>", "c/cpp: show ast" },
+                m = { "<cmd>ClangdMemoryUsage<cr>", "c/cpp: memory usage" },
+              },
+              opts = { buffer = args.bufnr },
+            })
           end
         end
       })

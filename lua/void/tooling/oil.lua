@@ -5,7 +5,7 @@ return {
 
   cmd = "Oil",
   keys = {
-    { "-", "<cmd>Oil<cr>", desc = "fs: view dir" },
+    { "-", "<cmd>Oil<cr>", desc = "oil: view dir" },
   },
 
   opts = {

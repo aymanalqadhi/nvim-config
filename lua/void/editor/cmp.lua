@@ -8,6 +8,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
+      "windwp/nvim-autopairs",
     },
 
     event = { "InsertEnter", "CmdlineEnter" },
@@ -16,7 +17,7 @@ return {
       local kinds = {
         Array         = "",
         Boolean       = "󰨙",
-        Class         = "",
+        Class         = "󰠱",
         Codeium       = "󰘦",
         Color         = "",
         Control       = "",
@@ -32,24 +33,24 @@ return {
         Folder        = "",
         Function      = "󰊕",
         Interface     = "",
-        Key           = "",
-        Keyword       = "",
+        Key           = "",
+        Keyword       = "󰌋",
         Method        = "󰊕",
         Module        = "",
         Namespace     = "󰦮",
-        Null          = "",
+        Null          = "󰟢",
         Number        = "󰎠",
         Object        = "",
         Operator      = "",
         Package       = "",
         Property      = "",
         Reference     = "",
-        Snippet       = "",
+        Snippet       = "",
         String        = "",
         Struct        = "󰆼",
         TabNine       = "󰏚",
         Text          = "",
-        TypeParameter = "",
+        TypeParameter = "󰆩",
         Unit          = "",
         Value         = "",
         Variable      = "󰀫",
@@ -65,10 +66,25 @@ return {
 
         -- completion sources
         sources = {
-          { name = "crates" },
-          { name = "nvim_lsp" },
-          { name = "path" },
-          { name = "buffer" },
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "path",     group_index = 4 },
+          { name = "buffer",   group_index = 4 },
+        },
+
+        -- sorting
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
         },
 
         -- key mappings
@@ -118,7 +134,9 @@ return {
 
         -- misc
         experimental = {
-          enabled = true,
+          ghost_text = {
+            enabled = true,
+          },
           native_menu = false,
         },
       }, opts)
@@ -151,11 +169,12 @@ return {
       })
 
       -- autopairs
+      require("nvim-autopairs").setup()
+
       cmp.event:on(
         "confirm_done",
         require("nvim-autopairs.completion.cmp").on_confirm_done()
       )
     end,
   },
-  { "windwp/nvim-autopairs", opts = {} },
 }

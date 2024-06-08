@@ -8,20 +8,16 @@ local M = {}
 ---@field silent  boolean      # Whether or not the mapping should be silent.
 ---@field noremap boolean      # Whether or not the mapping should be recursive.
 M.default_opts = {
-  buffer  = nil,
-  silent  = true,
-  noremap = true,
+  silent = true,
 }
 
-function M._register(mapping)
+function M._set(prefix, mapping)
   assert(type(mapping) == "table", "mappings should be a table")
 
   local opts = mapping.opts
   local mode = mapping.mode
-  local prefix = mapping.prefix
 
   mapping.opts = nil
-  mapping.prefix = nil
   mapping.mode = nil
 
   if type(mapping[1]) == "string" or type(mapping[1]) == "function" then
@@ -30,18 +26,12 @@ function M._register(mapping)
   else
     for key, inner in pairs(mapping) do
       if type(inner) == "string" then
-        M._register({
-          inner,
-          prefix = prefix .. key,
-          mode = mode,
-          opts = opts,
-        })
+        M._set(prefix .. key, { inner, mode = mode, opts = opts })
       else
-        inner.prefix = prefix .. (inner.prefix or "") .. (type(key) == "string" and key or "")
         inner.mode = inner.mode or mode
-        inner.opts = vim.tbl_extend("force", opts, inner.opts or {})
+        inner.opts = opts and vim.tbl_extend("keep", inner.opts or {}, opts) or inner.opts
 
-        M._register(inner)
+        M._set(prefix .. (type(key) == "string" and key or ""), inner)
       end
     end
   end
@@ -54,17 +44,16 @@ end
 
 ---Applies a key mapping.
 ---@param m VoidMapping|VoidMapping[] Mapping(s) to set.
-function M.register(m)
+function M.set(m)
   if vim.islist(m) then
     for _, mapping in m do
-      M.register(mapping)
+      M.set(mapping)
     end
   else
-    m.prefix = m.prefix or ""
-    m.mode   = m.mode or "n"
-    m.opts   = vim.tbl_extend("force", M.default_opts, m.opts or {})
+    m.mode = m.mode or "n"
+    m.opts = vim.tbl_extend("force", M.default_opts, m.opts or {})
 
-    M._register(m)
+    M._set("", m)
   end
 end
 

@@ -176,8 +176,11 @@ return {
   },
 
   config = function(_, opts)
-    -- setup diagnostics
+    -- diagnostics
     vim.diagnostic.config(opts.diagnostics)
+
+    -- ui
+    require("lspconfig.ui.windows").default_options.border = "none"
 
     -- per-server configuration
     local lspconfig = require("lspconfig")
@@ -216,10 +219,23 @@ return {
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
         vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = opts.bufnr })
 
+        -- diagnostics on cursor hold
+        vim.api.nvim_create_autocmd("CursorHold", {
+          buffer = args.bufnr,
+          callback = function()
+            vim.diagnostic.open_float(nil, {
+              focusable = false,
+              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+              border = "none",
+              source = "always",
+            })
+          end,
+        })
+
         -- keymaps
-        require("void.core.keymap").register({
+        require("void.core.keymap").set({
           -- code navigation
-          {
+          gl = {
             d = { vim.lsp.buf.definition, "lsp: definition" },
             D = { vim.lsp.buf.declaration, "lsp: declaration" },
             i = { vim.lsp.buf.implementation, "lsp: implementation" },
@@ -229,12 +245,10 @@ return {
             r = { vim.lsp.buf.references, "lsp: references" },
             s = { vim.lsp.buf.document_symbol, "lsp: document symbol" },
             S = { vim.lsp.buf.workspace_symbol, "lsp: workspace symbol" },
-
-            prefix = "gl",
           },
 
           -- code actions
-          {
+          ["<leader>l"] = {
             a = { vim.lsp.buf.code_action, "lsp: code action" },
             r = { vim.lsp.buf.rename, "lsp: rename" },
             f = { vim.lsp.buf.format, "lsp: format" },
@@ -245,8 +259,6 @@ return {
               end,
               "lsp: toggle inlay hints",
             },
-
-            prefix = "<leader>l"
           },
 
           -- diagnostics

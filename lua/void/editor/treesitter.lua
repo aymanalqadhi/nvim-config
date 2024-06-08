@@ -7,7 +7,6 @@ return {
     lazy = false,
 
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter").setup({
         sync_install = false,
         auto_install = true,
@@ -105,13 +104,5 @@ return {
       line_numbers = true,
       multiline_threshold = 4,
     }
-  },
-  {
-    "andymass/vim-matchup",
-    event = "VeryLazy",
-
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end
   },
 }

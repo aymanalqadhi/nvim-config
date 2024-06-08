@@ -58,8 +58,10 @@ return {
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
+      local ufo = require("ufo")
+
       ---@diagnostic disable-next-line: missing-fields
-      require("ufo").setup({
+      ufo.setup({
         open_fold_hl_timeout = 150,
         preview = {
           win_config = {
@@ -74,23 +76,18 @@ return {
         end
       })
 
-      local function set(lhs, rhs, opt)
-        vim.keymap.set(opt.mode or "n", lhs, rhs, {
-          noremap = true,
-          silent = true,
-          desc = opt.desc,
-        })
-      end
+      require("void.core.keymap").set({
+        z = {
+          R = { ufo.openAllFolds, "fold: open all" },
+          M = { ufo.closeAllFolds, "fold: close all" },
+          r = { ufo.openFoldsExceptKinds, "fold: open except" },
+          m = { ufo.closeFoldsWith, "fold: close with" },
+        },
 
-      set("zR", require("ufo").openAllFolds, { desc = "fold: open all" })
-      set("zM", require("ufo").closeAllFolds, { desc = "fold: close all" })
-      set("zr", require("ufo").openFoldsExceptKinds, { desc = "fold: open except" })
-      set("zm", require("ufo").closeFoldsWith, { desc = "fold: close with" })
-      set("L", function()
-        if not require("ufo").peekFoldedLinesUnderCursor() then
-          return "L"
-        end
-      end, { desc = "fold: preview" })
+        L = { function() return not ufo.peekFoldedLinesUnderCursor() and "L" end, "fold: peek" },
+
+        opts = { noremap = true, silent = true },
+      })
     end,
   }
 }

@@ -32,12 +32,12 @@ return {
     end,
 
     config = function()
-      vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
-        pattern = "rust",
-        group = vim.api.nvim_create_augroup("void-rust", { clear = true }),
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern  = "rust",
+        group    = vim.api.nvim_create_augroup("void-rust", { clear = true }),
         callback = function(args)
-          require("void.core.keymap").register({
-            {
+          require("void.core.keymap").set({
+            ["<localleader>r"] = {
               a = { "<cmd>RustLsp codeAction<cr>", "rust: code actions" },
               d = { "<cmd>RustLsp debuggables<cr>", "rust: debuggables" },
               D = { "<cmd>RustLsp debug<cr>", "rust: debug" },
@@ -57,7 +57,6 @@ return {
                 h = { "<cmd>RustLsp view hir<cr>", "rust: view hir" },
                 m = { "<cmd>RustLsp view mir<cr>", "rust: view mir" },
               },
-              prefix = ",r",
             },
 
             opts = { buffer = args.bufnr },
@@ -89,7 +88,7 @@ return {
         pattern = { "Cargo.toml" },
         group = vim.api.nvim_create_augroup("void-crates", { clear = true }),
         callback = function(args)
-          require("void.core.keymap").register({
+          require("void.core.keymap").set({
             K = { crates.show_popup, "rust: show crate documentation" },
 
             opts = { buffer = args.bufnr },
@@ -98,4 +97,13 @@ return {
       })
     end
   },
+
+  {
+    "hrsh7th/nvim-cmp",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "luasnip", group_index = 3 })
+      return opts
+    end,
+  }
 }

@@ -27,15 +27,15 @@ return {
       -- luasnip = true,
     })
 
-    vim.api.nvim_create_augroup("void-rust", { clear = true })
-    vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
-      pattern = { "go", "gomod", "gowork", "gosum" },
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern  = { "go", "gomod", "gowork", "gosum" },
+      group    = vim.api.nvim_create_augroup("void-go", { clear = true }),
       callback = function(args)
-        require("void.core.keymap").register({
-          r = { "<cmd>GoRun<cr>", "go: run" },
-
+        require("void.core.keymap").set({
+          ["<localleader>g"] = {
+            r = { "<cmd>GoRun<cr>", "go: run" },
+          },
           opts = { buffer = args.bufnr },
-          prefix = "<localeader>g"
         })
       end,
     })

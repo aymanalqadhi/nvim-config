@@ -27,6 +27,17 @@ set({ "n", "i" }, "<esc>", "<cmd>nohlsearch<cr><esc>", { desc = "clear `hlsearch
 set("v", "<", "<gv", { desc = "indent left" })
 set("v", ">", ">gv", { desc = "indent right" })
 
+-- better command mode
+set("c", "<c-a>", "<home>")
+set("c", "<c-b>", "<left>")
+set("c", "<c-d>", "<del>")
+set("c", "<c-e>", "<end>")
+set("c", "<c-f>", "<right>")
+set("c", "<c-n>", "<down>")
+set("c", "<c-p>", "<up>")
+set("c", "<esc><c-b>", "<s-left>")
+set("c", "<esc><c-f>", "<s-right>")
+
 -- move lines
 set("n", "<m-j>", "<cmd>m .+1<cr>==", { desc = "move line down" })
 set("n", "<m-k>", "<cmd>m .-2<cr>==", { desc = "move line up" })

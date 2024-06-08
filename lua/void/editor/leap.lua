@@ -3,9 +3,9 @@ return {
     "ggandor/leap.nvim",
 
     keys = {
-      { "s",  mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { "S",  mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+      { "s",  mode = { "n", "x", "o" }, desc = "leap: forward" },
+      { "S",  mode = { "n", "x", "o" }, desc = "leap: backward" },
+      { "gs", mode = { "n", "x", "o" }, desc = "leap: from windows" },
     },
 
     config = function(_, opts)
@@ -21,6 +21,7 @@ return {
       vim.keymap.del({ "x", "o" }, "X")
     end,
   },
+
   {
     "tpope/vim-repeat",
     event = "VeryLazy"
