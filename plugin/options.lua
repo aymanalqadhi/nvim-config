@@ -14,6 +14,7 @@ opt.undolevels     = 10000
 opt.shada          = { "'10", "<0", "s10", "h" }
 opt.timeout        = true
 opt.timeoutlen     = 300
+opt.updatetime     = 300
 
 -- editing
 opt.ignorecase     = true
