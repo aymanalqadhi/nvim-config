@@ -40,8 +40,16 @@ return {
       },
     },
 
+    server_defaults = {
+      server_capabilities = {
+        documentHighlightProvider = true,
+      }
+    },
+
     -- per-server configuration
     servers = {
+
+      -- c/cpp
       clangd = {
         filetypes = { "c", "cpp" },
         capabilities = {
@@ -63,11 +71,22 @@ return {
         },
       },
 
+      -- golang
       gopls = {
-        filetypes = { 'go', 'gomod', 'gosum', 'gotmpl', 'gohtmltmpl', 'gotexttmpl' },
+        cmd = { "gopls", "-remote.debug=:0" },
         message_level = vim.lsp.protocol.MessageType.Error,
-        cmd = { 'gopls', '-remote.debug=:0' },
-        flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
+        filetypes = {
+          "go",
+          "gomod",
+          "gosum",
+          "gotmpl",
+          "gohtmltmpl",
+          "gotexttmpl",
+        },
+        flags = {
+          allow_incremental_sync = true,
+          debounce_text_changes = 500,
+        },
         capabilities = {
           textDocument = {
             completion = {
@@ -109,16 +128,16 @@ return {
               shadow = true,
             },
 
-            -- codelenses = {
-            --   generate = true,
-            --   gc_details = true,
-            --   run_govulncheck = true,
-            --   test = true,
-            --   tidy = true,
-            --   vendor = true,
-            --   regenerate_cgo = true,
-            --   upgrade_dependency = true,
-            -- },
+            codelenses = {
+              generate = true,
+              gc_details = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              vendor = true,
+              regenerate_cgo = true,
+              upgrade_dependency = true,
+            },
 
             hints = {
               assignVariableTypes = true,
@@ -133,35 +152,24 @@ return {
             usePlaceholders = true,
             completeUnimported = true,
             staticcheck = true,
-            matcher = 'Fuzzy',
-            diagnosticsDelay = '500ms',
-            symbolMatcher = 'fuzzy',
-            semanticTokens = true,
-            -- noSemanticTokens = true,
-            buildFlags = { '-tags', 'integration' },
+            buildFlags = { "-tags", "integration" },
             gofumpt = true,
-            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
           },
         },
       },
 
+      -- lua
       lua_ls = {
-        capabilities = {},
         settings = {
           Lua = {
-            diagnostics = { globals = { "vim" } },
+            diagnostics = {
+              globals = { "vim" }
+            },
+            runtime = { version = 'LuaJIT' },
             workspace = { checkThirdParty = false },
             completion = { callSnippet = "Replace" },
             codeLens = { enable = true },
             telemetry = { enable = false },
-            hint = {
-              enable = true,
-              setType = false,
-              paramType = true,
-              paramName = "Disable",
-              semicolon = "Disable",
-              arrayIndex = "Disable",
-            },
           },
         },
       },
@@ -179,18 +187,18 @@ return {
 
     -- per-server configuration
     local lspconfig = require("lspconfig")
-    local capabilities = nil
+    local defaults = vim.deepcopy(opts.server_defaults)
 
     if pcall(require, "cmp_nvim_lsp") then
-      capabilities = require("cmp_nvim_lsp").default_capabilities()
+      defaults.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    else
+      defaults.capabilities = vim.lsp.protocol.make_client_capabilities()
     end
 
     local function setup(server, config)
-      config = vim.tbl_deep_extend("keep", config or {}, {
-        capabilities = capabilities,
-      })
-
-      lspconfig[server].setup(config)
+      lspconfig[server].setup(
+        config and vim.tbl_deep_extend("keep", config, defaults) or defaults
+      )
     end
 
     for server, config in pairs(opts.servers) do
@@ -202,7 +210,7 @@ return {
       handlers = {
         function(name)
           if not opts.servers[name] then
-            lspconfig[name].setup({ capabilities = capabilities })
+            setup(name, nil)
           end
         end
       }
@@ -211,21 +219,57 @@ return {
     -- on-attach config
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
-        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-        vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = opts.bufnr })
+        local bufnr = args.bufnr
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-        -- diagnostics on cursor hold
-        vim.api.nvim_create_autocmd("CursorHold", {
-          buffer = args.bufnr,
+        -- completion
+        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+
+        -- formatexpr
+        vim.opt_local.formatexpr = "v:lua.vim.lsp.formatexpr()"
+
+        -- highlight symbol under cursor
+        if client and client.server_capabilities.documentHighlightProvider then
+          local augroup = vim.api.nvim_create_augroup('void.lsp.document_highlight', {
+            clear = false
+          })
+
+          vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup })
+          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            group = augroup,
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+          })
+          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+            group = augroup,
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+          })
+        end
+
+        -- diagnostic float on cursor hold
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          buffer = bufnr,
           callback = function()
             vim.diagnostic.open_float(nil, {
               focusable = false,
               close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
               border = "none",
-              source = "always",
+              source = true,
+              prefix = " ",
+              scope = "cursor",
             })
-          end,
+          end
         })
+
+        -- codelens
+        if client and client.supports_method("textDocument/codeLens") then
+          vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+            group = vim.api.nvim_create_augroup("void-codelens", { clear = true }),
+            buffer = bufnr,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end
 
         -- keymaps
         require("void.core.keymap").set({
@@ -275,4 +319,12 @@ return {
       end
     })
   end,
+
+  init = function()
+    vim.cmd [[
+      hi! def  LspReferenceRead  cterm=bold gui=underline
+      hi! def  LspReferenceWrite cterm=bold gui=underline
+      hi! link LspReferenceText CursorLine
+    ]]
+  end
 }

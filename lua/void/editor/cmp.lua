@@ -17,7 +17,7 @@ return {
       local kinds = {
         Array         = "",
         Boolean       = "󰨙",
-        Class         = "󰠱",
+        Class         = "",
         Codeium       = "󰘦",
         Color         = "",
         Control       = "",
