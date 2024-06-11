@@ -19,9 +19,6 @@ return {
           local ft = vim.bo[args.buf].filetype
 
           if ft == "c" or ft == "cpp" then
-            require("clangd_extensions.inlay_hints").setup_autocmd()
-            require("clangd_extensions.inlay_hints").set_inlay_hints()
-
             require("void.core.keymap").set({
               ["<localleader>c"] = {
                 i = { "<cmd>ClangdToggleInlayHints<cr>", "c/cpp: toggle inlay hints" },
