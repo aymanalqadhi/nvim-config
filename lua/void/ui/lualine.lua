@@ -22,6 +22,16 @@ return {
       TERM = "  ",
       NONE = " ⏺︎ ",
       CONFIRM = " ᐅ ",
+      TERMINAL = " $ ",
+    }
+
+    local status_symbols = {
+      modified = " ",
+      readonly = "",
+      unnamed = " 󰍛",
+      newfile = "",
+      directory = "",
+      alternate_file = "",
     }
 
     require("lualine").setup({
@@ -33,6 +43,25 @@ return {
         },
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+      },
+
+      tabline = {
+        lualine_a = {
+          {
+            "buffers",
+            symbols = status_symbols,
+          },
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = { "encoding" },
+        lualine_z = {
+          {
+            "tabs",
+            show_modified_status = false,
+          },
+        }
       },
 
       sections = {
@@ -54,15 +83,10 @@ return {
           },
           {
             "filename",
-            newfile_status = true,
+            -- newfile_status = true,
             path = 1,
             shorting_target = 48,
-            symbols = {
-              modified = "",
-              readonly = "",
-              unnamed = " 󰍛",
-              newfile = "",
-            },
+            symbols = status_symbols,
             padding = { left = 0, right = 1 },
           },
           {
@@ -130,30 +154,26 @@ return {
         },
       },
       extensions = {
-        "toggleterm",
-        "nvim-tree",
+        "quickfix",
         "lazy",
+        "nvim-dap-ui",
+        "oil",
       },
     })
 
     vim.api.nvim_create_autocmd("RecordingEnter", {
       callback = function()
-        require("lualine").refresh({ place = { "statusline" } })
+        vim.schedule(function()
+          require("lualine").refresh({ place = { "statusline" } })
+        end)
       end,
     })
 
     vim.api.nvim_create_autocmd("RecordingLeave", {
       callback = function()
-        local timer = vim.loop.new_timer()
-        timer:start(
-          50,
-          0,
-          vim.schedule_wrap(function()
-            require("lualine").refresh({
-              place = { "statusline" },
-            })
-          end)
-        )
+        vim.schedule(function()
+          require("lualine").refresh({ place = { "statusline" } })
+        end)
       end,
     })
   end,
