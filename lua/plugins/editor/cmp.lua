@@ -14,50 +14,8 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
 
     opts = function(_, opts)
-      local kinds = {
-        Array         = "",
-        Boolean       = "󰨙",
-        Class         = "",
-        Codeium       = "󰘦",
-        Color         = "",
-        Control       = "",
-        Collapsed     = "",
-        Constant      = "󰏿",
-        Constructor   = "",
-        Copilot       = "",
-        Enum          = "",
-        EnumMember    = "",
-        Event         = "",
-        Field         = "",
-        File          = "",
-        Folder        = "",
-        Function      = "󰊕",
-        Interface     = "",
-        Key           = "",
-        Keyword       = "󰌋",
-        Method        = "󰊕",
-        Module        = "",
-        Namespace     = "󰦮",
-        Null          = "󰟢",
-        Number        = "󰎠",
-        Object        = "",
-        Operator      = "",
-        Package       = "",
-        Property      = "",
-        Reference     = "",
-        Snippet       = "",
-        String        = "",
-        Struct        = "󰆼",
-        TabNine       = "󰏚",
-        Text          = "",
-        TypeParameter = "󰆩",
-        Unit          = "",
-        Value         = "",
-        Variable      = "󰀫",
-        Unknown       = "",
-      }
-
       local cmp = require("cmp")
+      local icons = require("void.config.icons")
 
       return vim.tbl_deep_extend("keep", {
         -- disable tab
@@ -125,7 +83,7 @@ return {
           },
           format = function(_, item)
             item.menu = " · " .. (item.kind or "Unknown")
-            item.kind = kinds[item.kind] or kinds.Unknown
+            item.kind = icons.completion.kinds[item.kind] or icons.misc.Question
             item.abbr = " " .. item.abbr
 
             return item

@@ -22,7 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 
 
 -- load plugins
-require("lazy").setup("void", {
+require("lazy").setup("plugins", {
   change_detection = { enabled = false },
   performance = {
     rtp = {
