@@ -23,7 +23,9 @@ return {
         selection_modes = {
           ["@comment.inner"] = "v",
           ["@comment.outer"] = "V",
+          ["@variable.inner"] = "v",
           ["@variable.outer"] = "v",
+          ["@parameter.inner"] = "v",
           ["@parameter.outer"] = "v",
           ["@function.inner"] = "v",
           ["@function.outer"] = "V",
@@ -46,6 +48,8 @@ return {
 
       map_select("ad", "@comment.outer")
       map_select("id", "@comment.inner")
+      map_select("av", "@variable.outer")
+      map_select("iv", "@variable.inner")
       map_select("ap", "@parameter.outer")
       map_select("ip", "@parameter.inner")
       map_select("af", "@function.outer")
