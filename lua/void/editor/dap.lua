@@ -95,14 +95,16 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         require("dapui").eval(nil, { enter = true })
       end, { desc = "dap: eval" })
+    end,
 
+    init = function()
       vim.fn.sign_define({
         { name = "DapStopped", text = "󰁕", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "DapStoppedLine" },
-        { name = "DapBreakpoint", text = "", texthl = "DiagnosticError" },
+        { name = "DapBreakpoint", text = "", texthl = "DiagnosticError" },
         { name = "DapBreakpointCondition", text = "", texthl = "DiagnosticInfo" },
         { name = "DapBreakpointRejected", text = "", texthl = "DiagnosticWarn" },
         { name = "DapLogPoint", text = ".>" },
       })
-    end,
+    end
   }
 }
