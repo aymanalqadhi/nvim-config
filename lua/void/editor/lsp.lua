@@ -8,11 +8,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       dependencies = { "williamboman/mason.nvim" },
     },
-    {
-      "folke/neodev.nvim",
-      ft = "lua",
-      opts = {}
-    },
   },
 
   opts = {
