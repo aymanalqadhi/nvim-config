@@ -19,7 +19,11 @@ return {
   {
     "hrsh7th/nvim-cmp",
     optional = true,
-    dependencies = { "zbirenbaum/copilot-cmp", opts = {} },
+    dependencies = {
+      "tris203/copilot-cmp",
+      branch = "0.11_compat",
+      opts = {}
+    },
     opts = function(_, opts)
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { link = "DiagnosticHint" })
 
