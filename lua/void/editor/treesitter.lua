@@ -8,7 +8,6 @@ return {
 
     config = function()
       require("nvim-treesitter").setup({
-        sync_install = false,
         auto_install = true,
       })
     end,
@@ -22,9 +21,13 @@ return {
     config = function()
       require("nvim-treesitter-textobjects").setup({
         selection_modes = {
+          ["@comment.inner"] = "v",
+          ["@comment.outer"] = "V",
           ["@variable.outer"] = "v",
           ["@parameter.outer"] = "v",
+          ["@function.inner"] = "v",
           ["@function.outer"] = "V",
+          ["@class.inner"] = "v",
           ["@class.outer"] = "V",
         },
         move = {
@@ -41,12 +44,14 @@ return {
         end, { desc = "ts: select " .. cap })
       end
 
+      map_select("ad", "@comment.outer")
+      map_select("id", "@comment.inner")
+      map_select("ap", "@parameter.outer")
+      map_select("ip", "@parameter.inner")
       map_select("af", "@function.outer")
       map_select("if", "@function.inner")
       map_select("ac", "@class.outer")
       map_select("ic", "@class.inner")
-      map_select("ap", "@parameter.outer")
-      map_select("ip", "@parameter.inner")
 
       local swap = require("nvim-treesitter-textobjects.swap")
       local function map_swap_next(lhs, cap)
@@ -56,6 +61,10 @@ return {
         set("n", lhs, swap.swap_previous(cap), { desc = "ts: swap previous " .. cap })
       end
 
+      map_swap_next("<leader>tsv", "@variable.inner")
+      map_swap_next("<leader>tsV", "@variable.outer")
+      map_swap_prev("<leader>tSv", "@variable.inner")
+      map_swap_prev("<leader>tSV", "@variable.outer")
       map_swap_next("<leader>tsp", "@parameter.inner")
       map_swap_next("<leader>tsP", "@parameter.outer")
       map_swap_prev("<leader>tSp", "@parameter.inner")
