@@ -17,7 +17,7 @@ return {
         selection_caret = " ",
         entry_prefix = "   ",
         path_display = { "truncate" },
-        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        borderchars = Void.config.ui.borderchars,
       },
       extensions = {
         wrap_results = true,
@@ -31,7 +31,7 @@ return {
     -- setup keymaps
     local tbi = require("telescope.builtin")
 
-    require("void.core.keymap").set({
+    Void.core.keymap.set({
       -- find
       ["<leader>f"] = {
         f = { tbi.find_files, "find: files" },

@@ -76,7 +76,7 @@ return {
         end
       })
 
-      require("void.core.keymap").set({
+      Void.core.keymap.set({
         z = {
           R = { ufo.openAllFolds, "fold: open all" },
           M = { ufo.closeAllFolds, "fold: close all" },

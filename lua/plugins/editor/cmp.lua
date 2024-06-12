@@ -14,19 +14,13 @@ return {
     },
 
     opts = function()
+      local config = Void.config
       local cmp = require("cmp")
 
-      local icons = require("void.config.icons")
-      local source_names = {
-        buffer   = "Buffer",
-        cmdline  = "Command",
-        copilot  = "Copilot",
-        crates   = "Crates",
-        lazydev  = "LazyDev",
-        luasnip  = "LuaSnip",
-        nvim_lsp = "LSP",
-        path     = "Path",
-      }
+      local sources = {}
+      for source, opts in pairs(config.completion.sources) do
+        table.insert(sources, { name = source, group_index = opts.group })
+      end
 
       return {
         -- disable tab
@@ -34,31 +28,7 @@ return {
         ["<s-tab>"] = cmp.config.disable,
 
         -- completion sources
-        sources = {
-          { name = "lazydev",  group_index = 0 },
-          { name = "crates",   group_index = 1 },
-          { name = "copilot",  group_index = 2 },
-          { name = "nvim_lsp", group_index = 2 },
-          { name = "luasnip",  group_index = 2 },
-          { name = "path",     group_index = 4 },
-          { name = "buffer",   group_index = 4 },
-        },
-
-        -- sorting
-        -- sorting = {
-        --   priority_weight = 2,
-        --   comparators = {
-        --     cmp.config.compare.offset,
-        --     cmp.config.compare.exact,
-        --     cmp.config.compare.score,
-        --     cmp.config.compare.recently_used,
-        --     cmp.config.compare.locality,
-        --     cmp.config.compare.kind,
-        --     cmp.config.compare.sort_text,
-        --     cmp.config.compare.length,
-        --     cmp.config.compare.order,
-        --   },
-        -- },
+        sources = sources,
 
         -- key mappings
         mapping = {
@@ -97,14 +67,14 @@ return {
             cmp.ItemField.Menu,
           },
           format = function(entry, item)
-            local source = entry.source.name
+            local source = config.completion.sources[entry.source.name]
 
-            if source and #source > 0 then
-              item.menu = " · " .. source_names[source] or source
+            if source then
+              item.menu = " · " .. source.display
             end
 
             item.abbr = " " .. item.abbr
-            item.kind = icons.completion.kinds[item.kind] or icons.misc.Question
+            item.kind = config.icons.kinds[item.kind] or config.icons.Question
 
             return item
           end,
@@ -112,9 +82,7 @@ return {
 
         -- misc
         experimental = {
-          ghost_text = {
-            enabled = true,
-          },
+          ghost_text = { enabled = true },
         },
       }
     end,

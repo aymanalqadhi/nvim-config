@@ -6,16 +6,17 @@ return {
     build = ":TSUpdate",
     lazy = false,
 
-    config = function()
-      require("nvim-treesitter").setup({
-        ensure_install = { "core", "stable" },
-        auto_install = true,
-      })
+    opts = {
+      legacy_syntax = {},
+      ensure_install = { "core", "stable" },
+      auto_install = true,
+    },
+
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
 
       -- auto-enable features
       local augroup = vim.api.nvim_create_augroup("void.treesitter", { clear = true })
-
-      local legacy_syntax = {}
 
       vim.api.nvim_create_autocmd("FileType", {
         group = augroup,
@@ -23,17 +24,14 @@ return {
           local bufnr = args.buf
           local ft = vim.bo[bufnr].filetype
 
-          if not pcall(vim.treesitter.start) then
-            vim.bo[bufnr].syntax = "on"
-            return
-          end
-
-          if legacy_syntax[ft] then
+          if opts.legacy_syntax[ft] then
             vim.bo[bufnr].syntax = "on"
           end
 
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.bo.indentexpr = "v.lua:require'nvim-treesitter'.indentexpr()"
+          if pcall(vim.treesitter.start) then
+            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
         end,
       })
     end,
@@ -46,17 +44,20 @@ return {
 
     config = function()
       require("nvim-treesitter-textobjects").setup({
-        selection_modes = {
-          ["@comment.inner"] = "v",
-          ["@comment.outer"] = "V",
-          ["@variable.inner"] = "v",
-          ["@variable.outer"] = "v",
-          ["@parameter.inner"] = "v",
-          ["@parameter.outer"] = "v",
-          ["@function.inner"] = "v",
-          ["@function.outer"] = "V",
-          ["@class.inner"] = "v",
-          ["@class.outer"] = "V",
+        select = {
+          lookahead = true,
+          selection_modes = {
+            ["@comment.inner"] = "v",
+            ["@comment.outer"] = "V",
+            ["@variable.inner"] = "v",
+            ["@variable.outer"] = "v",
+            ["@parameter.inner"] = "v",
+            ["@parameter.outer"] = "v",
+            ["@function.inner"] = "v",
+            ["@function.outer"] = "V",
+            ["@class.inner"] = "v",
+            ["@class.outer"] = "V",
+          },
         },
         move = {
           set_jumps = true,
@@ -112,6 +113,8 @@ return {
         end, { desc = "ts: prev " .. cap })
       end
 
+      map_move_next("]v", "@variable.inner")
+      map_move_prev("[v", "@variable.inner")
       map_move_next("]p", "@parameter.inner")
       map_move_prev("[p", "@parameter.inner")
       map_move_next("]f", "@function.outer")

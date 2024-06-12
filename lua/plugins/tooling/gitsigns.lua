@@ -18,7 +18,7 @@ return {
   config = function(_, opts)
     require("gitsigns").setup(opts)
 
-    require("void.core.keymap").set({
+    Void.core.keymap.set({
       -- navigation
       ["]h"] = { "<cmd>Gitsigns next_hunk<cr>", "git: next hunk" },
       ["[h"] = { "<cmd>Gitsigns prev_hunk<cr>", "git: prev hunk" },

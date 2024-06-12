@@ -3,7 +3,7 @@ return {
 
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
-    local icons = require("void.config.icons")
+    local icons = Void.config.icons
 
     local modes = {
       COMMAND       = icons.modes.Command,
@@ -120,7 +120,7 @@ return {
                 table.insert(names, client.name)
               end
 
-              return icons.misc.Cog .. " " .. table.concat(names, ", ")
+              return icons.Cog .. " " .. table.concat(names, ", ")
             end,
             color = { gui = "bold" },
           },
@@ -129,7 +129,7 @@ return {
               local reg = vim.fn.reg_recording()
               return #reg > 0 and "REC @" .. reg or ""
             end,
-            icon = icons.misc.Recording,
+            icon = icons.Recording,
             color = "Constant",
           },
         },

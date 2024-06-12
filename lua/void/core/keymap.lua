@@ -1,5 +1,5 @@
 ---Core keymaps management module
----@class void.core.keymap
+---@class Void.core.keymap
 local M = {}
 
 ---Default keymaps options

@@ -11,7 +11,7 @@ return {
   },
 
   opts = function()
-    local icons = require("void.config.icons")
+    local icons = Void.config.icons
 
     return {
       -- diagnostic
@@ -162,6 +162,9 @@ return {
 
         -- lua
         lua_ls = {
+          server_capabilities = {
+            semanticTokensProvider = vim.NIL,
+          },
           settings = {
             Lua = {
               diagnostics = {
@@ -232,7 +235,7 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local bufnr = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
         -- completion
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -241,7 +244,7 @@ return {
         vim.opt_local.formatexpr = "v:lua.vim.lsp.formatexpr()"
 
         -- highlight symbol under cursor
-        if client and client.server_capabilities.documentHighlightProvider then
+        if client.server_capabilities.documentHighlightProvider then
           local augroup = vim.api.nvim_create_augroup('void.lsp.document_highlight', {
             clear = false
           })
@@ -260,7 +263,7 @@ return {
         end
 
         -- codelens
-        if client and client.supports_method("textDocument/codeLens") then
+        if client.supports_method("textDocument/codeLens") then
           vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
             group = vim.api.nvim_create_augroup("void-codelens", { clear = true }),
             buffer = bufnr,
@@ -269,7 +272,7 @@ return {
         end
 
         -- keymaps
-        require("void.core.keymap").set({
+        Void.core.keymap.set({
           -- code navigation
           gl = {
             d = { vim.lsp.buf.definition, "lsp: definition" },
@@ -313,6 +316,18 @@ return {
 
           opts = { buffer = args.bufnr },
         })
+
+        local settings = opts.servers[client.name]
+
+        if settings and settings.server_capabilities then
+          for k, v in pairs(settings.server_capabilities) do
+            if v == vim.NIL then
+              v = nil
+            end
+
+            client.server_capabilities[k] = v
+          end
+        end
       end
     })
   end,
@@ -321,7 +336,7 @@ return {
     vim.cmd [[
       hi! def  LspReferenceRead  cterm=bold gui=underline
       hi! def  LspReferenceWrite cterm=bold gui=underline
-      hi! link LspReferenceText CursorLine
+      hi! link LspReferenceText  CursorLine
     ]]
   end
 }
