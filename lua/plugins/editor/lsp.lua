@@ -130,14 +130,14 @@ return {
               },
 
               codelenses = {
+                gc_details = false,
                 generate = true,
-                gc_details = true,
+                regenerate_cgo = true,
                 run_govulncheck = true,
                 test = true,
                 tidy = true,
-                vendor = true,
-                regenerate_cgo = true,
                 upgrade_dependency = true,
+                vendor = true,
               },
 
               hints = {
@@ -155,6 +155,7 @@ return {
               staticcheck = true,
               buildFlags = { "-tags", "integration" },
               gofumpt = true,
+              semanticTokens = true,
             },
           },
         },
