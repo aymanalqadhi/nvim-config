@@ -70,6 +70,7 @@ return {
   {
     "Saecki/crates.nvim",
 
+    dependencies = { "hrsh7th/nvim-cmp" },
     event = { "BufRead Cargo.toml" },
 
     opts = {
@@ -97,13 +98,4 @@ return {
       })
     end
   },
-
-  {
-    "hrsh7th/nvim-cmp",
-    optional = true,
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "luasnip", group_index = 3 })
-      return opts
-    end,
-  }
 }
