@@ -8,7 +8,33 @@ return {
 
     config = function()
       require("nvim-treesitter").setup({
+        ensure_install = { "core", "stable" },
         auto_install = true,
+      })
+
+      -- auto-enable features
+      local augroup = vim.api.nvim_create_augroup("void.treesitter", { clear = true })
+
+      local legacy_syntax = {}
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = augroup,
+        callback = function(args)
+          local bufnr = args.buf
+          local ft = vim.bo[bufnr].filetype
+
+          if not pcall(vim.treesitter.start) then
+            vim.bo[bufnr].syntax = "on"
+            return
+          end
+
+          if legacy_syntax[ft] then
+            vim.bo[bufnr].syntax = "on"
+          end
+
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.bo.indentexpr = "v.lua:require'nvim-treesitter'.indentexpr()"
+        end,
       })
     end,
   },
