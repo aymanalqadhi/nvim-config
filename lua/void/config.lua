@@ -16,8 +16,11 @@ M.completion = {
 -- UI config
 M.ui = {
   -- borders
-  border = "none",
-  borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+  border         = "single",
+  borderchars    = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+
+  -- opacity
+  float_winblend = 0,
 }
 
 -- icons
@@ -86,7 +89,7 @@ M.icons = {
       Warning = " ",
       Info    = " ",
       Hint    = " ",
-    }
+    },
   },
 
   -- buffer status
@@ -95,7 +98,7 @@ M.icons = {
     NewFile   = "󰐙",
     Readonly  = "",
     Unnamed   = "",
-    Directory = "󰊱"
+    Directory = "󰊱",
   },
 
   -- git

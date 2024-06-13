@@ -1,6 +1,8 @@
 return {
   "folke/which-key.nvim",
+
   event = "VeryLazy",
+
   opts = {
     key_labels = {
       ["<space>"] = "SPC",

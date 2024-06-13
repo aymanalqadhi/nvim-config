@@ -34,20 +34,6 @@ return {
               [vim.diagnostic.severity.HINT] = icons.diagnostics.signs.Hint,
             },
           },
-          float = {
-            focusable = false,
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = "none",
-            source = true,
-            scope = "cursor",
-            format = function(d)
-              if not d.code and d.user_data and d.user_data.lsp then
-                return string.format("%s [%s]", d.message, d.user_data.lsp.code):gsub("1. ", "")
-              end
-
-              return d.message
-            end,
-          },
         },
 
         server_defaults = {
@@ -352,10 +338,10 @@ return {
 
     init = function()
       vim.cmd([[
-      hi! def  LspReferenceRead  cterm=bold gui=underline
-      hi! def  LspReferenceWrite cterm=bold gui=underline
-      hi! link LspReferenceText  CursorLine
-    ]])
+        hi! def  LspReferenceRead  cterm=bold gui=underline
+        hi! def  LspReferenceWrite cterm=bold gui=underline
+        hi! link LspReferenceText  CursorLine
+      ]])
     end,
   },
   {
@@ -365,7 +351,7 @@ return {
 
     opts = {
       formatters_by_ft = {
-        lua = { "stylua" },
+        lua = {},
         python = { "isort", "black" },
       },
       format_on_save = {

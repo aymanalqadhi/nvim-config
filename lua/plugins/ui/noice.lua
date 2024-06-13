@@ -34,9 +34,9 @@ return {
       },
 
       views = {
-        cmdline_popup = { border = { style = "single" } },
-        popupmenu = { border = { style = "single" } },
-        mini = { win_options = { winblend = 0 } },
+        cmdline_popup = { border = { style = Void.config.ui.border } },
+        popupmenu = { border = { style = Void.config.ui.border } },
+        mini = { win_options = { winblend = Void.config.ui.float_winblend } },
       },
 
       messages = {
@@ -76,5 +76,5 @@ return {
         vim.api.nvim_win_set_config(win, { zindex = 100, focusable = false })
       end,
     },
-  }
+  },
 }

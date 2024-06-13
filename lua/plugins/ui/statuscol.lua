@@ -4,7 +4,7 @@ return {
     branch = "0.10",
 
     config = function()
-      local builtin = require "statuscol.builtin"
+      local builtin = require("statuscol.builtin")
 
       require("statuscol").setup({
         setopt = true,
@@ -67,13 +67,13 @@ return {
           win_config = {
             border = { "", "─", "", "", "", "─", "", "" },
             winhighlight = "Normal:Folded",
-            winblend = 0
+            winblend = Void.config.ui.float_winblend,
           },
         },
         ---@diagnostic disable-next-line: unused-local
         provider_selector = function(bufnr, filetype, buftype)
           return { "treesitter", "indent" }
-        end
+        end,
       })
 
       Void.keymap.set({
@@ -84,10 +84,15 @@ return {
           m = { ufo.closeFoldsWith, "fold: close with" },
         },
 
-        L = { function() return not ufo.peekFoldedLinesUnderCursor() and "L" end, "fold: peek" },
+        L = {
+          function()
+            return not ufo.peekFoldedLinesUnderCursor() and "L"
+          end,
+          "fold: peek",
+        },
 
         opts = { noremap = true, silent = true },
       })
     end,
-  }
+  },
 }
