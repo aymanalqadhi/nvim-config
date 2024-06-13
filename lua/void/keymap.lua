@@ -1,15 +1,6 @@
----Core keymaps management module
----@class Void.core.keymap
+--- Key mapping utilities
+---@class Void.keymap
 local M = {}
-
----Default keymaps options
----@class VoidMappingOpts
----@field buffer  number|nil   # Buffer identifier on which to apply keymaps.
----@field silent  boolean      # Whether or not the mapping should be silent.
----@field noremap boolean      # Whether or not the mapping should be recursive.
-M.default_opts = {
-  silent = true,
-}
 
 function M._set(prefix, mapping)
   assert(type(mapping) == "table", "mappings should be a table")
@@ -51,7 +42,7 @@ function M.set(m)
     end
   else
     m.mode = m.mode or "n"
-    m.opts = vim.tbl_extend("force", M.default_opts, m.opts or {})
+    m.opts = m.opts or {}
 
     M._set("", m)
   end

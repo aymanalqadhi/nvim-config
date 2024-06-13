@@ -31,7 +31,7 @@ return {
       pattern  = { "go", "gomod", "gowork", "gosum" },
       group    = vim.api.nvim_create_augroup("void-go", { clear = true }),
       callback = function(args)
-        Void.core.keymap.set({
+        Void.keymap.set({
           ["<localleader>g"] = {
             r = { "<cmd>GoRun<cr>", "go: run" },
           },

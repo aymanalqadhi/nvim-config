@@ -19,7 +19,7 @@ return {
           local ft = vim.bo[args.buf].filetype
 
           if ft == "c" or ft == "cpp" then
-            Void.core.keymap.set({
+            Void.keymap.set({
               ["<localleader>c"] = {
                 i = { "<cmd>ClangdToggleInlayHints<cr>", "c/cpp: toggle inlay hints" },
                 h = { "<cmd>ClangdSwitchSourceHeader<cr>", "c/cpp: switch source/header" },

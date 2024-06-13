@@ -1,6 +1,7 @@
 ---Core module.
 ---@class Void.core
 ---@field keymap Void.core.keymap
-local M = require("void.util.module").make("void.core")
+local M = {
+}
 
 return M

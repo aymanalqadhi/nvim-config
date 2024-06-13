@@ -36,7 +36,7 @@ return {
         pattern  = "rust",
         group    = vim.api.nvim_create_augroup("void-rust", { clear = true }),
         callback = function(args)
-          Void.core.keymap.set({
+          Void.keymap.set({
             ["<localleader>r"] = {
               a = { "<cmd>RustLsp codeAction<cr>", "rust: code actions" },
               d = { "<cmd>RustLsp debuggables<cr>", "rust: debuggables" },
@@ -89,7 +89,7 @@ return {
         pattern = { "Cargo.toml" },
         group = vim.api.nvim_create_augroup("void-crates", { clear = true }),
         callback = function(args)
-          Void.core.keymap.set({
+          Void.keymap.set({
             K = { crates.show_popup, "rust: show crate documentation" },
 
             opts = { buffer = args.bufnr },

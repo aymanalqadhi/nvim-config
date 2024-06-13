@@ -4,11 +4,9 @@ local M = { _init = false }
 ---@class Void
 -----@field config void.config
 ---@field core Void.core
----@field util Void.util
 _G.Void = {
   config = require("void.config"),
-  core = require("void.core"),
-  util = require("void.util"),
+  keymap = require("void.keymap"),
 }
 
 function M.setup()

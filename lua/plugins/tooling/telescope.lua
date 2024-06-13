@@ -31,7 +31,7 @@ return {
     -- setup keymaps
     local tbi = require("telescope.builtin")
 
-    Void.core.keymap.set({
+    Void.keymap.set({
       -- find
       ["<leader>f"] = {
         f = { tbi.find_files, "find: files" },

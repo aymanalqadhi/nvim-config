@@ -76,7 +76,7 @@ return {
         end
       })
 
-      Void.core.keymap.set({
+      Void.keymap.set({
         z = {
           R = { ufo.openAllFolds, "fold: open all" },
           M = { ufo.closeAllFolds, "fold: close all" },
