@@ -14,11 +14,10 @@ return {
     },
 
     opts = function()
-      local config = Void.config
       local cmp = require("cmp")
 
       local sources = {}
-      for source, opts in pairs(config.completion.sources) do
+      for source, opts in pairs(Void.config.completion.sources) do
         table.insert(sources, { name = source, group_index = opts.group })
       end
 
@@ -67,14 +66,14 @@ return {
             cmp.ItemField.Menu,
           },
           format = function(entry, item)
-            local source = config.completion.sources[entry.source.name]
+            local source = Void.config.completion.sources[entry.source.name]
 
             if source then
               item.menu = " · " .. source.display
             end
 
             item.abbr = " " .. item.abbr
-            item.kind = config.icons.kinds[item.kind] or config.icons.Question
+            item.kind = Void.config.icons.kinds[item.kind] or Void.config.icons.Question
 
             return item
           end,

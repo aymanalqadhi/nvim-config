@@ -284,7 +284,6 @@ return {
                 function()
                   require("conform").format({
                     bufnr = bufnr,
-                    async = true,
                     lsp_fallback = true,
                   })
                 end,
@@ -353,6 +352,7 @@ return {
       formatters_by_ft = {
         lua = {},
         python = { "isort", "black" },
+        cmake = { "cmake_format" },
       },
       format_on_save = {
         timeout_ms = 500,
