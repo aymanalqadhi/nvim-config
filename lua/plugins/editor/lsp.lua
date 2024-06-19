@@ -275,7 +275,7 @@ return {
               r = { vim.lsp.buf.rename, "lsp: rename" },
               h = {
                 function()
-                  local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = opts.bufnr })
+                  local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
                   vim.lsp.inlay_hint.enable(not is_enabled)
                 end,
                 "lsp: toggle inlay hints",
@@ -317,7 +317,7 @@ return {
               ["<c-s>"] = { vim.lsp.buf.signature_help, "lsp: signature help", mode = { "n", "i" } },
             },
 
-            opts = { buffer = args.bufnr },
+            opts = { buffer = bufnr },
           })
 
           local settings = opts.servers[client.name]

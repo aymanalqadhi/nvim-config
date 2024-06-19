@@ -1,18 +1,5 @@
 local M = {}
 
--- completion config
-M.completion = {
-  sources = {
-    lazydev  = { display = "LazyDev", group = 0 },
-    crates   = { display = "Crates", group = 1 },
-    copilot  = { display = "Copilot", group = 2 },
-    nvim_lsp = { display = "LSP", group = 2 },
-    luasnip  = { display = "LuaSnip", group = 2 },
-    path     = { display = "Path", group = 4 },
-    buffer   = { display = "Buffer", group = 4 },
-  },
-}
-
 -- UI config
 M.ui = {
   -- borders

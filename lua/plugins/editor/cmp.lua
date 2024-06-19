@@ -16,10 +16,16 @@ return {
     opts = function()
       local cmp = require("cmp")
 
-      local sources = {}
-      for source, opts in pairs(Void.config.completion.sources) do
-        table.insert(sources, { name = source, group_index = opts.group })
-      end
+      local sources_display = {
+        buffer   = "Buffer",
+        cmdline  = "CMD",
+        crates   = "Crates",
+        copilot  = "Copilot",
+        lazydev  = "LazyDev",
+        luasnip  = "LuaSnip",
+        nvim_lsp = "LSP",
+        path     = "Path",
+      }
 
       return {
         -- disable tab
@@ -27,7 +33,15 @@ return {
         ["<s-tab>"] = cmp.config.disable,
 
         -- completion sources
-        sources = sources,
+        sources = {
+          { name = "lazydev",  group_index = 0 },
+          { name = "crates",   group_index = 1 },
+          { name = "copilot",  group_index = 2 },
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "luasnip",  group_index = 2 },
+          { name = "path",     group_index = 4 },
+          { name = "buffer",   group_index = 4 },
+        },
 
         -- key mappings
         mapping = {
@@ -66,10 +80,10 @@ return {
             cmp.ItemField.Menu,
           },
           format = function(entry, item)
-            local source = Void.config.completion.sources[entry.source.name]
+            local source = entry.source.name
 
             if source then
-              item.menu = " · " .. source.display
+              item.menu = " · " .. (sources_display[source] or source)
             end
 
             item.abbr = " " .. item.abbr
