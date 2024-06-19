@@ -45,22 +45,21 @@ return {
         m = { tbi.marks, "find: marks" },
         k = { tbi.keymaps, "find: keymaps" },
 
-        ['"'] = { tbi.registers, "find: registers" },
-        ["?"] = { tbi.help_tags, "find: help pages" },
-      },
-
-      -- git
-      ["<leader>g"] = {
-        b = { tbi.git_branches, "find: branches" },
-        c = { tbi.git_commits, "find: commits" },
-        h = { tbi.git_bcommits, "find: file history" },
-        s = { tbi.git_status, "find: status" },
-        S = { tbi.git_stash, "find: stash" },
+        -- git
+        g = {
+          b = { tbi.git_branches, "find: branches" },
+          c = { tbi.git_commits, "find: commits" },
+          h = { tbi.git_bcommits, "find: file history" },
+          s = { tbi.git_status, "find: status" },
+          S = { tbi.git_stash, "find: stash" },
+        },
       },
 
       -- misc
       ["<leader>/"] = { tbi.live_grep, "find: live grep" },
       ["<leader>:"] = { tbi.command_history, "find: command history" },
+      ['<leader>"'] = { tbi.registers, "find: registers" },
+      ["<leader>?"] = { tbi.help_tags, "find: help pages" },
     })
 
     -- load extensions
