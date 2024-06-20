@@ -2,50 +2,65 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
 
-    branch = "main",
+    branch = "master",
     build = ":TSUpdate",
-    lazy = false,
-
-    opts = {
-      legacy_syntax = {},
-      ensure_install = { "core", "stable" },
-      auto_install = true,
-    },
-
-    config = function(_, opts)
-      require("nvim-treesitter").setup(opts)
-
-      -- auto-enable features
-      local augroup = vim.api.nvim_create_augroup("void.treesitter", { clear = true })
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = augroup,
-        callback = function(args)
-          local bufnr = args.buf
-          local ft = vim.bo[bufnr].filetype
-
-          if opts.legacy_syntax[ft] then
-            vim.bo[bufnr].syntax = "on"
-          end
-
-          if pcall(vim.treesitter.start) then
-            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
-        end,
-      })
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-
-    branch = "main",
     event = "VeryLazy",
 
-    config = function()
-      require("nvim-treesitter-textobjects").setup({
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+
+    opts = {
+      auto_install = true,
+      ensure_installed = {
+        "c",
+        "diff",
+        "lua",
+        "luadoc",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "query",
+        "regex",
+        "vim",
+        "vimdoc",
+      },
+
+      -- better syntax eighlighting
+      highlight = { enable = true },
+
+      -- better indentation
+      indent = { enable = true },
+
+      -- context-aware selection
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<cr>",
+          node_incremental = "<cr>",
+          scope_incremental = "<c-cr>",
+          node_decremental = "<bs>",
+        },
+      },
+
+      -- more advanced text-objects
+      textobjects = {
+        -- selection
         select = {
+          enable = true,
           lookahead = true,
+
+          keymaps = {
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+            ["ad"] = "@comment.outer",
+            ["id"] = "@comment.inner",
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ap"] = "@parameter.outer",
+            ["ip"] = "@parameter.inner",
+            ["av"] = "@variable.outer",
+            ["iv"] = "@variable.inner",
+          },
+
           selection_modes = {
             ["@comment.inner"] = "v",
             ["@comment.outer"] = "V",
@@ -59,83 +74,74 @@ return {
             ["@class.outer"] = "V",
           },
         },
+
+        -- element navigation
         move = {
+          enable = true,
           set_jumps = true,
+
+          goto_next_start = {
+            ["]d"] = { query = "@comment.outer", desc = "ts: next comment" },
+            ["]c"] = { query = "@class.outer", desc = "ts: next class" },
+            ["]f"] = { query = "@function.outer", desc = "ts: next function" },
+            ["]p"] = { query = "@parameter.outer", desc = "ts: next parameter" },
+            ["]v"] = { query = "@variable.outer", desc = "ts: next variable" },
+          },
+
+          goto_previous_start = {
+            ["[d"] = { query = "@comment.outer", desc = "ts: previous comment" },
+            ["[c"] = { query = "@class.outer", desc = "ts: previous class" },
+            ["[f"] = { query = "@function.outer", desc = "ts: previous function" },
+            ["[p"] = { query = "@parameter.outer", desc = "ts: previous parameter" },
+            ["[v"] = { query = "@variable.outer", desc = "ts: previous variable" },
+          },
         },
-      })
 
-      local set = vim.keymap.set
+        -- element swapping
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>tsf"] = { query = "@function.inner", desc = "ts: swap next function" },
+            ["<leader>tsp"] = { query = "@parameter.inner", desc = "ts: swap next parameter" },
+            ["<leader>tsv"] = { query = "@variable.inner", desc = "ts: swap next variable" },
+          },
 
-      local select = require("nvim-treesitter-textobjects.select")
-      local function map_select(lhs, cap)
-        set({ "x", "o" }, lhs, function()
-          select.select_textobject(cap, "textobjects")
-        end, { desc = "ts: select " .. cap })
-      end
+          swap_previous = {
+            ["<leader>tsF"] = { query = "@function.inner", desc = "ts: swap previous function" },
+            ["<leader>tsP"] = { query = "@parameter.inner", desc = "ts: swap previous parameter" },
+            ["<leader>tsV"] = { query = "@variable.inner", desc = "ts: swap previous variable" },
+          },
+        },
 
-      map_select("ad", "@comment.outer")
-      map_select("id", "@comment.inner")
-      map_select("av", "@variable.outer")
-      map_select("iv", "@variable.inner")
-      map_select("ap", "@parameter.outer")
-      map_select("ip", "@parameter.inner")
-      map_select("af", "@function.outer")
-      map_select("if", "@function.inner")
-      map_select("ac", "@class.outer")
-      map_select("ic", "@class.inner")
+        -- lsp enhancement
+        lsp_interop = {
+          enable = true,
+          floating_preview_opts = {},
+          peek_definition_code = {
+            ["gpf"] = { query = "@function.outer", desc = "ts: peek function definition" },
+            ["gpF"] = { query = "@class.outer", desc = "ts: peek function definition in class" },
+          },
+        },
+      },
+    },
 
-      local swap = require("nvim-treesitter-textobjects.swap")
-      local function map_swap_next(lhs, cap)
-        set("n", lhs, swap.swap_next(cap), { desc = "ts: swap next " .. cap })
-      end
-      local function map_swap_prev(lhs, cap)
-        set("n", lhs, swap.swap_previous(cap), { desc = "ts: swap previous " .. cap })
-      end
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
 
-      map_swap_next("<leader>tsv", "@variable.inner")
-      map_swap_next("<leader>tsV", "@variable.outer")
-      map_swap_prev("<leader>tSv", "@variable.inner")
-      map_swap_prev("<leader>tSV", "@variable.outer")
-      map_swap_next("<leader>tsp", "@parameter.inner")
-      map_swap_next("<leader>tsP", "@parameter.outer")
-      map_swap_prev("<leader>tSp", "@parameter.inner")
-      map_swap_prev("<leader>tSP", "@parameter.outer")
+      local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
 
-      local move = require("nvim-treesitter-textobjects.move")
-      local function map_move_next(lhs, cap)
-        set({ "n", "x", "o" }, lhs, function()
-          move.goto_next_start(cap, "textobjects")
-        end, { desc = "ts: next " .. cap })
-      end
-      local function map_move_prev(lhs, cap)
-        set({ "n", "x", "o" }, lhs, function()
-          move.goto_previous_start(cap, "textobjects")
-        end, { desc = "ts: prev " .. cap })
-      end
-
-      map_move_next("]v", "@variable.inner")
-      map_move_prev("[v", "@variable.inner")
-      map_move_next("]p", "@parameter.inner")
-      map_move_prev("[p", "@parameter.inner")
-      map_move_next("]f", "@function.outer")
-      map_move_prev("[f", "@function.outer")
-      map_move_next("]c", "@class.outer")
-      map_move_prev("[c", "@class.outer")
-
-      local ts_rm = require "nvim-treesitter-textobjects.repeatable_move"
-
-      set({ "n", "x", "o" }, ";", ts_rm.repeat_last_move_next)
-      set({ "n", "x", "o" }, ",", ts_rm.repeat_last_move_previous)
-      set({ "n", "x", "o" }, "f", ts_rm.builtin_f_expr, { expr = true })
-      set({ "n", "x", "o" }, "F", ts_rm.builtin_F_expr, { expr = true })
-      set({ "n", "x", "o" }, "t", ts_rm.builtin_t_expr, { expr = true })
-      set({ "n", "x", "o" }, "T", ts_rm.builtin_T_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+      vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = "UIEnter",
 
+    event = "VeryLazy",
     keys = {
       { "<leader>tc", "<cmd>TSContextToggle<cr>", desc = "ts: toggle context" },
     },
