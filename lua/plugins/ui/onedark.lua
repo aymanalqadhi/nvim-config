@@ -35,5 +35,11 @@ return {
   config = function(_, opts)
     require("onedark").setup(opts)
     require("onedark").load()
+
+    vim.cmd([[
+      hi! def  LspReferenceRead  cterm=bold gui=underline
+      hi! def  LspReferenceWrite cterm=bold gui=underline
+      hi! link LspReferenceText  CursorLine
+    ]])
   end,
 }

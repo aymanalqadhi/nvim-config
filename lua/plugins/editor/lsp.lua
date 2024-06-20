@@ -6,180 +6,174 @@ return {
 
     dependencies = {
       "stevearc/conform.nvim",
-      {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-      },
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
     },
 
-    opts = function()
-      local icons = Void.config.icons
-
-      return {
-        -- diagnostic
-        diagnostics = {
-          underline = true,
-          update_in_insert = false,
-          virtual_text = {
-            spacing = 4,
-            source = "if_many",
-            prefix = icons.diagnostics.prefix,
+    opts = {
+      -- diagnostic
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = Void.config.icons.diagnostics.prefix,
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = Void.config.icons.diagnostics.signs.Error,
+            [vim.diagnostic.severity.WARN]  = Void.config.icons.diagnostics.signs.Warning,
+            [vim.diagnostic.severity.INFO]  = Void.config.icons.diagnostics.signs.Info,
+            [vim.diagnostic.severity.HINT]  = Void.config.icons.diagnostics.signs.Hint,
           },
-          severity_sort = true,
-          signs = {
-            text = {
-              [vim.diagnostic.severity.ERROR] = icons.diagnostics.signs.Error,
-              [vim.diagnostic.severity.WARN] = icons.diagnostics.signs.Warning,
-              [vim.diagnostic.severity.INFO] = icons.diagnostics.signs.Info,
-              [vim.diagnostic.severity.HINT] = icons.diagnostics.signs.Hint,
-            },
+        },
+      },
+
+      server_defaults = {
+        server_capabilities = {
+          documentHighlightProvider = true,
+        },
+      },
+
+      -- per-server configuration
+      servers = {
+
+        -- c/cpp
+        clangd = {
+          filetypes = { "c", "cpp", "objcpp", "cuda" },
+          capabilities = {
+            offsetEncoding = { "utf-16" },
+          },
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
           },
         },
 
-        server_defaults = {
-          server_capabilities = {
-            documentHighlightProvider = true,
+        -- golang
+        gopls = {
+          cmd = { "gopls", "-remote.debug=:0" },
+          message_level = vim.lsp.protocol.MessageType.Error,
+          filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
+          flags = {
+            allow_incremental_sync = true,
+            debounce_text_changes = 500,
           },
-        },
-
-        -- per-server configuration
-        servers = {
-
-          -- c/cpp
-          clangd = {
-            filetypes = { "c", "cpp", "objcpp", "cuda" },
-            capabilities = {
-              offsetEncoding = { "utf-16" },
-            },
-            cmd = {
-              "clangd",
-              "--background-index",
-              "--clang-tidy",
-              "--header-insertion=iwyu",
-              "--completion-style=detailed",
-              "--function-arg-placeholders",
-              "--fallback-style=llvm",
-            },
-            init_options = {
-              usePlaceholders = true,
-              completeUnimported = true,
-              clangdFileStatus = true,
-            },
-          },
-
-          -- golang
-          gopls = {
-            cmd = { "gopls", "-remote.debug=:0" },
-            message_level = vim.lsp.protocol.MessageType.Error,
-            filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
-            flags = {
-              allow_incremental_sync = true,
-              debounce_text_changes = 500,
-            },
-            capabilities = {
-              textDocument = {
-                completion = {
-                  completionItem = {
-                    commitCharactersSupport = true,
-                    deprecatedSupport = true,
-                    documentationFormat = { "markdown", "plaintext" },
-                    preselectSupport = true,
-                    insertReplaceSupport = true,
-                    labelDetailsSupport = true,
-                    snippetSupport = true,
-                    resolveSupport = {
-                      properties = {
-                        "documentation",
-                        "details",
-                        "additionalTextEdits",
-                      },
+          capabilities = {
+            textDocument = {
+              completion = {
+                completionItem = {
+                  commitCharactersSupport = true,
+                  deprecatedSupport = true,
+                  documentationFormat = { "markdown", "plaintext" },
+                  preselectSupport = true,
+                  insertReplaceSupport = true,
+                  labelDetailsSupport = true,
+                  snippetSupport = true,
+                  resolveSupport = {
+                    properties = {
+                      "documentation",
+                      "details",
+                      "additionalTextEdits",
                     },
                   },
-                  contextSupport = true,
-                  dynamicRegistration = true,
                 },
-              },
-            },
-
-            settings = {
-              gopls = {
-                analyses = {
-                  unreachable = true,
-                  nilness = true,
-                  unusedparams = true,
-                  useany = true,
-                  unusedwrite = true,
-                  ST1003 = true,
-                  undeclaredname = true,
-                  fillreturns = true,
-                  nonewvars = true,
-                  fieldalignment = true,
-                  shadow = true,
-                },
-
-                codelenses = {
-                  gc_details = false,
-                  generate = true,
-                  regenerate_cgo = true,
-                  run_govulncheck = true,
-                  test = true,
-                  tidy = true,
-                  upgrade_dependency = true,
-                  vendor = true,
-                },
-
-                hints = {
-                  assignVariableTypes = true,
-                  compositeLiteralFields = true,
-                  compositeLiteralTypes = true,
-                  constantValues = true,
-                  functionTypeParameters = true,
-                  parameterNames = true,
-                  rangeVariableTypes = true,
-                },
-
-                usePlaceholders = true,
-                completeUnimported = true,
-                staticcheck = true,
-                buildFlags = { "-tags", "integration" },
-                gofumpt = true,
-                semanticTokens = true,
+                contextSupport = true,
+                dynamicRegistration = true,
               },
             },
           },
 
-          -- lua
-          lua_ls = {
-            server_capabilities = {
-              semanticTokensProvider = vim.NIL,
-            },
-            settings = {
-              Lua = {
-                diagnostics = {
-                  globals = { "vim" },
-                },
-                runtime = { version = "LuaJIT" },
-                workspace = { checkThirdParty = false },
-                completion = { callSnippet = "Replace" },
-                codeLens = { enable = true },
-                doc = { privateName = { "^_" } },
-                hint = {
-                  enable = true,
-                  setType = false,
-                  paramType = true,
-                  paramName = "Disable",
-                  semicolon = "Disable",
-                  arrayIndex = "Disable",
-                },
-                telemetry = { enable = false },
+          settings = {
+            gopls = {
+              analyses = {
+                unreachable = true,
+                nilness = true,
+                unusedparams = true,
+                useany = true,
+                unusedwrite = true,
+                ST1003 = true,
+                undeclaredname = true,
+                fillreturns = true,
+                nonewvars = true,
+                fieldalignment = true,
+                shadow = true,
               },
+
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              buildFlags = { "-tags", "integration" },
+              gofumpt = true,
+              semanticTokens = true,
             },
           },
-
-          pyright = {},
         },
-      }
-    end,
+
+        -- lua
+        lua_ls = {
+          server_capabilities = {
+            semanticTokensProvider = vim.NIL,
+          },
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+              runtime = { version = "LuaJIT" },
+              workspace = { checkThirdParty = false },
+              completion = { callSnippet = "Replace" },
+              codeLens = { enable = true },
+              doc = { privateName = { "^_" } },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+              },
+              telemetry = { enable = false },
+            },
+          },
+        },
+
+        pyright = {},
+      },
+    },
 
     config = function(_, opts)
       -- diagnostics
@@ -225,6 +219,9 @@ return {
 
           -- completion
           vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+
+          -- formatting
+          vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
           -- highlight symbol under cursor
           if client.server_capabilities.documentHighlightProvider then
@@ -334,19 +331,11 @@ return {
         end,
       })
     end,
-
-    init = function()
-      vim.cmd([[
-        hi! def  LspReferenceRead  cterm=bold gui=underline
-        hi! def  LspReferenceWrite cterm=bold gui=underline
-        hi! link LspReferenceText  CursorLine
-      ]])
-    end,
   },
   {
     "stevearc/conform.nvim",
 
-    event = "LspAttach",
+    lazy = true,
 
     opts = {
       formatters_by_ft = {
@@ -359,13 +348,5 @@ return {
         lsp_fallback = true,
       },
     },
-
-    config = function(_, opts)
-      require("conform").setup(opts)
-    end,
-
-    init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
   },
 }
