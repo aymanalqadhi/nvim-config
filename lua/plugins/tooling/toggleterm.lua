@@ -12,6 +12,10 @@ return {
       open_mapping = "<c-\\>",
       persist_size = false,
       shade_terminals = true,
+      highlights = {
+        NormalFloat = { link = "FloatNormal" },
+        FloatBorder = { link = "FloatBorder" },
+      },
       float_opts = {
         winblend = vim.o.winblend,
         title_pos = "center",

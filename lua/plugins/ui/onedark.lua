@@ -1,45 +1,88 @@
 return {
-  "navarasu/onedark.nvim",
+  {
+    "navarasu/onedark.nvim",
 
-  lazy = false,
-  priority = 1000,
+    lazy = false,
+    priority = 1000,
 
-  opts = {
-    style = "dark",
-    transparent = true,
-    term_colors = true,
-    ending_tildes = true,
+    config = function()
+      local fg = "$fg"
+      local fg_dark = "$grey"
+      local fg_border = "$cyan"
+      local fg_title = "$black"
 
-    code_style = {
-      comments = "italic",
-      keywords = "bold",
-      functions = "none",
-      strings = "none",
-      variables = "none",
-    },
+      local bg = "$bg1"
+      local bg_dark = "$bg0"
+      local bg_highlight = "$bg2"
+      local bg_title = "$cyan"
 
-    lualine = {
-      transparent = false,
-    },
+      require("onedark").setup({
+        style         = "dark",
+        transparent   = true,
+        term_colors   = true,
+        ending_tildes = true,
 
-    colors = {},
-    highlights = {},
+        code_style    = {
+          comments = "italic",
+          keywords = "bold",
+          functions = "none",
+          strings = "none",
+          variables = "none",
+        },
 
-    diagnostics = {
-      darker = true,
-      undercurl = true,
-      background = true,
-    },
-  },
+        lualine       = {
+          transparent = false,
+        },
 
-  config = function(_, opts)
-    require("onedark").setup(opts)
-    require("onedark").load()
+        highlights    = {
+          -- bqf
+          BqfPreviewFloat             = { fg = fg, bg = bg_dark },
+          BqfPreviewTitle             = { fg = fg_title, bg = bg_title },
 
-    vim.cmd([[
-      hi! def  LspReferenceRead  cterm=bold gui=underline
-      hi! def  LspReferenceWrite cterm=bold gui=underline
-      hi! link LspReferenceText  CursorLine
-    ]])
-  end,
+          -- float
+          FloatNormal                 = { fg = fg, bg = bg_dark },
+          FloatBorder                 = { fg = fg_border, bg = bg_dark },
+          Title                       = { fg = fg_title, bg = bg_title },
+
+          -- folds
+          FoldColumn                  = { bg = "NONE" },
+          Folded                      = { bg = bg_dark },
+
+          -- lsp highlight
+          LspReferenceRead            = { bg = bg_highlight },
+          LspReferenceWrite           = { bg = bg_highlight },
+          LspReferenceText            = { bg = "NONE", fmt = "underline" },
+
+          -- noice/mini
+          MsgArea                     = { fg = fg, bg = bg },
+
+          -- pmenu
+          Pmenu                       = { fg = fg, bg = bg_highlight },
+
+          -- Telescope
+          TelescopeNormal             = { fg = fg, bg = bg_dark },
+          TelescopeBorder             = { fg = fg_border, bg = bg_dark },
+          TelescopeTitle              = { fg = fg_title, bg = bg_title },
+          TelescopePromptBorder       = { fg = fg_border, bg = bg_dark },
+          TelescopeResultsBorder      = { fg = fg_border, bg = bg_dark },
+          TelescopePreviewBorder      = { fg = fg_border, bg = bg_dark },
+
+          -- toggleterm
+          ToggleTermFloatNormal       = { fg = fg, bg = bg_dark },
+          ToggleTermFloatBorder       = { fg = fg_border, bg = bg_dark },
+
+          -- treesitter context
+          TreesitterContextLineNumber = { fg = fg_dark, bg = bg },
+        },
+
+        diagnostics   = {
+          darker = true,
+          undercurl = true,
+          background = true,
+        },
+      })
+
+      require("onedark").load()
+    end,
+  }
 }
