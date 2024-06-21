@@ -64,7 +64,6 @@ return {
           win_config = {
             border = { "", bc.n, "", "", "", bc.s, "", "" },
             winhighlight = "Normal:Folded",
-            winblend = Void.config.ui.float_winblend,
           },
         },
         ---@diagnostic disable-next-line: unused-local

@@ -22,7 +22,6 @@ return {
 
     require("telescope").setup({
       defaults = {
-        winblend = Void.config.ui.float_winblend,
         prompt_prefix = " ❯ ",
         selection_caret = " ",
         entry_prefix = "   ",

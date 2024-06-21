@@ -36,7 +36,6 @@ return {
       views = {
         cmdline_popup = { border = { style = Void.config.ui.border } },
         popupmenu = { border = { style = Void.config.ui.border } },
-        mini = { win_options = { winblend = Void.config.ui.float_winblend } },
       },
 
       messages = {

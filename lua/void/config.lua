@@ -3,9 +3,6 @@ local M = {}
 -- UI config
 M.ui = {
   -- borders
-
-  -- opacity
-  float_winblend = 0,
   border      = "single",
   borderchars = {
     nw = "┌",

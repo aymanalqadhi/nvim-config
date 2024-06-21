@@ -12,6 +12,9 @@ return {
       open_mapping = "<c-\\>",
       persist_size = false,
       shade_terminals = true,
+      float_opts = {
+        winblend = vim.o.winblend,
+      },
       winbar = {
         enabled = false,
       },

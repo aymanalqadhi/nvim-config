@@ -3,35 +3,36 @@ return {
 
   event = "VeryLazy",
 
-  opts = {
-    key_labels = {
-      ["<space>"] = "SPC",
-      ["<cr>"] = "RET",
-      ["<tab>"] = "TAB",
-    },
-    icons = {
-      breadcrumb = "➜",
-      separator = "",
-      group = "+",
-    },
-    window = {
-      border = "none",
-      margin = { 0, 3, 3, 3 },
-      padding = { 2, 2, 2, 2 },
-    },
-    layout = {
-      height = { min = 4, max = 25 },
-      width = { min = 20, max = 40 },
-      spacing = 4,
-      align = "center",
-    },
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-  },
-
-  config = function(_, opts)
+  config = function()
     local wk = require("which-key")
 
-    wk.setup(opts)
+    wk.setup({
+      key_labels = {
+        ["<space>"] = "SPC",
+        ["<cr>"] = "RET",
+        ["<tab>"] = "TAB",
+      },
+      icons = {
+        breadcrumb = "➜",
+        separator = "",
+        group = "+",
+      },
+      window = {
+        border = "none",
+        margin = { 0, 3, 3, 3 },
+        padding = { 2, 2, 2, 2 },
+        winblend = vim.o.winblend,
+      },
+      layout = {
+        height = { min = 4, max = 25 },
+        width = { min = 20, max = 40 },
+        spacing = 4,
+        align = "center",
+      },
+      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
+    })
+
+
     wk.register({
       ["<leader>d"] = { name = "+dap" },
       ["<leader>f"] = { name = "+find" },
@@ -41,9 +42,9 @@ return {
       ["<leader>t"] = { name = "+treesitter" },
 
       -- lang
-      [",r"] = { name = "+rust" },
-      [",g"] = { name = "+go" },
-      [",c"] = { name = "+cpp" },
+      ["<localleader>r"] = { name = "+rust" },
+      ["<localleader>g"] = { name = "+go" },
+      ["<localleader>c"] = { name = "+cpp" },
     })
   end,
 }

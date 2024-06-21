@@ -4,7 +4,6 @@ return {
   opts = {
     preview = {
       border = Void.config.ui.border,
-      winblend = Void.config.ui.float_winblend
     }
   },
 }
