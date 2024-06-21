@@ -14,12 +14,10 @@ return {
     config = function(_, opts)
       require("clangd_extensions").setup(opts)
 
-      vim.api.nvim_create_autocmd("LspAttach", {
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern  = { "c", "cpp" },
+        group    = vim.api.nvim_create_augroup("void-cpp", { clear = true }),
         callback = function(args)
-          local ft = vim.bo[args.buf].filetype
-
-          if ft == "c" or ft == "cpp" then
-          end
           Void.keymap.buf_set(args.buf, {
             { "<localleader>ch", "<cmd>ClangdToggleInlayHints<cr>",   desc = "c/cpp: toggle inlay hints" },
             { "<localleader>cs", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "c/cpp: switch source/header" },
