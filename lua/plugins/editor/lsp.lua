@@ -64,13 +64,20 @@ return {
 
         -- golang
         gopls = {
-          cmd = { "gopls", "-remote.debug=:0" },
-          message_level = vim.lsp.protocol.MessageType.Error,
-          filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
+          filetypes = {
+            "go",
+            "gomod",
+            "gosum",
+            "gotmpl",
+            "gohtmltmpl",
+            "gotexttmpl",
+          },
+
           flags = {
             allow_incremental_sync = true,
             debounce_text_changes = 500,
           },
+
           capabilities = {
             textDocument = {
               completion = {
@@ -148,30 +155,18 @@ return {
           server_capabilities = {
             semanticTokensProvider = vim.NIL,
           },
+
           settings = {
             Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
+              diagnostics = { globals = { "vim" } },
               runtime = { version = "LuaJIT" },
               workspace = { checkThirdParty = false },
               completion = { callSnippet = "Replace" },
               codeLens = { enable = true },
-              doc = { privateName = { "^_" } },
-              hint = {
-                enable = true,
-                setType = false,
-                paramType = true,
-                paramName = "Disable",
-                semicolon = "Disable",
-                arrayIndex = "Disable",
-              },
               telemetry = { enable = false },
             },
           },
         },
-
-        pyright = {},
       },
     },
 
