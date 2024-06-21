@@ -174,9 +174,6 @@ return {
       -- diagnostics
       vim.diagnostic.config(opts.diagnostics)
 
-      -- ui
-      require("lspconfig.ui.windows").default_options.border = "none"
-
       -- per-server configuration
       local lspconfig = require("lspconfig")
       local defaults = vim.deepcopy(opts.server_defaults)
