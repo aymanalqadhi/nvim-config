@@ -14,6 +14,7 @@ return {
       shade_terminals = true,
       float_opts = {
         winblend = vim.o.winblend,
+        title_pos = "center",
       },
       winbar = {
         enabled = false,
@@ -22,10 +23,14 @@ return {
 
     -- custom terminals
     local term = require("toggleterm.terminal")
-    local floating = term.Terminal:new({ direction = "float" })
+    local floating = term.Terminal:new({
+      direction = "float",
+      display_name = " Terminal ",
+    })
     local lazygit = term.Terminal:new({
       cmd = "lazygit",
       dir = "git_dir",
+      display_name = " LazyGit ",
       direction = "float",
       hidden = true,
       esc_esc = false,
