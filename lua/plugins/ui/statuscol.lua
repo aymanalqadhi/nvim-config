@@ -74,21 +74,17 @@ return {
       })
 
       Void.keymap.set({
-        z = {
-          R = { ufo.openAllFolds, "fold: open all" },
-          M = { ufo.closeAllFolds, "fold: close all" },
-          r = { ufo.openFoldsExceptKinds, "fold: open except" },
-          m = { ufo.closeFoldsWith, "fold: close with" },
-        },
-
-        L = {
+        { "zR", ufo.openAllFolds,         desc = "fold: open all" },
+        { "zM", ufo.closeAllFolds,        desc = "fold: close all" },
+        { "zr", ufo.openFoldsExceptKinds, desc = "fold: open except" },
+        { "zm", ufo.closeFoldsWith,       desc = "fold: close with" },
+        {
+          "L",
           function()
             return not ufo.peekFoldedLinesUnderCursor() and "L"
           end,
-          "fold: peek",
-        },
-
-        opts = { noremap = true, silent = true },
+          desc = "fold: peek",
+        }
       })
     end,
   },

@@ -20,32 +20,28 @@ return {
 
     Void.keymap.set({
       -- navigation
-      ["]h"] = { "<cmd>Gitsigns next_hunk<cr>", "git: next hunk" },
-      ["[h"] = { "<cmd>Gitsigns prev_hunk<cr>", "git: prev hunk" },
+      { "]h",          "<cmd>Gitsigns next_hunk<cr>",        desc = "git: next hunk" },
+      { "[h",          "<cmd>Gitsigns prev_hunk<cr>",        desc = "git: prev hunk" },
 
-      ["<leader>g"] = {
-        -- changes
-        s = { "<cmd>Gitsigns stage_hunk<cr>", "git: stage hunk", mode = { "n", "v" } },
-        u = { "<cmd>Gitsigns undo_stage_hunk<cr>", "git: unstage hunk" },
-        r = { "<cmd>Gitsigns reset_hunk<cr>", "git: reset hunk", mode = { "n", "v" } },
-        p = { "<cmd>Gitsigns preview_hunk<cr>", "git: preview hunk" },
-        S = { "<cmd>Gitsigns stage_buffer<cr>", "git: stage" },
-        R = { "<cmd>Gitsigns reset_buffer<cr>", "git: reset" },
+      -- changes
+      { "<leader>gs",  "<cmd>Gitsigns stage_hunk<cr>",       desc = "git: stage hunk",             mode = { "n", "v" } },
+      { "<leader>gu",  "<cmd>Gitsigns undo_stage_hunk<cr>",  desc = "git: unstage hunk" },
+      { "<leader>gr",  "<cmd>Gitsigns reset_hunk<cr>",       desc = "git: reset hunk",             mode = { "n", "v" } },
+      { "<leader>gp",  "<cmd>Gitsigns preview_hunk<cr>",     desc = "git: preview hunk" },
+      { "<leader>gS",  "<cmd>Gitsigns stage_buffer<cr>",     desc = "git: stage" },
+      { "<leader>gR",  "<cmd>Gitsigns reset_buffer<cr>",     desc = "git: reset" },
 
-        -- diff
-        d = { "<cmd>Gitsigns diffthis<cr>", "git: diff" },
-        D = { "<cmd>Gitsigns diffthis ~<cr>", "git: diff all" },
-        b = { "<cmd>Gitsigns blame_line<cr>", "git: blame" },
+      -- diff
+      { "<leader>gd",  "<cmd>Gitsigns diffthis<cr>",         desc = "git: diff" },
+      { "<leader>gD",  "<cmd>Gitsigns diffthis ~<cr>",       desc = "git: diff all" },
+      { "<leader>gb",  "<cmd>Gitsigns blame_line<cr>",       desc = "git: blame" },
 
-        -- toggles
-        t = {
-          d = { "<cmd>Gitsigns toggle_deleted<cr>", "git: toggle deleted" },
-          w = { "<cmd>Gitsigns toggle_word_diff<cr>", "git: toggle word diff" },
-          l = { "<cmd>Gitsigns toggle_linehl<cr>", "git: toggle line highlight" },
-          L = { "<cmd>Gitsigns toggle_numhl<cr>", "git: toggle number highlight" },
-          s = { "<cmd>Gitsigns toggle_signs<cr>", "git: toggle signs" },
-        },
-      },
+      -- toggles
+      { "<leader>gtd", "<cmd>Gitsigns toggle_deleted<cr>",   desc = "git: toggle deleted" },
+      { "<leader>gtw", "<cmd>Gitsigns toggle_word_diff<cr>", desc = "git: toggle word diff" },
+      { "<leader>gtl", "<cmd>Gitsigns toggle_linehl<cr>",    desc = "git: toggle line highlight" },
+      { "<leader>gTL", "<cmd>Gitsigns toggle_numhl<cr>",     desc = "git: toggle number highlight" },
+      { "<leader>gts", "<cmd>Gitsigns toggle_signs<cr>",     desc = "git: toggle signs" },
     })
   end,
 }

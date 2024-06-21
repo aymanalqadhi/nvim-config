@@ -36,30 +36,22 @@ return {
         pattern  = "rust",
         group    = vim.api.nvim_create_augroup("void-rust", { clear = true }),
         callback = function(args)
-          Void.keymap.set({
-            ["<localleader>r"] = {
-              a = { "<cmd>RustLsp codeAction<cr>", "rust: code actions" },
-              d = { "<cmd>RustLsp debuggables<cr>", "rust: debuggables" },
-              D = { "<cmd>RustLsp debug<cr>", "rust: debug" },
-              e = { "<cmd>RustLsp explainError<cr>", "rust: explain error" },
-              h = {
-                a = { "<cmd>RustLsp hover actions<cr>", "rust: hover actions" },
-                r = { "<cmd>RustLsp hover range<cr>", "rust: hover range" },
-              },
-              m = { "<cmd>RustLsp expandMacro<cr>", "rust: expand macro" },
-              r = { "<cmd>RustLsp runnables<cr>", "rust: runnables" },
-              R = { "<cmd>RustLsp run<cr>", "rust: run" },
-              t = { "<cmd>RustLsp testables<cr>", "rust: testables" },
-              T = { "<cmd>RustTest<cr>", "rust: test" },
-              v = {
-                a = { "<cmd>RustEmitAsm<cr>", "rust: view asm" },
-                i = { "<cmd>RustEmitIr<cr>", "rust: view llvm ir" },
-                h = { "<cmd>RustLsp view hir<cr>", "rust: view hir" },
-                m = { "<cmd>RustLsp view mir<cr>", "rust: view mir" },
-              },
-            },
-
-            opts = { buffer = args.bufnr },
+          Void.keymap.buf_set(args.buf, {
+            { "<localleader>ra",  "<cmd>RustLsp codeAction<cr>",    desc = "rust: code actions" },
+            { "<localleader>rd",  "<cmd>RustLsp debuggables<cr>",   desc = "rust: debuggables" },
+            { "<localleader>rD",  "<cmd>RustLsp debug<cr>",         desc = "rust: debug" },
+            { "<localleader>re",  "<cmd>RustLsp explainError<cr>",  desc = "rust: explain error" },
+            { "<localleader>rha", "<cmd>RustLsp hover actions<cr>", desc = "rust: hover actions" },
+            { "<localleader>rhr", "<cmd>RustLsp hover range<cr>",   desc = "rust: hover range",  mode = { "v" } },
+            { "<localleader>rm",  "<cmd>RustLsp expandMacro<cr>",   desc = "rust: expand macro" },
+            { "<localleader>rr",  "<cmd>RustLsp runnables<cr>",     desc = "rust: runnables" },
+            { "<localleader>rR",  "<cmd>RustLsp run<cr>",           desc = "rust: run" },
+            { "<localleader>rt",  "<cmd>RustLsp testables<cr>",     desc = "rust: testables" },
+            { "<localleader>rT",  "<cmd>RustTest<cr>",              desc = "rust: test" },
+            { "<localleader>rva", "<cmd>RustEmitAsm<cr>",           desc = "rust: view asm" },
+            { "<localleader>rvi", "<cmd>RustEmitIr<cr>",            desc = "rust: view llvm ir" },
+            { "<localleader>rvh", "<cmd>RustLsp view hir<cr>",      desc = "rust: view hir" },
+            { "<localleader>rvm", "<cmd>RustLsp view mir<cr>",      desc = "rust: view mir" },
           })
         end,
       })
@@ -89,10 +81,8 @@ return {
         pattern = { "Cargo.toml" },
         group = vim.api.nvim_create_augroup("void-crates", { clear = true }),
         callback = function(args)
-          Void.keymap.set({
-            K = { crates.show_popup, "rust: show crate documentation" },
-
-            opts = { buffer = args.bufnr },
+          Void.keymap.buf_set(args.buf, {
+            { "K", crates.show_popup, desc = "rust: show crate documentation" },
           })
         end
       })

@@ -251,70 +251,62 @@ return {
             })
           end
 
-          -- keymaps
-          Void.keymap.set({
+          Void.keymap.buf_set(bufnr, {
             -- code navigation
-            gl = {
-              d = { vim.lsp.buf.definition, "lsp: definition" },
-              D = { vim.lsp.buf.declaration, "lsp: declaration" },
-              i = { vim.lsp.buf.implementation, "lsp: implementation" },
-              t = { vim.lsp.buf.type_definition, "lsp: type definition" },
-              c = { vim.lsp.buf.outgoing_calls, "lsp: outgoing calls" },
-              C = { vim.lsp.buf.incoming_calls, "lsp: incoming calls" },
-              r = { vim.lsp.buf.references, "lsp: references" },
-              s = { vim.lsp.buf.document_symbol, "lsp: document symbol" },
-              S = { vim.lsp.buf.workspace_symbol, "lsp: workspace symbol" },
-            },
+            { "gld",        vim.lsp.buf.definition,       desc = "lsp: definition" },
+            { "glD",        vim.lsp.buf.declaration,      desc = "lsp: declaration" },
+            { "gli",        vim.lsp.buf.implementation,   desc = "lsp: implementation" },
+            { "glt",        vim.lsp.buf.type_definition,  desc = "lsp: type definition" },
+            { "glc",        vim.lsp.buf.outgoing_calls,   desc = "lsp: outgoing calls" },
+            { "glC",        vim.lsp.buf.incoming_calls,   desc = "lsp: incoming calls" },
+            { "glr",        vim.lsp.buf.references,       desc = "lsp: references" },
+            { "gls",        vim.lsp.buf.document_symbol,  desc = "lsp: document symbol" },
+            { "glS",        vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
 
             -- code actions
-            ["<leader>l"] = {
-              a = { vim.lsp.buf.code_action, "lsp: code action" },
-              r = { vim.lsp.buf.rename, "lsp: rename" },
-              h = {
-                function()
-                  local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-                  vim.lsp.inlay_hint.enable(not is_enabled)
-                end,
-                "lsp: toggle inlay hints",
-              },
-              f = {
-                function()
-                  require("conform").format({
-                    bufnr = bufnr,
-                    lsp_fallback = true,
-                  })
-                end,
-                "lsp: format",
+            { "<leader>la", vim.lsp.buf.code_action,      desc = "lsp: code action" },
+            { "<leader>lr", vim.lsp.buf.rename,           desc = "lsp: rename" },
+            {
+              "<leader>lh",
+              function()
+                local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+                vim.lsp.inlay_hint.enable(not is_enabled)
+              end,
+              desc = "lsp: toggle inlay hints",
+            },
+            {
+              "<leader>lf",
+              function()
+                require("conform").format({
+                  bufnr = bufnr,
+                  lsp_fallback = true,
+                })
+              end,
 
-                mode = { "n", "v" },
-              },
+              desc = "lsp: format",
+              mode = { "n", "v" },
             },
 
             -- diagnostics
+            { "gd",    vim.diagnostic.open_float,  desc = "lsp: show diagnostic" },
             {
-              ["gd"] = { vim.diagnostic.open_float, "lsp: show diagnostic" },
-              ["[d"] = {
-                function()
-                  vim.diagnostic.jump({ count = -1 })
-                end,
-                "lsp: prev diagnostic",
-              },
-              ["]d"] = {
-                function()
-                  vim.diagnostic.jump({ count = 1 })
-                end,
-                "lsp: next diagnostic",
-              },
+              "[d",
+              function()
+                vim.diagnostic.jump({ count = -1 })
+              end,
+              desc = "lsp: prev diagnostic"
+            },
+            {
+              "]d",
+              function()
+                vim.diagnostic.jump({ count = 1 })
+              end,
+              desc = "lsp: next diagnostic"
             },
 
             -- assist
-            {
-              K = { vim.lsp.buf.hover, "lsp: hover" },
-
-              ["<c-s>"] = { vim.lsp.buf.signature_help, "lsp: signature help", mode = { "n", "i" } },
-            },
-
-            opts = { buffer = bufnr },
+            { "K",     vim.lsp.buf.hover,          desc = "lsp: hover" },
+            { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
           })
 
           local settings = opts.servers[client.name]

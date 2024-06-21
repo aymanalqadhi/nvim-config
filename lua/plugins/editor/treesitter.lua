@@ -128,14 +128,20 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
 
-      local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+      local mode = { "n", "x", "o" }
+      local ts_rm = require("nvim-treesitter.textobjects.repeatable_move")
 
-      vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-      vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+      Void.keymap.set({
+        -- repeatable moves
+        { ";", ts_rm.repeat_last_move,          desc = "ts: repeat last move",           mode = mode },
+        { ",", ts_rm.repeat_last_move_opposite, desc = "ts: repeat last move (inverse)", mode = mode },
+
+        -- find and until
+        { "f", ts_rm.builtin_f_expr,            desc = "ts: find",                       expr = true, mode = mode },
+        { "F", ts_rm.builtin_F_expr,            desc = "ts: find (backwards)",           expr = true, mode = mode },
+        { "t", ts_rm.builtin_t_expr,            desc = "ts: until",                      expr = true, mode = mode },
+        { "T", ts_rm.builtin_T_expr,            desc = "ts: until (backwards)",          expr = true, mode = mode },
+      })
     end
   },
   {

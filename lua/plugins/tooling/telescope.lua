@@ -40,38 +40,40 @@ return {
       },
     })
 
-    -- setup keymaps
+    -- setup key maps
     local tbi = require("telescope.builtin")
+
+    local function dd(fn)
+      return function()
+        fn(require("telescope.themes").get_dropdown({ borderchars = drop_bc }))
+      end
+    end
 
     Void.keymap.set({
       -- find
-      ["<leader>f"] = {
-        f = { tbi.find_files, "find: files" },
-        b = { tbi.buffers, "find: buffers" },
-        r = { tbi.oldfiles, "find: recent" },
-        a = { tbi.autocommands, "find: auto commands" },
-        d = { tbi.lsp_document_diagnostics, "find: document diagnostics" },
-        D = { tbi.lsp_workspace_diagnostics, "find: workspace diagnostics" },
-        h = { tbi.highlights, "find: highlights" },
-        w = { tbi.grep_string, "find: selected" },
-        m = { tbi.marks, "find: marks" },
-        k = { tbi.keymaps, "find: keymaps" },
+      { "<leader>ff",  tbi.find_files,        desc = "find: files" },
+      { "<leader>fb",  tbi.find_files,        desc = "find: buffers" },
+      { "<leader>fr",  tbi.oldfiles,          desc = "find: recent" },
+      { "<leader>fa",  tbi.autocommands,      desc = "find: auto commands" },
+      { "<leader>fd",  tbi.diagnostics,       desc = "find: diagnostics" },
+      { "<leader>fh",  tbi.highlights,        desc = "find: highlights" },
+      { "<leader>fw",  tbi.grep_string,       desc = "find: selected" },
+      { "<leader>fm",  tbi.marks,             desc = "find: marks" },
+      { "<leader>fk",  tbi.keymaps,           desc = "find: keymaps" },
+      { "<leader>fs",  dd(tbi.spell_suggest), desc = "find: spell suggest" },
 
-        -- git
-        g = {
-          b = { tbi.git_branches, "find: branches" },
-          c = { tbi.git_commits, "find: commits" },
-          h = { tbi.git_bcommits, "find: file history" },
-          s = { tbi.git_status, "find: status" },
-          S = { tbi.git_stash, "find: stash" },
-        },
-      },
+      -- git
+      { "<leader>fgb", dd(tbi.git_branches),  desc = "find: branches" },
+      { "<leader>fgc", tbi.git_commits,       desc = "find: commits" },
+      { "<leader>fgh", tbi.git_bcommits,      desc = "find: file history" },
+      { "<leader>fgs", tbi.git_status,        desc = "find: status" },
+      { "<leader>fgS", dd(tbi.git_stash),     desc = "find: stash" },
 
       -- misc
-      ["<leader>/"] = { tbi.live_grep, "find: live grep" },
-      ["<leader>:"] = { tbi.command_history, "find: command history" },
-      ['<leader>"'] = { tbi.registers, "find: registers" },
-      ["<leader>?"] = { tbi.help_tags, "find: help pages" },
+      { "<leader>/",   tbi.live_grep,         desc = "find: live grep" },
+      { "<leader>:",   tbi.command_history,   desc = "find: command history" },
+      { '<leader>"',   tbi.registers,         desc = "find: registers" },
+      { "<leader>?",   tbi.help_tags,         desc = "find: help pages" },
     })
 
     -- load extensions

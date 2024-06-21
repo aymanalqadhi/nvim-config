@@ -19,17 +19,14 @@ return {
           local ft = vim.bo[args.buf].filetype
 
           if ft == "c" or ft == "cpp" then
-            Void.keymap.set({
-              ["<localleader>c"] = {
-                i = { "<cmd>ClangdToggleInlayHints<cr>", "c/cpp: toggle inlay hints" },
-                h = { "<cmd>ClangdSwitchSourceHeader<cr>", "c/cpp: switch source/header" },
-                H = { "<cmd>ClangdTypeHierarchy<cr>", "c/cpp: type hierarchy" },
-                a = { "<cmd>ClangdAst<cr>", "c/cpp: show ast" },
-                m = { "<cmd>ClangdMemoryUsage<cr>", "c/cpp: memory usage" },
-              },
-              opts = { buffer = args.bufnr },
-            })
           end
+          Void.keymap.buf_set(args.buf, {
+            { "<localleader>ch", "<cmd>ClangdToggleInlayHints<cr>",   desc = "c/cpp: toggle inlay hints" },
+            { "<localleader>cs", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "c/cpp: switch source/header" },
+            { "<localleader>ct", "<cmd>ClangdTypeHierarchy<cr>",      desc = "c/cpp: type hierarchy" },
+            { "<localleader>ca", "<cmd>ClangdAst<cr>",                desc = "c/cpp: show ast" },
+            { "<localleader>cm", "<cmd>ClangdMemoryUsage<cr>",        desc = "c/cpp: memory usage" },
+          })
         end
       })
     end,
