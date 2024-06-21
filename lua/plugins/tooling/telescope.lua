@@ -10,6 +10,16 @@ return {
   },
 
   config = function()
+    local ui = Void.config.ui
+    local bc = ui.borderchars
+
+    local main_bc = { bc.n, bc.e, bc.s, bc.w, bc.nw, bc.ne, bc.se, bc.sw }
+    local drop_bc = {
+      prompt  = { bc.n, bc.e, " ", bc.w, bc.nw, bc.ne, bc.e, bc.w },
+      results = { bc.n, bc.e, bc.s, bc.w, bc.wm, bc.em, bc.se, bc.sw },
+      preview = { bc.nc, bc.e, bc.s, bc.w, bc.nw, bc.ne, bc.se, bc.sw }
+    }
+
     require("telescope").setup({
       defaults = {
         winblend = Void.config.ui.float_winblend,
@@ -17,13 +27,15 @@ return {
         selection_caret = " ",
         entry_prefix = "   ",
         path_display = { "truncate" },
-        borderchars = Void.config.ui.borderchars,
+        borderchars = main_bc,
       },
       extensions = {
         wrap_results = true,
         fzf = {},
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown({}),
+          require("telescope.themes").get_dropdown({
+            borderchars = drop_bc,
+          }),
         },
       },
     })

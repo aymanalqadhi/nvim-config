@@ -3,11 +3,22 @@ local M = {}
 -- UI config
 M.ui = {
   -- borders
-  border         = "single",
-  borderchars    = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 
   -- opacity
   float_winblend = 0,
+  border      = "single",
+  borderchars = {
+    nw = "┌",
+    n  = "─",
+    ne = "┐",
+    e  = "│",
+    em = "┤",
+    se = "┘",
+    s  = "─",
+    sw = "└",
+    w  = "│",
+    wm = "├",
+  },
 }
 
 -- icons
