@@ -73,6 +73,8 @@ return {
 
           -- treesitter context
           TreesitterContextLineNumber = { fg = fg_dark, bg = bg },
+          -- cmp
+          CmpItemKindCopilot          = { fg = "$purple" }
         },
 
         diagnostics   = {
