@@ -195,9 +195,7 @@ return {
       require("mason-lspconfig").setup({
         handlers = {
           function(name)
-            if not opts.servers[name] then
-              setup(name, nil)
-            end
+            _ = opts.servers[name] and setup(name, nil)
           end,
         },
       })
@@ -207,11 +205,18 @@ return {
         local bufnr = args.buf
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
+        local cfg = opts.servers[client.name]
+        if cfg and cfg.server_capabilities then
+          for k, v in pairs(cfg.server_capabilities) do
+            client.server_capabilities[k] = v == vim.NIL and nil or v
+          end
+        end
+
         -- completion
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
         -- formatting
-        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        vim.o.formatexpr = 'v:lua.require("conform").formatexpr()'
 
         -- highlight symbol under cursor
         if client.server_capabilities.documentHighlightProvider then
@@ -227,7 +232,7 @@ return {
         end
 
         -- codelens
-        if client.supports_method("textDocument/codeLens") then
+        if client.server_capabilities.codeLensProvider then
           Void.event.on({ "BufEnter", "InsertLeave" }, function(e)
             vim.lsp.codelens.refresh({ bufnr = e.buf })
           end, { group = "lsp:codelens", buffer = bufnr })
@@ -290,18 +295,6 @@ return {
           { "K",     vim.lsp.buf.hover,          desc = "lsp: hover" },
           { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
         })
-
-        local settings = opts.servers[client.name]
-
-        if settings and settings.server_capabilities then
-          for k, v in pairs(settings.server_capabilities) do
-            if v == vim.NIL then
-              v = nil
-            end
-
-            client.server_capabilities[k] = v
-          end
-        end
       end)
     end,
   },
