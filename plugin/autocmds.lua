@@ -1,44 +1,25 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("void_" .. name, { clear = true })
-end
+-- activate cursor line/column for active windows
+Void.event.on({ "InsertLeave", "WinEnter" }, function()
+  vim.wo.cursorline = true
+  vim.wo.cursorcolumn = true
+end, { group = "global:cursorlc_gain" })
 
--- show cursor line only in active window
-vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
-  callback = function()
-    local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorlc")
-    if ok and cl then
-      vim.wo.cursorline = true
-      vim.wo.cursorcolumn = true
-      vim.api.nvim_win_del_var(0, "auto-cursorlc")
-    end
-  end,
-})
-vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
-  callback = function()
-    local cl = vim.wo.cursorline
-    if cl then
-      vim.api.nvim_win_set_var(0, "auto-cursorlc", cl)
-      vim.wo.cursorline = false
-      vim.wo.cursorcolumn = false
-    end
-  end,
+-- deactivate cursor line/column for inactive windows
+Void.event.on({ "InsertEnter", "WinLeave" }, function()
+  vim.wo.cursorline = false
+  vim.wo.cursorcolumn = false
+end, { group = "global:cursorlc_lose" })
+
+-- watch files for external changes
+Void.event.on({ "FocusGained", "TermClose", "TermLeave" }, "checktime", {
+  group = "global:checktime"
 })
 
--- reload file on change
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
-  command = "checktime",
-})
-
--- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
-  callback = function()
-    vim.highlight.on_yank({ on_visual = false, higroup = "Visual" })
-  end,
-})
-
-
-
-})
-
+-- highlight yanked text
+Void.event.on("TextYankPost", function()
+  vim.highlight.on_yank({
+    on_visual = false,
+    timeout = 300,
+    higroup = "Visual",
+  })
+end, { group = "global:yankhl" })

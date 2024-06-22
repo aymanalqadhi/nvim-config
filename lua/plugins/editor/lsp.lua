@@ -204,116 +204,106 @@ return {
       })
 
       -- on-attach config
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          local bufnr = args.buf
-          local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+      Void.event.on("LspAttach", function(args)
+        local bufnr = args.buf
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-          -- completion
-          vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+        -- completion
+        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-          -- formatting
-          vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        -- formatting
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-          -- highlight symbol under cursor
-          if client.server_capabilities.documentHighlightProvider then
-            local augroup = vim.api.nvim_create_augroup("void.lsp.document_highlight", {
-              clear = false,
-            })
-
-            vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup })
-            vim.api.nvim_create_autocmd("CursorHold", {
-              group = augroup,
-              buffer = bufnr,
-              callback = vim.lsp.buf.document_highlight,
-            })
-            vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
-              group = augroup,
-              buffer = bufnr,
-              callback = vim.lsp.buf.clear_references,
-            })
-          end
-
-          -- codelens
-          if client.supports_method("textDocument/codeLens") then
-            vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-              group = vim.api.nvim_create_augroup("void-codelens", { clear = true }),
-              buffer = bufnr,
-              callback = vim.lsp.codelens.refresh,
-            })
-          end
-
-          Void.keymap.buf_set(bufnr, {
-            -- code navigation
-            { "gld",        vim.lsp.buf.definition,       desc = "lsp: definition" },
-            { "glD",        vim.lsp.buf.declaration,      desc = "lsp: declaration" },
-            { "gli",        vim.lsp.buf.implementation,   desc = "lsp: implementation" },
-            { "glt",        vim.lsp.buf.type_definition,  desc = "lsp: type definition" },
-            { "glc",        vim.lsp.buf.outgoing_calls,   desc = "lsp: outgoing calls" },
-            { "glC",        vim.lsp.buf.incoming_calls,   desc = "lsp: incoming calls" },
-            { "glr",        vim.lsp.buf.references,       desc = "lsp: references" },
-            { "gls",        vim.lsp.buf.document_symbol,  desc = "lsp: document symbol" },
-            { "glS",        vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
-
-            -- code actions
-            { "<leader>la", vim.lsp.buf.code_action,      desc = "lsp: code action" },
-            { "<leader>lr", vim.lsp.buf.rename,           desc = "lsp: rename" },
-            {
-              "<leader>lh",
-              function()
-                local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-                vim.lsp.inlay_hint.enable(not is_enabled)
-              end,
-              desc = "lsp: toggle inlay hints",
-            },
-            {
-              "<leader>lf",
-              function()
-                require("conform").format({
-                  bufnr = bufnr,
-                  lsp_fallback = true,
-                })
-              end,
-
-              desc = "lsp: format",
-              mode = { "n", "v" },
-            },
-
-            -- diagnostics
-            { "gd",    vim.diagnostic.open_float,  desc = "lsp: show diagnostic" },
-            {
-              "[d",
-              function()
-                vim.diagnostic.jump({ count = -1 })
-              end,
-              desc = "lsp: prev diagnostic"
-            },
-            {
-              "]d",
-              function()
-                vim.diagnostic.jump({ count = 1 })
-              end,
-              desc = "lsp: next diagnostic"
-            },
-
-            -- assist
-            { "K",     vim.lsp.buf.hover,          desc = "lsp: hover" },
-            { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
+        -- highlight symbol under cursor
+        if client.server_capabilities.documentHighlightProvider then
+          Void.event.on("CursorHold", vim.lsp.buf.document_highlight, {
+            group = "lsp:highlight_gain",
+            buffer = bufnr
           })
 
-          local settings = opts.servers[client.name]
+          Void.event.on({ "CursorMoved", "InsertEnter" }, vim.lsp.buf.clear_references, {
+            group = "lsp:highlight_lose",
+            buffer = bufnr,
+          })
+        end
 
-          if settings and settings.server_capabilities then
-            for k, v in pairs(settings.server_capabilities) do
-              if v == vim.NIL then
-                v = nil
-              end
+        -- codelens
+        if client.supports_method("textDocument/codeLens") then
+          Void.event.on({ "BufEnter", "InsertLeave" }, function(e)
+            vim.lsp.codelens.refresh({ bufnr = e.buf })
+          end, { group = "lsp:codelens", buffer = bufnr })
+        end
 
-              client.server_capabilities[k] = v
+        Void.keymap.buf_set(bufnr, {
+          -- code navigation
+          { "gld",        vim.lsp.buf.definition,       desc = "lsp: definition" },
+          { "glD",        vim.lsp.buf.declaration,      desc = "lsp: declaration" },
+          { "gli",        vim.lsp.buf.implementation,   desc = "lsp: implementation" },
+          { "glt",        vim.lsp.buf.type_definition,  desc = "lsp: type definition" },
+          { "glc",        vim.lsp.buf.outgoing_calls,   desc = "lsp: outgoing calls" },
+          { "glC",        vim.lsp.buf.incoming_calls,   desc = "lsp: incoming calls" },
+          { "glr",        vim.lsp.buf.references,       desc = "lsp: references" },
+          { "gls",        vim.lsp.buf.document_symbol,  desc = "lsp: document symbol" },
+          { "glS",        vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
+
+          -- code actions
+          { "<leader>la", vim.lsp.buf.code_action,      desc = "lsp: code action" },
+          { "<leader>lr", vim.lsp.buf.rename,           desc = "lsp: rename" },
+          {
+            "<leader>lh",
+            function()
+              local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+              vim.lsp.inlay_hint.enable(not is_enabled)
+            end,
+            desc = "lsp: toggle inlay hints",
+          },
+          {
+            "<leader>lf",
+            function()
+              require("conform").format({
+                bufnr = bufnr,
+                lsp_fallback = true,
+              })
+            end,
+
+            desc = "lsp: format",
+            mode = { "n", "v" },
+          },
+
+          -- diagnostics
+          { "gd",    vim.diagnostic.open_float,  desc = "lsp: show diagnostic" },
+          {
+            "[d",
+            function()
+              vim.diagnostic.jump({ count = -1 })
+            end,
+            desc = "lsp: prev diagnostic"
+          },
+          {
+            "]d",
+            function()
+              vim.diagnostic.jump({ count = 1 })
+            end,
+            desc = "lsp: next diagnostic"
+          },
+
+          -- assist
+          { "K",     vim.lsp.buf.hover,          desc = "lsp: hover" },
+          { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
+        })
+
+        local settings = opts.servers[client.name]
+
+        if settings and settings.server_capabilities then
+          for k, v in pairs(settings.server_capabilities) do
+            if v == vim.NIL then
+              v = nil
             end
+
+            client.server_capabilities[k] = v
           end
-        end,
-      })
+        end
+      end)
     end,
   },
   {
