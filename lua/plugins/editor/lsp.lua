@@ -39,7 +39,6 @@ return {
 
       -- per-server configuration
       servers = {
-
         -- c/cpp
         clangd = {
           filetypes = { "c", "cpp", "objcpp", "cuda" },
@@ -162,8 +161,8 @@ return {
               runtime = { version = "LuaJIT" },
               workspace = { checkThirdParty = false },
               completion = { callSnippet = "Replace" },
-              codeLens = { enable = true },
               telemetry = { enable = false },
+              -- codeLens = { enable = true },
             },
           },
         },
