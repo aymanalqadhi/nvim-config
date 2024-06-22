@@ -5,6 +5,7 @@ _G.Void = {
 
   -- utils
   keymap = require("void.util.keymap"),
+  event  = require("void.util.event")
 }
 
 function M.setup()
