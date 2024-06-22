@@ -47,20 +47,20 @@ return {
         mapping = {
           -- docs
           ["<c-f>"] = cmp.mapping.scroll_docs(4),
-          ["<c-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<c-b>"] = cmp.mapping.scroll_docs(-4),
 
           -- completion
-          ["<c-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-          ["<c-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
+          ["<c-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<c-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<c-space>"] = cmp.mapping.complete(),
 
           -- confirmation
           ["<c-e>"] = cmp.mapping.abort(),
           ["<c-y>"] = cmp.mapping(
-            cmp.mapping.confirm {
+            cmp.mapping.confirm({
               behavior = cmp.ConfirmBehavior.Insert,
               select = true,
-            },
+            }),
             { "i", "c" }
           ),
         },
