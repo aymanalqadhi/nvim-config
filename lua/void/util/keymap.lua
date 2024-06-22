@@ -1,5 +1,5 @@
 --- Key mapping utilities
----@class Void.keymap
+---@class Void.util.keymap
 local M = {}
 
 ---@class VoidMapping

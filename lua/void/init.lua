@@ -2,7 +2,9 @@ local M = { _init = false }
 
 _G.Void = {
   config = require("void.config"),
-  keymap = require("void.keymap"),
+
+  -- utils
+  keymap = require("void.util.keymap"),
 }
 
 function M.setup()
