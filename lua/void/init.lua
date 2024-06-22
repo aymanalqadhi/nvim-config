@@ -1,9 +1,5 @@
 local M = { _init = false }
 
----Main module
----@class Void
------@field config void.config
----@field core Void.core
 _G.Void = {
   config = require("void.config"),
   keymap = require("void.keymap"),
