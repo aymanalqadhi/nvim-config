@@ -3,7 +3,7 @@ local opt     = vim.opt
 -- system integration
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.mouse     = "a"           -- Enable mouse mode
-opt.formatoptions:remove "o"
+opt.formatoptions:remove("o")
 
 -- behaviour
 opt.inccommand     = "split"
@@ -52,21 +52,22 @@ opt.cmdheight      = 1
 opt.conceallevel   = 3
 opt.visualbell     = true
 opt.fillchars      = {
-  eob = " ",
-  fold = " ",
+  eob       = " ",
+  fold      = " ",
   foldclose = "",
-  foldopen = "",
-  foldsep = " ",
-  msgsep = "─",
-  diff = "╱",
-  vert = "▏",
+  foldopen  = "",
+  foldsep   = " ",
+  msgsep    = "─",
+  diff      = "╱",
+  vert      = "▏",
 }
+opt.list           = true
 opt.listchars      = {
-  space = " ",
-  trail = "⋅",
-  tab = "  ▸",
-  -- eol = "↵" | "⌍" | "↩",
-  extends = "❯",
+  space    = " ",
+  trail    = "⋅",
+  tab      = "  ▸",
+  -- eol      = "↲", -- "↵" | "⌍" | "↩",
+  extends  = "❯",
   precedes = "❮",
-  nbsp = "␣",
+  nbsp     = "␣",
 }
