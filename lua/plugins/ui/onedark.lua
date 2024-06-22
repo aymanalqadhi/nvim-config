@@ -7,7 +7,6 @@ return {
 
     config = function()
       local fg = "$fg"
-      local fg_dark = "$grey"
       local fg_border = "$cyan"
       local fg_title = "$black"
 
@@ -72,7 +71,8 @@ return {
           ToggleTermFloatBorder       = { fg = fg_border, bg = bg_dark },
 
           -- treesitter context
-          TreesitterContextLineNumber = { fg = fg_dark, bg = bg },
+          TreesitterContextLineNumber = { bg = bg },
+
           -- cmp
           CmpItemKindCopilot          = { fg = "$purple" }
         },
