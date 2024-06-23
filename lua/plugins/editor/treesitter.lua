@@ -51,8 +51,6 @@ return {
           keymaps = {
             ["ac"] = "@class.outer",
             ["ic"] = "@class.inner",
-            ["ad"] = "@comment.outer",
-            ["id"] = "@comment.inner",
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
             ["ap"] = "@parameter.outer",
@@ -62,8 +60,6 @@ return {
           },
 
           selection_modes = {
-            ["@comment.inner"] = "v",
-            ["@comment.outer"] = "V",
             ["@variable.inner"] = "v",
             ["@variable.outer"] = "v",
             ["@parameter.inner"] = "v",
@@ -81,7 +77,6 @@ return {
           set_jumps = true,
 
           goto_next_start = {
-            ["]d"] = { query = "@comment.outer", desc = "ts: next comment" },
             ["]c"] = { query = "@class.outer", desc = "ts: next class" },
             ["]f"] = { query = "@function.outer", desc = "ts: next function" },
             ["]p"] = { query = "@parameter.outer", desc = "ts: next parameter" },
@@ -89,7 +84,6 @@ return {
           },
 
           goto_previous_start = {
-            ["[d"] = { query = "@comment.outer", desc = "ts: previous comment" },
             ["[c"] = { query = "@class.outer", desc = "ts: previous class" },
             ["[f"] = { query = "@function.outer", desc = "ts: previous function" },
             ["[p"] = { query = "@parameter.outer", desc = "ts: previous parameter" },
