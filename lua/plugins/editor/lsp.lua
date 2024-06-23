@@ -195,7 +195,7 @@ return {
       require("mason-lspconfig").setup({
         handlers = {
           function(name)
-            _ = opts.servers[name] and setup(name, nil)
+            _ = not opts.servers[name] and setup(name, nil)
           end,
         },
       })
