@@ -2,6 +2,8 @@ local M = {}
 
 -- UI config
 M.ui = {
+  colorscheme = "onedark",
+
   -- borders
   border      = "single",
   borderchars = {
