@@ -49,14 +49,20 @@ return {
           lookahead = true,
 
           keymaps = {
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ap"] = "@parameter.outer",
-            ["ip"] = "@parameter.inner",
-            ["av"] = "@variable.outer",
-            ["iv"] = "@variable.inner",
+            ["ib"] = { query = "@block.inner", desc = "ts: inside block" },
+            ["ab"] = { query = "@block.outer", desc = "ts: around block" },
+            ["ic"] = { query = "@class.inner", desc = "ts: inside class" },
+            ["ac"] = { query = "@class.outer", desc = "ts: around class" },
+            ["if"] = { query = "@function.inner", desc = "ts: inside function" },
+            ["af"] = { query = "@function.outer", desc = "ts: around function" },
+            ["ii"] = { query = "@conditional.inner", desc = "ts: inside conditional" },
+            ["ai"] = { query = "@conditional.outer", desc = "ts: around conditional" },
+            ["il"] = { query = "@loop.inner", desc = "ts: inside loop" },
+            ["al"] = { query = "@loop.outer", desc = "ts: around loop" },
+            ["ip"] = { query = "@parameter.inner", desc = "ts: inside parameter" },
+            ["ap"] = { query = "@parameter.outer", desc = "ts: around parameter" },
+            ["iv"] = { query = "@variable.outer", desc = "ts: inside variable" },
+            ["av"] = { query = "@variable.outer", desc = "ts: around variable" },
           },
 
           selection_modes = {
