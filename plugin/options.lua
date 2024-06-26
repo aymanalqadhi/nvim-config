@@ -6,15 +6,16 @@ opt.mouse     = "a"           -- Enable mouse mode
 opt.formatoptions:remove("o")
 
 -- behaviour
-opt.inccommand     = "split"
-opt.splitbelow     = true
-opt.splitright     = true
-opt.undofile       = true
-opt.undolevels     = 10000
-opt.shada          = { "'10", "<0", "s10", "h" }
-opt.timeout        = true
-opt.timeoutlen     = 300
-opt.updatetime     = 300
+opt.inccommand = "split"
+opt.splitbelow = true
+opt.splitright = true
+opt.undofile   = true
+opt.undolevels = 10000
+opt.shada      = { "'10", "<0", "s10", "h" }
+opt.timeout    = true
+opt.timeoutlen = 300
+opt.updatetime = 300
+opt.whichwrap:append("<>[]hl")
 
 -- editing
 opt.ignorecase     = true
