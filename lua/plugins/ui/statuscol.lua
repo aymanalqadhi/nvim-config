@@ -55,14 +55,12 @@ return {
     config = function()
       local ufo = require("ufo")
 
-      local bc = Void.config.ui.borderchars
-
       ---@diagnostic disable-next-line: missing-fields
       ufo.setup({
         open_fold_hl_timeout = 150,
         preview = {
           win_config = {
-            border = { "", bc.n, "", "", "", bc.s, "", "" },
+            border = { "", "─", "", "", "", "─", "", "" },
             winhighlight = "Normal:Folded",
           },
         },

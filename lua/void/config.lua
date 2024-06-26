@@ -6,18 +6,6 @@ M.ui = {
 
   -- borders
   border      = "single",
-  borderchars = {
-    nw = "┌",
-    n  = "─",
-    ne = "┐",
-    e  = "│",
-    em = "┤",
-    se = "┘",
-    s  = "─",
-    sw = "└",
-    w  = "│",
-    wm = "├",
-  },
 }
 
 -- icons
