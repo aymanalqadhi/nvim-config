@@ -10,7 +10,7 @@ M.ui = {
 
 -- icons
 M.icons = {
-  Cog         = "",
+  Cog         = "",
   Question    = "",
   Recording   = "󰑋",
 
@@ -29,11 +29,11 @@ M.icons = {
     Enum          = "",
     EnumMember    = "",
     Event         = "",
-    Field         = "",
+    Field         = "",
     File          = "",
     Folder        = "",
     Function      = "󰊕",
-    Interface     = "",
+    Interface     = "",
     Key           = "",
     Keyword       = "󰌋",
     Method        = "󰊕",
@@ -48,7 +48,7 @@ M.icons = {
     Reference     = "",
     Snippet       = "",
     String        = "",
-    Struct        = "󰆼",
+    Struct        = "",
     TabNine       = "󰏚",
     Text          = "",
     TypeParameter = "󰆩",
@@ -59,7 +59,7 @@ M.icons = {
 
   -- debugging
   debug       = {
-    Stopped = "󰁕",
+    Stopped = "→",
     Breakpoint = "",
     BreakpointConditional = "",
     BreakpointRejected = "",
@@ -72,7 +72,7 @@ M.icons = {
     signs = {
       Error   = " ",
       Warning = " ",
-      Info    = " ",
+      Info    = " ",
       Hint    = " ",
     },
   },
