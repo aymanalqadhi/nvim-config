@@ -1,3 +1,11 @@
+local borderchars = {
+  single = {
+    perimeter = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+    divider   = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+  }
+}
+
+
 return {
   "nvim-telescope/telescope.nvim",
 
@@ -11,13 +19,6 @@ return {
 
 
   config = function()
-    local borderchars = {
-      single = {
-        perimeter = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-        divider   = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-      }
-    }
-
     local ui = Void.config.ui
     local bc = borderchars[ui.border]
 

@@ -30,27 +30,30 @@ function M.setup()
   -- load plugins
   require("lazy").setup("plugins", {
     change_detection = { enabled = false },
+    defaults = {
+      version = false,
+    },
     performance = {
       rtp = {
         disabled_plugins = {
-          "2html_plugin",
+          "gzip",
+          "netrwPlugin",
+          "tarPlugin",
           "tohtml",
+          "tutor",
+          "zipPlugin",
+          "2html_plugin",
           "getscript",
           "getscriptPlugin",
-          "gzip",
           "logipat",
           "netrw",
-          "netrwPlugin",
           "netrwSettings",
           "netrwFileHandlers",
           "tar",
-          "tarPlugin",
           "rrhelper",
           "vimball",
           "vimballPlugin",
           "zip",
-          "zipPlugin",
-          "tutor",
           "rplugin",
           "synmenu",
           "optwin",
