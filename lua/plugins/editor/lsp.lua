@@ -250,6 +250,9 @@ return {
           { "gls",        vim.lsp.buf.document_symbol,  desc = "lsp: document symbol" },
           { "glS",        vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
 
+          -- codelens
+          { "<leader>ll", vim.lsp.codelens.run,         desc = "lsp: run codelens" },
+
           -- code actions
           { "<leader>la", vim.lsp.buf.code_action,      desc = "lsp: code action" },
           { "<leader>lr", vim.lsp.buf.rename,           desc = "lsp: rename" },
