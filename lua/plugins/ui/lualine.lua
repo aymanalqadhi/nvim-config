@@ -1,6 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
 
+  event = "VeryLazy",
+
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
     local icons = void.config.icons
