@@ -18,7 +18,7 @@ return {
         pattern  = { "c", "cpp" },
         group    = vim.api.nvim_create_augroup("void-cpp", { clear = true }),
         callback = function(args)
-          Void.keymap.buf_set(args.buf, {
+          void.keymap.buf_set(args.buf, {
             { "<localleader>ch", "<cmd>ClangdToggleInlayHints<cr>",   desc = "c/cpp: toggle inlay hints" },
             { "<localleader>cs", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "c/cpp: switch source/header" },
             { "<localleader>ct", "<cmd>ClangdTypeHierarchy<cr>",      desc = "c/cpp: type hierarchy" },

@@ -70,7 +70,7 @@ return {
         end,
       })
 
-      Void.keymap.set({
+      void.keymap.set({
         { "zR", ufo.openAllFolds,         desc = "fold: open all" },
         { "zM", ufo.closeAllFolds,        desc = "fold: close all" },
         { "zr", ufo.openFoldsExceptKinds, desc = "fold: open except" },

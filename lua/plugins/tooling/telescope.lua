@@ -19,7 +19,7 @@ return {
 
 
   config = function()
-    local ui = Void.config.ui
+    local ui = void.config.ui
     local bc = borderchars[ui.border]
 
     local pickers = {
@@ -112,7 +112,7 @@ return {
     })
 
     -- setup key maps
-    Void.keymap.set({
+    void.keymap.set({
       -- general
       { "<leader>fF",  tbi.resume,          desc = "find: resume" },
 

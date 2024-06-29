@@ -1,4 +1,4 @@
-Void.keymap.set({
+void.keymap.set({
   -- window navigation
   { "<c-h>",      "<c-w><c-h>",               desc = "win: left" },
   { "<c-j>",      "<c-w><c-j>",               desc = "win: down" },
@@ -45,7 +45,7 @@ Void.keymap.set({
 
 -- terminal
 function _G.set_terminal_keymaps()
-  Void.keymap.buf_set(0, {
+  void.keymap.buf_set(0, {
     { "<esc><esc>", [[<c-\><c-n>]],      desc = "term: leave", mode = { "t" } },
     { "<c-h>",      "<cmd>wincmd h<cr>", desc = "term: left",  mode = { "t" } },
     { "<c-j>",      "<cmd>wincmd j<cr>", desc = "term: down",  mode = { "t" } },

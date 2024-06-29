@@ -8,7 +8,7 @@ return {
     config = function()
       local popup_view = {
         border = {
-          style = Void.config.ui.border
+          style = void.config.ui.border
         },
         win_options = {
           winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder"

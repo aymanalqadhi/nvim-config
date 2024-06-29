@@ -18,15 +18,15 @@ return {
         virtual_text = {
           spacing = 4,
           source = "if_many",
-          prefix = Void.config.icons.diagnostics.prefix,
+          prefix = void.config.icons.diagnostics.prefix,
         },
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = Void.config.icons.diagnostics.signs.Error,
-            [vim.diagnostic.severity.WARN]  = Void.config.icons.diagnostics.signs.Warning,
-            [vim.diagnostic.severity.INFO]  = Void.config.icons.diagnostics.signs.Info,
-            [vim.diagnostic.severity.HINT]  = Void.config.icons.diagnostics.signs.Hint,
+            [vim.diagnostic.severity.ERROR] = void.config.icons.diagnostics.signs.Error,
+            [vim.diagnostic.severity.WARN]  = void.config.icons.diagnostics.signs.Warning,
+            [vim.diagnostic.severity.INFO]  = void.config.icons.diagnostics.signs.Info,
+            [vim.diagnostic.severity.HINT]  = void.config.icons.diagnostics.signs.Hint,
           },
         },
       },
@@ -201,7 +201,7 @@ return {
       })
 
       -- on-attach config
-      Void.event.on("LspAttach", function(args)
+      void.event.on("LspAttach", function(args)
         local bufnr = args.buf
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
@@ -220,12 +220,12 @@ return {
 
         -- highlight symbol under cursor
         if client.server_capabilities.documentHighlightProvider then
-          Void.event.on("CursorHold", vim.lsp.buf.document_highlight, {
+          void.event.on("CursorHold", vim.lsp.buf.document_highlight, {
             group = "lsp:highlight_gain",
             buffer = bufnr
           })
 
-          Void.event.on({ "CursorMoved", "InsertEnter" }, vim.lsp.buf.clear_references, {
+          void.event.on({ "CursorMoved", "InsertEnter" }, vim.lsp.buf.clear_references, {
             group = "lsp:highlight_lose",
             buffer = bufnr,
           })
@@ -233,12 +233,12 @@ return {
 
         -- codelens
         if client.server_capabilities.codeLensProvider then
-          Void.event.on({ "BufEnter", "InsertLeave" }, function(e)
+          void.event.on({ "BufEnter", "InsertLeave" }, function(e)
             vim.lsp.codelens.refresh({ bufnr = e.buf })
           end, { group = "lsp:codelens", buffer = bufnr })
         end
 
-        Void.keymap.buf_set(bufnr, {
+        void.keymap.buf_set(bufnr, {
           -- code navigation
           { "gld",        vim.lsp.buf.definition,       desc = "lsp: definition" },
           { "glD",        vim.lsp.buf.declaration,      desc = "lsp: declaration" },

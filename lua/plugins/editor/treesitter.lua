@@ -131,7 +131,7 @@ return {
       local mode = { "n", "x", "o" }
       local ts_rm = require("nvim-treesitter.textobjects.repeatable_move")
 
-      Void.keymap.set({
+      void.keymap.set({
         -- repeatable moves
         { ";", ts_rm.repeat_last_move,          desc = "ts: repeat last move",           mode = mode },
         { ",", ts_rm.repeat_last_move_opposite, desc = "ts: repeat last move (inverse)", mode = mode },

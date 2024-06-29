@@ -104,5 +104,5 @@ return {
     require("onedark").load()
   end,
 
-  enabled = Void.config.ui.colorscheme == "onedark",
+  enabled = void.config.ui.colorscheme == "onedark",
 }

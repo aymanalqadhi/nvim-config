@@ -88,7 +88,7 @@ return {
     },
 
     config = function(_, opts)
-      local icons = Void.config.icons
+      local icons = void.config.icons
 
       require("dapui").setup(opts)
       require("nvim-dap-virtual-text").setup({})

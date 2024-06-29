@@ -87,7 +87,7 @@ return {
             end
 
             item.abbr = " " .. item.abbr
-            item.kind = Void.config.icons.kinds[item.kind] or Void.config.icons.Question
+            item.kind = void.config.icons.kinds[item.kind] or void.config.icons.Question
 
             return item
           end,

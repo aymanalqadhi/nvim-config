@@ -1,6 +1,6 @@
 local M = { _init = false }
 
-_G.Void = {
+_G.void = {
   config = require("void.config"),
 
   -- utils

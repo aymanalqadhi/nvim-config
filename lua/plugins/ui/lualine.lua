@@ -3,7 +3,7 @@ return {
 
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
-    local icons = Void.config.icons
+    local icons = void.config.icons
 
     local modes = {
       COMMAND       = icons.modes.Command,

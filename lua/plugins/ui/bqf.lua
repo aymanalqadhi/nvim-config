@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     preview = {
-      border = Void.config.ui.border,
+      border = void.config.ui.border,
     }
   },
 }
