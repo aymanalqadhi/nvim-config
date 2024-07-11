@@ -11,9 +11,11 @@ void.event.on({ "InsertEnter", "WinLeave" }, function()
 end, { group = "global:cursorlc_lose" })
 
 -- watch files for external changes
-void.event.on({ "FocusGained", "TermClose", "TermLeave" }, "checktime", {
-  group = "global:checktime"
-})
+void.event.on({ "FocusGained", "TermClose", "TermLeave" }, function()
+  if vim.o.buftype ~= "nofile" then
+    vim.cmd("checktime")
+  end
+end, { group = "global:checktime" })
 
 -- highlight yanked text
 void.event.on("TextYankPost", function()
@@ -23,3 +25,23 @@ void.event.on("TextYankPost", function()
     higroup = "Visual",
   })
 end, { group = "global:yankhl" })
+
+-- close some filetypes with <q>
+void.event.on("FileType",
+  function(args)
+    vim.bo[args.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>bdelete<cr>", { buffer = args.buf })
+  end, {
+    group = "global:quickq",
+    pattern = {
+      "man",
+      "help",
+      "lspinfo",
+      "notify",
+      "qf",
+      "startuptime",
+      "checkhealth",
+      "dbout",
+      "gitsigns.blame",
+    },
+  })
