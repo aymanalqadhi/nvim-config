@@ -1,11 +1,3 @@
-local borderchars = {
-  single = {
-    perimeter = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-    divider   = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-  }
-}
-
-
 return {
   "nvim-telescope/telescope.nvim",
 
@@ -17,41 +9,15 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
   },
 
-
   config = function()
-    local ui = void.config.ui
-    local bc = borderchars[ui.border]
-
-    local pickers = {
-      dropdown = {
-        theme = "dropdown",
-        borderchars = {
-          prompt = bc.perimeter,
-          results = bc.divider,
-          preview = bc.perimeter,
-        },
-      },
-      cursor = {
-        theme = "cursor",
-        borderchars = {
-          prompt = bc.perimeter,
-          results = bc.divider,
-        },
-      },
-      ivy = {
-        theme = "ivy",
-        borderchars = {
-          preview = bc.perimeter,
-        },
-      },
-    }
+    local pickers = require("plugins.tooling.telescope.pickers")
 
     local act = require("telescope.actions")
     local tbi = require("telescope.builtin")
 
     require("telescope").setup({
       defaults = {
-        borderchars = bc.perimeter,
+        borderchars = pickers.borderchars.perimeter,
         entry_prefix = "   ",
         layout_strategy = "horizontal",
         prompt_prefix = " ❯ ",
@@ -69,44 +35,43 @@ return {
             ["<c-k>"] = act.cycle_history_prev,
             ["<c-q>"] = act.close,
           },
-          n = {
-            ["<c-q>"] = act.close,
-          },
+          n = { q = act.close },
         },
       },
 
       pickers = {
         -- find
-        find_files      = {},
-        buffers         = pickers.dropdown,
-        oldfiles        = pickers.dropdown,
-        autocommands    = pickers.ivy,
-        diagnostics     = pickers.ivy,
-        highlights      = pickers.ivy,
-        grep_string     = pickers.ivy,
-        marks           = pickers.dropdown,
-        keymaps         = pickers.dropdown,
-        spell_suggest   = pickers.cursor,
+        find_files      = pickers.default(),
+        buffers         = pickers.dropdown(),
+        oldfiles        = pickers.dropdown(),
+        autocommands    = pickers.ivy(),
+        diagnostics     = pickers.ivy(),
+        highlights      = pickers.ivy(),
+        grep_string     = pickers.ivy(),
+        marks           = pickers.dropdown(),
+        keymaps         = pickers.dropdown(),
+        spell_suggest   = pickers.cursor(),
 
         -- git
-        git_files       = pickers.default,
-        git_branches    = pickers.dropdown,
-        git_commits     = pickers.dropdown,
-        git_bcommits    = pickers.ivy,
-        git_status      = pickers.default,
-        git_stash       = pickers.dropdown,
+        git_files       = pickers.default(),
+        git_branches    = pickers.dropdown(),
+        git_commits     = pickers.dropdown(),
+        git_bcommits    = pickers.ivy(),
+        git_status      = pickers.default(),
+        git_stash       = pickers.dropdown(),
 
         -- misc
-        live_grep       = pickers.ivy,
-        command_history = pickers.dropdown,
-        registers       = pickers.cursor,
-        help_tags       = pickers.ivy,
+        live_grep       = pickers.ivy(),
+        command_history = pickers.dropdown(),
+        registers       = pickers.cursor(),
+        help_tags       = pickers.ivy(),
       },
+
       extensions = {
         wrap_results = true,
         fzf = {},
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown(pickers.dropdown),
+          require("telescope.themes").get_dropdown(pickers.dropdown()),
         },
       },
     })
