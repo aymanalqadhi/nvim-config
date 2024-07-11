@@ -79,7 +79,7 @@ M.icons = {
 
   -- buffer status
   buffer      = {
-    Modified  = "",
+    Modified  = "",
     NewFile   = "󰐙",
     Readonly  = "",
     Unnamed   = "",
@@ -98,7 +98,7 @@ M.icons = {
   modes       = {
     -- builtin
     Command        = "  ",
-    Insert         = "  ",
+    Insert         = "  ",
     Normal         = "  ",
     Replace        = "  ",
     ReplaceVirtual = "  ",
