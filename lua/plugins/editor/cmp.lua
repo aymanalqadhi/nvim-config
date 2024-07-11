@@ -36,6 +36,7 @@ return {
         sources = {
           { name = "lazydev",  group_index = 0 },
           { name = "crates",   group_index = 1 },
+          { name = "cmp-dbee", group_index = 2 },
           { name = "copilot",  group_index = 2 },
           { name = "nvim_lsp", group_index = 2 },
           { name = "luasnip",  group_index = 2 },
@@ -80,12 +81,9 @@ return {
             cmp.ItemField.Menu,
           },
           format = function(entry, item)
-            local source = entry.source.name
+            local source = sources_display[entry.source.name] or entry.source.name
 
-            if source then
-              item.menu = " · " .. (sources_display[source] or source)
-            end
-
+            item.menu = "· " .. source
             item.abbr = " " .. item.abbr
             item.kind = void.config.icons.kinds[item.kind] or void.config.icons.Question
 
