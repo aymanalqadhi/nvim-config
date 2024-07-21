@@ -33,7 +33,6 @@ return {
           i = {
             ["<c-j>"] = act.cycle_history_next,
             ["<c-k>"] = act.cycle_history_prev,
-            ["<c-q>"] = act.close,
           },
           n = { q = act.close },
         },
