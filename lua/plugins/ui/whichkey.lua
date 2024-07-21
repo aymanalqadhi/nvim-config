@@ -7,7 +7,7 @@ return {
     local wk = require("which-key")
 
     wk.setup({
-      key_labels = {
+      replace = {
         ["<space>"] = "SPC",
         ["<cr>"] = "RET",
         ["<tab>"] = "TAB",
@@ -17,11 +17,12 @@ return {
         separator = "",
         group = "+",
       },
-      window = {
+      win = {
         border = "none",
-        margin = { 0, 3, 3, 3 },
         padding = { 2, 2, 2, 2 },
-        winblend = vim.o.winblend,
+        wo = {
+          winblend = vim.o.winblend,
+        },
       },
       layout = {
         height = { min = 4, max = 25 },
@@ -29,22 +30,24 @@ return {
         spacing = 4,
         align = "center",
       },
-      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
     })
 
-
-    wk.register({
-      ["<leader>d"] = { name = "+dap" },
-      ["<leader>f"] = { name = "+find" },
-      ["<leader>fg"] = { name = "+git" },
-      ["<leader>g"] = { name = "+git" },
-      ["<leader>l"] = { name = "+lsp" },
-      ["<leader>t"] = { name = "+treesitter" },
+    wk.add({
+      { "<leader>d",      group = "+dap" },
+      { "<leader>f",      group = "+find" },
+      { "<leader>fg",     group = "+git" },
+      { "<leader>g",      group = "+git" },
+      { "<leader>l",      group = "+lsp" },
+      { "<leader>t",      group = "+treesitter" },
 
       -- lang
-      ["<localleader>r"] = { name = "+rust" },
-      ["<localleader>g"] = { name = "+go" },
-      ["<localleader>c"] = { name = "+cpp" },
+      { "<localleader>r", group = "+rust" },
+      { "<localleader>g", group = "+go" },
+      { "<localleader>c", group = "+cpp" },
+
+      -- editor
+      { "<leader>b",      group = "+buffer" },
+      { "<leader>w",      group = "+window" },
     })
   end,
 }
