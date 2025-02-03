@@ -36,3 +36,15 @@
 
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "sql"))
+;
+(macro_invocation
+  macro: [
+    (identifier) @_name
+    (scoped_identifier name: (identifier) @_name)
+  ] (#eq? @_name "asm")
+
+  (token_tree
+    (string_literal
+      (string_content) @injection.content))
+
+  (#set! injection.language "nasm"))
