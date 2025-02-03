@@ -166,7 +166,28 @@ return {
             },
           },
         },
+
+        -- rego
+        regal = {},
+
+        -- docker compose
+        docker_compose_language_service = {},
+
+        -- yaml
+        yamlls = {
+          settings = {
+            format = {
+              enable = true,
+            },
+            schemaStore = {
+              enable = true,
+            }
+          }
+        },
       },
+
+      -- per-server setup function
+      setup = {},
     },
 
     config = function(_, opts)
