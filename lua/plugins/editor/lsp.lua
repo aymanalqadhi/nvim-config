@@ -205,11 +205,21 @@ return {
       end
 
       local function setup(server, config)
-        lspconfig[server].setup(config and vim.tbl_deep_extend("keep", config, defaults) or defaults)
+        config = config and vim.tbl_deep_extend("keep", config, defaults) or defaults
+
+        if opts.setup[server] and opts.setup[server](config) == true then
+          return
+        end
+
+        lspconfig[server].setup(config)
       end
 
       for server, config in pairs(opts.servers) do
-        setup(server, config)
+        if not config or not config.manual then
+          if config then
+            setup(server, config)
+          end
+        end
       end
 
       -- extra servers installed via mason
