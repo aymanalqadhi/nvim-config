@@ -330,6 +330,10 @@ return {
         lua = {},
         python = { "isort", "black" },
         cmake = { "cmake_format" },
+        typescript = { "prettierd", "prettier" },
+        javascript = { "prettierd", "prettier" },
+        json = { "prettierd", "prettier" },
+        yaml = { "prettierd", "prettier", "yamlfmt" },
       },
       format_on_save = {
         timeout_ms = 500,
