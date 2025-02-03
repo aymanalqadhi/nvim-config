@@ -310,20 +310,8 @@ return {
 
           -- diagnostics
           { "gd",    vim.diagnostic.open_float,  desc = "lsp: show diagnostic" },
-          {
-            "[d",
-            function()
-              vim.diagnostic.jump({ count = -1 })
-            end,
-            desc = "lsp: prev diagnostic"
-          },
-          {
-            "]d",
-            function()
-              vim.diagnostic.jump({ count = 1 })
-            end,
-            desc = "lsp: next diagnostic"
-          },
+          { "[d",    vim.diagnostic.goto_prev,   desc = "lsp: prev diagnostic" },
+          { "]d",    vim.diagnostic.goto_next,   desc = "lsp: next diagnostic" },
 
           -- assist
           { "K",     vim.lsp.buf.hover,          desc = "lsp: hover" },
