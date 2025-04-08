@@ -184,6 +184,14 @@ return {
             }
           }
         },
+
+        -- protocol buffers
+        buf_ls = {
+          server_capabilities = {
+            semanticTokensProvider = vim.NIL,
+          },
+        },
+        -- protols = {},
       },
 
       -- per-server setup function
