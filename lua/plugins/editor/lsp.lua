@@ -232,6 +232,8 @@ return {
 
       -- extra servers installed via mason
       require("mason-lspconfig").setup({
+        ensure_installed = {},
+        automatic_installation = false,
         handlers = {
           function(name)
             _ = not opts.servers[name] and setup(name, nil)
