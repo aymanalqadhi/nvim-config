@@ -2,69 +2,35 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
 
-    branch = "master",
+    branch = "main",
     build = ":TSUpdate",
+    lazy = false,
+
+    config = function()
+      require("nvim-treesitter").setup({
+        ensure_install = { "core", "stable" },
+      })
+
+      void.event.on("FileType", function(args)
+        local ok, parser = pcall(vim.treesitter.get_parser, args.buf)
+        if ok and parser then
+          vim.treesitter.start(args.buf)
+          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end, { group = "treesitter" })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+
+    branch = "main",
     event = "VeryLazy",
 
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-
-    opts = {
-      auto_install = true,
-      ensure_installed = {
-        "c",
-        "diff",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "query",
-        "regex",
-        "vim",
-        "vimdoc",
-      },
-
-      -- better syntax eighlighting
-      highlight = { enable = true },
-
-      -- better indentation
-      indent = { enable = true },
-
-      -- context-aware selection
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<cr>",
-          node_incremental = "<cr>",
-          scope_incremental = "<c-cr>",
-          node_decremental = "<bs>",
-        },
-      },
-
-      -- more advanced text-objects
-      textobjects = {
-        -- selection
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
         select = {
-          enable = true,
           lookahead = true,
-
-          keymaps = {
-            ["ib"] = { query = "@block.inner", desc = "ts: inside block" },
-            ["ab"] = { query = "@block.outer", desc = "ts: around block" },
-            ["ic"] = { query = "@class.inner", desc = "ts: inside class" },
-            ["ac"] = { query = "@class.outer", desc = "ts: around class" },
-            ["if"] = { query = "@function.inner", desc = "ts: inside function" },
-            ["af"] = { query = "@function.outer", desc = "ts: around function" },
-            ["ii"] = { query = "@conditional.inner", desc = "ts: inside conditional" },
-            ["ai"] = { query = "@conditional.outer", desc = "ts: around conditional" },
-            ["il"] = { query = "@loop.inner", desc = "ts: inside loop" },
-            ["al"] = { query = "@loop.outer", desc = "ts: around loop" },
-            ["ip"] = { query = "@parameter.inner", desc = "ts: inside parameter" },
-            ["ap"] = { query = "@parameter.outer", desc = "ts: around parameter" },
-            ["iv"] = { query = "@variable.outer", desc = "ts: inside variable" },
-            ["av"] = { query = "@variable.outer", desc = "ts: around variable" },
-          },
-
           selection_modes = {
             ["@variable.inner"] = "v",
             ["@variable.outer"] = "v",
@@ -76,73 +42,112 @@ return {
             ["@class.outer"] = "V",
           },
         },
-
-        -- element navigation
         move = {
-          enable = true,
           set_jumps = true,
-
-          goto_next_start = {
-            ["]c"] = { query = "@class.outer", desc = "ts: next class" },
-            ["]f"] = { query = "@function.outer", desc = "ts: next function" },
-            ["]p"] = { query = "@parameter.outer", desc = "ts: next parameter" },
-            ["]v"] = { query = "@variable.outer", desc = "ts: next variable" },
-          },
-
-          goto_previous_start = {
-            ["[c"] = { query = "@class.outer", desc = "ts: previous class" },
-            ["[f"] = { query = "@function.outer", desc = "ts: previous function" },
-            ["[p"] = { query = "@parameter.outer", desc = "ts: previous parameter" },
-            ["[v"] = { query = "@variable.outer", desc = "ts: previous variable" },
-          },
         },
+      })
 
-        -- element swapping
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>tsf"] = { query = "@function.inner", desc = "ts: swap next function" },
-            ["<leader>tsp"] = { query = "@parameter.inner", desc = "ts: swap next parameter" },
-            ["<leader>tsv"] = { query = "@variable.inner", desc = "ts: swap next variable" },
-          },
+      -- keymaps
+      local ts_select = require("nvim-treesitter-textobjects.select")
+      local ts_move = require("nvim-treesitter-textobjects.move")
+      local ts_swap = require("nvim-treesitter-textobjects.swap")
+      local ts_rm = require("nvim-treesitter-textobjects.repeatable_move")
 
-          swap_previous = {
-            ["<leader>tsF"] = { query = "@function.inner", desc = "ts: swap previous function" },
-            ["<leader>tsP"] = { query = "@parameter.inner", desc = "ts: swap previous parameter" },
-            ["<leader>tsV"] = { query = "@variable.inner", desc = "ts: swap previous variable" },
-          },
-        },
+      local function selectfn(textobject)
+        return function()
+          ts_select.select_textobject(textobject, "textobjects")
+        end
+      end
 
-        -- lsp enhancement
-        lsp_interop = {
-          enable = true,
-          floating_preview_opts = {},
-          peek_definition_code = {
-            ["gpf"] = { query = "@function.outer", desc = "ts: peek function definition" },
-            ["gpF"] = { query = "@class.outer", desc = "ts: peek function definition in class" },
-          },
-        },
-      },
-    },
+      local function movefn(textobject, dir)
+        if dir < 0 then
+          return function()
+            ts_move.goto_previous_start(textobject, "textobjects")
+          end
+        else
+          return function()
+            ts_move.goto_next_start(textobject, "textobjects")
+          end
+        end
+      end
 
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      local function swap_fn(textobject, dir)
+        if dir < 0 then
+          return function()
+            ts_swap.swap_previous(textobject)
+          end
+        else
+          return function()
+            ts_swap.swap_next(textobject)
+          end
+        end
+      end
 
-      local mode = { "n", "x", "o" }
-      local ts_rm = require("nvim-treesitter.textobjects.repeatable_move")
+      local xo = { "x", "o" }
+      local nxo = { "n", "x", "o" }
 
       void.keymap.set({
+        -- select keymaps
+        { "ab", selectfn("@block.outer"), desc = "ts(select): around block", mode = xo },
+        { "ib", selectfn("@block.inner"), desc = "ts(select): inside block", mode = xo },
+        { "ac", selectfn("@class.outer"), desc = "ts(select): around class", mode = xo },
+        { "ic", selectfn("@class.inner"), desc = "ts(select): inside class", mode = xo },
+        { "af", selectfn("@function.outer"), desc = "ts(select): around function", mode = xo },
+        { "if", selectfn("@function.inner"), desc = "ts(select): inside function", mode = xo },
+        { "ap", selectfn("@parameter.outer"), desc = "ts(select): around parameter", mode = xo },
+        { "ip", selectfn("@parameter.inner"), desc = "ts(select): inside parameter", mode = xo },
+        { "av", selectfn("@variable.outer"), desc = "ts(select): around variable", mode = xo },
+        { "iv", selectfn("@variable.inner"), desc = "ts(select): inside variable", mode = xo },
+
+        -- move keymaps
+        { "]c", movefn("@class.outer", 1), desc = "ts(move): next class", mode = nxo },
+        { "[c", movefn("@class.outer", -1), desc = "ts(move): previous class", mode = nxo },
+        { "]f", movefn("@function.outer", 1), desc = "ts(move): next function", mode = nxo },
+        { "[f", movefn("@function.outer", -1), desc = "ts(move): previous function", mode = nxo },
+        { "]p", movefn("@parameter.outer", 1), desc = "ts(move): next parameter", mode = nxo },
+        { "[p", movefn("@parameter.outer", -1), desc = "ts(move): previous parameter", mode = nxo },
+
+        -- swap keymaps
+        { "<leader>tsf", swap_fn("@function.inner", 1), desc = "ts(swap): next function" },
+        { "<leader>tsF", swap_fn("@function.inner", -1), desc = "ts(swap): previous function" },
+        { "<leader>tsp", swap_fn("@parameter.inner", 1), desc = "ts(swap): next parameter" },
+        { "<leader>tsP", swap_fn("@parameter.inner", -1), desc = "ts(swap): previous parameter" },
+
         -- repeatable moves
-        { ";", ts_rm.repeat_last_move,          desc = "ts: repeat last move",           mode = mode },
-        { ",", ts_rm.repeat_last_move_opposite, desc = "ts: repeat last move (inverse)", mode = mode },
+        { ";", ts_rm.repeat_last_move, desc = "ts: repeat last move", mode = nxo },
+        { ",", ts_rm.repeat_last_move_opposite, desc = "ts: repeat last move (inverse)", mode = nxo },
 
         -- find and until
-        { "f", ts_rm.builtin_f_expr,            desc = "ts: find",                       expr = true, mode = mode },
-        { "F", ts_rm.builtin_F_expr,            desc = "ts: find (backwards)",           expr = true, mode = mode },
-        { "t", ts_rm.builtin_t_expr,            desc = "ts: until",                      expr = true, mode = mode },
-        { "T", ts_rm.builtin_T_expr,            desc = "ts: until (backwards)",          expr = true, mode = mode },
+        {
+          "f",
+          ts_rm.builtin_f_expr,
+          desc = "ts: find",
+          mode = nxo,
+          expr = true,
+        },
+        {
+          "F",
+          ts_rm.builtin_F_expr,
+          desc = "ts: find (backwards)",
+          mode = nxo,
+          expr = true,
+        },
+        {
+          "t",
+          ts_rm.builtin_t_expr,
+          desc = "ts: until",
+          mode = nxo,
+          expr = true,
+        },
+        {
+          "T",
+          ts_rm.builtin_T_expr,
+          desc = "ts: until (backwards)",
+          mode = nxo,
+          expr = true,
+        },
       })
-    end
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -157,6 +162,6 @@ return {
       max_lines = 12,
       line_numbers = true,
       multiline_threshold = 4,
-    }
+    },
   },
 }

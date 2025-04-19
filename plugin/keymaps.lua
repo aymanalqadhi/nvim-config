@@ -41,17 +41,24 @@ void.keymap.set({
   { "<m-k>",      "<esc><cmd>m .-2<cr>==gi",  desc = "move line up",        mode = { "i" } },
   { "<m-j>",      ":m '>+1<cr>gv=gv",         desc = "move selection down", mode = { "v" } },
   { "<m-k>",      ":m '<-2<cr>gv=gv",         desc = "move selection up",   mode = { "v" } },
+
+  -- diagnostics
+    { "gd", vim.diagnostic.open_float,                          desc = "diagnostic: show float" },
+    { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "diagnostic: goto prev" },
+    { "]d", function() vim.diagnostic.jump({ count = 1 }) end,  desc = "diagnostic: goto next" },
 })
 
--- terminal
-function _G.set_terminal_keymaps()
-  void.keymap.buf_set(0, {
-    { "<esc><esc>", [[<c-\><c-n>]],      desc = "term: leave", mode = { "t" } },
-    { "<c-h>",      "<cmd>wincmd h<cr>", desc = "term: left",  mode = { "t" } },
-    { "<c-j>",      "<cmd>wincmd j<cr>", desc = "term: down",  mode = { "t" } },
-    { "<c-k>",      "<cmd>wincmd k<cr>", desc = "term: up",    mode = { "t" } },
-    { "<c-l>",      "<cmd>wincmd l<cr>", desc = "term: right", mode = { "t" } },
-  })
-end
-
-vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+-- terminal mappings
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term://*",
+  callback = function()
+    void.keymap.buf_set(0, {
+      { "<esc><esc>", [[<c-\><c-n>]],      desc = "term: leave", mode = { "t" } },
+      { "<c-[><c-[>", [[<c-\><c-n>]],      desc = "term: leave", mode = { "t" } },
+      { "<c-h>",      "<cmd>wincmd h<cr>", desc = "term: left",  mode = { "t" } },
+      { "<c-j>",      "<cmd>wincmd j<cr>", desc = "term: down",  mode = { "t" } },
+      { "<c-k>",      "<cmd>wincmd k<cr>", desc = "term: up",    mode = { "t" } },
+      { "<c-l>",      "<cmd>wincmd l<cr>", desc = "term: right", mode = { "t" } },
+    })
+  end
+})

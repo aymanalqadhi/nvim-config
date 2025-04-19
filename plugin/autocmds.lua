@@ -19,7 +19,7 @@ end, { group = "global:checktime" })
 
 -- highlight yanked text
 void.event.on("TextYankPost", function()
-  vim.highlight.on_yank({
+  vim.hl.on_yank({
     on_visual = false,
     timeout = 300,
     higroup = "Visual",

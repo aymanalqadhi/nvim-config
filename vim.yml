@@ -1,0 +1,10 @@
+base: lua51
+name: vim
+
+globals:
+  vim:
+    any: true
+  void:
+    any: true
+
+lua_versions: []

@@ -1,10 +1,7 @@
 return {
   "kndndrj/nvim-dbee",
 
-  dependencies = {
-    "MunifTanjim/nui.nvim",
-    "MattiasMTS/cmp-dbee",
-  },
+  dependencies = { "MunifTanjim/nui.nvim" },
 
   keys = {
     { "<localleader>do", function() require("dbee").open() end,   desc = "db: open explorer" },
@@ -18,6 +15,5 @@ return {
 
   config = function(_, opts)
     require("dbee").setup(opts)
-    require("cmp-dbee").setup()
   end
 }

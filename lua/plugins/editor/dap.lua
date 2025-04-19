@@ -6,7 +6,18 @@ return {
       "rcarriga/nvim-dap-ui",
       {
         "jay-babu/mason-nvim-dap.nvim",
-        dependencies = { "williamboman/mason.nvim" }
+
+        dependencies = { "williamboman/mason.nvim" },
+
+        opts = {
+          ensure_installed = {},
+          automatic_installation = false,
+          handlers = {
+            function(config)
+              require("mason-nvim-dap").default_setup(config)
+            end,
+          }
+        }
       },
     },
 
@@ -24,12 +35,9 @@ return {
     config = function()
       local dap = require("dap")
 
-      require("mason-nvim-dap").setup({
-        handlers = {
-          function(config)
-            require("mason-nvim-dap").default_setup(config)
-          end,
-        }
+      void.keymap.set({
+        { "<leader>dd", dap.toggle_breakpoint, desc = "dap: toggle breakpoint" },
+        { "<leader>dd", dap.toggle_breakpoint, desc = "dap: toggle breakpoint" },
       })
 
       vim.keymap.set("n", "<leader>dd", dap.toggle_breakpoint)
@@ -130,5 +138,5 @@ return {
         },
       })
     end
-  }
+  },
 }

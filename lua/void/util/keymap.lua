@@ -3,9 +3,6 @@
 local M = {}
 
 ---@class VoidMapping
----@field mode   string|table|nil # The mode(s) the mapping should apply to.
----@field prefix string|nil       # The key combination required to invoke the mapping.
----@field opts   table|nil        # Options to pass to `vim.keymap.set`.
 
 local function prepare_mapping(map)
   local rhs = table.remove(map, 2)

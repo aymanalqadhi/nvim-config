@@ -1,70 +1,7 @@
-local M = { _init = false }
+local M = {}
 
-_G.void = {
-  config = require("void.config"),
-
-  -- utils
-  keymap = require("void.util.keymap"),
-  event  = require("void.util.event")
-}
-
-function M.setup()
-  assert(not M._init, "already bootstrapped")
-
-  M._init = true
-
-  -- initilize lazy.nvim
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-      vim.api.nvim_echo({
-        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-        { out,                            "WarningMsg" },
-        { "\nPress any key to exit..." },
-      }, true, {})
-      vim.fn.getchar()
-      os.exit(1)
-    end
-  end
-  vim.opt.rtp:prepend(lazypath)
-
-  -- load plugins
-  require("lazy").setup("plugins", {
-    change_detection = { enabled = false },
-    defaults = {
-      version = false,
-    },
-    performance = {
-      rtp = {
-        disabled_plugins = {
-          "gzip",
-          "netrwPlugin",
-          "tarPlugin",
-          "tohtml",
-          "tutor",
-          "zipPlugin",
-          "2html_plugin",
-          "getscript",
-          "getscriptPlugin",
-          "logipat",
-          "netrw",
-          "netrwSettings",
-          "netrwFileHandlers",
-          "tar",
-          "rrhelper",
-          "vimball",
-          "vimballPlugin",
-          "zip",
-          "rplugin",
-          "synmenu",
-          "optwin",
-          "bugreport",
-        },
-      },
-    },
-  })
-end
+M.config = require("void.config")
+M.keymap = require("void.util.keymap")
+M.event  = require("void.util.event")
 
 return M

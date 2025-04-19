@@ -3,13 +3,17 @@ return {
 
   dependencies = { "williamboman/mason.nvim" },
 
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = { "BufWritePre" },
 
   config = function()
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
-  end
+    local lint = require("lint")
+
+    lint.linters_by_ft = {
+      lua = { "selene" },
+    }
+
+    void.event.on("BufWritePost", function()
+      lint.try_lint()
+    end)
+  end,
 }

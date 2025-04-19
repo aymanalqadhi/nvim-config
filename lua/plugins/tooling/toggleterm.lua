@@ -1,6 +1,7 @@
 return {
   "akinsho/toggleterm.nvim",
 
+  version = "*",
   keys = {
     { "<a-g>",  desc = "term: lazygit" },
     { "<c-\\>", desc = "term: toggle" },
@@ -11,7 +12,6 @@ return {
     require("toggleterm").setup({
       open_mapping = "<c-\\>",
       persist_size = false,
-      shade_terminals = true,
       highlights = {
         NormalFloat = { link = "FloatNormal" },
         FloatBorder = { link = "FloatBorder" },
@@ -25,13 +25,19 @@ return {
       },
     })
 
-    -- custom terminals
-    local term = require("toggleterm.terminal")
-    local floating = term.Terminal:new({
+    local function make_term(key, config)
+      local term = require("toggleterm.terminal").Terminal:new(config)
+      vim.keymap.set("n", key, function() term:toggle() end)
+    end
+
+    -- floating terminal
+    make_term("<c-t>", {
       direction = "float",
       display_name = " Terminal ",
     })
-    local lazygit = term.Terminal:new({
+
+    -- lazygit
+    make_term("<a-g>", {
       cmd = "lazygit",
       dir = "git_dir",
       display_name = " LazyGit ",
@@ -40,11 +46,8 @@ return {
       esc_esc = false,
       on_open = function(t)
         vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(t.bufnr, "n", "q", "<cmd>close<cr>", {})
+        vim.api.nvim_buf_set_keymap(t.bufnr, "n", "q", "<cmd>close<cr>", { noremap = true, silent = true })
       end,
     })
-
-    vim.keymap.set("n", "<a-g>", function() lazygit:toggle() end)
-    vim.keymap.set("n", "<c-t>", function() floating:toggle() end)
   end,
 }

@@ -72,9 +72,6 @@ return {
         -- treesitter context
         TreesitterContextLineNumber    = { bg = bg },
 
-        -- cmp
-        CmpItemKindCopilot             = { fg = "$purple" },
-
         -- noice
         NoiceCmdlineIconCmdline        = { fg = bg_title },
         NoiceCmdlinePopupBorderCmdline = { fg = bg_title },
@@ -92,6 +89,10 @@ return {
         NoiceCmdlineIconInput          = { fg = "$green" },
         NoiceCmdlinePopupTitleInput    = { fg = fg_title, bg = "$green" },
         NoiceCmdlinePopupBorderInput   = { fg = "$green" },
+
+        -- nvim-tree
+        NvimTreeNormal                    = { fg = fg, bg = bg_dark },
+        NvimTreeNormalFloat                    = { fg = fg, bg = bg_dark },
       },
 
       diagnostics   = {

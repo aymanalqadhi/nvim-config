@@ -2,19 +2,35 @@ return {
   {
     "folke/lazydev.nvim",
 
-    dependencies = { "hrsh7th/nvim-cmp" },
-
     ft = "lua",
 
     opts = {
       library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+      integrations = {
+        lspconfig = true,
+        cmp = false,
+        coq = false,
       },
     },
   },
-
   {
-    "Bilal2453/luvit-meta",
-    lazy = true,
+    "saghen/blink.cmp",
+
+    optional = true,
+
+    opts = {
+      sources = {
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+          },
+        },
+      },
+    },
   },
 }

@@ -36,7 +36,8 @@
 
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "sql"))
-;
+
+;; inline assembly
 (macro_invocation
   macro: [
     (identifier) @_name

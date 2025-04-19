@@ -11,6 +11,7 @@ M.ui = {
 -- icons
 M.icons = {
   Cog         = "",
+  Check       = "󱉶",
   Question    = "",
   Recording   = "󰑋",
 

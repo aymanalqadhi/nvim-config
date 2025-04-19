@@ -9,7 +9,7 @@ return {
   },
 
   opts = {
-    columns = { "icon", "size" },
+    columns = { "icon", "permission", "size", "mime" },
     keymaps = {
       ["<c-h>"] = false,
       ["<c-j>"] = false,
@@ -31,5 +31,6 @@ return {
     view_options = {
       show_hidden = true,
     },
+    watch_for_changes = true,
   }
 }

@@ -2,8 +2,8 @@ return {
   "nvim-lualine/lualine.nvim",
 
   event = "VeryLazy",
-
   dependencies = { "nvim-tree/nvim-web-devicons" },
+
   opts = function()
     local icons = void.config.icons
 
@@ -111,13 +111,11 @@ return {
           {
             function()
               local clients = vim.lsp.get_clients()
-
               if #clients == 0 then
                 return ""
               end
 
               local names = {}
-
               for _, client in pairs(clients) do
                 table.insert(names, client.name)
               end
