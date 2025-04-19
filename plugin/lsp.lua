@@ -1,5 +1,5 @@
 -- base config
-vim.lsp.config('*', {
+vim.lsp.config("*", {
   capabilities = {
     textDocument = {
       semanticTokens = {
@@ -7,9 +7,9 @@ vim.lsp.config('*', {
       },
       foldingRange = {
         dynamicRegistration = false,
-        lineFoldingOnly = true
-      }
-    }
+        lineFoldingOnly = true,
+      },
+    },
   },
   root_markers = { ".git" },
 })
@@ -19,6 +19,7 @@ vim.lsp.enable({
   "clangd",
   "gopls",
   "lua_ls",
+  "yamlls",
 })
 
 -- setup on client attach
@@ -30,7 +31,7 @@ void.event.on("LspAttach", function(args)
   if client.server_capabilities.documentHighlightProvider then
     void.event.on("CursorHold", vim.lsp.buf.document_highlight, {
       group = "lsp:highlight_gain",
-      buffer = bufnr
+      buffer = bufnr,
     })
 
     void.event.on({ "CursorMoved", "InsertEnter" }, vim.lsp.buf.clear_references, {
@@ -48,22 +49,22 @@ void.event.on("LspAttach", function(args)
 
   void.keymap.buf_set(bufnr, {
     -- code navigation
-    { "gld",        vim.lsp.buf.definition,       desc = "lsp: definition" },
-    { "glD",        vim.lsp.buf.declaration,      desc = "lsp: declaration" },
-    { "gli",        vim.lsp.buf.implementation,   desc = "lsp: implementation" },
-    { "glt",        vim.lsp.buf.type_definition,  desc = "lsp: type definition" },
-    { "glc",        vim.lsp.buf.outgoing_calls,   desc = "lsp: outgoing calls" },
-    { "glC",        vim.lsp.buf.incoming_calls,   desc = "lsp: incoming calls" },
-    { "glr",        vim.lsp.buf.references,       desc = "lsp: references" },
-    { "gls",        vim.lsp.buf.document_symbol,  desc = "lsp: document symbol" },
-    { "glS",        vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
+    { "gld", vim.lsp.buf.definition, desc = "lsp: definition" },
+    { "glD", vim.lsp.buf.declaration, desc = "lsp: declaration" },
+    { "gli", vim.lsp.buf.implementation, desc = "lsp: implementation" },
+    { "glt", vim.lsp.buf.type_definition, desc = "lsp: type definition" },
+    { "glc", vim.lsp.buf.outgoing_calls, desc = "lsp: outgoing calls" },
+    { "glC", vim.lsp.buf.incoming_calls, desc = "lsp: incoming calls" },
+    { "glr", vim.lsp.buf.references, desc = "lsp: references" },
+    { "gls", vim.lsp.buf.document_symbol, desc = "lsp: document symbol" },
+    { "glS", vim.lsp.buf.workspace_symbol, desc = "lsp: workspace symbol" },
 
     -- codelens
-    { "<leader>ll", vim.lsp.codelens.run,         desc = "lsp: run codelens" },
+    { "<leader>ll", vim.lsp.codelens.run, desc = "lsp: run codelens" },
 
     -- code actions
-    { "<leader>la", vim.lsp.buf.code_action,      desc = "lsp: code action" },
-    { "<leader>lr", vim.lsp.buf.rename,           desc = "lsp: rename" },
+    { "<leader>la", vim.lsp.buf.code_action, desc = "lsp: code action" },
+    { "<leader>lr", vim.lsp.buf.rename, desc = "lsp: rename" },
     {
       "<leader>lh",
       function()
@@ -72,10 +73,10 @@ void.event.on("LspAttach", function(args)
       end,
       desc = "lsp: toggle inlay hints",
     },
-    { "<leader>lf", vim.lsp.buf.format,         desc = "lsp: format",         mode = { "n", "v" }, },
+    { "<leader>lf", vim.lsp.buf.format, desc = "lsp: format", mode = { "n", "v" } },
 
     -- assist
-    { "K",          vim.lsp.buf.hover,          desc = "lsp: hover" },
-    { "<c-s>",      vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
+    { "K", vim.lsp.buf.hover, desc = "lsp: hover" },
+    { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
   })
 end)
