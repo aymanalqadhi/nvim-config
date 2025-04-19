@@ -10,6 +10,7 @@ return {
 
     lint.linters_by_ft = {
       lua = { "selene" },
+      sql = { "sqruff" },
     }
 
     void.event.on("BufWritePost", function()
