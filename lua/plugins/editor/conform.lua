@@ -23,7 +23,7 @@ return {
       json = { "prettierd", "prettier" },
       lua = { "stylua" },
       python = { "isort", "black" },
-      sql = { "sqruff" },
+      sql = { "sqlfluff" },
       typescript = { "prettierd", "prettier" },
       yaml = { "prettierd", "prettier", "yamlfmt" },
     },
