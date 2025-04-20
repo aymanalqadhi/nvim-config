@@ -4,10 +4,13 @@ return {
 
     dependencies = {
       "rcarriga/nvim-dap-ui",
+      "nvim-telescope/telescope.nvim",
+      "nvim-telescope/telescope-dap.nvim",
       {
         "jay-babu/mason-nvim-dap.nvim",
 
         dependencies = { "williamboman/mason.nvim" },
+        lazy = true,
 
         opts = {
           ensure_installed = {},
@@ -16,50 +19,64 @@ return {
             function(config)
               require("mason-nvim-dap").default_setup(config)
             end,
-          }
-        }
+          },
+        },
       },
     },
 
-    keys = {
-      { "<leader>dd", desc = "dap: toggle breakpoint" },
-      { "<leader>dc", desc = "dap: continue" },
-      { "<leader>dq", desc = "dap: close" },
-      { "<leader>dr", desc = "dap: restart" },
-      { "<leader>di", desc = "dap: step into" },
-      { "<leader>do", desc = "dap: step over" },
-      { "<leader>dO", desc = "dap: step out" },
-      { "<leader>db", desc = "dap: step back" },
-    },
+    keys = function()
+      local function act(f, ...)
+        local args = { ... }
+        return function()
+          require("dap")[f](unpack(args))
+        end
+      end
+
+      local function pick(n, theme)
+        return function()
+          local opts = theme and require("plugins.tooling.telescope.pickers")[theme]() or {}
+          require("telescope").extensions.dap[n](opts)
+        end
+      end
+
+      return {
+        -- actions
+        { "<leader>dd", act("toggle_breakpoint"), desc = "dap: toggle breakpoint" },
+        { "<leader>dc", act("continue"), desc = "dap: continue" },
+        { "<leader>dC", act("run_to_cursor"), desc = "dap: run to cursor" },
+        { "<leader>dp", act("pause"), desc = "dap: pause" },
+        { "<leader>ds", act("stop"), desc = "dap: stop" },
+        { "<leader>dr", act("restart"), desc = "dap: restart" },
+        { "<leader>dq", act("terminate"), desc = "dap: terminate" },
+        -- navgiation
+        { "<leader>dnu", act("up"), desc = "dap: stack up" },
+        { "<leader>dnd", act("down"), desc = "dap: stack down" },
+        { "<leader>di", act("step_into"), desc = "dap: step into" },
+        { "<leader>do", act("step_over"), desc = "dap: step over" },
+        { "<leader>dO", act("step_out"), desc = "dap: step out" },
+        { "<leader>db", act("step_back"), desc = "dap: step back" },
+        -- pickers
+        { "<leader>dlc", pick("commands", "dropdown"), desc = "dap: list commands" },
+        { "<leader>dlC", pick("configurations", "dropdown"), desc = "dap: list configurations" },
+        { "<leader>dlb", pick("list_breakpoints", "ivy"), desc = "dap: list breakpoints" },
+        { "<leader>dlv", pick("variables", "dropdown"), desc = "dap: list variables" },
+        { "<leader>dlf", pick("frames", "ivy"), desc = "dap: list frames" },
+      }
+    end,
 
     config = function()
-      local dap = require("dap")
-
-      void.keymap.set({
-        { "<leader>dd", dap.toggle_breakpoint, desc = "dap: toggle breakpoint" },
-        { "<leader>dd", dap.toggle_breakpoint, desc = "dap: toggle breakpoint" },
-      })
-
-      vim.keymap.set("n", "<leader>dd", dap.toggle_breakpoint)
-      vim.keymap.set("n", "<leader>dc", dap.continue)
-      vim.keymap.set("n", "<leader>dq", dap.close)
-      vim.keymap.set("n", "<leader>dr", dap.restart)
-      vim.keymap.set("n", "<leader>di", dap.step_into)
-      vim.keymap.set("n", "<leader>do", dap.step_over)
-      vim.keymap.set("n", "<leader>dO", dap.step_out)
-      vim.keymap.set("n", "<leader>db", dap.step_back)
-
+      local dap, dapui = require("dap"), require("dapui")
       dap.listeners.before.attach.dapui_config = function()
-        require("dapui").open()
+        dapui.open()
       end
       dap.listeners.before.launch.dapui_config = function()
-        require("dapui").open()
+        dapui.open()
       end
       dap.listeners.before.event_terminated.dapui_config = function()
-        require("dapui").close()
+        dapui.close()
       end
       dap.listeners.before.event_exited.dapui_config = function()
-        require("dapui").close()
+        dapui.close()
       end
     end,
   },
@@ -78,9 +95,9 @@ return {
       layouts = {
         {
           elements = {
-            { id = "scopes",      size = 0.50, },
+            { id = "scopes", size = 0.50 },
             { id = "breakpoints", size = 0.30 },
-            { id = "watches",     size = 0.20 },
+            { id = "watches", size = 0.20 },
           },
           size = 40,
           position = "left",
@@ -98,6 +115,7 @@ return {
 
     config = function(_, opts)
       require("dapui").setup(opts)
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-dap-virtual-text").setup({})
 
       vim.keymap.set("n", "<leader>de", function()
@@ -137,6 +155,6 @@ return {
           text = icons.debug.LogPoint,
         },
       })
-    end
+    end,
   },
 }
