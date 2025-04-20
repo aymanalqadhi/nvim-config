@@ -42,30 +42,30 @@ return {
 
       pickers = {
         -- find
-        find_files      = pickers.default(),
-        buffers         = pickers.dropdown(),
-        oldfiles        = pickers.dropdown(),
-        autocommands    = pickers.ivy(),
-        diagnostics     = pickers.ivy(),
-        highlights      = pickers.ivy(),
-        grep_string     = pickers.ivy(),
-        marks           = pickers.dropdown(),
-        keymaps         = pickers.dropdown(),
-        spell_suggest   = pickers.cursor(),
+        find_files = pickers.default(),
+        buffers = pickers.dropdown(),
+        oldfiles = pickers.dropdown(),
+        autocommands = pickers.ivy(),
+        diagnostics = pickers.ivy(),
+        highlights = pickers.ivy(),
+        grep_string = pickers.ivy(),
+        marks = pickers.dropdown(),
+        keymaps = pickers.dropdown(),
+        spell_suggest = pickers.cursor(),
 
         -- git
-        git_files       = pickers.default(),
-        git_branches    = pickers.dropdown(),
-        git_commits     = pickers.dropdown(),
-        git_bcommits    = pickers.ivy(),
-        git_status      = pickers.default(),
-        git_stash       = pickers.dropdown(),
+        git_files = pickers.default(),
+        git_branches = pickers.dropdown(),
+        git_commits = pickers.dropdown(),
+        git_bcommits = pickers.ivy(),
+        git_status = pickers.default(),
+        git_stash = pickers.dropdown(),
 
         -- misc
-        live_grep       = pickers.ivy(),
+        live_grep = pickers.ivy(),
         command_history = pickers.dropdown(),
-        registers       = pickers.cursor(),
-        help_tags       = pickers.ivy(),
+        registers = pickers.cursor(),
+        help_tags = pickers.ivy(),
       },
 
       extensions = {
@@ -80,33 +80,33 @@ return {
     -- setup key maps
     void.keymap.set({
       -- general
-      { "<leader>fF",  tbi.resume,          desc = "find: resume" },
+      { "<leader>fF", tbi.resume, desc = "find: resume" },
 
       -- find
-      { "<leader>ff",  tbi.find_files,      desc = "find: files" },
-      { "<leader>fb",  tbi.buffers,         desc = "find: buffers" },
-      { "<leader>fr",  tbi.oldfiles,        desc = "find: recent" },
-      { "<leader>fa",  tbi.autocommands,    desc = "find: auto commands" },
-      { "<leader>fd",  tbi.diagnostics,     desc = "find: diagnostics" },
-      { "<leader>fh",  tbi.highlights,      desc = "find: highlights" },
-      { "<leader>fw",  tbi.grep_string,     desc = "find: selected" },
-      { "<leader>fm",  tbi.marks,           desc = "find: marks" },
-      { "<leader>fk",  tbi.keymaps,         desc = "find: keymaps" },
-      { "<leader>fs",  tbi.spell_suggest,   desc = "find: spell suggest" },
+      { "<leader>ff", tbi.find_files, desc = "find: files" },
+      { "<leader>fb", tbi.buffers, desc = "find: buffers" },
+      { "<leader>fr", tbi.oldfiles, desc = "find: recent" },
+      { "<leader>fa", tbi.autocommands, desc = "find: auto commands" },
+      { "<leader>fd", tbi.diagnostics, desc = "find: diagnostics" },
+      { "<leader>fh", tbi.highlights, desc = "find: highlights" },
+      { "<leader>fw", tbi.grep_string, desc = "find: selected" },
+      { "<leader>fm", tbi.marks, desc = "find: marks" },
+      { "<leader>fk", tbi.keymaps, desc = "find: keymaps" },
+      { "<leader>fs", tbi.spell_suggest, desc = "find: spell suggest" },
 
       -- git
-      { "<leader>fgf", tbi.git_files,       desc = "find: branches" },
-      { "<leader>fgb", tbi.git_branches,    desc = "find: branches" },
-      { "<leader>fgc", tbi.git_commits,     desc = "find: commits" },
-      { "<leader>fgh", tbi.git_bcommits,    desc = "find: file history" },
-      { "<leader>fgs", tbi.git_status,      desc = "find: status" },
-      { "<leader>fgS", tbi.git_stash,       desc = "find: stash" },
+      { "<leader>fgf", tbi.git_files, desc = "find: branches" },
+      { "<leader>fgb", tbi.git_branches, desc = "find: branches" },
+      { "<leader>fgc", tbi.git_commits, desc = "find: commits" },
+      { "<leader>fgh", tbi.git_bcommits, desc = "find: file history" },
+      { "<leader>fgs", tbi.git_status, desc = "find: status" },
+      { "<leader>fgS", tbi.git_stash, desc = "find: stash" },
 
       -- misc
-      { "<leader>/",   tbi.live_grep,       desc = "find: live grep" },
-      { "<leader>:",   tbi.command_history, desc = "find: command history" },
-      { '<leader>"',   tbi.registers,       desc = "find: registers" },
-      { "<leader>?",   tbi.help_tags,       desc = "find: help pages" },
+      { "<leader>/", tbi.live_grep, desc = "find: live grep" },
+      { "<leader>:", tbi.command_history, desc = "find: command history" },
+      { '<leader>"', tbi.registers, desc = "find: registers" },
+      { "<leader>?", tbi.help_tags, desc = "find: help pages" },
     })
 
     -- load extensions
