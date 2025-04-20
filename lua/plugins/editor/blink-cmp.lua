@@ -28,7 +28,7 @@ return {
     },
 
     appearance = {
-      nerd_font_variant = "mono"
+      nerd_font_variant = "mono",
     },
 
     completion = {
@@ -44,12 +44,14 @@ return {
           },
           components = {
             label = {
-              text = function(ctx) return " " .. ctx.label end,
+              text = function(ctx)
+                return " " .. ctx.label
+              end,
             },
-            source_name = { highlight = "Comment", }
+            source_name = { highlight = "Comment" },
           },
-          treesitter = { "lsp" }
-        }
+          treesitter = { "lsp" },
+        },
       },
       ghost_text = { enabled = true },
     },
@@ -57,11 +59,11 @@ return {
     sources = {
       default = function(_)
         local ok, node = pcall(vim.treesitter.get)
-        if ok and node and vim.tbl_contains({
-              "comment",
-              "line_comment",
-              "block_comment"
-            }, node:type()) then
+        if
+          ok
+          and node
+          and vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type())
+        then
           return { "path", "buffer" }
         end
 
