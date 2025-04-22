@@ -1,3 +1,4 @@
+---@class Void.event
 local M = {}
 
 function M.group(name, clear)
@@ -17,7 +18,7 @@ function M.on(event, callback, opts)
     end
 
     if type(opts.group) == "string" then
-      opts.group = M.group(opts.group)
+      opts.group = M.group(opts.group, false)
     end
   else
     opts = { callback = callback }

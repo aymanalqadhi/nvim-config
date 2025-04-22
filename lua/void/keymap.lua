@@ -1,5 +1,5 @@
 --- Key mapping utilities
----@class Void.util.keymap
+---@class Void.keymap
 local M = {}
 
 ---@class VoidMapping
@@ -10,7 +10,8 @@ local function prepare_mapping(map)
   local mode = nil
 
   if map.mode then
-    mode = map.mode; map.mode = nil
+    mode = map.mode
+    map.mode = nil
   end
 
   if map.expr and map.replace_keycodes ~= false then

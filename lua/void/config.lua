@@ -1,3 +1,4 @@
+---@class Void.config
 local M = {}
 
 -- UI config
@@ -5,61 +6,61 @@ M.ui = {
   colorscheme = "onedark",
 
   -- borders
-  border      = "single",
+  border = "single",
 }
 
 -- icons
 M.icons = {
-  Cog         = "",
-  Check       = "󱉶",
-  Question    = "",
-  Recording   = "󰑋",
+  Cog = "",
+  Check = "󱉶",
+  Question = "",
+  Recording = "󰑋",
 
   -- completion kinds
-  kinds       = {
-    Array         = "",
-    Boolean       = "󰨙",
-    Class         = "",
-    Codeium       = "󰘦",
-    Color         = "",
-    Control       = "",
-    Collapsed     = "",
-    Constant      = "󰏿",
-    Constructor   = "",
-    Copilot       = "",
-    Enum          = "",
-    EnumMember    = "",
-    Event         = "",
-    Field         = "",
-    File          = "",
-    Folder        = "",
-    Function      = "󰊕",
-    Interface     = "",
-    Key           = "",
-    Keyword       = "󰌋",
-    Method        = "󰊕",
-    Module        = "",
-    Namespace     = "󰦮",
-    Null          = "󰟢",
-    Number        = "󰎠",
-    Object        = "",
-    Operator      = "",
-    Package       = "",
-    Property      = "",
-    Reference     = "",
-    Snippet       = "",
-    String        = "",
-    Struct        = "",
-    TabNine       = "󰏚",
-    Text          = "",
+  kinds = {
+    Array = "",
+    Boolean = "󰨙",
+    Class = "",
+    Codeium = "󰘦",
+    Color = "",
+    Control = "",
+    Collapsed = "",
+    Constant = "󰏿",
+    Constructor = "",
+    Copilot = "",
+    Enum = "",
+    EnumMember = "",
+    Event = "",
+    Field = "",
+    File = "",
+    Folder = "",
+    Function = "󰊕",
+    Interface = "",
+    Key = "",
+    Keyword = "󰌋",
+    Method = "󰊕",
+    Module = "",
+    Namespace = "󰦮",
+    Null = "󰟢",
+    Number = "󰎠",
+    Object = "",
+    Operator = "",
+    Package = "",
+    Property = "",
+    Reference = "",
+    Snippet = "",
+    String = "",
+    Struct = "",
+    TabNine = "󰏚",
+    Text = "",
     TypeParameter = "󰆩",
-    Unit          = "",
-    Value         = "",
-    Variable      = "󰀫",
+    Unit = "",
+    Value = "",
+    Variable = "󰀫",
   },
 
   -- debugging
-  debug       = {
+  debug = {
     Stopped = "→",
     Breakpoint = "",
     BreakpointConditional = "",
@@ -71,49 +72,49 @@ M.icons = {
   diagnostics = {
     prefix = "●",
     signs = {
-      Error   = " ",
+      Error = " ",
       Warning = " ",
-      Info    = " ",
-      Hint    = " ",
+      Info = " ",
+      Hint = " ",
     },
   },
 
   -- buffer status
-  buffer      = {
-    Modified  = "",
-    NewFile   = "󰐙",
-    Readonly  = "",
-    Unnamed   = "",
+  buffer = {
+    Modified = "",
+    NewFile = "󰐙",
+    Readonly = "",
+    Unnamed = "",
     Directory = "󰊱",
   },
 
   -- git
-  git         = {
-    Added    = " ",
+  git = {
+    Added = " ",
     Modified = " ",
-    Removed  = " ",
-    Branch   = "",
+    Removed = " ",
+    Branch = "",
   },
 
   -- mode
-  modes       = {
+  modes = {
     -- builtin
-    Command        = "  ",
-    Insert         = "  ",
-    Normal         = "  ",
-    Replace        = "  ",
+    Command = "  ",
+    Insert = "  ",
+    Normal = "  ",
+    Replace = "  ",
     ReplaceVirtual = "  ",
-    Select         = "  ",
-    Terminal       = " $ ",
-    Visual         = " 󰘖 ",
-    VisualLine     = " 󰡏 ",
-    VisualBlock    = " 󰁌 ",
+    Select = "  ",
+    Terminal = " $ ",
+    Visual = " 󰘖 ",
+    VisualLine = " 󰡏 ",
+    VisualBlock = " 󰁌 ",
 
     -- extra
-    Confirm        = " ᐅ ",
-    Enter          = "  ",
-    More           = "  ",
-    Shell          = "  ",
+    Confirm = " ᐅ ",
+    Enter = "  ",
+    More = "  ",
+    Shell = "  ",
   },
 }
 
