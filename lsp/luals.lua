@@ -18,7 +18,7 @@ return {
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
+          vim.env.VIMRUNTIME,
         },
       },
       completion = { callSnippet = "Replace" },
