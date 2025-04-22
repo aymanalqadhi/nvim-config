@@ -52,11 +52,20 @@ function M.init()
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 
     if not vim.uv.fs_stat(lazypath) then
-      local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-      if vim.v.shell_error ~= 0 then
+      local out = vim
+        .system({
+          "git",
+          "clone",
+          "--filter=blob:none",
+          "--branch=stable",
+          lazyrepo,
+          lazypath,
+        }, { text = true, stdout = false })
+        :wait()
+      if out.code ~= 0 then
         vim.api.nvim_echo({
           { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-          { out,                            "WarningMsg" },
+          { out.stderr, "WarningMsg" },
           { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
