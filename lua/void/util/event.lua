@@ -9,10 +9,10 @@ end
 function M.on(event, callback, opts)
   if opts then
     if type(callback) ~= "string" then
-      assert(not opts.callback)
+      assert(not opts.callback, "callback can only be specified once")
       opts.callback = callback
     else
-      assert(not opts.command)
+      assert(not opts.command, "callback can only be specified once")
       opts.command = callback
     end
 
