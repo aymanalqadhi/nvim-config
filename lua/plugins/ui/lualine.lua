@@ -8,28 +8,28 @@ return {
     local icons = void.config.icons
 
     local modes = {
-      COMMAND       = icons.modes.Command,
-      INSERT        = icons.modes.Insert,
-      NORMAL        = icons.modes.Normal,
-      REPLACE       = icons.modes.Replace,
+      COMMAND = icons.modes.Command,
+      INSERT = icons.modes.Insert,
+      NORMAL = icons.modes.Normal,
+      REPLACE = icons.modes.Replace,
       ["V-REPLACE"] = icons.modes.ReplaceVirtual,
-      SELECT        = icons.modes.Select,
-      TERMINAL      = icons.modes.Terminal,
-      VISUAL        = icons.modes.Visual,
-      ["V-LINE"]    = icons.modes.VisualLine,
-      ["V-BLOCK"]   = icons.modes.VisualBlock,
-      CONFIRM       = icons.modes.Confirm,
-      ENTER         = icons.modes.Enter,
-      MORE          = icons.modes.More,
-      SHELL         = icons.modes.Shell,
+      SELECT = icons.modes.Select,
+      TERMINAL = icons.modes.Terminal,
+      VISUAL = icons.modes.Visual,
+      ["V-LINE"] = icons.modes.VisualLine,
+      ["V-BLOCK"] = icons.modes.VisualBlock,
+      CONFIRM = icons.modes.Confirm,
+      ENTER = icons.modes.Enter,
+      MORE = icons.modes.More,
+      SHELL = icons.modes.Shell,
     }
 
     local status_symbols = {
-      modified       = " " .. icons.buffer.Modified,
-      readonly       = " " .. icons.buffer.Readonly,
-      unnamed        = " " .. icons.buffer.Unnamed,
-      newfile        = " " .. icons.buffer.NewFile,
-      directory      = " " .. icons.buffer.Directory,
+      modified = " " .. icons.buffer.Modified,
+      readonly = " " .. icons.buffer.Readonly,
+      unnamed = " " .. icons.buffer.Unnamed,
+      newfile = " " .. icons.buffer.NewFile,
+      directory = " " .. icons.buffer.Directory,
       alternate_file = "",
     }
 
@@ -60,14 +60,16 @@ return {
             "tabs",
             show_modified_status = false,
           },
-        }
+        },
       },
 
       sections = {
         lualine_a = {
           {
             "mode",
-            fmt = function(mode) return modes[mode] or mode end,
+            fmt = function(mode)
+              return modes[mode] or mode
+            end,
             padding = 0,
           },
         },
@@ -77,8 +79,8 @@ return {
         lualine_c = {
           {
             "filetype",
-            icon_only = true,
-            padding = { left = 1, right = 0 },
+            padding = 1,
+            color = { fg = "grey", gui = "italic"},
           },
           {
             "filename",
@@ -91,9 +93,9 @@ return {
           {
             "diff",
             symbols = {
-              added    = icons.git.Added,
+              added = icons.git.Added,
               modified = icons.git.Modified,
-              removed  = icons.git.Removed,
+              removed = icons.git.Removed,
             },
           },
         },
@@ -103,9 +105,9 @@ return {
             sources = { "nvim_diagnostic", "nvim_lsp" },
             symbols = {
               error = icons.diagnostics.signs.Error,
-              warn  = icons.diagnostics.signs.Warning,
-              info  = icons.diagnostics.signs.Info,
-              hint  = icons.diagnostics.signs.Hint,
+              warn = icons.diagnostics.signs.Warning,
+              info = icons.diagnostics.signs.Info,
+              hint = icons.diagnostics.signs.Hint,
             },
           },
           {
