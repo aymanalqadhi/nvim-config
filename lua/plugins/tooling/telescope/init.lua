@@ -13,9 +13,7 @@ return {
 
   config = function()
     local pickers = require("plugins.tooling.telescope.pickers")
-
-    local act = require("telescope.actions")
-    local tbi = require("telescope.builtin")
+    local actions = require("telescope.actions")
 
     require("telescope").setup({
       defaults = {
@@ -33,10 +31,10 @@ return {
 
         mappings = {
           i = {
-            ["<c-j>"] = act.cycle_history_next,
-            ["<c-k>"] = act.cycle_history_prev,
+            ["<c-j>"] = actions.cycle_history_next,
+            ["<c-k>"] = actions.cycle_history_prev,
           },
-          n = { q = act.close },
+          n = { q = actions.close },
         },
       },
 
@@ -77,36 +75,38 @@ return {
       },
     })
 
+    local builtin = require("telescope.builtin")
+
     -- setup key maps
     void.keymap.set({
       -- general
-      { "<leader>fF", tbi.resume, desc = "find: resume" },
+      { "<leader>fF", builtin.resume, desc = "find: resume" },
 
       -- find
-      { "<leader>ff", tbi.find_files, desc = "find: files" },
-      { "<leader>fb", tbi.buffers, desc = "find: buffers" },
-      { "<leader>fr", tbi.oldfiles, desc = "find: recent" },
-      { "<leader>fa", tbi.autocommands, desc = "find: auto commands" },
-      { "<leader>fd", tbi.diagnostics, desc = "find: diagnostics" },
-      { "<leader>fh", tbi.highlights, desc = "find: highlights" },
-      { "<leader>fw", tbi.grep_string, desc = "find: selected" },
-      { "<leader>fm", tbi.marks, desc = "find: marks" },
-      { "<leader>fk", tbi.keymaps, desc = "find: keymaps" },
-      { "<leader>fs", tbi.spell_suggest, desc = "find: spell suggest" },
+      { "<leader>ff", builtin.find_files, desc = "find: files" },
+      { "<leader>fb", builtin.buffers, desc = "find: buffers" },
+      { "<leader>fr", builtin.oldfiles, desc = "find: recent" },
+      { "<leader>fa", builtin.autocommands, desc = "find: auto commands" },
+      { "<leader>fd", builtin.diagnostics, desc = "find: diagnostics" },
+      { "<leader>fh", builtin.highlights, desc = "find: highlights" },
+      { "<leader>fw", builtin.grep_string, desc = "find: selected" },
+      { "<leader>fm", builtin.marks, desc = "find: marks" },
+      { "<leader>fk", builtin.keymaps, desc = "find: keymaps" },
+      { "<leader>fs", builtin.spell_suggest, desc = "find: spell suggest" },
 
       -- git
-      { "<leader>fgf", tbi.git_files, desc = "find: branches" },
-      { "<leader>fgb", tbi.git_branches, desc = "find: branches" },
-      { "<leader>fgc", tbi.git_commits, desc = "find: commits" },
-      { "<leader>fgh", tbi.git_bcommits, desc = "find: file history" },
-      { "<leader>fgs", tbi.git_status, desc = "find: status" },
-      { "<leader>fgS", tbi.git_stash, desc = "find: stash" },
+      { "<leader>fgf", builtin.git_files, desc = "find: branches" },
+      { "<leader>fgb", builtin.git_branches, desc = "find: branches" },
+      { "<leader>fgc", builtin.git_commits, desc = "find: commits" },
+      { "<leader>fgh", builtin.git_bcommits, desc = "find: file history" },
+      { "<leader>fgs", builtin.git_status, desc = "find: status" },
+      { "<leader>fgS", builtin.git_stash, desc = "find: stash" },
 
       -- misc
-      { "<leader>/", tbi.live_grep, desc = "find: live grep" },
-      { "<leader>:", tbi.command_history, desc = "find: command history" },
-      { '<leader>"', tbi.registers, desc = "find: registers" },
-      { "<leader>?", tbi.help_tags, desc = "find: help pages" },
+      { "<leader>/", builtin.live_grep, desc = "find: live grep" },
+      { "<leader>:", builtin.command_history, desc = "find: command history" },
+      { '<leader>"', builtin.registers, desc = "find: registers" },
+      { "<leader>?", builtin.help_tags, desc = "find: help pages" },
     })
 
     -- load extensions
