@@ -27,6 +27,11 @@ return {
       typescript = { "prettierd", "prettier" },
       yaml = { "prettierd", "prettier", "yamlfmt" },
     },
+    formatters = {
+      stylua = {
+        require_cwd = true,
+      },
+    },
   },
 
   config = function(_, opts)
