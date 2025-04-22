@@ -157,7 +157,6 @@ return {
         "lazy",
         "nvim-dap-ui",
         "oil",
-        "trouble",
       },
     }
   end,
