@@ -1,5 +1,5 @@
 return {
-  "navarasu/onedark.nvim",
+  "aymanalqadhi/onedark.nvim",
 
   lazy = false,
   priority = 1000,
@@ -91,8 +91,8 @@ return {
         NoiceCmdlinePopupBorderInput   = { fg = "$green" },
 
         -- nvim-tree
-        NvimTreeNormal                    = { fg = fg, bg = bg_dark },
-        NvimTreeNormalFloat                    = { fg = fg, bg = bg_dark },
+        NvimTreeNormal                 = { fg = fg, bg = bg_dark },
+        NvimTreeNormalFloat            = { fg = fg, bg = bg_dark },
       },
 
       diagnostics   = {
