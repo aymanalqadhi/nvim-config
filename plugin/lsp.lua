@@ -18,7 +18,8 @@ vim.lsp.config("*", {
 vim.lsp.enable({
   "clangd",
   "gopls",
-  "lua_ls",
+  "jsonls",
+  "luals",
   "yamlls",
 })
 
@@ -88,4 +89,4 @@ void.event.on("LspAttach", function(args)
     { "K", vim.lsp.buf.hover, desc = "lsp: hover" },
     { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
   })
-end)
+end, { group = "lsp" })
