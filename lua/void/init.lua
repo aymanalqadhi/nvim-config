@@ -2,6 +2,7 @@
 ---@field config Void.config
 ---@field keymap Void.keymap
 ---@field event  Void.event
+---@field buf    Void.buf
 local M = {}
 
 -- lazy load modules
@@ -12,9 +13,5 @@ setmetatable(M, {
     return rawget(t, k)
   end,
 })
-
-M.config = require("void.config")
-M.keymap = require("void.keymap")
-M.event = require("void.event")
 
 return M
