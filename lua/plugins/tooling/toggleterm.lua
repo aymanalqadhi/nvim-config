@@ -3,9 +3,9 @@ return {
 
   version = "*",
   keys = {
-    { "<a-g>",  desc = "term: lazygit" },
+    { "<a-g>", desc = "term: lazygit" },
     { "<c-\\>", desc = "term: toggle" },
-    { "<c-t>",  desc = "term: toggle float" },
+    { "<c-t>", desc = "term: toggle float" },
   },
 
   config = function()
@@ -27,7 +27,9 @@ return {
 
     local function make_term(key, config)
       local term = require("toggleterm.terminal").Terminal:new(config)
-      vim.keymap.set("n", key, function() term:toggle() end)
+      vim.keymap.set("n", key, function()
+        term:toggle()
+      end)
     end
 
     -- floating terminal
@@ -42,11 +44,14 @@ return {
       dir = "git_dir",
       display_name = " LazyGit ",
       direction = "float",
-      hidden = true,
-      esc_esc = false,
       on_open = function(t)
-        vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(t.bufnr, "n", "q", "<cmd>close<cr>", { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(
+          t.bufnr,
+          "n",
+          "q",
+          "<cmd>close<cr>",
+          { noremap = true, silent = true }
+        )
       end,
     })
   end,
