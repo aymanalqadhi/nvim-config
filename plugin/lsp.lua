@@ -16,6 +16,7 @@ vim.lsp.config("*", {
 
 -- enable servers
 vim.lsp.enable({
+  "bashls",
   "clangd",
   "gopls",
   "jsonls",
