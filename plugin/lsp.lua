@@ -65,15 +65,6 @@ void.event.on("LspAttach", function(args)
     -- codelens
     { "<leader>ll", vim.lsp.codelens.run, desc = "lsp: run codelens" },
 
-    -- inlay hints
-    {
-      "<leader>li",
-      function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-      end,
-      desc = "lsp: enlay hints",
-    },
-
     -- code actions
     { "<leader>la", vim.lsp.buf.code_action, desc = "lsp: code action" },
     { "<leader>lr", vim.lsp.buf.rename, desc = "lsp: rename" },
