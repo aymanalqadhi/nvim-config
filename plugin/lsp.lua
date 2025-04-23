@@ -83,3 +83,12 @@ void.event.on("LspAttach", function(args)
     { "<c-s>", vim.lsp.buf.signature_help, desc = "lsp: signature help", mode = { "n", "i" } },
   })
 end, { group = "lsp" })
+
+-- commands
+vim.api.nvim_create_user_command("LspInfo", function(_)
+  vim.cmd.checkhealth("vim.lsp")
+end, { desc = "lsp: check health" })
+
+vim.api.nvim_create_user_command("LspLog", function(_)
+  vim.cmd.tabnew(vim.lsp.get_log_path())
+end, { desc = "lsp: open logs file" })
