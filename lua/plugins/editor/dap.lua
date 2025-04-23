@@ -44,9 +44,10 @@ return {
         { "<leader>dd", act("toggle_breakpoint"), desc = "dap: toggle breakpoint" },
         { "<leader>dc", act("continue"), desc = "dap: continue" },
         { "<leader>dC", act("run_to_cursor"), desc = "dap: run to cursor" },
+        { "<leader>dp", act("run_last"), desc = "dap: run last target" },
         { "<leader>dp", act("pause"), desc = "dap: pause" },
-        { "<leader>ds", act("stop"), desc = "dap: stop" },
-        { "<leader>dr", act("restart"), desc = "dap: restart" },
+        { "<leader>dx", act("close"), desc = "dap: close" },
+        { "<leader>dX", act("restart"), desc = "dap: restart" },
         { "<leader>dq", act("terminate"), desc = "dap: terminate" },
         -- navgiation
         { "<leader>dnu", act("up"), desc = "dap: stack up" },
@@ -55,6 +56,7 @@ return {
         { "<leader>do", act("step_over"), desc = "dap: step over" },
         { "<leader>dO", act("step_out"), desc = "dap: step out" },
         { "<leader>db", act("step_back"), desc = "dap: step back" },
+        { "<leader>dr", act("repl_open"), desc = "dap: open repl" },
         -- pickers
         { "<leader>dlc", pick("commands", "dropdown"), desc = "dap: list commands" },
         { "<leader>dlC", pick("configurations", "dropdown"), desc = "dap: list configurations" },
@@ -90,14 +92,50 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
 
+    keys = {
+      {
+        "<leader>duu",
+        function()
+          require("dapui").toggle()
+        end,
+        desc = "dap: toggle ui",
+      },
+      {
+        "<leader>dur",
+        function()
+          require("dapui").close()
+          require("dapui").open({ reset = true })
+        end,
+        desc = "dap: reset ui",
+      },
+      {
+        "<leader>de",
+        function()
+          require("dapui").eval(nil, { enter = true })
+        end,
+        desc = "dap: eval",
+      },
+      {
+        "<leader>dus",
+        function()
+          require("dapui").float_element("stacks", {
+            title = "Stacks",
+            height = 32,
+            enter = true,
+          })
+        end,
+        desc = "dap: open stacks float",
+      },
+    },
+
     opts = {
       icons = { expanded = "", collapsed = "", current_frame = "" },
       layouts = {
         {
           elements = {
-            { id = "scopes", size = 0.50 },
-            { id = "breakpoints", size = 0.30 },
-            { id = "watches", size = 0.20 },
+            { id = "scopes", size = 0.80 },
+            { id = "breakpoints", size = 0.10 },
+            { id = "watches", size = 0.10 },
           },
           size = 40,
           position = "left",
@@ -111,17 +149,17 @@ return {
           position = "bottom",
         },
       },
+      floating = {
+        mappings = {
+          close = { "q", "<Esc>" },
+        },
+      },
     },
 
     config = function(_, opts)
       require("dapui").setup(opts)
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-dap-virtual-text").setup({})
-
-      vim.keymap.set("n", "<leader>de", function()
-        ---@diagnostic disable-next-line: missing-fields
-        require("dapui").eval(nil, { enter = true })
-      end, { desc = "dap: eval" })
     end,
 
     init = function()
