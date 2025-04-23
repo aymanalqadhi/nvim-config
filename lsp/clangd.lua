@@ -31,5 +31,4 @@ return {
     completeUnimported = true,
     clangdFileStatus = true,
   },
-  workspace_required = false,
 }

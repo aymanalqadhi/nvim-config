@@ -13,5 +13,4 @@ return {
       telemetry = { enabled = false },
     },
   },
-  workspace_required = false,
 }
