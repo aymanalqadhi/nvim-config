@@ -20,7 +20,7 @@ vim.lsp.enable({
   "clangd",
   "gopls",
   "jsonls",
-  "luals",
+  "lua_ls",
   "neocmakelsp",
   "yamlls",
 })

@@ -15,17 +15,11 @@ return {
     Lua = {
       diagnostics = { globals = { "vim", "void" } },
       runtime = { version = "LuaJIT" },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-        },
-      },
       completion = { callSnippet = "Replace" },
       telemetry = { enable = false },
       semantic = { enable = false },
       hint = { enable = true },
-      -- codeLens = { enable = true },
+      codeLens = { enable = true },
     },
   },
 }
