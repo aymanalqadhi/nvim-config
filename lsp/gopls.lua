@@ -30,19 +30,19 @@ return {
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gosum", "gotmpl" },
 
-  root_dir = function(bufnr, set)
+  root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
 
     run_with_env(function(env)
       if vim.startswith(fname, env.root) or vim.startswith(fname, env.mod_cache) then
         local clients = vim.lsp.get_clients({ name = "gopls" })
         if #clients > 0 then
-          set(clients[#clients].config.root_dir)
+          on_dir(clients[#clients].config.root_dir)
           return
         end
       end
 
-      set(vim.fs.root(fname, { "go.mod", "go.work", ".git" }))
+      on_dir(vim.fs.root(fname, { "go.mod", "go.work", ".git" }))
     end)
   end,
 
