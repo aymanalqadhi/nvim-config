@@ -22,6 +22,7 @@ vim.lsp.enable({
   "jsonls",
   "lua_ls",
   "neocmakelsp",
+  "taplo",
   "yamlls",
 })
 
