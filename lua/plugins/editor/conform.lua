@@ -1,3 +1,5 @@
+local enable_autofmt = true
+
 return {
   "stevearc/conform.nvim",
 
@@ -13,6 +15,13 @@ return {
         })
       end,
       desc = "conform: format",
+    },
+    {
+      "<leader>ct",
+      function()
+        enable_autofmt = not enable_autofmt
+      end,
+      desc = "conform: toggle auto format",
     },
   },
 
@@ -38,10 +47,12 @@ return {
     require("conform").setup(opts)
 
     void.event.on("BufWritePre", function(args)
-      require("conform").format({
-        bufnr = args.buf,
-        lsp_fallback = true,
-      })
+      if enable_autofmt then
+        require("conform").format({
+          bufnr = args.buf,
+          lsp_fallback = true,
+        })
+      end
     end)
   end,
 }
