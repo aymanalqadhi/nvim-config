@@ -41,8 +41,7 @@ return {
           draw = {
             padding = 1,
             columns = {
-              { "kind_icon",         "sep",        "label", gap = 1 },
-              { "label_description", "source_name" },
+              { "kind_icon", "sep", "label", gap = 1 },
             },
             components = {
               sep = {
@@ -50,26 +49,29 @@ return {
                   return ""
                 end,
               },
+              label = {
+                width = { fill = true, max = 60 },
+                text = function(ctx)
+                  return require("colorful-menu").blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require("colorful-menu").blink_components_highlight(ctx)
+                end,
+              },
               source_name = {
                 highlight = "Comment",
               },
             },
-            treesitter = { "lsp" },
           },
         },
         ghost_text = { enabled = true },
       },
 
       sources = {
-        default = function(_)
-          if vim.bo.filetype == "lua" then
-            return { "lazydev", "lsp", "path", "snippets", "buffer" }
-          end
-
-          -- fallback
-          return { "lsp", "path", "snippets", "buffer" }
-        end,
-        providers = {},
+        default = { "lsp", "path", "snippets", "buffer" },
+        per_filetype = {
+          lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        },
       },
 
       signature = { enabled = true },
@@ -78,5 +80,10 @@ return {
     opts_extend = {
       "sources.default",
     },
+  },
+  {
+    "xzbdmw/colorful-menu.nvim",
+    lazy = true,
+    opts = {},
   },
 }
