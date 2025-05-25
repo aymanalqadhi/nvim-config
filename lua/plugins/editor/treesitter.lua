@@ -20,6 +20,12 @@ return {
         end
       end, { group = "treesitter" })
     end,
+
+    init = function()
+      -- enusure treesitter has a higher prioerity than semantic tokens
+      vim.hl.priorities.semantic_tokens = 95
+      vim.hl.priorities.treesitter = 100
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -115,7 +121,12 @@ return {
 
         -- repeatable moves
         { ";", ts_rm.repeat_last_move, desc = "ts: repeat last move", mode = nxo },
-        { ",", ts_rm.repeat_last_move_opposite, desc = "ts: repeat last move (inverse)", mode = nxo },
+        {
+          ",",
+          ts_rm.repeat_last_move_opposite,
+          desc = "ts: repeat last move (inverse)",
+          mode = nxo,
+        },
 
         -- find and until
         {
