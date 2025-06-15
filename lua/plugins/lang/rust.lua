@@ -61,4 +61,11 @@ return {
       },
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+
+    opts = {
+      ensure_install = { "rust", "toml" },
+    },
+  },
 }
