@@ -6,10 +6,12 @@ return {
     build = ":TSUpdate",
     lazy = false,
 
-    config = function()
-      require("nvim-treesitter").setup({
-        ensure_install = { "core", "stable" },
-      })
+    opts = {
+      ensure_install = { "core", "stable" },
+    },
+
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
 
       void.event.on("FileType", function(args)
         local ok, parser = pcall(vim.treesitter.get_parser, args.buf)
@@ -94,24 +96,104 @@ return {
 
       void.keymap.set({
         -- select keymaps
-        { "ab", selectfn("@block.outer"), desc = "ts(select): around block", mode = xo },
-        { "ib", selectfn("@block.inner"), desc = "ts(select): inside block", mode = xo },
-        { "ac", selectfn("@class.outer"), desc = "ts(select): around class", mode = xo },
-        { "ic", selectfn("@class.inner"), desc = "ts(select): inside class", mode = xo },
-        { "af", selectfn("@function.outer"), desc = "ts(select): around function", mode = xo },
-        { "if", selectfn("@function.inner"), desc = "ts(select): inside function", mode = xo },
-        { "ap", selectfn("@parameter.outer"), desc = "ts(select): around parameter", mode = xo },
-        { "ip", selectfn("@parameter.inner"), desc = "ts(select): inside parameter", mode = xo },
-        { "av", selectfn("@variable.outer"), desc = "ts(select): around variable", mode = xo },
-        { "iv", selectfn("@variable.inner"), desc = "ts(select): inside variable", mode = xo },
+        {
+          "ab",
+          selectfn("@block.outer"),
+          desc = "ts(select): around block",
+          mode = xo,
+        },
+        {
+          "ib",
+          selectfn("@block.inner"),
+          desc = "ts(select): inside block",
+          mode = xo,
+        },
+        {
+          "ac",
+          selectfn("@class.outer"),
+          desc = "ts(select): around class",
+          mode = xo,
+        },
+        {
+          "ic",
+          selectfn("@class.inner"),
+          desc = "ts(select): inside class",
+          mode = xo,
+        },
+        {
+          "af",
+          selectfn("@function.outer"),
+          desc = "ts(select): around function",
+          mode = xo,
+        },
+        {
+          "if",
+          selectfn("@function.inner"),
+          desc = "ts(select): inside function",
+          mode = xo,
+        },
+        {
+          "ap",
+          selectfn("@parameter.outer"),
+          desc = "ts(select): around parameter",
+          mode = xo,
+        },
+        {
+          "ip",
+          selectfn("@parameter.inner"),
+          desc = "ts(select): inside parameter",
+          mode = xo,
+        },
+        {
+          "av",
+          selectfn("@variable.outer"),
+          desc = "ts(select): around variable",
+          mode = xo,
+        },
+        {
+          "iv",
+          selectfn("@variable.inner"),
+          desc = "ts(select): inside variable",
+          mode = xo,
+        },
 
         -- move keymaps
-        { "]c", movefn("@class.outer", 1), desc = "ts(move): next class", mode = nxo },
-        { "[c", movefn("@class.outer", -1), desc = "ts(move): previous class", mode = nxo },
-        { "]f", movefn("@function.outer", 1), desc = "ts(move): next function", mode = nxo },
-        { "[f", movefn("@function.outer", -1), desc = "ts(move): previous function", mode = nxo },
-        { "]p", movefn("@parameter.outer", 1), desc = "ts(move): next parameter", mode = nxo },
-        { "[p", movefn("@parameter.outer", -1), desc = "ts(move): previous parameter", mode = nxo },
+        {
+          "]c",
+          movefn("@class.outer", 1),
+          desc = "ts(move): next class",
+          mode = nxo,
+        },
+        {
+          "[c",
+          movefn("@class.outer", -1),
+          desc = "ts(move): previous class",
+          mode = nxo,
+        },
+        {
+          "]f",
+          movefn("@function.outer", 1),
+          desc = "ts(move): next function",
+          mode = nxo,
+        },
+        {
+          "[f",
+          movefn("@function.outer", -1),
+          desc = "ts(move): previous function",
+          mode = nxo,
+        },
+        {
+          "]p",
+          movefn("@parameter.outer", 1),
+          desc = "ts(move): next parameter",
+          mode = nxo,
+        },
+        {
+          "[p",
+          movefn("@parameter.outer", -1),
+          desc = "ts(move): previous parameter",
+          mode = nxo,
+        },
 
         -- swap keymaps
         { "<leader>tsf", swap_fn("@function.inner", 1), desc = "ts(swap): next function" },
@@ -120,7 +202,12 @@ return {
         { "<leader>tsP", swap_fn("@parameter.inner", -1), desc = "ts(swap): previous parameter" },
 
         -- repeatable moves
-        { ";", ts_rm.repeat_last_move, desc = "ts: repeat last move", mode = nxo },
+        {
+          ";",
+          ts_rm.repeat_last_move,
+          desc = "ts: repeat last move",
+          mode = nxo,
+        },
         {
           ",",
           ts_rm.repeat_last_move_opposite,
@@ -165,7 +252,7 @@ return {
 
     event = "VeryLazy",
     keys = {
-      { "<leader>tc", "<cmd>TSContextToggle<cr>", desc = "ts: toggle context" },
+      { "<leader>tc", "<cmd>TSContext toggle<cr>", desc = "ts: toggle context" },
     },
 
     opts = {
@@ -173,6 +260,17 @@ return {
       max_lines = 12,
       line_numbers = true,
       multiline_threshold = 4,
+      on_attach = function(buf)
+        void.keymap.buf_set(buf, {
+          {
+            "<Backspace>",
+            function()
+              require("treesitter-context").go_to_context(vim.v.count1)
+            end,
+            desc = "ts: upper context",
+          },
+        })
+      end,
     },
   },
 }
