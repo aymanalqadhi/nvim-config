@@ -32,7 +32,7 @@ return {
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
-        file_ignore_patterns = { ".git/", "node_modules/", "build/", "target/" },
+        file_ignore_patterns = { ".git/", "node_modules/", "target/" },
 
         mappings = {
           i = {
@@ -85,33 +85,33 @@ return {
     -- setup key maps
     void.keymap.set({
       -- general
-      { "<leader>fF",  builtin.resume,          desc = "find: resume" },
+      { "<leader>fF", builtin.resume, desc = "find: resume" },
 
       -- find
-      { "<leader>ff",  builtin.find_files,      desc = "find: files" },
-      { "<leader>fb",  builtin.buffers,         desc = "find: buffers" },
-      { "<leader>fr",  builtin.oldfiles,        desc = "find: recent" },
-      { "<leader>fa",  builtin.autocommands,    desc = "find: auto commands" },
-      { "<leader>fd",  builtin.diagnostics,     desc = "find: diagnostics" },
-      { "<leader>fh",  builtin.highlights,      desc = "find: highlights" },
-      { "<leader>fw",  builtin.grep_string,     desc = "find: selected" },
-      { "<leader>fm",  builtin.marks,           desc = "find: marks" },
-      { "<leader>fk",  builtin.keymaps,         desc = "find: keymaps" },
-      { "<leader>fs",  builtin.spell_suggest,   desc = "find: spell suggest" },
+      { "<leader>ff", builtin.find_files, desc = "find: files" },
+      { "<leader>fb", builtin.buffers, desc = "find: buffers" },
+      { "<leader>fr", builtin.oldfiles, desc = "find: recent" },
+      { "<leader>fa", builtin.autocommands, desc = "find: auto commands" },
+      { "<leader>fd", builtin.diagnostics, desc = "find: diagnostics" },
+      { "<leader>fh", builtin.highlights, desc = "find: highlights" },
+      { "<leader>fw", builtin.grep_string, desc = "find: selected" },
+      { "<leader>fm", builtin.marks, desc = "find: marks" },
+      { "<leader>fk", builtin.keymaps, desc = "find: keymaps" },
+      { "<leader>fs", builtin.spell_suggest, desc = "find: spell suggest" },
 
       -- git
-      { "<leader>fgf", builtin.git_files,       desc = "find: branches" },
-      { "<leader>fgb", builtin.git_branches,    desc = "find: branches" },
-      { "<leader>fgc", builtin.git_commits,     desc = "find: commits" },
-      { "<leader>fgh", builtin.git_bcommits,    desc = "find: file history" },
-      { "<leader>fgs", builtin.git_status,      desc = "find: status" },
-      { "<leader>fgS", builtin.git_stash,       desc = "find: stash" },
+      { "<leader>fgf", builtin.git_files, desc = "find: branches" },
+      { "<leader>fgb", builtin.git_branches, desc = "find: branches" },
+      { "<leader>fgc", builtin.git_commits, desc = "find: commits" },
+      { "<leader>fgh", builtin.git_bcommits, desc = "find: file history" },
+      { "<leader>fgs", builtin.git_status, desc = "find: status" },
+      { "<leader>fgS", builtin.git_stash, desc = "find: stash" },
 
       -- misc
-      { "<leader>/",   builtin.live_grep,       desc = "find: live grep" },
-      { "<leader>:",   builtin.command_history, desc = "find: command history" },
-      { '<leader>"',   builtin.registers,       desc = "find: registers" },
-      { "<leader>?",   builtin.help_tags,       desc = "find: help pages" },
+      { "<leader>/", builtin.live_grep, desc = "find: live grep" },
+      { "<leader>:", builtin.command_history, desc = "find: command history" },
+      { '<leader>"', builtin.registers, desc = "find: registers" },
+      { "<leader>?", builtin.help_tags, desc = "find: help pages" },
     })
 
     -- load extensions
