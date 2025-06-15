@@ -16,7 +16,9 @@ return {
     "compile_commands.json",
     "compile_flags.txt",
     "configure.ac",
+    "aconfigure.ac",
     "CMakeLists.txt",
+    "Makefile",
   },
   capabilities = {
     textDocument = {
