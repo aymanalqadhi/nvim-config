@@ -32,13 +32,13 @@ return {
       cmdline_popup = {
         border = { style = void.config.ui.border },
         win_options = {
-          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder"
+          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
         },
       },
       cmdline_input = {
         border = { style = void.config.ui.border },
         win_options = {
-          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder"
+          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
         },
       },
     },

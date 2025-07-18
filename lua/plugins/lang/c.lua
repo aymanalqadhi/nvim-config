@@ -1,8 +1,9 @@
 return {
   {
     "p00f/clangd_extensions.nvim",
-    lazy = true,
-    config = function() end,
+
+    ft = { "c", "cpp" },
+
     opts = {
       inlay_hints = {
         inline = false,
@@ -32,7 +33,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
 
     opts = {
-      ensure_install = { "c", "cpp", "make", "cmake" },
+      ensure_install = { "c", "cpp" },
     },
   },
 }
