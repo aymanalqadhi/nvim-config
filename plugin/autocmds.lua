@@ -60,3 +60,19 @@ void.event.on("BufWritePre", function(args)
     end
   end
 end, { group = "global:auto_create_dir" })
+
+-- restore last editing position
+void.event.on("BufReadPost", function(args)
+  local exclude = { "gitcommit" }
+  if vim.tbl_contains(exclude, vim.bo[args.buf].filetype) then
+    return
+  end
+
+  local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+  if mark[1] > 0 then
+    if mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+      vim.api.nvim_feedkeys("zvzz", "n", true)
+    end
+  end
+end, { group = "global:restore_cursor_position" })
