@@ -2,17 +2,24 @@ return {
   {
     "saghen/blink.cmp",
 
-    version = "1.*",
+    version = "*",
     dependencies = { "rafamadriz/friendly-snippets" },
 
     event = "InsertEnter",
 
     opts = {
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = "mono",
+        kind_icons = void.config.icons.kinds,
+      },
+
       keymap = {
         preset = "none",
 
         -- completion
         ["<c-e>"] = { "hide" },
+        ["<c-c>"] = { "cancel" },
         ["<c-y>"] = { "select_and_accept" },
         ["<c-p>"] = { "select_prev", "fallback_to_mappings" },
         ["<c-n>"] = { "select_next", "fallback_to_mappings" },
@@ -25,14 +32,13 @@ return {
         -- docs
         ["<c-f>"] = { "scroll_documentation_down", "fallback" },
         ["<c-b>"] = { "scroll_documentation_up", "fallback" },
-        ["<c-l>"] = { "show_signature", "hide_signature", "fallback" },
-      },
-
-      appearance = {
-        nerd_font_variant = "mono",
+        ["<c-s>"] = { "show_signature", "hide_signature", "fallback" },
       },
 
       completion = {
+        keyword = {
+          range = "full",
+        },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 500,
@@ -70,7 +76,17 @@ return {
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
         per_filetype = {
-          lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
+          lua = { inherit_defaults = true, "lazydev" },
+        },
+      },
+
+      fuzzy = {
+        sorts = {
+          "score",
+          "kind",
+          "exact",
+          "sort_text",
+          "label",
         },
       },
 
@@ -78,6 +94,7 @@ return {
     },
 
     opts_extend = {
+      "sources.completion.enabled_providers",
       "sources.default",
     },
   },

@@ -1,17 +1,12 @@
 return {
   cmd = {
     "clangd",
+    "--log=error",
     "--enable-config",
-    "--all-scopes-completion",
     "--background-index",
     "--clang-tidy",
-    "--clang-tidy-checks=*",
     "--compile-commands-dir=build",
     "--completion-style=detailed",
-    "--cross-file-rename",
-    "--experimental-modules-support",
-    "--fallback-style=google",
-    "--function-arg-placeholders",
     "--header-insertion-decorators",
     "--header-insertion=iwyu",
     "--pch-storage=memory",
@@ -36,7 +31,9 @@ return {
         editsNearCursor = true,
       },
     },
-    offsetEncoding = { "utf-8", "utf-16" },
+    general = {
+      positionEncodings = { "utf-8", "utf-16" },
+    },
   },
   init_options = {
     usePlaceholders = true,

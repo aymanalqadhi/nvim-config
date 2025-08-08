@@ -14,7 +14,19 @@ return {
           lsp_fallback = true,
         })
       end,
+      mode = { "n", "v" },
       desc = "conform: format",
+    },
+    {
+      "<leader>cF",
+      function()
+        require("conform").format({
+          formatters = { "injected" },
+          timeout_ms = 3000,
+        })
+      end,
+      mode = { "n", "v" },
+      desc = "conform: format injected",
     },
     {
       "<leader>ct",
@@ -27,7 +39,7 @@ return {
 
   opts = {
     formatters_by_ft = {
-      cmake = { "cmake_format" },
+      -- cmake = { "cmake_format" },
       javascript = { "prettierd", "prettier" },
       json = { "prettierd", "prettier" },
       lua = { "stylua" },
@@ -37,6 +49,9 @@ return {
       yaml = { "prettierd", "prettier", "yamlfmt" },
     },
     formatters = {
+      injected = {
+        options = { ignore_errors = true },
+      },
       stylua = {
         require_cwd = true,
       },

@@ -1,4 +1,4 @@
-;; extends
+; extends
 
 ; check_source_compiles (language set via first argument)
 (normal_command
