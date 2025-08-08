@@ -17,15 +17,6 @@ void.event.on({ "FocusGained", "TermClose", "TermLeave" }, function()
   end
 end, { group = "global:checktime" })
 
--- highlight yanked text
-void.event.on("TextYankPost", function()
-  vim.hl.on_yank({
-    on_visual = false,
-    timeout = 300,
-    higroup = "Visual",
-  })
-end, { group = "global:yankhl" })
-
 -- close some filetypes with <q>
 void.event.on("FileType", function(args)
   vim.bo[args.buf].buflisted = false
