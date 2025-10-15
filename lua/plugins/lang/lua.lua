@@ -9,7 +9,7 @@ return {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
       integrations = {
-        lspconfig = true,
+        -- lspconfig = true,
         cmp = false,
         coq = false,
       },
@@ -27,7 +27,8 @@ return {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
+            -- score_offset = 100,
+            fallbacks = { "lsp" },
           },
         },
       },

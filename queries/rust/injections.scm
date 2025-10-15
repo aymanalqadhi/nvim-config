@@ -1,3 +1,5 @@
+; extends
+
 ;; sqlx `query*` macros
 (macro_invocation
   ;; query macro

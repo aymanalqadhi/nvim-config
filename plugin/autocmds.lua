@@ -54,8 +54,9 @@ end, { group = "global:auto_create_dir" })
 
 -- restore last editing position
 void.event.on("BufReadPost", function(args)
-  local exclude = { "gitcommit" }
-  if vim.tbl_contains(exclude, vim.bo[args.buf].filetype) then
+  if vim.tbl_contains({
+    "gitcommit",
+  }, vim.bo[args.buf].filetype) then
     return
   end
 

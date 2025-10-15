@@ -259,9 +259,9 @@ return {
 
     opts = {
       enable = true,
-      max_lines = 12,
-      line_numbers = true,
-      multiline_threshold = 4,
+      max_lines = 8,
+      -- line_numbers = true,
+      multiline_threshold = 2,
       on_attach = function(buf)
         void.keymap.buf_set(buf, {
           {

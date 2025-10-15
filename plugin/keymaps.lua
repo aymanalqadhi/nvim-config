@@ -19,11 +19,9 @@ void.keymap.set({
   { "<leader>wo", "<cmd>only<cr>", desc = "win: only" },
   { "<leader>we", "<cmd>wincmd =<cr>", desc = "win: equalize" },
 
-  -- buffer navigation
+  -- buffers
   { "[b", "<cmd>bprevious<cr>", desc = "buf: prev" },
   { "]b", "<cmd>bnext<cr>", desc = "buf: next" },
-
-  -- buffer managemenet
   { "<leader>bd", void.buf.delete, desc = "buf: delete" },
   {
     "<leader>bD",
@@ -34,6 +32,13 @@ void.keymap.set({
   },
   { "<leader>bo", void.buf.other, desc = "buf: delete others" },
   { "<leader>ba", "<cmd>ball<cr>", desc = "buf: all" },
+
+  -- tabs
+  { "[T", "<cmd>tabprevious<cr>", desc = "tab: prev" },
+  { "]T", "<cmd>tabnext<cr>", desc = "tab: next" },
+  { "<leader>T", "<cmd>tabnew<cr>", desc = "tab: new" },
+  { "<leader>Td", "<cmd>tabclose<cr>", desc = "tab: close" },
+  { "<leader>To", "<cmd>tabonly<cr>", desc = "tab: close others" },
 
   -- clear `hlsearch` with `esc`
   { "<esc>", "<cmd>nohlsearch<cr><esc>", desc = "clear `hlsearch`" },

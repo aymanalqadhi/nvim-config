@@ -12,7 +12,13 @@ return {
   },
 
   opts = {
+    default_file_explorer = true,
+    watch_for_changes = true,
+    skip_confirm_for_simple_edits = true,
+
     columns = { "icon", "size", "mime" },
+    view_options = { show_hidden = true },
+
     use_default_keymaps = false,
     keymaps = {
       ["g?"] = { "actions.show_help", mode = "n" },
@@ -56,9 +62,39 @@ return {
         desc = "oil: find files in the current directory",
       },
     },
-    view_options = {
-      show_hidden = true,
-    },
-    watch_for_changes = true,
   },
+
+  config = function(_, opts)
+    require("oil").setup(opts)
+
+    -- confirm quit for empty buffers
+    void.event.on("BufUnload", function(args)
+      if vim.api.nvim_buf_get_name(args.buf) == "" then
+        vim.cmd("confirm q")
+      end
+    end, { pattern = "oil://*" })
+
+    -- close buffers associated with deleted files
+    void.event.on("User", function(args)
+      if args.data.err then
+        return
+      end
+
+      for _, action in ipairs(args.data.actions) do
+        if action.type == "delete" then
+          local bufnr = vim.fn.bufnr(vim.uri_to_fname(action.url))
+          if bufnr ~= -1 then
+            vim.api.nvim_buf_delete(bufnr, { force = false })
+          end
+        end
+      end
+    end, { pattern = "OilActionsPost" })
+  end,
+
+  init = function()
+    ---@diagnostic disable-next-line: param-type-mismatch
+    if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      require("lazy").load({ plugins = { "oil.nvim" } })
+    end
+  end,
 }

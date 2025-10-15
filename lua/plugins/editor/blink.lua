@@ -3,7 +3,15 @@ return {
     "saghen/blink.cmp",
 
     version = "*",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      {
+        "saghen/blink.compat",
+        version = "2.*",
+        lazy = true,
+        opts = {},
+      },
+    },
 
     event = "InsertEnter",
 
@@ -77,6 +85,7 @@ return {
         default = { "lsp", "path", "snippets", "buffer" },
         per_filetype = {
           lua = { inherit_defaults = true, "lazydev" },
+          sql = { inherit_defaults = true, "dadbod" },
         },
       },
 

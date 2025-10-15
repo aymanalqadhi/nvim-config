@@ -1,5 +1,5 @@
 vim.filetype.add {
   extension = {
-    h = "c",
+    -- h = "c",
   },
 }

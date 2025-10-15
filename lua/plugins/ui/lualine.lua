@@ -80,7 +80,7 @@ return {
           {
             "filetype",
             padding = 1,
-            color = { fg = "grey", gui = "italic"},
+            color = { fg = "grey", gui = "italic" },
           },
           {
             "filename",

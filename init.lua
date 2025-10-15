@@ -8,10 +8,14 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- disable unneeded providers
+-- disable unneeded providers/plugins
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_matchparen = 1
+vim.g.no_man_maps = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- set utilities global
 -- selene: allow(global_usage)

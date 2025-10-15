@@ -2,18 +2,29 @@ return {
   {
     "mrcjkb/rustaceanvim",
 
-    version = "^6", -- Recommended
-    lazy = false, -- This plugin is already lazy
+    version = "^6",
+    lazy = false,
 
     init = function()
       vim.g.rustaceanvim = {
         -- Plugin configuration
-        tools = {},
+        tools = {
+          enable_clippy = true,
+        },
         -- LSP configuration
         server = {
           default_settings = {
             -- rust-analyzer language server configuration
             ["rust-analyzer"] = {
+              imports = {
+                granularity = {
+                  group = "module",
+                },
+                prefix = "self",
+              },
+              checkOnSave = true,
+              check = { command = "clippy" },
+              files = { excludeDirs = { ".direnv" } },
               experimental = {
                 serverStatusNotification = true,
               },

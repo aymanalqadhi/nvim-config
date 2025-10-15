@@ -30,6 +30,7 @@ vim.lsp.enable({
   "neocmakelsp",
   "pyright",
   "taplo",
+  "ts_ls",
   "yamlls",
 })
 

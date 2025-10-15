@@ -7,6 +7,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-tree/nvim-web-devicons",
   },
@@ -20,7 +21,10 @@ return {
       end
     end
 
-    require("telescope").setup({
+    local telescope = require("telescope")
+    local lga_actions = require("telescope-live-grep-args.actions")
+
+    telescope.setup({
       defaults = {
         borderchars = pickers.borderchars.perimeter,
         entry_prefix = "   ",
@@ -38,6 +42,13 @@ return {
           i = {
             ["<c-j>"] = action("cycle_history_next"),
             ["<c-k>"] = action("cycle_history_prev"),
+
+            -- livegrep args
+            ["<c-l>"] = lga_actions.quote_prompt(),
+            ["<c-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+
+            -- freeze the current list and start a fuzzy search in the frozen list
+            ["<C-space>"] = lga_actions.to_fuzzy_refine,
           },
           n = { q = action("close") },
         },
@@ -74,13 +85,21 @@ return {
       extensions = {
         wrap_results = true,
         fzf = {},
+        live_grep_args = pickers.ivy(),
         ["ui-select"] = {
           pickers.dropdown(),
         },
       },
     })
 
+    -- load extensions
+    telescope.load_extension("fzf")
+    telescope.load_extension("live_grep_args")
+    telescope.load_extension("ui-select")
+
     local builtin = require("telescope.builtin")
+    local lga = telescope.extensions.live_grep_args
+    local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
 
     -- setup key maps
     void.keymap.set({
@@ -94,10 +113,17 @@ return {
       { "<leader>fa", builtin.autocommands, desc = "find: auto commands" },
       { "<leader>fd", builtin.diagnostics, desc = "find: diagnostics" },
       { "<leader>fh", builtin.highlights, desc = "find: highlights" },
-      { "<leader>fw", builtin.grep_string, desc = "find: selected" },
       { "<leader>fm", builtin.marks, desc = "find: marks" },
       { "<leader>fk", builtin.keymaps, desc = "find: keymaps" },
       { "<leader>fs", builtin.spell_suggest, desc = "find: spell suggest" },
+      { "<leader>fw", builtin.grep_string, desc = "find: selected" },
+      {
+        "<leader>/",
+        lga_shortcuts.grep_visual_selection,
+        desc = "find: live grep",
+        mode = { "v" },
+      },
+      { "<leader>/", lga.live_grep_args, desc = "find: live grep" },
 
       -- git
       { "<leader>fgf", builtin.git_files, desc = "find: branches" },
@@ -108,14 +134,9 @@ return {
       { "<leader>fgS", builtin.git_stash, desc = "find: stash" },
 
       -- misc
-      { "<leader>/", builtin.live_grep, desc = "find: live grep" },
       { "<leader>:", builtin.command_history, desc = "find: command history" },
       { '<leader>"', builtin.registers, desc = "find: registers" },
       { "<leader>?", builtin.help_tags, desc = "find: help pages" },
     })
-
-    -- load extensions
-    require("telescope").load_extension("fzf")
-    require("telescope").load_extension("ui-select")
   end,
 }

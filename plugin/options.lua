@@ -29,6 +29,7 @@ opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 4
 opt.sidescrolloff = 8
+opt.smoothscroll = true
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.tabstop = 4
@@ -71,7 +72,7 @@ opt.listchars = {
   space = " ",
   trail = "⋅",
   tab = "  ▸",
-  -- eol      = "↲", -- "↵" | "⌍" | "↩",
+  -- eol = "¬",
   extends = "❯",
   precedes = "❮",
   nbsp = "␣",

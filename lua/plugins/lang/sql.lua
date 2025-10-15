@@ -1,19 +1,58 @@
 return {
-  "kndndrj/nvim-dbee",
-
-  dependencies = { "MunifTanjim/nui.nvim" },
-
-  keys = {
-    { "<localleader>do", function() require("dbee").open() end,   desc = "db: open explorer" },
-    { "<localleader>dc", function() require("dbee").close() end,  desc = "db: close explorer" },
-    { "<localleader>dd", function() require("dbee").toggle() end, desc = "db: toggle explorer" },
+  {
+    "tpope/vim-dadbod",
+    cmd = "DB",
   },
 
-  build = function()
-    require("dbee").install()
-  end,
+  {
+    "kristijanhusak/vim-dadbod-completion",
+    dependencies = "vim-dadbod",
+    ft = { "sql", "mysql", "plsql" },
+  },
 
-  config = function(_, opts)
-    require("dbee").setup(opts)
-  end
+  {
+    "kristijanhusak/vim-dadbod-ui",
+
+    dependencies = { "tpope/vim-dadbod" },
+
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+
+    keys = {
+      { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
+    },
+
+    init = function()
+      local data_path = vim.fn.stdpath("data")
+
+      vim.g.db_ui_auto_execute_table_helpers = 1
+      vim.g.db_ui_save_location = data_path .. "/dadbod_ui"
+      vim.g.db_ui_show_database_icon = true
+      vim.g.db_ui_tmp_query_location = data_path .. "/dadbod_ui/tmp"
+      vim.g.db_ui_use_nerd_fonts = true
+      vim.g.db_ui_use_nvim_notify = true
+      vim.g.db_ui_execute_on_save = false
+    end,
+  },
+  {
+    "saghen/blink.cmp",
+
+    optional = true,
+
+    dependencies = {
+      "kristijanhusak/vim-dadbod-completion",
+    },
+
+    opts = {
+      sources = {
+        providers = {
+          dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        },
+      },
+    },
+  },
 }
