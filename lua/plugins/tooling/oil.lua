@@ -76,15 +76,17 @@ return {
 
     -- close buffers associated with deleted files
     void.event.on("User", function(args)
-      if args.data.err then
+      if args.data.err or args.data.actions == nil then
         return
       end
 
       for _, action in ipairs(args.data.actions) do
-        if action.type == "delete" then
-          local bufnr = vim.fn.bufnr(vim.uri_to_fname(action.url))
+        if action.entry_type == "file" and action.type == "delete" then
+          local file = action.url:sub(7)
+          local bufnr = vim.fn.bufnr(file)
+
           if bufnr ~= -1 then
-            vim.api.nvim_buf_delete(bufnr, { force = false })
+            vim.api.nvim_buf_delete(bufnr, { force = true })
           end
         end
       end
