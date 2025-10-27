@@ -14,9 +14,9 @@ local M = {}
 function M.delete(opts)
   if type(opts) == "table" then
     if type(opts.filter) == "function" then
-      opts.filter = nil
       for _, b in ipairs(vim.tbl_filter(opts.filter, vim.api.nvim_list_bufs())) do
         if vim.bo[b].buflisted then
+          opts.filter = nil
           opts.buf = b
           M.delete(opts)
         end
