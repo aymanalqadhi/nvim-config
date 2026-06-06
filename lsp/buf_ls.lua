@@ -1,5 +1,5 @@
 return {
   cmd = { "buf", "lsp", "serve" },
-  filetypes = { "proto" },
+  filetypes = { "proto", "buf-config" },
   root_markers = { "buf.yaml", ".git" },
 }
