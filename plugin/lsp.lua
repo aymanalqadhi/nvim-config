@@ -23,6 +23,7 @@ vim.lsp.config("*", {
 -- enable servers
 vim.lsp.enable({
   "bashls",
+  "buf_ls",
   "clangd",
   "gopls",
   "jsonls",
@@ -52,11 +53,19 @@ void.event.on("LspAttach", function(args)
     })
   end
 
+  -- linked editing
+  if client.server_capabilities.linkedEditingRangeProvider then
+    vim.lsp.linked_editing_range.enable(true, { client_id = client.id })
+  end
+
+  -- on-type formatting
+  if client.server_capabilities.documentOnTypeFormattingProvider then
+    vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
+  end
+
   -- codelens
   if client.server_capabilities.codeLensProvider then
-    void.event.on({ "BufEnter", "InsertLeave" }, function(e)
-      vim.lsp.codelens.refresh({ bufnr = e.buf })
-    end, { group = "lsp:codelens", buffer = bufnr })
+    vim.lsp.codelens.enable(true, { bufnr = bufnr })
   end
 
   void.keymap.buf_set(bufnr, {
@@ -99,5 +108,5 @@ vim.api.nvim_create_user_command("LspInfo", function(_)
 end, { desc = "lsp: check health" })
 
 vim.api.nvim_create_user_command("LspLog", function(_)
-  vim.cmd.tabnew(vim.lsp.get_log_path())
+  vim.cmd.tabnew(vim.lsp.log.get_filename())
 end, { desc = "lsp: open logs file" })

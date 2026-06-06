@@ -71,6 +71,20 @@ void.keymap.set({
     end,
     desc = "diagnostic: goto next",
   },
+  {
+    "[e",
+    function()
+      vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR})
+    end,
+    desc = "diagnostic: goto prev error",
+  },
+  {
+    "]e",
+    function()
+      vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+    end,
+    desc = "diagnostic: goto next error",
+  },
 })
 
 -- terminal mappings
