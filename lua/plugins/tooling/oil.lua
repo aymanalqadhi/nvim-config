@@ -4,6 +4,7 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "nvim-telescope/telescope.nvim",
+    "akinsho/toggleterm.nvim",
   },
 
   cmd = "Oil",
@@ -60,6 +61,24 @@ return {
         mode = "n",
         nowait = true,
         desc = "oil: find files in the current directory",
+      },
+
+      -- terminal
+      ["\\"] = {
+        function()
+          local cwd = require("oil").get_current_dir()
+          require("toggleterm.terminal")
+            .Terminal:new({
+              direction = "float",
+              display_name = " Oil: " .. cwd,
+              dir = cwd,
+              close_on_exit = true,
+            })
+            :open()
+        end,
+        mode = "n",
+        nowait = true,
+        desc = "oil: open terminal in current directory",
       },
     },
   },
