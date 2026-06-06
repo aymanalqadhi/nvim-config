@@ -64,7 +64,7 @@ return {
                 end,
               },
               label = {
-                width = { fill = true, max = 60 },
+                width = { fill = true, max = 120 },
                 text = function(ctx)
                   return require("colorful-menu").blink_components_text(ctx)
                 end,
