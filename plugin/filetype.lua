@@ -9,3 +9,5 @@ vim.filetype.add({
     ["buf.lock"] = "buf-config",
   },
 })
+
+vim.treesitter.language.register("yaml", { "buf-config" })

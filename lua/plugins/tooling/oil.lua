@@ -5,6 +5,15 @@ return {
     "nvim-tree/nvim-web-devicons",
     "nvim-telescope/telescope.nvim",
     "akinsho/toggleterm.nvim",
+    {
+      "malewicz1337/oil-git.nvim",
+      dependencies = { "stevearc/oil.nvim" },
+      opts = {
+        show_file_highlights = true,
+        show_directory_highlights = false,
+        show_ignored_files = true,
+      },
+    },
   },
 
   cmd = "Oil",
@@ -67,8 +76,8 @@ return {
       ["\\"] = {
         function()
           local cwd = require("oil").get_current_dir()
-          require("toggleterm.terminal")
-            .Terminal:new({
+          require("toggleterm.terminal").Terminal
+            :new({
               direction = "float",
               display_name = " Oil: " .. cwd,
               dir = cwd,
